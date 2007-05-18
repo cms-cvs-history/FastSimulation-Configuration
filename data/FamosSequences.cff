@@ -1,0 +1,70 @@
+#Particle data table, Magnetic Field, CMS geometry, Tracker geometry, Calo geometry
+include "FastSimulation/Configuration/data/CommonInputs.cff"
+
+# Primary vertex smearing.
+include "IOMC/EventVertexGenerators/data/VtxSmearedGauss.cfi"    
+
+# Conversion to GenParticleCandidates 
+include "PhysicsTools/HepMCCandAlgos/data/genParticleCandidatesFast.cfi" 
+
+# Famos SimHits producer
+include "FastSimulation/EventProducer/data/FamosSimHits.cfi"
+
+# Mixing module 
+include "SimGeneral/MixingModule/data/mixNoPU.cfi"
+#include "SimGeneral/MixingModule/data/mixLowLumPU.cfi"
+#include "SimGeneral/MixingModule/data/mixHighPU.cfi"
+
+# Gaussian Smearing RecHit producer
+include "FastSimulation/TrackingRecHitProducer/data/SiTrackerGaussianSmearingRecHitConverter.cfi"
+
+# Rec Hit Tranlator to the Full map with DeTId'
+include "FastSimulation/TrackingRecHitProducer/data/TrackingRecHitTranslator.cfi"
+
+# KF Track Candidate Maker
+include "FastSimulation/Tracking/data/GSTrackCandidates.cff"
+
+# CTF track fit with material
+include "FastSimulation/Tracking/data/GSFinalFitWithMaterial.cff"
+
+# Calo RecHits producer
+include "FastSimulation/CaloRecHitsProducer/data/CaloRecHits.cfi"	
+
+
+# Famos pre-defined sequences
+sequence famosWithTrackerHits = { 
+    famosSimHits,
+    mix, 
+    siTrackerGaussianSmearingRecHits,
+    gsTrackCandidates
+}	
+
+sequence famosWithTracks = { 
+    famosSimHits,
+    mix, 
+    siTrackerGaussianSmearingRecHits,
+    gsTrackCandidates,
+    gsWithMaterialTracks
+}	
+
+sequence famosWithCaloHits = { 
+    famosSimHits,
+    mix, 
+    caloRecHits   
+}	
+
+sequence famosWithEcalClusters = { 
+    famosSimHits,
+    mix, 
+    caloRecHits,
+    ecalClusters
+}	
+
+sequence famosWithTracksAndCaloHits = { 
+    famosSimHits,
+    mix, 
+    siTrackerGaussianSmearingRecHits,
+    gsTrackCandidates,
+    gsWithMaterialTracks,
+    caloRecHits   
+}

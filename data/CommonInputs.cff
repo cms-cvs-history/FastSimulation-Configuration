@@ -1,0 +1,18 @@
+# The particle data table ESSource
+include "SimGeneral/HepPDTESSource/data/pythiapdt.cfi"
+
+#The ideal Geometry ESSource
+include "Geometry/CMSCommonData/data/cmsSimIdealGeometryXML.cfi"
+
+#The Tracker geometry ESSource and ESProducer
+include "Geometry/TrackerNumberingBuilder/data/trackerNumberingGeometry.cfi"
+include "Geometry/TrackerGeometryBuilder/data/trackerGeometry.cfi"
+include "RecoTracker/GeometryESProducer/data/TrackerRecoGeometryESProducer.cfi"
+
+#The Magnetic Field ESProducer
+include "MagneticField/Engine/data/volumeBasedMagneticField.cfi"
+
+# The Calo geometry service model
+include "Geometry/CaloEventSetup/data/CaloGeometry.cff"
+include "Geometry/CaloEventSetup/data/CaloTopology.cfi"		
+
