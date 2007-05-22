@@ -2,7 +2,7 @@
 include "SimGeneral/HepPDTESSource/data/pythiapdt.cfi"
 
 #The ideal Geometry ESSource
-include "Geometry/CMSCommonData/data/cmsSimIdealGeometryXML.cfi"
+include "Geometry/CMSCommonData/data/cmsIdealGeometryXML.cfi"
 
 #The Tracker geometry ESSource and ESProducer
 include "Geometry/TrackerNumberingBuilder/data/trackerNumberingGeometry.cfi"

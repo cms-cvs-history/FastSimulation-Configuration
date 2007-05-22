@@ -30,6 +30,15 @@ include "FastSimulation/Tracking/data/GSFinalFitWithMaterial.cff"
 # Calo RecHits producer
 include "FastSimulation/CaloRecHitsProducer/data/CaloRecHits.cfi"	
 
+# ECAL clusters (this will generate harmless warnings...)
+include "RecoEcal/EgammaClusterProducers/data/ecalClusteringSequence.cff"
+replace islandBasicClusters.barrelHitProducer="caloRecHits"
+replace islandBasicClusters.endcapHitProducer="caloRecHits"
+replace hybridSuperClusters.ecalhitproducer="caloRecHits"
+replace correctedHybridSuperClusters.recHitProducer="caloRecHits"
+replace correctedIslandBarrelSuperClusters.recHitProducer="caloRecHits"
+replace correctedIslandEndcapSuperClusters.recHitProducer="caloRecHits"
+replace correctedEndcapSuperClustersWithPreshower.preshRecHitProducer = "caloRecHits"
 
 # Famos pre-defined sequences
 sequence famosWithTrackerHits = { 
@@ -40,10 +49,7 @@ sequence famosWithTrackerHits = {
 }	
 
 sequence famosWithTracks = { 
-    famosSimHits,
-    mix, 
-    siTrackerGaussianSmearingRecHits,
-    gsTrackCandidates,
+    famosWithTrackerHits,
     gsWithMaterialTracks
 }	
 
@@ -54,17 +60,16 @@ sequence famosWithCaloHits = {
 }	
 
 sequence famosWithEcalClusters = { 
-    famosSimHits,
-    mix, 
-    caloRecHits,
-    ecalClusters
+    famosWithCaloHits,
+    ecalClusteringSequence
 }	
 
 sequence famosWithTracksAndCaloHits = { 
-    famosSimHits,
-    mix, 
-    siTrackerGaussianSmearingRecHits,
-    gsTrackCandidates,
-    gsWithMaterialTracks,
+    famosWithTracks,
     caloRecHits   
+}
+
+sequence famosWithTracksAndEcalClusters = { 
+    famosWithTracksAndCaloHits,
+    ecalClusteringSequence
 }
