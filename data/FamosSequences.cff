@@ -40,21 +40,6 @@ replace correctedIslandBarrelSuperClusters.recHitProducer="caloRecHits"
 replace correctedIslandEndcapSuperClusters.recHitProducer="caloRecHits"
 replace correctedEndcapSuperClustersWithPreshower.preshRecHitProducer = "caloRecHits"
 
-# Particle Flow
-include "RecoParticleFlow/Configuration/data/RecoParticleFlow.cff"
-replace particleFlowCluster.ecalRecHitsEBModuleLabel = "caloRecHits"
-replace particleFlowCluster.ecalRecHitsEEModuleLabel = "caloRecHits"
-replace particleFlowCluster.ecalRecHitsESModuleLabel = "caloRecHits"
-replace particleFlowSimParticle.SimModuleLabel = "famosSimHits"
-replace elecpreid.RefitModuleLabel = "gsWithMaterialTracks"
-
-# Calo Towers
-replace towerMaker.ecalInputs = { "caloRecHits:EcalRecHitsEB", "caloRecHits:EcalRecHitsEE" }
-replace towerMaker.hbheInput = caloRecHits
-replace towerMaker.hoInput = caloRecHits
-replace towerMaker.hfInput = caloRecHits
-
-
 # Famos pre-defined sequences
 sequence famosWithTrackerHits = { 
     famosSimHits,
@@ -87,24 +72,4 @@ sequence famosWithTracksAndCaloHits = {
 sequence famosWithTracksAndEcalClusters = { 
     famosWithTracksAndCaloHits,
     ecalClusteringSequence
-}
-
-sequence famosWithParticleFlow = {
-    famosWithTracksAndCaloHits,
-    particleFlowCluster,
-    elecpreid,
-    particleFlowBlock,
-    particleFlow
-}
-
-sequence famosWithCaloTowers = {
-    famosWithTracksAndCaloHits,
-    towerMaker,
-    caloTowers
-}
-
-sequence famosWithCaloTowersAndParticleFlow = {
-    famosWithParticleFlow,
-    towerMaker,
-    caloTowers
 }
