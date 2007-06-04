@@ -27,6 +27,9 @@ include "FastSimulation/Tracking/data/GSTrackCandidates.cff"
 # CTF track fit with material
 include "FastSimulation/Tracking/data/GSFinalFitWithMaterial.cff"
 
+# GSF electron fit
+include "TrackingTools/GsfTracking/data/GsfElectronFit.cfi"
+
 # Calo RecHits producer
 include "FastSimulation/CaloRecHitsProducer/data/CaloRecHits.cfi"	
 
