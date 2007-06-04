@@ -100,6 +100,12 @@ sequence famosWithParticleFlow = {
 }
 
 sequence famosWithCaloTowers = {
+    famosWithCaloHits,
+    towerMaker,
+    caloTowers
+}
+
+sequence famosWithTracksAndCaloTowers = {
     famosWithTracksAndCaloHits,
     towerMaker,
     caloTowers
