@@ -59,6 +59,8 @@ replace towerMaker.hbheInput = caloRecHits
 replace towerMaker.hoInput = caloRecHits
 replace towerMaker.hfInput = caloRecHits
 
+# Muon parametrization
+include "FastSimulation/ParamL3MuonProducer/data/ParamL3Muon.cfi"
 
 # Famos pre-defined sequences
 sequence famosWithTrackerHits = { 
@@ -118,4 +120,9 @@ sequence famosWithCaloTowersAndParticleFlow = {
     famosWithParticleFlow,
     towerMaker,
     caloTowers
+}
+
+sequence famosWithMuons = {
+    famosWithTracks,
+    paramMuons
 }
