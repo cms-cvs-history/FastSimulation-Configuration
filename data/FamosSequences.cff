@@ -130,7 +130,7 @@ sequence famosWithTracksAndCaloTowers = {
     caloTowers
 }
 
-sequence famosWithTracksCaloTowersAndJets ={
+sequence famosWithTracksAndJets ={
    famosWithTracksAndCaloTowers,
    caloJetMetGen,
    caloJetMet	
