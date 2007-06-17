@@ -116,6 +116,14 @@ sequence famosWithCaloTowers = {
     caloTowers
 }
 
+sequence famosWithJets = {
+    famosWithCaloHits,
+    towerMaker,
+    caloTowers,
+    caloJetMetGen,
+    caloJetMet	
+}
+
 sequence famosWithTracksAndCaloTowers = {
     famosWithTracksAndCaloHits,
     towerMaker,
