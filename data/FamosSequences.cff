@@ -48,6 +48,7 @@ include "RecoParticleFlow/Configuration/data/RecoParticleFlow.cff"
 replace particleFlowCluster.ecalRecHitsEBModuleLabel = "caloRecHits"
 replace particleFlowCluster.ecalRecHitsEEModuleLabel = "caloRecHits"
 replace particleFlowCluster.ecalRecHitsESModuleLabel = "caloRecHits"
+replace particleFlowCluster.hcalRecHitsHBHEModuleLabel = "caloRecHits"
 replace particleFlowSimParticle.SimModuleLabel = "famosSimHits"
 replace elecpreid.RefitModuleLabel = "gsWithMaterialTracks"
 
