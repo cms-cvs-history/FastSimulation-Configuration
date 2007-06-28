@@ -92,6 +92,23 @@ sequence famosElectronSequence = {
 }
 
 
+# B tagging
+include "RecoVertex/Configuration/data/RecoVertex.cff"
+include "RecoBTau/Configuration/data/RecoBTau.cff"
+include "RecoBTag/Configuration/data/RecoBTag.cff"
+include "RecoBTag/CombinedSV/data/combined.cfi"
+replace offlinePrimaryVerticesFromCTFTracks.TrackLabel = "gsWithMaterialTracks"
+replace jetTracksAssociator.tracks = gsWithMaterialTracks
+replace combinedSVJetTags.trackcoll = "gsWithMaterialTracks"
+sequence famosBTaggingSequence = {
+    iterativeCone5CaloJets,
+    vertexreco,
+    jetTracksAssociator,
+    impactParameterTagInfos,
+    (jetProbabilityJetTags & trackCountingHighPurJetTags & trackCountingHighEffJetTags),
+    combinedSVJetTags
+}
+
 # Famos pre-defined sequences
 sequence famosWithTrackerHits = { 
     famosSimHits,
@@ -176,4 +193,9 @@ sequence famosWithElectrons = {
     caloRecHits,
     ecalClusteringSequence,
     famosElectronSequence
+}
+
+sequence famosWithBTagging = {
+    famosWithTracksAndCaloTowers,
+    famosBTaggingSequence
 }
