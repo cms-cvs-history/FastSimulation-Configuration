@@ -69,6 +69,29 @@ replace genCandidatesForMET.verbose=false
 # Muon parametrization
 include "FastSimulation/ParamL3MuonProducer/data/ParamL3Muon.cfi"
 
+# Electron reconstruction
+include "FastSimulation/EgammaElectronAlgos/data/electronGSPixelSeeds.cfi"
+include "FastSimulation/EgammaElectronAlgos/data/electronGSGsfTrackCandidates.cff"
+include "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfElectrons.cff"
+include "TrackingTools/GsfTracking/data/GsfElectronFit.cff"
+include "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
+module pixelMatchGsfFitBarrel = pixelMatchGsfFit from "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
+replace pixelMatchGsfFitBarrel.src = "electronGSGsfTrackCandidatesBarrel"
+module pixelMatchGsfFitEndcap = pixelMatchGsfFit from "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
+replace pixelMatchGsfFitEndcap.src = "electronGSGsfTrackCandidatesEndcap"
+replace pixelMatchGsfElectrons.hbheModule = "caloRecHits"
+replace pixelMatchGsfElectrons.SCLBarrelLabel = "electronGSPixelSeeds"
+replace pixelMatchGsfElectrons.SCLEndcapLabel = "electronGSPixelSeeds"
+sequence famosElectronSequence = {
+    electronGSPixelSeeds,
+    electronGSGsfTrackCandidatesBarrel,
+    electronGSGsfTrackCandidatesEndcap,
+    pixelMatchGsfFitBarrel,
+    pixelMatchGsfFitEndcap,
+    pixelMatchGsfElectrons
+}
+
+
 # Famos pre-defined sequences
 sequence famosWithTrackerHits = { 
     famosSimHits,
@@ -146,4 +169,11 @@ sequence famosWithCaloTowersAndParticleFlow = {
 sequence famosWithMuons = {
     famosWithTracks,
     paramMuons
+}
+
+sequence famosWithElectrons = {
+    famosWithTrackerHits,
+    caloRecHits,
+    ecalClusteringSequence,
+    famosElectronSequence
 }
