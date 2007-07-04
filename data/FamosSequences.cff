@@ -8,7 +8,7 @@ include "IOMC/EventVertexGenerators/data/VtxSmearedGauss.cfi"
 include "PhysicsTools/HepMCCandAlgos/data/genParticleCandidatesFast.cfi" 
 
 # Famos SimHits producer
-include "FastSimulation/EventProducer/data/FamosSimHits.cfi"
+include "FastSimulation/EventProducer/data/FamosSimHits.cff"
 
 # Mixing module 
 include "SimGeneral/MixingModule/data/mixNoPU.cfi"
@@ -31,7 +31,7 @@ include "FastSimulation/Tracking/data/GSFinalFitWithMaterial.cff"
 include "TrackingTools/GsfTracking/data/GsfElectronFit.cfi"
 
 # Calo RecHits producer
-include "FastSimulation/CaloRecHitsProducer/data/CaloRecHits.cfi"	
+include "FastSimulation/CaloRecHitsProducer/data/CaloRecHits.cff"	
 
 # ECAL clusters (this will generate harmless warnings...)
 include "RecoEcal/EgammaClusterProducers/data/ecalClusteringSequence.cff"
@@ -90,7 +90,6 @@ sequence famosElectronSequence = {
     pixelMatchGsfFitEndcap,
     pixelMatchGsfElectrons
 }
-
 
 # B tagging
 include "RecoVertex/Configuration/data/RecoVertex.cff"
