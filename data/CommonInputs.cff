@@ -15,4 +15,5 @@ include "MagneticField/Engine/data/volumeBasedMagneticField.cfi"
 # The Calo geometry service model
 include "Geometry/CaloEventSetup/data/CaloGeometry.cff"
 include "Geometry/CaloEventSetup/data/CaloTopology.cfi"		
+include "Geometry/CaloEventSetup/data/EcalTrigTowerConstituents.cfi"  
 
