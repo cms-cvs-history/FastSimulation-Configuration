@@ -1,9 +1,17 @@
-include "CalibCalorimetry/Configuration/data/Ecal_FakeConditions.cff"
-    
-es_source = CaloMiscalibTools{
-untracked string fileNameBarrel = "miscalib_barrel_0.05.xml"
-#untracked string fileNameEndcap = "miscalib_endcap_0.05.xml"
+include "CondCore/DBCommon/data/CondDBSetup.cfi"
+
+es_source ecalConditions = PoolDBESSource  
+{ 
+    using CondDBSetup
+    VPSet toGet = {
+	{ string record = "EcalIntercalibConstantsRcd"
+	    string tag = "EcalIntercalibConstants_miscalibcsa07"}
+    }
+    string connect = "frontier://FrontierDev/CMS_COND_ECAL"
+    untracked bool siteLocalConfig = true
+    untracked uint32 authenticationMethod = 1
+    string timetype = "runnumber"
+    untracked uint32 messagelevel = 0 
 }
-es_prefer = CaloMiscalibTools{}
 
 replace caloRecHits.RecHitsFactory.doMiscalib=true
