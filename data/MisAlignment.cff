@@ -1,15 +1,21 @@
 #The tracker misalignment capability
 include "CondCore/DBCommon/data/CondDBSetup.cfi"
-es_source trackerAlignment = PoolDBESSource {
+
+es_source trackerAlignment = PoolDBESSource { 
     using CondDBSetup
-    string timetype = "runnumber"
-    string connect = "oracle://cms_orcoff_int2r/CMS_COND_ALIGNMENT"
-    untracked string catalog = "relationalcatalog_oracle://cms_orcoff_int2r/CMS_COND_GENERAL"
     VPSet toGet = {
 	{ string record = "TrackerAlignmentRcd" string tag = "TrackerShortTermScenario150" },
 	{ string record = "TrackerAlignmentErrorRcd" string tag = "TrackerShortTermScenarioErrors150" }
     }
+    string timetype = "runnumber"
+    
+    # FRONTIER
+    string connect = "frontier://FrontierDev/CMS_COND_ALIGNMENT"
+    untracked bool siteLocalConfig = true
+    
 }
 
-# Apply misalignment.
-replace TrackerDigiGeometryESModule.applyAlignment = true
+es_prefer trackerAlignment = PoolDBESSource {}
+
+# to apply misalignments
+replace TrackerDigiGeometryESModule.applyAlignment = true      
