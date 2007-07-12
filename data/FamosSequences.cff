@@ -50,7 +50,8 @@ replace particleFlowCluster.ecalRecHitsEEModuleLabel = "caloRecHits"
 replace particleFlowCluster.ecalRecHitsESModuleLabel = "caloRecHits"
 replace particleFlowCluster.hcalRecHitsHBHEModuleLabel = "caloRecHits"
 replace particleFlowSimParticle.SimModuleLabel = "famosSimHits"
-replace elecpreid.TkColList = {gsWithMaterialTracks}
+replace elecpreid.RefitModuleLabel = "gsWithMaterialTracks"
+#replace elecpreid.TkColList = {gsWithMaterialTracks}
 
 # Calo Towers
 include "RecoJets/Configuration/data/CaloTowersRec.cff" 
