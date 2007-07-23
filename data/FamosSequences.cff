@@ -27,9 +27,6 @@ include "FastSimulation/Tracking/data/GSTrackCandidates.cff"
 # CTF track fit with material
 include "FastSimulation/Tracking/data/GSFinalFitWithMaterial.cff"
 
-# GSF electron fit
-include "TrackingTools/GsfTracking/data/GsfElectronFit.cfi"
-
 # Calo RecHits producer
 include "FastSimulation/CaloRecHitsProducer/data/CaloRecHits.cff"	
 
@@ -74,12 +71,13 @@ include "FastSimulation/ParamL3MuonProducer/data/ParamL3Muon.cfi"
 include "FastSimulation/EgammaElectronAlgos/data/electronGSPixelSeeds.cfi"
 include "FastSimulation/EgammaElectronAlgos/data/electronGSGsfTrackCandidates.cff"
 include "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfElectrons.cff"
-include "TrackingTools/GsfTracking/data/GsfElectronFit.cff"
 include "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
 module pixelMatchGsfFitBarrel = pixelMatchGsfFit from "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
 replace pixelMatchGsfFitBarrel.src = "electronGSGsfTrackCandidatesBarrel"
+replace pixelMatchGsfFitBarrel.TTRHBuilder = "WithoutRefit"
 module pixelMatchGsfFitEndcap = pixelMatchGsfFit from "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
 replace pixelMatchGsfFitEndcap.src = "electronGSGsfTrackCandidatesEndcap"
+replace pixelMatchGsfFitEndcap.TTRHBuilder = "WithoutRefit"
 replace pixelMatchGsfElectrons.hbheModule = "caloRecHits"
 replace pixelMatchGsfElectrons.SCLBarrelLabel = "electronGSPixelSeeds"
 replace pixelMatchGsfElectrons.SCLEndcapLabel = "electronGSPixelSeeds"
