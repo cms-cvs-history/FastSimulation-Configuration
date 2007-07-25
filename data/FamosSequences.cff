@@ -99,7 +99,7 @@ replace offlinePrimaryVerticesFromCTFTracks.TrackLabel = "gsWithMaterialTracks"
 replace jetTracksAssociator.tracks = gsWithMaterialTracks
 replace combinedSVJetTags.trackcoll = "gsWithMaterialTracks"
 sequence famosBTaggingSequence = {
-#    iterativeCone5CaloJets,   # To avoid conflict when the jet sequence is invoked too.
+#    iterativeCone5CaloJets,
     vertexreco,
     jetTracksAssociator,
     impactParameterTagInfos,
@@ -202,7 +202,6 @@ sequence famosWithEverything = {
     ecalClusteringSequence,
     famosElectronSequence,
     paramMuons,
-    famosBTaggingSequence,
-    caloJetMetGen,
-    caloJetMet
+    recoJets,
+    famosBTaggingSequence
 }
