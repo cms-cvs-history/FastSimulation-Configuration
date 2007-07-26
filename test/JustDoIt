@@ -1,0 +1,6 @@
+#!/bin/sh
+rm MisAlignedSimulation.root
+rm MisAlignedReconstruction.root
+cmsRun MisAlignedSimulation.cfg
+cmsRun MisAlignedReconstruction.cfg
+rm MisAlignedSimulation.root
