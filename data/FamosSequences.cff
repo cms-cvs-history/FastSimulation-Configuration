@@ -100,8 +100,8 @@ replace jetTracksAssociator.tracks = gsWithMaterialTracks
 replace combinedSVJetTags.trackcoll = "gsWithMaterialTracks"
 sequence famosBTaggingSequence = {
 #    iterativeCone5CaloJets,
-    vertexreco,
-    jetTracksAssociator,
+#    vertexreco,
+#    jetTracksAssociator,
     impactParameterTagInfos,
     (jetProbabilityJetTags & trackCountingHighPurJetTags & trackCountingHighEffJetTags),
     combinedSVJetTags
@@ -112,8 +112,8 @@ include "RecoTauTag/Configuration/data/RecoTauTag.cff"
 replace combinedTauTag.PVSrc = "offlinePrimaryVerticesFromCTFTracks"
 sequence famosTauTaggingSequence = {
 #    iterativeCone5CaloJets,
-    vertexreco,
-    jetTracksAssociator,
+#    vertexreco,
+#    jetTracksAssociator,
     coneIsolationTauJetTags,
     combinedTauTag,
 tauCaloProducer
@@ -207,12 +207,16 @@ sequence famosWithElectrons = {
 
 sequence famosWithBTagging = {
     famosWithTracksAndCaloTowers,
+    vertexreco,
+    jetTracksAssociator,
     iterativeCone5CaloJets,
     famosBTaggingSequence
 }
 
 sequence famosWithTauTagging = {
     famosWithTracksAndCaloTowers,
+    vertexreco,
+    jetTracksAssociator,
     iterativeCone5CaloJets,
 ecalClusteringSequence,
     famosTauTaggingSequence
@@ -225,5 +229,9 @@ sequence famosWithEverything = {
     famosElectronSequence,
     paramMuons,
     recoJets,
-    famosBTaggingSequence
+    vertexreco,
+    jetTracksAssociator,
+    famosBTaggingSequence,
+    famosTauTaggingSequence
+
 }
