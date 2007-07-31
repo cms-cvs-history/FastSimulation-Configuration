@@ -107,6 +107,17 @@ sequence famosBTaggingSequence = {
     combinedSVJetTags
 }
 
+#Tau tagging
+include "RecoTauTag/Configuration/data/RecoTauTag.cff"
+sequence famosTauTaggingSequence = {
+#    iterativeCone5CaloJets,
+    vertexreco,
+    jetTracksAssociator,
+    coneIsolationTauJetTags
+}
+
+
+
 # Famos pre-defined sequences
 sequence famosWithTrackerHits = { 
     famosSimHits,
@@ -196,6 +207,13 @@ sequence famosWithBTagging = {
     iterativeCone5CaloJets,
     famosBTaggingSequence
 }
+
+sequence famosWithTauTagging = {
+    famosWithTracksAndCaloTowers,
+    iterativeCone5CaloJets,
+    famosTauTaggingSequence
+}
+
 
 sequence famosWithEverything = {
     famosWithCaloTowersAndParticleFlow,
