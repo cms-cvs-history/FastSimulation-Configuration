@@ -109,11 +109,14 @@ sequence famosBTaggingSequence = {
 
 #Tau tagging
 include "RecoTauTag/Configuration/data/RecoTauTag.cff"
+replace combinedTauTag.PVSrc = "offlinePrimaryVerticesFromCTFTracks"
 sequence famosTauTaggingSequence = {
 #    iterativeCone5CaloJets,
     vertexreco,
     jetTracksAssociator,
-    coneIsolationTauJetTags
+    coneIsolationTauJetTags,
+    combinedTauTag,
+tauCaloProducer
 }
 
 
@@ -211,6 +214,7 @@ sequence famosWithBTagging = {
 sequence famosWithTauTagging = {
     famosWithTracksAndCaloTowers,
     iterativeCone5CaloJets,
+ecalClusteringSequence,
     famosTauTaggingSequence
 }
 
