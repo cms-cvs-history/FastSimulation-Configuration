@@ -16,3 +16,6 @@ include "MagneticField/Engine/data/volumeBasedMagneticField.cfi"
 include "Geometry/CaloEventSetup/data/CaloGeometry.cff"
 include "Geometry/CaloEventSetup/data/CaloTopology.cfi"		
 include "Geometry/CaloEventSetup/data/EcalTrigTowerConstituents.cfi"
+
+#B and Tau service to retrieve calibration of the algorithms from the CondDB
+include "RecoBTau/Configuration/data/RecoBTau_FrontierConditions.cff"
