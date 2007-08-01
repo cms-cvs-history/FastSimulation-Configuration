@@ -42,6 +42,13 @@ replace correctedEndcapSuperClustersWithPreshower.preshRecHitProducer = "caloRec
 
 # Particle Flow
 include "RecoParticleFlow/Configuration/data/RecoParticleFlow.cff"
+replace towerMakerPF.ecalInputs = { 
+    "caloRecHits:EcalRecHitsEB", 
+    "caloRecHits:EcalRecHitsEE" 
+}
+replace towerMakerPF.hbheInput = caloRecHits
+replace towerMakerPF.hoInput = caloRecHits
+replace towerMakerPF.hfInput = caloRecHits
 replace particleFlowCluster.ecalRecHitsEBModuleLabel = "caloRecHits"
 replace particleFlowCluster.ecalRecHitsEEModuleLabel = "caloRecHits"
 replace particleFlowCluster.ecalRecHitsESModuleLabel = "caloRecHits"
@@ -162,6 +169,7 @@ sequence famosWithTracksAndEcalClusters = {
 
 sequence famosWithParticleFlow = {
     famosWithTracksAndCaloHits,
+    caloTowersPFRec,
     particleFlowCluster,
     elecpreid,
     particleFlowBlock,
