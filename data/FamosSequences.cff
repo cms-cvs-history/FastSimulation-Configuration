@@ -130,8 +130,13 @@ sequence famosPFTauTaggingSequence = {
     pfConeIsolation,
     tauPFProducer
 }
-
-
+#Fast L1 Trigger
+include "FastSimulation/L1CaloTriggerProducer/data/fastl1calosim.cfi"
+include "FastSimulation/L1CaloTriggerProducer/data/fastL1extraParticleMap.cfi"
+replace fastL1CaloSim.EmInputs =
+	 { "caloRecHits:EcalRecHitsEB", "caloRecHits:EcalRecHitsEE"  }	
+#Fast Tau HLT
+include "FastSimulation/Configuration/data/fastTauHLT.cff"
 
 # Famos pre-defined sequences
 sequence famosWithTrackerHits = { 
@@ -255,4 +260,29 @@ sequence famosWithEverything = {
     famosTauTaggingSequence,
     famosPFTauTaggingSequence
 
+}
+
+#Trigger sequences
+sequence famosWithSingleTauTrigger = {
+    famosWithTracksAndJets,
+    fastL1CaloSim,
+    fastL1extraParticleMap, 
+    vertexreco,
+    fastSingleTauTrigger
+}
+
+sequence famosWithSingleTauMETTrigger = {
+    famosWithTracksAndJets,
+    fastL1CaloSim,
+    fastL1extraParticleMap, 
+    vertexreco,
+    fastSingleTauMETTrigger
+}
+ 
+sequence famosWithDoubleTauTrigger = {
+    famosWithTracksAndJets,
+    fastL1CaloSim,
+    fastL1extraParticleMap, 
+    vertexreco,
+    fastDoubleTauTrigger
 }
