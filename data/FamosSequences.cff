@@ -226,16 +226,16 @@ sequence famosWithElectrons = {
 sequence famosWithBTagging = {
     famosWithTracksAndCaloTowers,
     vertexreco,
-    jetTracksAssociator,
     iterativeCone5CaloJets,
+    jetTracksAssociator,
     famosBTaggingSequence
 }
 
 sequence famosWithTauTagging = {
     famosWithTracksAndCaloTowers,
     vertexreco,
-    jetTracksAssociator,
     iterativeCone5CaloJets,
+    jetTracksAssociator,
 ecalClusteringSequence,
     famosTauTaggingSequence
 }
@@ -264,25 +264,22 @@ sequence famosWithEverything = {
 
 #Trigger sequences
 sequence famosWithSingleTauTrigger = {
-    famosWithTracksAndJets,
-    fastL1CaloSim,
-    fastL1extraParticleMap, 
-    vertexreco,
+    famosWithCaloTowers&
+    fastL1CaloSim&
+    fastL1extraParticleMap&
     fastSingleTauTrigger
 }
 
 sequence famosWithSingleTauMETTrigger = {
-    famosWithTracksAndJets,
-    fastL1CaloSim,
-    fastL1extraParticleMap, 
-    vertexreco,
+    famosWithCaloTowers&
+    fastL1CaloSim&
+    fastL1extraParticleMap& 
     fastSingleTauMETTrigger
 }
  
 sequence famosWithDoubleTauTrigger = {
-    famosWithTracksAndJets,
-    fastL1CaloSim,
-    fastL1extraParticleMap, 
-    vertexreco,
+    famosWithCaloTowers&
+    fastL1CaloSim&
+    fastL1extraParticleMap&
     fastDoubleTauTrigger
 }

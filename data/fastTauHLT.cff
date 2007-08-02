@@ -212,9 +212,12 @@ sequence fastCaloTau = { caloTowersTau1, icone5Tau1, caloTowersTau2, icone5Tau2,
 
 
 sequence fastSingleTauTrigger = {singleTauL1SeedFilter & fastCaloTau&  
+met&
 hlt1METSingleTau&
 ecalIsolation&
 filterSingleTauEcalIsolation&
+famosWithTracks&
+vertexreco&
 (associatorL3SingleTauFast,
 coneIsolationL3SingleTauFast,
 isolatedL3SingleTauFast,
@@ -222,9 +225,12 @@ filterL3SingleTauFast)
 }
 
 sequence fastSingleTauMETTrigger = {singleTauMETL1SeedFilter & fastCaloTau&  
+met&
 hlt1METSingleTauMET&
 ecalIsolationSingleTauMET&
 filterSingleTauMETEcalIsolation&
+famosWithTracks&
+vertexreco&
 (associatorL3SingleTauMETFast,
 coneIsolationL3SingleTauMETFast,
 isolatedL3SingleTauMETFast,
@@ -234,6 +240,8 @@ filterL3SingleTauMETFast)
 sequence fastDoubleTauTrigger = {doubleTauL1SeedFilter & fastCaloTau&  
 ecalIsolation&
 filterTauEcalIsolation&
+famosWithTracks&
+vertexreco&
 (associatorL3DoubleTauFast,
 coneIsolationL3DoubleTauFast,
 isolatedL3DoubleTauFast,
