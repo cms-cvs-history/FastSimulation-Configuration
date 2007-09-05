@@ -133,7 +133,7 @@ replace coneIsolationL3SingleTauMETFast.vertexSrc = "offlinePrimaryVerticesFromC
 
 module coneIsolationL25DoubleTauFast = coneIsolationForHLT from "RecoTauTag/HLTProducers/data/coneIsolationForHLT.cfi"    
 replace coneIsolationL25DoubleTauFast.JetTrackSrc = "associatorL25DoubleTauFast"
-replace coneIsolationL25DoubleTauFast.vertexSrc = "offlinePrimaryVerticesFromCTFTracks"
+
 
 #
 #Selecting Isolated Taus
@@ -198,7 +198,7 @@ module filterL3SingleTauMETFast = HLT1Tau {
 }
 
 module filterL25DoubleTauFast = HLT1Tau {
-    InputTag inputTag   = isolatedL3DoubleTauFast
+    InputTag inputTag   = isolatedL25DoubleTauFast
     double MinPt  = 1.0
     double MaxEta = 5.0
     int32 MinN     = 2
