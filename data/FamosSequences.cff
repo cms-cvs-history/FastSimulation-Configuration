@@ -4,6 +4,7 @@ include "FastSimulation/Configuration/data/CommonInputs.cff"
 # Primary vertex smearing.
 include "IOMC/EventVertexGenerators/data/VtxSmearedGauss.cfi"    
 
+
 # Conversion to GenParticleCandidates 
 include "PhysicsTools/HepMCCandAlgos/data/genParticleCandidatesFast.cfi" 
 
@@ -39,6 +40,12 @@ replace correctedHybridSuperClusters.recHitProducer="caloRecHits"
 replace correctedIslandBarrelSuperClusters.recHitProducer="caloRecHits"
 replace correctedIslandEndcapSuperClusters.recHitProducer="caloRecHits"
 replace correctedEndcapSuperClustersWithPreshower.preshRecHitProducer = "caloRecHits"
+
+#PixelTracks and Vertices
+include "FastSimulation/Tracking/data/PixelTracksMaker.cfi"
+include "RecoPixelVertexing/PixelVertexFinding/data/PixelVertexes.cfi"
+
+
 
 # Particle Flow
 include "RecoParticleFlow/Configuration/data/RecoParticleFlow.cff"
