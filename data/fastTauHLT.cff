@@ -5,8 +5,6 @@ include "HLTrigger/btau/data/tau/PixelTau.cff"
 include "HLTrigger/btau/data/tau/EcalIsolation.cff"
 include "HLTrigger/btau/data/tau/TauTriggerSequences.cff"
 
-include "FastSimulation/Tracking/data/PixelTracksMaker.cfi"
-include "RecoPixelVertexing/PixelVertexFinding/data/PixelVertexes.cfi"
 
 #Replaces for FastSimulation
 
