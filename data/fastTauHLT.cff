@@ -168,10 +168,10 @@ module isolatedL25DoubleTauFast = IsolatedTauJetsSelector{
     
     VInputTag JetSrc = {coneIsolationL25DoubleTauFast}
 	double MatchingCone = 0.1
-	double SignalCone = 0.065
-	double IsolationCone = 0.4
+	double SignalCone = 0.07
+	double IsolationCone = 0.3
 	double MinimumTransverseMomentumInIsolationRing = 1.
-    double MinimumTransverseMomentumLeadingTrack = 20
+    double MinimumTransverseMomentumLeadingTrack = 3
     double DeltaZetTrackVertex = 0.2
     int32	MaximumNumberOfTracksIsolationRing = 0
     InputTag VertexSrc = pixelVertices
