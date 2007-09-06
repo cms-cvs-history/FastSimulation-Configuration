@@ -131,6 +131,7 @@ replace coneIsolationL3SingleTauMETFast.vertexSrc = "offlinePrimaryVerticesFromC
 
 module coneIsolationL25DoubleTauFast = coneIsolationForHLT from "RecoTauTag/HLTProducers/data/coneIsolationForHLT.cfi"    
 replace coneIsolationL25DoubleTauFast.JetTrackSrc = "associatorL25DoubleTauFast"
+replace coneIsolationL25DoubleTauFast.MinimumNumberOfHits  = 2
 
 
 #
