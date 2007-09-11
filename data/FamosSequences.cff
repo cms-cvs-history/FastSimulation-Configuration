@@ -4,7 +4,6 @@ include "FastSimulation/Configuration/data/CommonInputs.cff"
 # Primary vertex smearing.
 include "IOMC/EventVertexGenerators/data/VtxSmearedGauss.cfi"    
 
-
 # Conversion to GenParticleCandidates 
 include "PhysicsTools/HepMCCandAlgos/data/genParticleCandidatesFast.cfi" 
 
@@ -28,8 +27,17 @@ include "FastSimulation/Tracking/data/GSTrackCandidates.cff"
 # CTF track fit with material
 include "FastSimulation/Tracking/data/GSFinalFitWithMaterial.cff"
 
-# Calo RecHits producer
+#PixelTracks and Vertices
+include "FastSimulation/Tracking/data/PixelTracksMaker.cfi"
+include "RecoPixelVertexing/PixelVertexFinding/data/PixelVertexes.cfi"
+
+# Calo RecHits producer (with no HCAL miscalibration by default)
 include "FastSimulation/CaloRecHitsProducer/data/CaloRecHits.cff"	
+include "FastSimulation/CaloRecHitsProducer/data/HcalMisCalib.cff"
+sequence caloRecHitSequence = { 
+    caloRecHits,   // Bare recHits + optional ECAL miscalibration
+    hcalRecHits    // + optional HCAL miscalibration
+}
 
 # ECAL clusters (this will generate harmless warnings...)
 include "RecoEcal/EgammaClusterProducers/data/ecalClusteringSequence.cff"
@@ -41,36 +49,32 @@ replace correctedIslandBarrelSuperClusters.recHitProducer="caloRecHits"
 replace correctedIslandEndcapSuperClusters.recHitProducer="caloRecHits"
 replace correctedEndcapSuperClustersWithPreshower.preshRecHitProducer = "caloRecHits"
 
-#PixelTracks and Vertices
-include "FastSimulation/Tracking/data/PixelTracksMaker.cfi"
-include "RecoPixelVertexing/PixelVertexFinding/data/PixelVertexes.cfi"
-
-
-
 # Particle Flow
 include "RecoParticleFlow/Configuration/data/RecoParticleFlow.cff"
 replace towerMakerPF.ecalInputs = { 
     "caloRecHits:EcalRecHitsEB", 
     "caloRecHits:EcalRecHitsEE" 
 }
-replace towerMakerPF.hbheInput = caloRecHits
-replace towerMakerPF.hoInput = caloRecHits
-replace towerMakerPF.hfInput = caloRecHits
+replace towerMakerPF.hbheInput = hcalRecHits:RecalibHBHE
+replace towerMakerPF.hoInput = hcalRecHits:RecalibHBHE
+replace towerMakerPF.hfInput = hcalRecHits:RecalibHBHE
 replace particleFlowCluster.ecalRecHitsEBModuleLabel = "caloRecHits"
 replace particleFlowCluster.ecalRecHitsEEModuleLabel = "caloRecHits"
 replace particleFlowCluster.ecalRecHitsESModuleLabel = "caloRecHits"
-replace particleFlowCluster.hcalRecHitsHBHEModuleLabel = "caloRecHits"
+replace particleFlowCluster.hcalRecHitsHBHEModuleLabel = "hcalRecHits"
 replace particleFlowSimParticle.SimModuleLabel = "famosSimHits"
 #replace elecpreid.RefitModuleLabel = "gsWithMaterialTracks"
 replace elecpreid.TkColList = {gsWithMaterialTracks}
 
 # Calo Towers
 include "RecoJets/Configuration/data/CaloTowersRec.cff" 
-#include "RecoJets/Configuration/data/RecoJets.cff"
-replace towerMaker.ecalInputs = { "caloRecHits:EcalRecHitsEB", "caloRecHits:EcalRecHitsEE" }
-replace towerMaker.hbheInput = caloRecHits
-replace towerMaker.hoInput = caloRecHits
-replace towerMaker.hfInput = caloRecHits
+replace towerMaker.ecalInputs = { 
+    "caloRecHits:EcalRecHitsEB", 
+    "caloRecHits:EcalRecHitsEE" 
+}
+replace towerMaker.hbheInput = hcalRecHits:RecalibHBHE
+replace towerMaker.hfInput = hcalRecHits:RecalibHF
+replace towerMaker.hoInput = hcalRecHits:RecalibHO
 
 # Jets
 include "Configuration/JetMET/data/calorimetry-jetmet-gen.cff" 
@@ -92,7 +96,8 @@ replace pixelMatchGsfFitBarrel.TTRHBuilder = "WithoutRefit"
 module pixelMatchGsfFitEndcap = pixelMatchGsfFit from "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
 replace pixelMatchGsfFitEndcap.src = "electronGSGsfTrackCandidatesEndcap"
 replace pixelMatchGsfFitEndcap.TTRHBuilder = "WithoutRefit"
-replace pixelMatchGsfElectrons.hbheModule = "caloRecHits"
+replace pixelMatchGsfElectrons.hbheModule = "hcalRecHits"
+replace pixelMatchGsfElectrons.hbheInstance = "RecalibHBHE"
 replace pixelMatchGsfElectrons.SCLBarrelLabel = "electronGSPixelSeeds"
 replace pixelMatchGsfElectrons.SCLEndcapLabel = "electronGSPixelSeeds"
 sequence famosElectronSequence = {
@@ -141,7 +146,7 @@ sequence famosPFTauTaggingSequence = {
 include "FastSimulation/L1CaloTriggerProducer/data/fastl1calosim.cfi"
 include "FastSimulation/L1CaloTriggerProducer/data/fastL1extraParticleMap.cfi"
 replace fastL1CaloSim.EmInputs =
-	 { "caloRecHits:EcalRecHitsEB", "caloRecHits:EcalRecHitsEE"  }	
+	 { "CaloRecHits:EcalRecHitsEB", "CaloRecHits:EcalRecHitsEE"  }	
 #Fast Tau HLT
 include "FastSimulation/Configuration/data/fastTauHLT.cff"
 
@@ -161,7 +166,7 @@ sequence famosWithTracks = {
 sequence famosWithCaloHits = { 
     famosSimHits,
     mix, 
-    caloRecHits   
+    caloRecHitSequence   
 }	
 
 sequence famosWithEcalClusters = { 
@@ -171,7 +176,7 @@ sequence famosWithEcalClusters = {
 
 sequence famosWithTracksAndCaloHits = { 
     famosWithTracks,
-    caloRecHits   
+    caloRecHitSequence   
 }
 
 sequence famosWithTracksAndEcalClusters = { 
@@ -225,7 +230,7 @@ sequence famosWithMuons = {
 
 sequence famosWithElectrons = {
     famosWithTrackerHits,
-    caloRecHits,
+    caloRecHitSequence,
     ecalClusteringSequence,
     famosElectronSequence
 }
@@ -243,7 +248,7 @@ sequence famosWithTauTagging = {
     vertexreco,
     iterativeCone5CaloJets,
     jetTracksAssociator,
-ecalClusteringSequence,
+    ecalClusteringSequence,
     famosTauTaggingSequence
 }
 
