@@ -129,22 +129,16 @@ sequence famosBTaggingSequence = {
 #Tau tagging
 include "RecoTauTag/Configuration/data/RecoTauTag.cff"
 replace combinedTauTag.PVSrc = "offlinePrimaryVerticesFromCTFTracks"
-replace tauCaloProducer.PVProducer = "offlinePrimaryVerticesFromCTFTracks"
+replace caloRecoTauProducer.PVProducer = "offlinePrimaryVerticesFromCTFTracks"
 
 sequence famosTauTaggingSequence = {
-    coneIsolationTauJetTags,
-    combinedTauTag,
-tauCaloProducer
+tautagging
 }
 include "RecoTauTag/Configuration/data/RecoPFTauTag.cff"
-replace pfConeIsolation.PVmodule = "offlinePrimaryVerticesFromCTFTracks"
-replace tauPFProducer.PVProducer = "offlinePrimaryVerticesFromCTFTracks"
+replace pfRecoTauProducer.PVProducer = "offlinePrimaryVerticesFromCTFTracks"
 
 sequence famosPFTauTaggingSequence = {
-   particleFlowJetCandidates,
-    iterativeCone5PFJets,
-    pfConeIsolation,
-    tauPFProducer
+PFTau
 }
 #Fast L1 Trigger
 include "FastSimulation/L1CaloTriggerProducer/data/fastl1calosim.cfi"
