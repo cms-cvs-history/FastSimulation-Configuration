@@ -109,6 +109,12 @@ sequence famosElectronSequence = {
     pixelMatchGsfElectrons
 }
 
+# Photon reconstruction
+include "RecoEgamma/EgammaPhotonProducers/data/photonSequence.cff"
+replace photons.barrelHitProducer="caloRecHits"
+replace photons.endcapHitProducer="caloRecHits"
+replace photons.pixelSeedAssocProducer="electronGSPixelSeeds"
+
 # B tagging
 include "RecoVertex/Configuration/data/RecoVertex.cff"
 include "RecoBTau/Configuration/data/RecoBTau.cff"
@@ -232,6 +238,22 @@ sequence famosWithElectrons = {
     ecalClusteringSequence,
     famosElectronSequence
 }
+
+sequence famosWithPhotons = {
+    famosWithTrackerHits,
+    caloRecHitSequence,
+    ecalClusteringSequence,
+    photonSequence
+}
+
+sequence famosWithElectronsAndPhotons = {
+    famosWithTrackerHits,
+    caloRecHitSequence,
+    ecalClusteringSequence,
+    famosElectronSequence,
+    photonSequence
+}
+
 
 sequence famosWithBTagging = {
     famosWithTracksAndCaloTowers,
