@@ -283,6 +283,7 @@ sequence famosWithEverything = {
     famosWithCaloTowersAndParticleFlow,
     ecalClusteringSequence,
     famosElectronSequence,
+    photonSequence,
     paramMuons,
     caloJetMetGen,
     caloJetMet,
