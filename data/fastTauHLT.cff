@@ -3,7 +3,16 @@ include "HLTrigger/btau/data/tau/SingleTauMET.cff"
 include "HLTrigger/btau/data/tau/DoubleTau.cff"
 include "HLTrigger/btau/data/tau/PixelTau.cff"
 include "HLTrigger/btau/data/tau/EcalIsolation.cff"
-include "HLTrigger/btau/data/tau/TauTriggerSequences.cff"
+
+#PixelTracks and Vertices
+include "FastSimulation/Tracking/data/PixelTracksMaker.cfi"
+include "RecoPixelVertexing/PixelVertexFinding/data/PixelVertexes.cfi"
+
+
+sequence ecalIsolation ={(singleTauJetCrystalsAssociator,ecalSingleTauIsol,ecalSingleTauIsolated) & (doubleTauJetCrystalsAssociator,ecalDoubleTauIsol,ecalDoubleTauIsolated) ,ecalTauIsolated}
+
+sequence ecalIsolationSingleTauMET={singleTauMETJetCrystalsAssociator,ecalSingleTauMETIsol,ecalSingleTauMETIsolated}
+
 
 #Replaces for FastSimulation
 
@@ -111,8 +120,8 @@ module associatorL3SingleTauMETFast = JetTracksAssociator {
     double coneSize = 0.5
 }
 
-module associatorL3DoubleTauFast = JetTracksAssociator {
-    InputTag tracks = gsWithMaterialTracks
+module associatorL25DoubleTauFast = JetTracksAssociator {
+    InputTag tracks = pixelTracks
     InputTag jets   = ecalTauIsolated:Isolated
     double coneSize = 0.5
 }
@@ -128,9 +137,10 @@ module coneIsolationL3SingleTauMETFast = coneIsolationForHLT from "RecoTauTag/HL
 replace coneIsolationL3SingleTauMETFast.JetTrackSrc = "associatorL3SingleTauMETFast"
 replace coneIsolationL3SingleTauMETFast.vertexSrc = "offlinePrimaryVerticesFromCTFTracks"
 
-module coneIsolationL3DoubleTauFast = coneIsolationForHLT from "RecoTauTag/HLTProducers/data/coneIsolationForHLT.cfi"    
-replace coneIsolationL3DoubleTauFast.JetTrackSrc = "associatorL3DoubleTauFast"
-replace coneIsolationL3DoubleTauFast.vertexSrc = "offlinePrimaryVerticesFromCTFTracks"
+module coneIsolationL25DoubleTauFast = coneIsolationForHLT from "RecoTauTag/HLTProducers/data/coneIsolationForHLT.cfi"    
+replace coneIsolationL25DoubleTauFast.JetTrackSrc = "associatorL25DoubleTauFast"
+replace coneIsolationL25DoubleTauFast.MinimumNumberOfHits  = 2
+
 
 #
 #Selecting Isolated Taus
@@ -163,17 +173,17 @@ module isolatedL3SingleTauMETFast = IsolatedTauJetsSelector{
     bool UseVertex = false
 }
 
-module isolatedL3DoubleTauFast = IsolatedTauJetsSelector{
+module isolatedL25DoubleTauFast = IsolatedTauJetsSelector{
     
-    VInputTag JetSrc = {coneIsolationL3DoubleTauFast}
-	double MatchingCone = 0.1
-	double SignalCone = 0.065
-	double IsolationCone = 0.4
-	double MinimumTransverseMomentumInIsolationRing = 1.
-    double MinimumTransverseMomentumLeadingTrack = 20
+    VInputTag JetSrc = {coneIsolationL25DoubleTauFast}
+    double MatchingCone = 0.1
+    double SignalCone = 0.07
+    double IsolationCone = 0.3
+    double MinimumTransverseMomentumInIsolationRing = 1.
+    double MinimumTransverseMomentumLeadingTrack = 3
     double DeltaZetTrackVertex = 0.2
     int32	MaximumNumberOfTracksIsolationRing = 0
-    InputTag VertexSrc = offlinePrimaryVerticesFromCTFTracks
+    InputTag VertexSrc = pixelVertices
     bool UseVertex = false
 }
 
@@ -194,8 +204,8 @@ module filterL3SingleTauMETFast = HLT1Tau {
     int32 MinN     = 1
 }
 
-module filterL3DoubleTauFast = HLT1Tau {
-    InputTag inputTag   = isolatedL3DoubleTauFast
+module filterL25DoubleTauFast = HLT1Tau {
+    InputTag inputTag   = isolatedL25DoubleTauFast
     double MinPt  = 1.0
     double MaxEta = 5.0
     int32 MinN     = 2
@@ -208,6 +218,7 @@ sequence fastCaloTau = { caloTowersTau1, icone5Tau1, caloTowersTau2, icone5Tau2,
     icone5Tau4,
     l2TauJetsProvider
 }
+
 
 
 
@@ -240,11 +251,13 @@ filterL3SingleTauMETFast)
 sequence fastDoubleTauTrigger = {doubleTauL1SeedFilter & fastCaloTau&  
 ecalIsolation&
 filterTauEcalIsolation&
-famosWithTracks&
-vertexreco&
-(associatorL3DoubleTauFast,
-coneIsolationL3DoubleTauFast,
-isolatedL3DoubleTauFast,
-filterL3DoubleTauFast)
+famosWithTrackerHits&
+pixelTracks&
+pixelVertices&
+(associatorL25DoubleTauFast,
+coneIsolationL25DoubleTauFast,
+isolatedL25DoubleTauFast,
+filterL25DoubleTauFast)
 }
+
 
