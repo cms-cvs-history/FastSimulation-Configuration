@@ -121,7 +121,7 @@ include "RecoBTau/Configuration/data/RecoBTau.cff"
 include "RecoBTag/Configuration/data/RecoBTag.cff"
 include "RecoBTag/CombinedSV/data/combined.cfi"
 replace offlinePrimaryVerticesFromCTFTracks.TrackLabel = "gsWithMaterialTracks"
-replace jetTracksAssociator.tracks = gsWithMaterialTracks
+replace ic5JetTracksAssociatorAtVertex.tracks = gsWithMaterialTracks
 replace combinedSVJetTags.trackcoll = "gsWithMaterialTracks"
 sequence famosBTaggingSequence = {
 #    iterativeCone5CaloJets,
@@ -259,7 +259,8 @@ sequence famosWithBTagging = {
     famosWithTracksAndCaloTowers,
     vertexreco,
     iterativeCone5CaloJets,
-    jetTracksAssociator,
+    ic5JetTracksAssociatorAtVertex,
+    #jetTracksAssociator,
     famosBTaggingSequence
 }
 
@@ -267,7 +268,8 @@ sequence famosWithTauTagging = {
     famosWithTracksAndCaloTowers,
     vertexreco,
     iterativeCone5CaloJets,
-    jetTracksAssociator,
+    ic5JetTracksAssociatorAtVertex,
+    #jetTracksAssociator,
     ecalClusteringSequence,
     famosTauTaggingSequence
 }
@@ -288,7 +290,8 @@ sequence famosWithEverything = {
     caloJetMetGen,
     caloJetMet,
     vertexreco,
-    jetTracksAssociator,
+    ic5JetTracksAssociatorAtVertex,
+    #jetTracksAssociator,
     famosBTaggingSequence,
     famosTauTaggingSequence,
     famosPFTauTaggingSequence
