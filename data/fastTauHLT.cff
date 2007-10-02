@@ -108,19 +108,19 @@ module l2TauJetsProvider = L2TauJetsProvider {
 #L3 TrackIsolation modules
 
 #JetTrackAssociator
-module associatorL3SingleTauFast = JetTracksAssociator {
+module associatorL3SingleTauFast = JetTracksAssociatorAtVertex {
     InputTag tracks = gsWithMaterialTracks
     InputTag jets   = ecalSingleTauIsolated:Isolated
     double coneSize = 0.5
 }
 
-module associatorL3SingleTauMETFast = JetTracksAssociator {
+module associatorL3SingleTauMETFast = JetTracksAssociatorAtVertex {
     InputTag tracks = gsWithMaterialTracks
     InputTag jets   = ecalSingleTauMETIsolated:Isolated
     double coneSize = 0.5
 }
 
-module associatorL25DoubleTauFast = JetTracksAssociator {
+module associatorL25DoubleTauFast = JetTracksAssociatorAtVertex {
     InputTag tracks = pixelTracks
     InputTag jets   = ecalTauIsolated:Isolated
     double coneSize = 0.5
