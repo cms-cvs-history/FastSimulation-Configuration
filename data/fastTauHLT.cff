@@ -4,7 +4,14 @@ include "HLTrigger/btau/data/tau/DoubleTau.cff"
 include "HLTrigger/btau/data/tau/PixelTau.cff"
 include "HLTrigger/btau/data/tau/EcalIsolation.cff"
 
+#PixelTracks and Vertices
+include "FastSimulation/Tracking/data/PixelTracksMaker.cfi"
+include "RecoPixelVertexing/PixelVertexFinding/data/PixelVertexes.cfi"
+
+
 sequence ecalIsolation ={(singleTauJetCrystalsAssociator,ecalSingleTauIsol,ecalSingleTauIsolated) & (doubleTauJetCrystalsAssociator,ecalDoubleTauIsol,ecalDoubleTauIsolated) ,ecalTauIsolated}
+
+sequence ecalIsolationSingleTauMET={singleTauMETJetCrystalsAssociator,ecalSingleTauMETIsol,ecalSingleTauMETIsolated}
 
 
 #Replaces for FastSimulation
