@@ -95,12 +95,16 @@ replace icone5Tau4.src = caloTowersTau4
 #L2TauJets provider (can be removed if fast simulation switches to the new L1TriggerEmulationMap)
 module l2SingleTauJetsFast = l2TauJetsProvider from "RecoTauTag/HLTProducers/data/L2TauJetsProvider.cfi"
 replace l2SingleTauJetsFast.L1TauTrigger = "singleTauL1SeedFilterFast"
+replace  l2SingleTauJetsFast.L1Particles = fastL1CaloSim:Tau
 
 module l2SingleTauMETJetsFast = l2TauJetsProvider from "RecoTauTag/HLTProducers/data/L2TauJetsProvider.cfi"
 replace l2SingleTauMETJetsFast.L1TauTrigger = "singleTauMETL1SeedFilterFast"
+replace  l2SingleTauMETJetsFast.L1Particles = fastL1CaloSim:Tau
 
 module l2DoubleTauJetsFast = l2TauJetsProvider from "RecoTauTag/HLTProducers/data/L2TauJetsProvider.cfi"
 replace l2DoubleTauJetsFast.L1TauTrigger = "doubleTauL1SeedFilterFast"
+replace  l2DoubleTauJetsFast.L1Particles = fastL1CaloSim:Tau
+
 
 #Replace needed for EcalIsolation
 #construct the jet-crystals associator for the single and double Tau collection
