@@ -175,12 +175,12 @@ pixelVertices&
 }
 
 sequence fastSingleTauMETTrigger = {
-singleTauMETL1SeedFilter & 
+singleTauMETL1SeedFilterFast & 
 caloTausCreator& 
 met&
 hlt1METSingleTauMET&
 l2SingleTauMETJetsFast& 
-singleTauMETJetCrystalsAssociatorMETFast&ecalSingleTauMETIsolFast&ecalSingleTauIsolated&
+singleTauMETJetCrystalsAssociatorFast&ecalSingleTauMETIsolFast&ecalSingleTauMETIsolated&
 filterSingleTauMETEcalIsolation&
 famosWithTracks&
 pixelTracks&
@@ -189,7 +189,7 @@ pixelVertices&
 }
 
 sequence fastDoubleTauTrigger = {
-doubleTauL1SeedFilter& 
+doubleTauL1SeedFilterFast& 
 caloTausCreator&  
 l2DoubleTauJetsFast& 
 doubleTauJetCrystalsAssociatorFast&ecalDoubleTauIsolFast&ecalDoubleTauIsolated&
