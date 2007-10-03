@@ -149,8 +149,9 @@ PFTau
 #Fast L1 Trigger
 include "FastSimulation/L1CaloTriggerProducer/data/fastl1calosim.cfi"
 include "FastSimulation/L1CaloTriggerProducer/data/fastL1extraParticleMap.cfi"
+replace fastL1CaloSim.AlgorithmSource = "RecHits"
 replace fastL1CaloSim.EmInputs =
-	 { "CaloRecHits:EcalRecHitsEB", "CaloRecHits:EcalRecHitsEE"  }	
+	 { "caloRecHits:EcalRecHitsEB", "caloRecHits:EcalRecHitsEE"  }	
 #Fast Tau HLT
 include "FastSimulation/Configuration/data/fastTauHLT.cff"
 
