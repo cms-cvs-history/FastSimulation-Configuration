@@ -134,7 +134,7 @@ sequence famosBTaggingSequence = {
 
 #Tau tagging
 include "RecoTauTag/Configuration/data/RecoTauTag.cff"
-replace combinedTauTag.PVSrc = "offlinePrimaryVerticesFromCTFTracks"
+#replace combinedTauTag.PVSrc = "offlinePrimaryVerticesFromCTFTracks"
 replace caloRecoTauProducer.PVProducer = "offlinePrimaryVerticesFromCTFTracks"
 
 sequence famosTauTaggingSequence = {
