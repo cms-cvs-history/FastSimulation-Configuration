@@ -1,42 +1,40 @@
-#include files from Full simulation
 include "HLTrigger/btau/data/tau/SingleTau.cff"
 include "HLTrigger/btau/data/tau/SingleTauMET.cff"
 include "HLTrigger/btau/data/tau/DoubleTau.cff"
-
-
+include "HLTrigger/btau/data/tau/PixelTau.cff"
+include "HLTrigger/btau/data/tau/EcalIsolation.cff"
 
 #PixelTracks and Vertices
 include "FastSimulation/Tracking/data/PixelTracksMaker.cfi"
 include "RecoPixelVertexing/PixelVertexFinding/data/PixelVertexes.cfi"
 
 
-#L1 SeedFilter not anylonger in use in Full Simulation
-module singleTauL1SeedFilterFast = HLTLevel1Seed {
-    vstring L1Seeds = {"L1_SingleTauJet80"}
-    bool andOr      = true
-    bool byName     = true
-    InputTag L1ExtraCollections = fastL1CaloSim
-    InputTag L1ExtraParticleMap = fastL1extraParticleMap
-    InputTag L1GTReadoutRecord  = fastL1extraParticleMap
-}
+sequence ecalIsolation ={(singleTauJetCrystalsAssociator,ecalSingleTauIsol,ecalSingleTauIsolated) & (doubleTauJetCrystalsAssociator,ecalDoubleTauIsol,ecalDoubleTauIsolated) ,ecalTauIsolated}
 
-module singleTauMETL1SeedFilterFast = HLTLevel1Seed {
-    vstring L1Seeds = {"L1_TauJet30_ETM30"}
-    bool andOr      = true
-    bool byName     = true
-    InputTag L1ExtraCollections = fastL1CaloSim
-    InputTag L1ExtraParticleMap = fastL1extraParticleMap
-    InputTag L1GTReadoutRecord  = fastL1extraParticleMap
-}
+sequence ecalIsolationSingleTauMET={singleTauMETJetCrystalsAssociator,ecalSingleTauMETIsol,ecalSingleTauMETIsolated}
 
-module doubleTauL1SeedFilterFast = HLTLevel1Seed {
-    vstring L1Seeds = {"L1_DoubleTauJet40"}
-    bool andOr      = true
-    bool byName     = true
-    InputTag L1ExtraCollections = fastL1CaloSim
-    InputTag L1ExtraParticleMap = fastL1extraParticleMap
-    InputTag L1GTReadoutRecord  = fastL1extraParticleMap
-}
+
+#Replaces for FastSimulation
+
+replace singleTauL1SeedFilter.L1ExtraCollections = fastL1CaloSim
+replace singleTauL1SeedFilter.L1ExtraParticleMap= fastL1extraParticleMap
+replace singleTauL1SeedFilter.L1GTReadoutRecord= fastL1extraParticleMap
+
+replace singleTauMETL1SeedFilter.L1ExtraCollections = fastL1CaloSim
+replace singleTauMETL1SeedFilter.L1ExtraParticleMap= fastL1extraParticleMap
+replace singleTauMETL1SeedFilter.L1GTReadoutRecord= fastL1extraParticleMap
+
+replace doubleTauL1SeedFilter.L1ExtraCollections = fastL1CaloSim
+replace doubleTauL1SeedFilter.L1ExtraParticleMap= fastL1extraParticleMap
+replace doubleTauL1SeedFilter.L1GTReadoutRecord= fastL1extraParticleMap
+
+replace singleTauJetCrystalsAssociator.EBRecHits = caloRecHits:EcalRecHitsEB
+replace singleTauJetCrystalsAssociator.EERecHits = caloRecHits:EcalRecHitsEE
+replace singleTauMETJetCrystalsAssociator.EBRecHits = caloRecHits:EcalRecHitsEB
+replace singleTauMETJetCrystalsAssociator.EERecHits = caloRecHits:EcalRecHitsEE
+replace doubleTauJetCrystalsAssociator.EBRecHits = caloRecHits:EcalRecHitsEB
+replace doubleTauJetCrystalsAssociator.EERecHits = caloRecHits:EcalRecHitsEE
+
 
 # prepare tower collection in the location of the L1 Tau candidates
 module caloTowersTau1 = caloTowerMakerHLT from "RecoTauTag/HLTProducers/data/caloTowerMakerHLT.cfi"
@@ -65,7 +63,7 @@ module icone5Tau1 = IterativeConeJetProducer {
 }
 replace icone5Tau1.src = caloTowersTau1
 
-
+//module icone5Tau2 = iterativeCone5CaloJets from "RecoJets/JetProducers/data/CaloJets.cfi"
 module icone5Tau2 = IterativeConeJetProducer {
     untracked string alias = "IC5CaloJet"
     using IconeJetParameters
@@ -83,6 +81,7 @@ module icone5Tau3 = IterativeConeJetProducer {
 }
 replace icone5Tau3.src = caloTowersTau3
 
+//module icone5Tau4 = iterativeCone5CaloJets from "RecoJets/JetProducers/data/CaloJets.cfi"
 module icone5Tau4 = IterativeConeJetProducer {
     untracked string alias = "IC5CaloJet"
     using IconeJetParameters
@@ -92,111 +91,172 @@ module icone5Tau4 = IterativeConeJetProducer {
 replace icone5Tau4.src = caloTowersTau4
 
 
-#L2TauJets provider (can be removed if fast simulation switches to the new L1TriggerEmulationMap)
-module l2SingleTauJetsFast = l2TauJetsProvider from "RecoTauTag/HLTProducers/data/L2TauJetsProvider.cfi"
-replace l2SingleTauJetsFast.L1TauTrigger = "singleTauL1SeedFilterFast"
-replace  l2SingleTauJetsFast.L1Particles = fastL1CaloSim:Tau
+#Jet Splitter
+module l2TauJetsProvider = L2TauJetsProvider {
+    VInputTag JetSrc = { icone5Tau1,icone5Tau2,icone5Tau3,icone5Tau4 }
+    InputTag L1ParticleMap = fastL1extraParticleMap
+    InputTag L1Particles = fastL1CaloSim:Tau
+    string L1SingleTauTrigger = "L1_SingleTauJet80"
+    string L1SingleTauMETTrigger = "L1_TauJet30_ETM30"
+    string L1DoubleTauTrigger ="L1_DoubleTauJet40"
+    string L1IsoEMTauTrigger= "L1_IsoEG10_TauJet20"
+    string L1MuonTrigger="L1_Mu5_TauJet20"
+    double EtExtraTau = 20.
+    double EtMin = 15.
+}
 
-module l2SingleTauMETJetsFast = l2TauJetsProvider from "RecoTauTag/HLTProducers/data/L2TauJetsProvider.cfi"
-replace l2SingleTauMETJetsFast.L1TauTrigger = "singleTauMETL1SeedFilterFast"
-replace  l2SingleTauMETJetsFast.L1Particles = fastL1CaloSim:Tau
-
-module l2DoubleTauJetsFast = l2TauJetsProvider from "RecoTauTag/HLTProducers/data/L2TauJetsProvider.cfi"
-replace l2DoubleTauJetsFast.L1TauTrigger = "doubleTauL1SeedFilterFast"
-replace  l2DoubleTauJetsFast.L1Particles = fastL1CaloSim:Tau
-
-
-#Replace needed for EcalIsolation
-#construct the jet-crystals associator for the single and double Tau collection
-module singleTauJetCrystalsAssociatorFast = jetCrystalsAssociator from "HLTrigger/btau/data/tau/JetCrystalsAssociator.cfi"
-replace singleTauJetCrystalsAssociatorFast.jets   =l2SingleTauJetsFast
-replace singleTauJetCrystalsAssociatorFast.EBRecHits = caloRecHits:EcalRecHitsEB
-replace singleTauJetCrystalsAssociatorFast.EERecHits = caloRecHits:EcalRecHitsEE
-
-module singleTauMETJetCrystalsAssociatorFast = jetCrystalsAssociator from "HLTrigger/btau/data/tau/JetCrystalsAssociator.cfi"
-replace singleTauMETJetCrystalsAssociatorFast.jets   =l2SingleTauMETJetsFast
-replace singleTauMETJetCrystalsAssociatorFast.EBRecHits = caloRecHits:EcalRecHitsEB
-replace singleTauMETJetCrystalsAssociatorFast.EERecHits = caloRecHits:EcalRecHitsEE
-
-
-module doubleTauJetCrystalsAssociatorFast = jetCrystalsAssociator from "HLTrigger/btau/data/tau/JetCrystalsAssociator.cfi"
-replace doubleTauJetCrystalsAssociatorFast.jets   =l2DoubleTauJetsFast
-replace doubleTauJetCrystalsAssociatorFast.EBRecHits = caloRecHits:EcalRecHitsEB
-replace doubleTauJetCrystalsAssociatorFast.EERecHits = caloRecHits:EcalRecHitsEE
-
-
-#EcalIsolation Producer
-module  ecalSingleTauIsolFast =  ecalIsolation from "HLTrigger/btau/data/tau/EcalIsolation.cfi"
-replace ecalSingleTauIsolFast.JetForFilter = singleTauJetCrystalsAssociatorFast
-
-module  ecalSingleTauMETIsolFast =  ecalIsolation from "HLTrigger/btau/data/tau/EcalIsolation.cfi"
-replace ecalSingleTauMETIsolFast.JetForFilter = singleTauMETJetCrystalsAssociatorFast
-
-module  ecalDoubleTauIsolFast =  ecalIsolation from "HLTrigger/btau/data/tau/EcalIsolation.cfi"
-replace ecalDoubleTauIsolFast.JetForFilter = doubleTauJetCrystalsAssociatorFast
-
-#EcalIsolation Selectors
-replace ecalSingleTauIsolated.TauSrc= {ecalSingleTauIsolFast}
-replace ecalSingleTauMETIsolated.TauSrc= {ecalSingleTauMETIsolFast}
-replace ecalDoubleTauIsolated.TauSrc= {ecalDoubleTauIsolFast}
-
-
-#TrackIsolation modules
+#L3 TrackIsolation modules
 
 #JetTrackAssociator
-replace associatorL3SingleTau.tracks = gsWithMaterialTracks 
-replace associatorL3SingleTau.jets = ecalSingleTauIsolated:Isolated
+module associatorL3SingleTauFast = JetTracksAssociatorAtVertex {
+    InputTag tracks = gsWithMaterialTracks
+    InputTag jets   = ecalSingleTauIsolated:Isolated
+    double coneSize = 0.5
+}
 
-replace associatorL3SingleTauMET.tracks = gsWithMaterialTracks
-replace associatorL3SingleTauMET.jets   = ecalSingleTauMETIsolated:Isolated
+module associatorL3SingleTauMETFast = JetTracksAssociatorAtVertex {
+    InputTag tracks = gsWithMaterialTracks
+    InputTag jets   = ecalSingleTauMETIsolated:Isolated
+    double coneSize = 0.5
+}
 
-replace associatorL25PixelTauIsolated.tracks = pixelTracks
-replace associatorL25PixelTauIsolated.jets   = ecalDoubleTauIsolated:Isolated
-
-#All the rest is the same!
+module associatorL25DoubleTauFast = JetTracksAssociatorAtVertex {
+    InputTag tracks = pixelTracks
+    InputTag jets   = ecalTauIsolated:Isolated
+    double coneSize = 0.5
+}
  
-#Sequences
-sequence caloTausCreator = { caloTowersTau1, icone5Tau1, caloTowersTau2, icone5Tau2, caloTowersTau3, icone5Tau3, caloTowersTau4, icone5Tau4
+
+#Cone Isolation
+
+module coneIsolationL3SingleTauFast = coneIsolationForHLT from "RecoTauTag/HLTProducers/data/coneIsolationForHLT.cfi"    
+replace coneIsolationL3SingleTauFast.JetTrackSrc = "associatorL3SingleTauFast"
+replace coneIsolationL3SingleTauFast.vertexSrc = "offlinePrimaryVerticesFromCTFTracks"
+
+module coneIsolationL3SingleTauMETFast = coneIsolationForHLT from "RecoTauTag/HLTProducers/data/coneIsolationForHLT.cfi"    
+replace coneIsolationL3SingleTauMETFast.JetTrackSrc = "associatorL3SingleTauMETFast"
+replace coneIsolationL3SingleTauMETFast.vertexSrc = "offlinePrimaryVerticesFromCTFTracks"
+
+module coneIsolationL25DoubleTauFast = coneIsolationForHLT from "RecoTauTag/HLTProducers/data/coneIsolationForHLT.cfi"    
+replace coneIsolationL25DoubleTauFast.JetTrackSrc = "associatorL25DoubleTauFast"
+replace coneIsolationL25DoubleTauFast.MinimumNumberOfHits  = 2
+
+
+#
+#Selecting Isolated Taus
+#
+
+module isolatedL3SingleTauFast = IsolatedTauJetsSelector{
+    
+    VInputTag JetSrc = {coneIsolationL3SingleTauFast}
+	double MatchingCone = 0.1
+	double SignalCone = 0.065
+	double IsolationCone = 0.4
+	double MinimumTransverseMomentumInIsolationRing = 1.
+    double MinimumTransverseMomentumLeadingTrack = 20
+    double DeltaZetTrackVertex = 0.2
+    int32	MaximumNumberOfTracksIsolationRing = 0
+    InputTag VertexSrc = offlinePrimaryVerticesFromCTFTracks
+    bool UseVertex = false
+}
+
+module isolatedL3SingleTauMETFast = IsolatedTauJetsSelector{
+        VInputTag JetSrc = {coneIsolationL3SingleTauMETFast}
+	double MatchingCone = 0.1
+	double SignalCone = 0.065
+	double IsolationCone = 0.4
+	double MinimumTransverseMomentumInIsolationRing = 1.
+    double MinimumTransverseMomentumLeadingTrack = 20
+    double DeltaZetTrackVertex = 0.2
+    int32	MaximumNumberOfTracksIsolationRing = 0
+    InputTag VertexSrc = offlinePrimaryVerticesFromCTFTracks
+    bool UseVertex = false
+}
+
+module isolatedL25DoubleTauFast = IsolatedTauJetsSelector{
+    
+    VInputTag JetSrc = {coneIsolationL25DoubleTauFast}
+    double MatchingCone = 0.1
+    double SignalCone = 0.07
+    double IsolationCone = 0.3
+    double MinimumTransverseMomentumInIsolationRing = 1.
+    double MinimumTransverseMomentumLeadingTrack = 3
+    double DeltaZetTrackVertex = 0.2
+    int32	MaximumNumberOfTracksIsolationRing = 0
+    InputTag VertexSrc = pixelVertices
+    bool UseVertex = false
 }
 
 
-sequence fastSingleTauTrigger = {
-singleTauL1SeedFilterFast & 
-caloTausCreator&  
+# Filtering
+
+module filterL3SingleTauFast = HLT1Tau {
+    InputTag inputTag   = isolatedL3SingleTauFast
+    double MinPt  = 1.0
+    double MaxEta = 5.0
+    int32 MinN     = 1
+}
+
+module filterL3SingleTauMETFast = HLT1Tau {
+    InputTag inputTag   = isolatedL3SingleTauMETFast
+    double MinPt  = 1.0
+    double MaxEta = 5.0
+    int32 MinN     = 1
+}
+
+module filterL25DoubleTauFast = HLT1Tau {
+    InputTag inputTag   = isolatedL25DoubleTauFast
+    double MinPt  = 1.0
+    double MaxEta = 5.0
+    int32 MinN     = 2
+}
+
+
+
+#Sequences
+sequence fastCaloTau = { caloTowersTau1, icone5Tau1, caloTowersTau2, icone5Tau2, caloTowersTau3, icone5Tau3, caloTowersTau4, 
+    icone5Tau4,
+    l2TauJetsProvider
+}
+
+
+
+
+sequence fastSingleTauTrigger = {singleTauL1SeedFilter & fastCaloTau&  
 met&
 hlt1METSingleTau&
-l2SingleTauJetsFast& 
-singleTauJetCrystalsAssociatorFast&ecalSingleTauIsolFast&ecalSingleTauIsolated&
+ecalIsolation&
 filterSingleTauEcalIsolation&
 famosWithTracks&
-pixelTracks&
-pixelVertices&
-(associatorL3SingleTau,coneIsolationL3SingleTau,isolatedL3SingleTau,filterL3SingleTau)
+vertexreco&
+(associatorL3SingleTauFast,
+coneIsolationL3SingleTauFast,
+isolatedL3SingleTauFast,
+filterL3SingleTauFast)
 }
 
-sequence fastSingleTauMETTrigger = {
-singleTauMETL1SeedFilterFast & 
-caloTausCreator& 
+sequence fastSingleTauMETTrigger = {singleTauMETL1SeedFilter & fastCaloTau&  
 met&
 hlt1METSingleTauMET&
-l2SingleTauMETJetsFast& 
-singleTauMETJetCrystalsAssociatorFast&ecalSingleTauMETIsolFast&ecalSingleTauMETIsolated&
+ecalIsolationSingleTauMET&
 filterSingleTauMETEcalIsolation&
 famosWithTracks&
-pixelTracks&
-pixelVertices&
-(associatorL3SingleTauMET,coneIsolationL3SingleTauMET,isolatedL3SingleTauMET,filterL3SingleTauMET)
+vertexreco&
+(associatorL3SingleTauMETFast,
+coneIsolationL3SingleTauMETFast,
+isolatedL3SingleTauMETFast,
+filterL3SingleTauMETFast)
 }
 
-sequence fastDoubleTauTrigger = {
-doubleTauL1SeedFilterFast& 
-caloTausCreator&  
-l2DoubleTauJetsFast& 
-doubleTauJetCrystalsAssociatorFast&ecalDoubleTauIsolFast&ecalDoubleTauIsolated&
-filterDoubleTauEcalIsolation&
+sequence fastDoubleTauTrigger = {doubleTauL1SeedFilter & fastCaloTau&  
+ecalIsolation&
+filterTauEcalIsolation&
 famosWithTrackerHits&
 pixelTracks&
 pixelVertices&
-(associatorL25PixelTauIsolated,coneIsolationL25PixelTauIsolated,isolatedL25PixelTau,filterL25PixelTau)
+(associatorL25DoubleTauFast,
+coneIsolationL25DoubleTauFast,
+isolatedL25DoubleTauFast,
+filterL25DoubleTauFast)
 }
 

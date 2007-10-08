@@ -122,14 +122,14 @@ include "RecoBTag/Configuration/data/RecoBTag.cff"
 include "RecoBTag/CombinedSV/data/combined.cfi"
 replace offlinePrimaryVerticesFromCTFTracks.TrackLabel = "gsWithMaterialTracks"
 replace ic5JetTracksAssociatorAtVertex.tracks = gsWithMaterialTracks
-replace combinedSVBJetTags.trackcoll = "gsWithMaterialTracks"
+replace combinedSVJetTags.trackcoll = "gsWithMaterialTracks"
 sequence famosBTaggingSequence = {
 #    iterativeCone5CaloJets,
 #    vertexreco,
 #    jetTracksAssociator,
     impactParameterTagInfos,
-    (jetProbabilityBJetTags & trackCountingHighPurBJetTags & trackCountingHighEffBJetTags),
-    combinedSVBJetTags
+    (jetProbabilityJetTags & trackCountingHighPurJetTags & trackCountingHighEffJetTags),
+    combinedSVJetTags
 }
 
 #Tau tagging
@@ -149,9 +149,8 @@ PFTau
 #Fast L1 Trigger
 include "FastSimulation/L1CaloTriggerProducer/data/fastl1calosim.cfi"
 include "FastSimulation/L1CaloTriggerProducer/data/fastL1extraParticleMap.cfi"
-replace fastL1CaloSim.AlgorithmSource = "RecHits"
 replace fastL1CaloSim.EmInputs =
-	 { "caloRecHits:EcalRecHitsEB", "caloRecHits:EcalRecHitsEE"  }	
+	 { "CaloRecHits:EcalRecHitsEB", "CaloRecHits:EcalRecHitsEE"  }	
 #Fast Tau HLT
 include "FastSimulation/Configuration/data/fastTauHLT.cff"
 
