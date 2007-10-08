@@ -122,14 +122,14 @@ include "RecoBTag/Configuration/data/RecoBTag.cff"
 include "RecoBTag/CombinedSV/data/combined.cfi"
 replace offlinePrimaryVerticesFromCTFTracks.TrackLabel = "gsWithMaterialTracks"
 replace ic5JetTracksAssociatorAtVertex.tracks = gsWithMaterialTracks
-replace combinedSVJetTags.trackcoll = "gsWithMaterialTracks"
+replace combinedSVBJetTags.trackcoll = "gsWithMaterialTracks"
 sequence famosBTaggingSequence = {
 #    iterativeCone5CaloJets,
 #    vertexreco,
 #    jetTracksAssociator,
     impactParameterTagInfos,
-    (jetProbabilityJetTags & trackCountingHighPurJetTags & trackCountingHighEffJetTags),
-    combinedSVJetTags
+    (jetProbabilityBJetTags & trackCountingHighPurBJetTags & trackCountingHighEffBJetTags),
+    combinedSVBJetTags
 }
 
 #Tau tagging
