@@ -4,8 +4,8 @@ include "CondCore/DBCommon/data/CondDBSetup.cfi"
 es_source trackerAlignment = PoolDBESSource { 
     using CondDBSetup
     VPSet toGet = {
-	{ string record = "TrackerAlignmentRcd" string tag = "TrackerShortTermScenario150" },
-	{ string record = "TrackerAlignmentErrorRcd" string tag = "TrackerShortTermScenarioErrors150" }
+	{ string record = "TrackerAlignmentRcd" string tag = "Tracker100pbScenario150" },
+	{ string record = "TrackerAlignmentErrorRcd" string tag = "Tracker100pbScenarioErrors150" }
     }
     string timetype = "runnumber"
     
@@ -16,6 +16,3 @@ es_source trackerAlignment = PoolDBESSource {
 }
 
 es_prefer trackerAlignment = PoolDBESSource {}
-
-# to apply misalignments
-replace TrackerDigiGeometryESModule.applyAlignment = true      

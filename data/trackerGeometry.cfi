@@ -1,0 +1,9 @@
+include "Geometry/TrackerGeometryBuilder/data/trackerGeometry.cfi"
+
+#The same, but as above for misaligned Tracker geometry
+es_module misalignedTrackerGeometry = TrackerDigiGeometryESModule {
+    untracked bool applyAlignment = false
+    bool fromDDD = true
+    string appendToDataLabel = "MisAligned"
+}
+
