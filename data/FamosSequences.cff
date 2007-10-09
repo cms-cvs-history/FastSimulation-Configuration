@@ -116,12 +116,13 @@ replace photons.endcapHitProducer="caloRecHits"
 replace photons.pixelSeedAssocProducer="electronGSPixelSeeds"
 
 # B tagging
+include "RecoJets/JetAssociationProducers/data/ic5JetTracksAssociatorAtVertex.cfi"
+replace ic5JetTracksAssociatorAtVertex.tracks = gsWithMaterialTracks
 include "RecoVertex/Configuration/data/RecoVertex.cff"
-include "RecoBTau/Configuration/data/RecoBTau.cff"
+#include "RecoBTau/Configuration/data/RecoBTau.cff"
 include "RecoBTag/Configuration/data/RecoBTag.cff"
 include "RecoBTag/CombinedSV/data/combined.cfi"
 replace offlinePrimaryVerticesFromCTFTracks.TrackLabel = "gsWithMaterialTracks"
-replace ic5JetTracksAssociatorAtVertex.tracks = gsWithMaterialTracks
 replace combinedSVBJetTags.trackcoll = "gsWithMaterialTracks"
 sequence famosBTaggingSequence = {
 #    iterativeCone5CaloJets,
