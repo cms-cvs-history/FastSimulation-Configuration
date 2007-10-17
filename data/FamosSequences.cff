@@ -84,6 +84,8 @@ replace genCandidatesForMET.verbose=false
 
 # Muon parametrization
 include "FastSimulation/ParamL3MuonProducer/data/ParamL3Muon.cfi"
+# Muon Isolation
+include "RecoMuon/MuonIsolationProducers/data/muIsolation.cff"
 
 # Electron reconstruction
 include "FastSimulation/EgammaElectronAlgos/data/electronGSPixelSeeds.cfi"
@@ -232,6 +234,12 @@ sequence famosWithCaloTowersAndParticleFlow = {
 sequence famosWithMuons = {
     famosWithTracks,
     paramMuons
+}
+
+sequence famosWithMuonsAndIsolation = {
+     famosWithTracksAndCaloTowers,
+     paramMuons,
+     muIsolation_ParamGlobalMuons
 }
 
 sequence famosWithElectrons = {
