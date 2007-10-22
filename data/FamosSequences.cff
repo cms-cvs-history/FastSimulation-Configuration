@@ -91,23 +91,18 @@ include "RecoMuon/MuonIsolationProducers/data/muIsolation.cff"
 include "FastSimulation/EgammaElectronAlgos/data/electronGSPixelSeeds.cfi"
 include "FastSimulation/EgammaElectronAlgos/data/electronGSGsfTrackCandidates.cff"
 include "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfElectrons.cff"
-include "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
-module pixelMatchGsfFitBarrel = pixelMatchGsfFit from "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
-replace pixelMatchGsfFitBarrel.src = "electronGSGsfTrackCandidatesBarrel"
-replace pixelMatchGsfFitBarrel.TTRHBuilder = "WithoutRefit"
-module pixelMatchGsfFitEndcap = pixelMatchGsfFit from "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
-replace pixelMatchGsfFitEndcap.src = "electronGSGsfTrackCandidatesEndcap"
-replace pixelMatchGsfFitEndcap.TTRHBuilder = "WithoutRefit"
+include "TrackingTools/GsfTracking/data/GsfElectronFit.cff"
+module pixelMatchGsfFit = GsfElectrons from "TrackingTools/GsfTracking/data/GsfElectronFit.cfi"
+replace pixelMatchGsfFit.src = "electronGSGsfTrackCandidates"
+replace pixelMatchGsfFit.TTRHBuilder = "WithoutRefit"
 replace pixelMatchGsfElectrons.hbheModule = "hcalRecHits"
 replace pixelMatchGsfElectrons.hbheInstance = "RecalibHBHE"
 replace pixelMatchGsfElectrons.SCLBarrelLabel = "electronGSPixelSeeds"
 replace pixelMatchGsfElectrons.SCLEndcapLabel = "electronGSPixelSeeds"
 sequence famosElectronSequence = {
     electronGSPixelSeeds,
-    electronGSGsfTrackCandidatesBarrel,
-    electronGSGsfTrackCandidatesEndcap,
-    pixelMatchGsfFitBarrel,
-    pixelMatchGsfFitEndcap,
+    electronGSGsfTrackCandidates,
+    pixelMatchGsfFit,
     pixelMatchGsfElectrons
 }
 
@@ -115,7 +110,7 @@ sequence famosElectronSequence = {
 include "RecoEgamma/EgammaPhotonProducers/data/photonSequence.cff"
 replace photons.barrelHitProducer="caloRecHits"
 replace photons.endcapHitProducer="caloRecHits"
-replace photons.pixelSeedAssocProducer="electronGSPixelSeeds"
+replace photons.pixelSeedProducer="electronGSPixelSeeds"
 
 # B tagging
 include "RecoJets/JetAssociationProducers/data/ic5JetTracksAssociatorAtVertex.cfi"
