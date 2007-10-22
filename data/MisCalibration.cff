@@ -7,11 +7,11 @@ es_source ecalConditions = PoolDBESSource
 	{ string record = "EcalIntercalibConstantsRcd"
 	    string tag = "EcalIntercalibConstants_miscalibcsa07"}
     }
-    string connect = "frontier://FrontierDev/CMS_COND_ECAL"
-    untracked bool siteLocalConfig = true
+    string connect = "frontier://cms_conditions_data/CMS_COND_16X_ECAL"
     untracked uint32 authenticationMethod = 1
     string timetype = "runnumber"
     untracked uint32 messagelevel = 0 
 }
 
 replace caloRecHits.RecHitsFactory.doMiscalib=true
+replace ecalConditions.catalog="relationalcatalog_frontier://cms_conditions_data/CMS_COND_16X_FRONTIER"

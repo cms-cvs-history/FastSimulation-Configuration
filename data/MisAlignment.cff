@@ -10,7 +10,7 @@ es_source trackerAlignment = PoolDBESSource {
     string timetype = "runnumber"
     
     # FRONTIER
-    string connect = "frontier://FrontierDev/CMS_COND_ALIGNMENT"
+    string connect = "frontier://cms_conditions_data/CMS_COND_16X_ALIGNMENT"
     untracked bool siteLocalConfig = true
     
 }
@@ -19,3 +19,4 @@ es_prefer trackerAlignment = PoolDBESSource {}
 
 # to apply misalignments
 replace TrackerDigiGeometryESModule.applyAlignment = true      
+replace trackerAlignment.catalog="relationalcatalog_frontier://cms_conditions_data/CMS_COND_16X_FRONTIER"

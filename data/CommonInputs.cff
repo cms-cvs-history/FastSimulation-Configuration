@@ -19,3 +19,9 @@ include "Geometry/CaloEventSetup/data/EcalTrigTowerConstituents.cfi"
 
 #B and Tau service to retrieve calibration of the algorithms from the CondDB
 include "RecoBTau/Configuration/data/RecoBTau_FrontierConditions.cff"
+replace BTauMVAJetTagComputerRecord.connect ="frontier://cms_conditions_data/CMS_COND_16X_BTAU"				 
+replace BTauMVAJetTagComputerRecord.catalog ="relationalcatalog_frontier://cms_conditions_data/CMS_COND_16X_FRONTIER"
+
+replace CombinedTauTagRecord.connect ="frontier://cms_conditions_data/CMS_COND_16X_BTAU"				 
+replace CombinedTauTagRecord.catalog ="relationalcatalog_frontier://cms_conditions_data/CMS_COND_16X_FRONTIER"
+
