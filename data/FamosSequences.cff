@@ -7,6 +7,9 @@ include "IOMC/EventVertexGenerators/data/VtxSmearedGauss.cfi"
 # Conversion to GenParticleCandidates 
 include "PhysicsTools/HepMCCandAlgos/data/genParticleCandidatesFast.cfi" 
 
+# Famos PileUp Producer
+include "FastSimulation/PileUpProducer/data/PileUpProducer.cff"
+
 # Famos SimHits producer
 include "FastSimulation/EventProducer/data/FamosSimHits.cff"
 
@@ -146,6 +149,7 @@ include "FastSimulation/Configuration/data/fastTauHLT.cff"
 
 # Famos pre-defined sequences
 sequence famosWithTrackerHits = { 
+    famosPileUp,
     famosSimHits,
     mix, 
     siTrackerGaussianSmearingRecHits,
@@ -158,6 +162,7 @@ sequence famosWithTracks = {
 }	
 
 sequence famosWithCaloHits = { 
+    famosPileUp,
     famosSimHits,
     mix, 
     caloRecHits   
