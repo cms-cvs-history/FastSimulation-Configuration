@@ -308,24 +308,28 @@ sequence famosWithEverything = {
 
 }
 
-#Trigger sequences
+#Trigger sequences . These sequence require "caloRecHits.RecHitsFactory.doDigis=true" 
+
+sequence famosWithL1 = { 
+        famosWithCaloTowers& 
+        ecalTriggerPrimitiveDigis& 
+        hcalTriggerPrimitiveDigis& 
+        fastL1CaloSim& 
+        fastL1extraParticleMap 
+} 
+
+
 sequence famosWithSingleTauTrigger = {
-    famosWithCaloTowers&
-    fastL1CaloSim&
-    fastL1extraParticleMap&
+    famosWithL1 &	
     fastSingleTauTrigger
 }
 
 sequence famosWithSingleTauMETTrigger = {
-    famosWithCaloTowers&
-    fastL1CaloSim&
-    fastL1extraParticleMap& 
+    famosWithL1 & 
     fastSingleTauMETTrigger
 }
  
 sequence famosWithDoubleTauTrigger = {
-    famosWithCaloTowers&
-    fastL1CaloSim&
-    fastL1extraParticleMap&
+    famosWithL1 &
     fastDoubleTauTrigger
 }
