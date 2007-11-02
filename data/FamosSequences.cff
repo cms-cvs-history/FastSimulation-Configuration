@@ -125,6 +125,7 @@ include "RecoJets/JetAssociationProducers/data/ic5JetTracksAssociatorAtVertex.cf
 replace ic5JetTracksAssociatorAtVertex.tracks = gsWithMaterialTracks
 include "RecoVertex/Configuration/data/RecoVertex.cff"
 include "RecoVertex/BeamSpotProducer/data/BeamSpot.cff"
+include "RecoVertex/BeamSpotProducer/data/BeamSpotFakeConditions.cff"
 include "RecoBTag/Configuration/data/RecoBTag.cff"
 include "RecoBTag/CombinedSV/data/combined.cfi"
 replace offlinePrimaryVerticesFromCTFTracks.TrackLabel = "gsWithMaterialTracks"
