@@ -1,0 +1,24 @@
+es_source trackerAlignment = PoolDBESSource { 
+
+    using CondDBSetup
+    VPSet toGet = {
+	{ string record = "TrackerAlignmentRcd"      string tag = "TrackerIdealGeometry150" },
+	{ string record = "TrackerAlignmentErrorRcd" string tag = "TrackerIdealGeometryErrors150" }
+    }
+    string timetype = "runnumber"
+    
+    # FRONTIER
+    string connect = "frontier://FrontierDev/CMS_COND_ALIGNMENT"
+    
+}
+
+es_prefer trackerAlignment = PoolDBESSource {}
+
+// The following is needed to change the misalignment conditions
+/*
+replace misalignedTrackerGeometry.applyAlignment = true
+replace trackerAlignment.toGet = {
+    { string record = "TrackerAlignmentRcd" string tag = "Tracker100pbScenario150" },
+    { string record = "TrackerAlignmentErrorRcd" string tag = "Tracker100pbScenarioErrors150" }
+}
+*/

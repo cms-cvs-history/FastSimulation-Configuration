@@ -17,8 +17,8 @@ include "Geometry/CaloEventSetup/data/EcalTrigTowerConstituents.cfi"
 
 #Services from the CondDB
 include "CondCore/DBCommon/data/CondDBSetup.cfi"
-include "RecoBTag/Configuration/data/RecoBTag_FrontierConditions.cff"
-include "RecoBTau/Configuration/data/RecoBTau_FrontierConditions.cff"
-include "CalibCalorimetry/Configuration/data/Hcal_FrontierConditions.cff"
-include "FastSimulation/Configuration/data/Ecal_FrontierConditions.cff"
-include "FastSimulation/Configuration/data/Tracker_FrontierConditions.cff" 
+include "RecoBTag/Configuration/data/RecoBTag_FakeConditions.cff"
+include "RecoBTau/Configuration/data/RecoBTau_FakeConditions.cff"
+include "CalibCalorimetry/Configuration/data/Hcal_FakeConditions.cff"
+include "CalibCalorimetry/Configuration/data/Ecal_FakeConditions.cff"
+include "CalibTracker/Configuration/data/Tracker_FakeAlignment.cff" 

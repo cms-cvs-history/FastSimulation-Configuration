@@ -1,0 +1,21 @@
+#
+# Ecal  calibrations from Frontier
+#
+include "RecoLocalCalo/EcalRecProducers/data/getEcalConditions_frontier.cff"
+
+replace ecalConditions.connect="frontier://FrontierDev/CMS_COND_ECAL"				 
+
+# the following is an example to change the calibration conditions
+
+/*
+replace caloRecHits.RecHitsFactory.doMiscalib=true
+replace ecalConditions.toGet = {
+	{ string record = "EcalPedestalsRcd"
+	    string tag = "EcalPedestals_trivial" },
+	{ string record = "EcalADCToGeVConstantRcd"
+	    string tag = "EcalADCToGeVConstant_trivial" },
+	{ string record = "EcalGainRatiosRcd"
+	    string tag = "EcalGainRatios_trivial" }
+     }
+replace src2.producedEcalIntercalibConstants = true
+*/
