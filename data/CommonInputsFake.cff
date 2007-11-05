@@ -17,6 +17,8 @@ include "Geometry/CaloEventSetup/data/EcalTrigTowerConstituents.cfi"
 
 #Services from the CondDB
 include "CondCore/DBCommon/data/CondDBSetup.cfi"
+include "RecoVertex/BeamSpotProducer/data/BeamSpot.cff"
+include "RecoVertex/BeamSpotProducer/data/BeamSpotFakeConditions.cff"
 include "RecoBTag/Configuration/data/RecoBTag_FakeConditions.cff"
 include "RecoBTau/Configuration/data/RecoBTau_FakeConditions.cff"
 include "CalibCalorimetry/Configuration/data/Hcal_FakeConditions.cff"

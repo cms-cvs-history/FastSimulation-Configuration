@@ -17,6 +17,7 @@ include "Geometry/CaloEventSetup/data/EcalTrigTowerConstituents.cfi"
 
 #Services from the CondDB
 include "CondCore/DBCommon/data/CondDBSetup.cfi"
+include "RecoVertex/BeamSpotProducer/data/BeamSpotSimpleGaussian.cff"
 include "RecoBTag/Configuration/data/RecoBTag_FrontierConditions.cff"
 include "RecoBTau/Configuration/data/RecoBTau_FrontierConditions.cff"
 include "FastSimulation/Configuration/data/Hcal_FrontierConditions.cff"
