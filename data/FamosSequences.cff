@@ -94,18 +94,23 @@ include "RecoMuon/MuonIsolationProducers/data/muIsolation.cff"
 include "FastSimulation/EgammaElectronAlgos/data/electronGSPixelSeeds.cfi"
 include "FastSimulation/EgammaElectronAlgos/data/electronGSGsfTrackCandidates.cff"
 include "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfElectrons.cff"
-include "TrackingTools/GsfTracking/data/GsfElectronFit.cff"
-module pixelMatchGsfFit = GsfElectrons from "TrackingTools/GsfTracking/data/GsfElectronFit.cfi"
-replace pixelMatchGsfFit.src = "electronGSGsfTrackCandidates"
-replace pixelMatchGsfFit.TTRHBuilder = "WithoutRefit"
+include "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
+module pixelMatchGsfFitBarrel = pixelMatchGsfFit from "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
+replace pixelMatchGsfFitBarrel.src = "electronGSGsfTrackCandidatesBarrel"
+replace pixelMatchGsfFitBarrel.TTRHBuilder = "WithoutRefit"
+module pixelMatchGsfFitEndcap = pixelMatchGsfFit from "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
+replace pixelMatchGsfFitEndcap.src = "electronGSGsfTrackCandidatesEndcap"
+replace pixelMatchGsfFitEndcap.TTRHBuilder = "WithoutRefit"
 replace pixelMatchGsfElectrons.hbheModule = "hcalRecHits"
 replace pixelMatchGsfElectrons.hbheInstance = "RecalibHBHE"
 replace pixelMatchGsfElectrons.SCLBarrelLabel = "electronGSPixelSeeds"
 replace pixelMatchGsfElectrons.SCLEndcapLabel = "electronGSPixelSeeds"
 sequence famosElectronSequence = {
     electronGSPixelSeeds,
-    electronGSGsfTrackCandidates,
-    pixelMatchGsfFit,
+    electronGSGsfTrackCandidatesBarrel,
+    electronGSGsfTrackCandidatesEndcap,
+    pixelMatchGsfFitBarrel,
+    pixelMatchGsfFitEndcap,
     pixelMatchGsfElectrons
 }
 
@@ -113,13 +118,14 @@ sequence famosElectronSequence = {
 include "RecoEgamma/EgammaPhotonProducers/data/photonSequence.cff"
 replace photons.barrelHitProducer="caloRecHits"
 replace photons.endcapHitProducer="caloRecHits"
-replace photons.pixelSeedProducer="electronGSPixelSeeds"
+replace photons.pixelSeedAssocProducer="electronGSPixelSeeds"
 
 # B tagging
 include "RecoJets/JetAssociationProducers/data/ic5JetTracksAssociatorAtVertex.cfi"
 replace ic5JetTracksAssociatorAtVertex.tracks = gsWithMaterialTracks
 replace ic5PFJetTracksAssociatorAtVertex.tracks = gsWithMaterialTracks
 include "RecoVertex/Configuration/data/RecoVertex.cff"
+include "RecoVertex/BeamSpotProducer/data/BeamSpot.cff"
 include "RecoBTag/Configuration/data/RecoBTag.cff"
 include "RecoBTag/CombinedSV/data/combined.cfi"
 replace offlinePrimaryVerticesFromCTFTracks.TrackLabel = "gsWithMaterialTracks"
@@ -134,6 +140,7 @@ sequence famosBTaggingSequence = {
 include "RecoTauTag/Configuration/data/RecoTauTag.cff"
 #replace combinedTauTag.PVSrc = "offlinePrimaryVerticesFromCTFTracks"
 replace caloRecoTauProducer.PVProducer = "offlinePrimaryVerticesFromCTFTracks"
+
 replace caloRecoTauTagInfoProducer.EBRecHitsSource = caloRecHits:EcalRecHitsEB
 replace caloRecoTauTagInfoProducer.EERecHitsSource = caloRecHits:EcalRecHitsEE
 

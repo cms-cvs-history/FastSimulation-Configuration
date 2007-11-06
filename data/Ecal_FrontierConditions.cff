@@ -3,7 +3,7 @@
 #
 include "RecoLocalCalo/EcalRecProducers/data/getEcalConditions_frontier.cff"
 
-replace ecalConditions.connect="frontier://FrontierDev/CMS_COND_ECAL"				 
+replace ecalConditions.connect="frontier://cms_conditions_data/CMS_COND_17X_ECAL"				 
 
 # the following is an example to change the calibration conditions
 

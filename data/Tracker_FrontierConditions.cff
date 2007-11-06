@@ -8,7 +8,7 @@ es_source trackerAlignment = PoolDBESSource {
     string timetype = "runnumber"
     
     # FRONTIER
-    string connect = "frontier://FrontierDev/CMS_COND_ALIGNMENT"
+    string connect = "frontier://cms_conditions_data/CMS_COND_17X_ALIGNMENT"				 
     
 }
 
