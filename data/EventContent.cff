@@ -262,7 +262,7 @@ replace RECOSIMEventContent.outputCommands += FastSimCoreRECO.outputCommands
 replace RECOSIMEventContent.outputCommands += FastSimRecoLocalTrackerRECO.outputCommands
 replace RECOSIMEventContent.outputCommands += FastSimRecoLocalCaloRECO.outputCommands
 replace RECOSIMEventContent.outputCommands += FastSimRecoTrackerRECO.outputCommands
-replace RECOSIMEventContent.outputCommands += FastSimParamMuonFEVT.outputCommands
+replace RECOSIMEventContent.outputCommands += FastSimParamMuonRECO.outputCommands
 
 #####################################################################
 #
@@ -274,4 +274,4 @@ replace AODSIMEventContent.outputCommands += FastSimCoreAOD.outputCommands
 replace AODSIMEventContent.outputCommands += FastSimRecoLocalTrackerAOD.outputCommands
 replace AODSIMEventContent.outputCommands += FastSimRecoLocalCaloAOD.outputCommands
 replace AODSIMEventContent.outputCommands += FastSimRecoTrackerAOD.outputCommands
-replace AODSIMEventContent.outputCommands += FastSimParamMuonFEVT.outputCommands
+replace AODSIMEventContent.outputCommands += FastSimParamMuonAOD.outputCommands
