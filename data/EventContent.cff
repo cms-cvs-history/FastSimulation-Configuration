@@ -1,0 +1,277 @@
+#####################################################################
+#
+# Event Content definition
+#
+# Just a few replace statements to benefit from the maintenance
+# effort of other people!
+#####################################################################
+include "Configuration/EventContent/data/EventContent.cff"
+
+#####################################################################
+# The simHits part is definitely different in FastSim
+#####################################################################
+
+#Full Event content 
+block FastSimCoreFEVT = {
+  untracked vstring outputCommands = {
+    "keep *_famosPileUp_*_*",
+    "keep *_famosSimHits_*_*",
+    "keep edmHepMCProduct_source_*_*",
+    "keep edmGenInfoProduct_source_*_*",
+#
+# Keeping both genParticleCandidates and genParticle for smooth transition
+#
+    "keep *_genParticleCandidates_*_*",
+    "keep *_genParticles_*_*",
+    "keep *_genEventWeight_*_*",
+    "keep *_genEventScale_*_*",
+    "keep *_genEventProcID_*_*",
+    "keep *_genEventRunInfo_*_*",
+    "keep edmAlpgenInfoProduct_source_*_*"
+
+  }		
+}	
+
+#RECO content
+block FastSimCoreRECO = {
+  untracked vstring outputCommands = {
+#
+# Keeping both genParticleCandidates and genParticle for smooth transition
+#
+    "keep *_genParticleCandidates_*_*",
+    "keep *_genParticles_*_*",
+    "keep *_genEventWeight_*_*",
+    "keep *_genEventScale_*_*",
+    "keep edmHepMCProduct_source_*_*",
+    "keep edmGenInfoProduct_source_*_*",
+    "keep SimTracks_famosSimHits_*_*",
+    "keep SimVertexs_famosSimHits_*_*",
+    "keep *_genEventProcID_*_*",
+    "keep *_genEventRunInfo_*_*",
+    "keep edmAlpgenInfoProduct_source_*_*"
+
+  }		
+}	
+
+#AOD content
+block FastSimCoreAOD = {
+  untracked vstring outputCommands = {
+#
+# Keeping both genParticleCandidates and genParticle for smooth transition
+#
+    "keep edmGenInfoProduct_source_*_*",
+    "keep *_genParticleCandidates_*_*",
+    "keep *_genParticles_*_*",
+    "keep *_genEventWeight_*_*",
+    "keep *_genEventScale_*_*",
+    "keep *_genEventProcID_*_*",
+    "keep *_genEventRunInfo_*_*",
+    "keep edmAlpgenInfoProduct_source_*_*"
+
+  }		
+}	
+
+#####################################################################
+# The Tracker RecHits are also different
+#####################################################################
+
+#Full Event content 
+block FastSimRecoLocalTrackerFEVT = {
+  untracked vstring outputCommands = {
+#Tracker Rec Hits
+    "keep *_siTrackerGaussianSmearingRecHits_*_*"
+  }		
+}	
+
+#RECO content
+block FastSimRecoLocalTrackerRECO = {
+  untracked vstring outputCommands = {
+#nothing!
+  }		
+}	
+
+#AOD content
+block FastSimRecoLocalTrackerAOD = {
+  untracked vstring outputCommands = {
+#nothing!
+  }		
+}	
+
+#####################################################################
+# The Calo RecHits are also different
+#####################################################################
+
+#Full Event content 
+block FastSimRecoLocalCaloFEVT = 
+{
+    untracked vstring outputCommands = 
+    {
+	#Calibrated RecHits
+	"keep *_caloRecHits_*_*",
+	"keep *_hcalRecHits_*_*"
+    }
+}
+
+#RECO content
+block FastSimRecoLocalCaloRECO = 
+{
+    untracked vstring outputCommands = 
+    {
+	#Calibrated RecHits
+	"keep *_caloRecHits_*_*",
+	"keep *_hcalRecHits_*_*"
+    }
+}
+
+#AOD content
+block FastSimRecoLocalCaloAOD = 
+{
+    untracked vstring outputCommands = 
+    {
+	#Nothing	
+    }
+}
+
+#####################################################################
+# The Tracker Tracks are also different
+#####################################################################
+
+#Full Event content 
+block FastSimRecoTrackerFEVT = {
+  untracked vstring outputCommands = {
+#Tracks
+    "keep *_gsWithMaterialTracks_*_*"
+  }		
+}	
+
+#RECO content
+block FastSimRecoTrackerRECO = {
+  untracked vstring outputCommands = {
+#Tracks
+    "keep *_gsWithMaterialTracks_*_*"
+  }		
+}	
+
+#AOD content
+block FastSimRecoTrackerAOD = {
+  untracked vstring outputCommands = {
+#Tracks without extra and hits
+    "keep recoTracks_gsWithMaterialTracks_*_*"
+  }		
+}	
+
+#####################################################################
+# The Muons are, for now, parameterized
+#####################################################################
+
+#Full Event content 
+block FastSimParamMuonFEVT = {
+  untracked vstring outputCommands = {
+#Tracks
+    "keep *_paramMuons_*_*",
+#MuIsoDeposits
+    "keep *_muParamGlobalIsoDepositGsTk_*_*",
+    "keep *_muParamGlobalIsoDepositCalEcal_*_*",
+    "keep *_muParamGlobalIsoDepositCalHcal_*_*",
+    "keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*",
+    "keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*",
+    "keep *_muParamGlobalIsoDepositJets_*_*"
+  }
+}	
+
+#RECO content
+block FastSimParamMuonRECO = {
+  untracked vstring outputCommands = {
+#Tracks
+    "keep *_paramMuons_*_*",
+#MuIsoDeposits
+    "keep *_muParamGlobalIsoDepositGsTk_*_*",
+    "keep *_muParamGlobalIsoDepositCalEcal_*_*",
+    "keep *_muParamGlobalIsoDepositCalHcal_*_*",
+    "keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*",
+    "keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*",
+    "keep *_muParamGlobalIsoDepositJets_*_*"
+  }		
+}	
+
+#AOD content
+block FastSimParamMuonAOD = {
+  untracked vstring outputCommands = {
+#Tracks without extra and hits
+    "keep recoMuons_paramMuons_*_*",
+#MuIsoDeposits
+    "keep *_muParamGlobalIsoDepositGsTk_*_*",
+    "keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*",
+    "keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*",
+    "keep *_muParamGlobalIsoDepositJets_*_*"
+  }		
+}	
+
+# Addition to the event content
+# We don't need to remove anything, as the corresponding products are
+# not produced anyway in a FastSimulation job.
+#####################################################################
+#
+# FEVT Data Tier re-definition
+#
+#####################################################################
+replace FEVTEventContent.outputCommands += FastSimRecoLocalTrackerFEVT.outputCommands
+replace FEVTEventContent.outputCommands += FastSimRecoLocalCaloFEVT.outputCommands
+replace FEVTEventContent.outputCommands += FastSimRecoTrackerFEVT.outputCommands
+replace FEVTEventContent.outputCommands += FastSimParamMuonFEVT.outputCommands
+
+#####################################################################
+#
+# RECO Data Tier definition
+#
+#####################################################################
+replace RECOEventContent.outputCommands += FastSimRecoLocalTrackerRECO.outputCommands
+replace RECOEventContent.outputCommands += FastSimRecoLocalCaloRECO.outputCommands
+replace RECOEventContent.outputCommands += FastSimRecoTrackerRECO.outputCommands
+replace RECOEventContent.outputCommands += FastSimParamMuonRECO.outputCommands
+
+#####################################################################
+#
+# AOD Data Tier definition
+#
+#####################################################################
+replace AODEventContent.outputCommands += FastSimRecoLocalTrackerAOD.outputCommands
+replace AODEventContent.outputCommands += FastSimRecoLocalCaloAOD.outputCommands
+replace AODEventContent.outputCommands += FastSimRecoTrackerAOD.outputCommands
+replace AODEventContent.outputCommands += FastSimParamMuonAOD.outputCommands
+
+#####################################################################
+#
+# FEVTSIM Data Tier re-definition
+#
+#####################################################################
+#replace FEVTSIMEventContent.outputCommands -= SimG4CoreFEVT.outputCommands
+replace FEVTSIMEventContent.outputCommands += FastSimCoreFEVT.outputCommands
+replace FEVTSIMEventContent.outputCommands += FastSimRecoLocalTrackerFEVT.outputCommands
+replace FEVTSIMEventContent.outputCommands += FastSimRecoLocalCaloFEVT.outputCommands
+replace FEVTSIMEventContent.outputCommands += FastSimRecoTrackerFEVT.outputCommands
+replace FEVTSIMEventContent.outputCommands += FastSimParamMuonFEVT.outputCommands
+
+#####################################################################
+#
+# RECOSIM Data Tier re-definition
+#
+#####################################################################
+#replace RECOSIMEventContent.outputCommands -= SimG4CoreRECO.outputCommands
+replace RECOSIMEventContent.outputCommands += FastSimCoreRECO.outputCommands
+replace RECOSIMEventContent.outputCommands += FastSimRecoLocalTrackerRECO.outputCommands
+replace RECOSIMEventContent.outputCommands += FastSimRecoLocalCaloRECO.outputCommands
+replace RECOSIMEventContent.outputCommands += FastSimRecoTrackerRECO.outputCommands
+replace RECOSIMEventContent.outputCommands += FastSimParamMuonRECO.outputCommands
+
+#####################################################################
+#
+# AODSIM Data Tier re-definition
+#
+#####################################################################
+#replace AODSIMEventContent.outputCommands -= SimG4CoreAOD.outputCommands
+replace AODSIMEventContent.outputCommands += FastSimCoreAOD.outputCommands
+replace AODSIMEventContent.outputCommands += FastSimRecoLocalTrackerAOD.outputCommands
+replace AODSIMEventContent.outputCommands += FastSimRecoLocalCaloAOD.outputCommands
+replace AODSIMEventContent.outputCommands += FastSimRecoTrackerAOD.outputCommands
+replace AODSIMEventContent.outputCommands += FastSimParamMuonAOD.outputCommands
