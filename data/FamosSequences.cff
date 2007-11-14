@@ -84,12 +84,22 @@ include "FastSimulation/MuonSimHitProducer/data/MuonSimHitProducer.cfi"
 include "SimMuon/Configuration/data/SimMuon.cff"
 include "RecoLocalMuon/Configuration/data/RecoLocalMuon.cff"
 replace  DTParametrizedDriftAlgo_CSA07.recAlgoConfig.tTrigModeConfig.doT0Correction = false
-include "RecoMuon/Configuration/data/RecoMuon.cff"
+#include "RecoMuon/Configuration/data/RecoMuon.cff"
+include "RecoMuon/TrackingTools/data/MuonServiceProxy.cff"
+include "RecoMuon/TrackingTools/data/MuonTrackLoader.cff"
+include "RecoMuon/MuonSeedGenerator/data/standAloneMuonSeeds.cfi"
+include "RecoMuon/StandAloneMuonProducer/data/standAloneMuons.cfi"
+#include "RecoMuon/GlobalTrackingTools/data/GlobalTrajectoryBuilderCommon.cff" // For 170.
+include "FastSimulation/Configuration/data/globalMuons.cff"
+replace globalMuons.GLBTrajBuilderParameters.TrackRecHitBuilder = "WithoutRefit"
+replace globalMuons.GLBTrajBuilderParameters.TrackTransformer.TrackerRecHitBuilder = "WithoutRefit"
+replace globalMuons.TrackerCollectionLabel = gsWithMaterialTracks
 sequence famosMuonSequence = { 
     muonDigi, 
     muonlocalreco, 
     MuonSeed, 
-    standAloneMuons
+    standAloneMuons,
+    globalMuons
 }
 
 # Electron reconstruction
@@ -183,6 +193,7 @@ sequence famosWithTracksAndMuonHits = {
     mix, 
     siTrackerGaussianSmearingRecHits,
     gsTrackCandidates,
+    gsWithMaterialTracks,
     famosMuonSequence
 }
 
