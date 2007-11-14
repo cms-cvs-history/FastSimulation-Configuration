@@ -79,6 +79,18 @@ include "FastSimulation/ParamL3MuonProducer/data/ParamL3Muon.cfi"
 # Muon Isolation
 include "RecoMuon/MuonIsolationProducers/data/muIsolation.cff"
 
+# Muon simHit + RecHit sequence
+include "FastSimulation/MuonSimHitProducer/data/MuonSimHitProducer.cfi"
+include "SimMuon/Configuration/data/SimMuon.cff"
+include "RecoLocalMuon/Configuration/data/RecoLocalMuon.cff"
+replace  DTParametrizedDriftAlgo_CSA07.recAlgoConfig.tTrigModeConfig.doT0Correction = false
+include "RecoMuon/Configuration/data/RecoMuon.cff"
+sequence famosMuonSequence = { 
+    muonDigi, 
+    muonlocalreco, 
+    MuonSeed, 
+    standAloneMuons
+}
 
 # Electron reconstruction
 include "FastSimulation/EgammaElectronAlgos/data/electronGSPixelSeeds.cfi"
@@ -163,6 +175,16 @@ sequence famosWithTracks = {
     famosWithTrackerHits,
     gsWithMaterialTracks
 }	
+
+sequence famosWithTracksAndMuonHits = { 
+    famosPileUp,
+    famosSimHits,
+    MuonSimHits,
+    mix, 
+    siTrackerGaussianSmearingRecHits,
+    gsTrackCandidates,
+    famosMuonSequence
+}
 
 sequence famosWithCaloHits = { 
     famosPileUp,

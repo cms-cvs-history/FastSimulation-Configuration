@@ -17,6 +17,15 @@ include "Geometry/CaloEventSetup/data/CaloGeometry.cff"
 include "Geometry/CaloEventSetup/data/CaloTopology.cfi"		
 include "Geometry/CaloEventSetup/data/EcalTrigTowerConstituents.cfi"
 
+# The muon geometry
+include "RecoMuon/TrackingTools/data/MuonServiceProxy.cff"
+include "RecoMuon/DetLayers/data/muonDetLayerGeometry.cfi"
+
+# The muon digi calibration
+include "CalibMuon/Configuration/data/DT_FakeConditions.cff"
+include "CalibMuon/Configuration/data/CSC_FakeConditions.cff"
+
+
 #B and Tau service to retrieve calibration of the algorithms from the CondDB
 include "RecoBTau/Configuration/data/RecoBTau_FrontierConditions.cff"
 replace BTauMVAJetTagComputerRecord.connect ="frontier://cms_conditions_data/CMS_COND_16X_BTAU"				 
