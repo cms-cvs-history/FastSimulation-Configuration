@@ -15,6 +15,13 @@ include "Geometry/CaloEventSetup/data/CaloGeometry.cff"
 include "Geometry/CaloEventSetup/data/CaloTopology.cfi"		
 include "Geometry/CaloEventSetup/data/EcalTrigTowerConstituents.cfi"
 
+# The muon geometry
+include "RecoMuon/DetLayers/data/muonDetLayerGeometry.cfi"
+
+# The muon digi calibration
+include "CalibMuon/Configuration/data/DT_FrontierConditions.cff"
+include "CalibMuon/Configuration/data/CSC_FrontierDBConditions.cff"
+
 #Services from the CondDB
 include "CondCore/DBCommon/data/CondDBSetup.cfi"
 include "RecoVertex/BeamSpotProducer/data/BeamSpotSimpleGaussian.cff"

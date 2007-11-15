@@ -1,0 +1,23 @@
+include "RecoTracker/TransientTrackingRecHit/data/TransientTrackingRecHitBuilderWithoutRefit.cfi"
+include "TrackingTools/TrackRefitter/data/TracksToTrajectories.cff"
+include "RecoMuon/GlobalTrackingTools/data/GlobalTrajectoryBuilderCommon.cff"
+
+es_module Chi2EstimatorForMuRefit = Chi2MeasurementEstimatorESProducer
+{
+  string ComponentName = "Chi2EstimatorForMuRefit"
+  double MaxChi2 = 100000.
+  double nSigma = 3.
+}
+
+es_module GlbMuKFFitter = KFTrajectoryFitterESProducer
+{
+    string ComponentName = "GlbMuKFFitter"
+    
+    string Propagator = "SmartPropagatorAny"
+    string Updator = "KFUpdator"
+    string Estimator = "Chi2EstimatorForMuRefit"
+    int32 minHits = 3
+    
+}
+
+include "RecoMuon/GlobalMuonProducer/data/globalMuons.cfi"
