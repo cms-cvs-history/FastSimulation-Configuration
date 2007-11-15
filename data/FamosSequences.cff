@@ -90,7 +90,6 @@ include "FastSimulation/ParamL3MuonProducer/data/ParamL3Muon.cfi"
 # Muon Isolation
 #include "RecoMuon/MuonIsolationProducers/data/muIsolation.cff"
 
-
 # Muon simHit sequence 
 include "FastSimulation/MuonSimHitProducer/data/MuonSimHitProducer.cfi"
 
@@ -99,7 +98,7 @@ include "SimMuon/Configuration/data/SimMuon.cff"
 
 # Muon RecHit sequence
 include "RecoLocalMuon/Configuration/data/RecoLocalMuon.cff"
-replace  DTParametrizedDriftAlgo_CSA07.recAlgoConfig.tTrigModeConfig.doT0Correction = false
+#replace  DTParametrizedDriftAlgo_CSA07.recAlgoConfig.tTrigModeConfig.doT0Correction = false
 
 # Muon reconstruction sequence
 #include "RecoMuon/Configuration/data/RecoMuon.cff"
@@ -141,28 +140,22 @@ sequence famosMuonSequence = {
     globalMuons
 }
 
-
 # Electron reconstruction
 include "FastSimulation/EgammaElectronAlgos/data/electronGSPixelSeeds.cfi"
 include "FastSimulation/EgammaElectronAlgos/data/electronGSGsfTrackCandidates.cff"
 include "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfElectrons.cff"
-include "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
-module pixelMatchGsfFitBarrel = pixelMatchGsfFit from "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
-replace pixelMatchGsfFitBarrel.src = "electronGSGsfTrackCandidatesBarrel"
-replace pixelMatchGsfFitBarrel.TTRHBuilder = "WithoutRefit"
-module pixelMatchGsfFitEndcap = pixelMatchGsfFit from "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
-replace pixelMatchGsfFitEndcap.src = "electronGSGsfTrackCandidatesEndcap"
-replace pixelMatchGsfFitEndcap.TTRHBuilder = "WithoutRefit"
+include "TrackingTools/GsfTracking/data/GsfElectronFit.cff"
+module pixelMatchGsfFit = GsfElectrons from "TrackingTools/GsfTracking/data/GsfElectronFit.cfi"
+replace pixelMatchGsfFit.src = "electronGSGsfTrackCandidates"
+replace pixelMatchGsfFit.TTRHBuilder = "WithoutRefit"
 replace pixelMatchGsfElectrons.hbheModule = "hcalRecHits"
 replace pixelMatchGsfElectrons.hbheInstance = "RecalibHBHE"
 replace pixelMatchGsfElectrons.SCLBarrelLabel = "electronGSPixelSeeds"
 replace pixelMatchGsfElectrons.SCLEndcapLabel = "electronGSPixelSeeds"
 sequence famosElectronSequence = {
     electronGSPixelSeeds,
-    electronGSGsfTrackCandidatesBarrel,
-    electronGSGsfTrackCandidatesEndcap,
-    pixelMatchGsfFitBarrel,
-    pixelMatchGsfFitEndcap,
+    electronGSGsfTrackCandidates,
+    pixelMatchGsfFit,
     pixelMatchGsfElectrons
 }
 
@@ -170,7 +163,7 @@ sequence famosElectronSequence = {
 include "RecoEgamma/EgammaPhotonProducers/data/photonSequence.cff"
 replace photons.barrelHitProducer="caloRecHits"
 replace photons.endcapHitProducer="caloRecHits"
-replace photons.pixelSeedAssocProducer="electronGSPixelSeeds"
+replace photons.pixelSeedProducer="electronGSPixelSeeds"
 
 # B tagging
 include "RecoJets/JetAssociationProducers/data/ic5JetTracksAssociatorAtVertex.cfi"
@@ -192,7 +185,6 @@ sequence famosBTaggingSequence = {
 include "RecoTauTag/Configuration/data/RecoTauTag.cff"
 #replace combinedTauTag.PVSrc = "offlinePrimaryVerticesFromCTFTracks"
 replace caloRecoTauProducer.PVProducer = "offlinePrimaryVerticesFromCTFTracks"
-
 replace caloRecoTauTagInfoProducer.EBRecHitsSource = caloRecHits:EcalRecHitsEB
 replace caloRecoTauTagInfoProducer.EERecHitsSource = caloRecHits:EcalRecHitsEE
 
@@ -238,6 +230,7 @@ sequence famosWithTracksAndMuonHits = {
     gsWithMaterialTracks,
     famosMuonSequence
 }
+
 sequence famosWithTracksAndMuons = { 
     famosPileUp,
     famosSimHits,
