@@ -30,8 +30,14 @@ include "FastSimulation/Tracking/data/GSTrackCandidates.cff"
 # CTF track fit with material
 include "FastSimulation/Tracking/data/GSFinalFitWithMaterial.cff"
 
-# Calo RecHits producer
+# Calo RecHits producer (with no HCAL miscalibration by default)
 include "FastSimulation/CaloRecHitsProducer/data/CaloRecHits.cff"	
+include "FastSimulation/CaloRecHitsProducer/data/HcalMisCalib.cff"
+sequence caloRecHitSequence = { 
+    caloRecHits,   // Bare recHits + optional ECAL miscalibration
+    hcalRecHits    // + optional HCAL miscalibration
+}
+
 
 # ECAL clusters (this will generate harmless warnings...)
 include "RecoEcal/EgammaClusterProducers/data/ecalClusteringSequence.cff"
@@ -49,13 +55,13 @@ replace towerMakerPF.ecalInputs = {
     "caloRecHits:EcalRecHitsEB", 
     "caloRecHits:EcalRecHitsEE" 
 }
-replace towerMakerPF.hbheInput = caloRecHits
-replace towerMakerPF.hoInput = caloRecHits
-replace towerMakerPF.hfInput = caloRecHits
+replace towerMakerPF.hbheInput = hcalRecHits:RecalibHBHE
+replace towerMakerPF.hoInput = hcalRecHits:RecalibHBHE
+replace towerMakerPF.hfInput = hcalRecHits:RecalibHBHE
 replace particleFlowCluster.ecalRecHitsEBModuleLabel = "caloRecHits"
 replace particleFlowCluster.ecalRecHitsEEModuleLabel = "caloRecHits"
 replace particleFlowCluster.ecalRecHitsESModuleLabel = "caloRecHits"
-replace particleFlowCluster.hcalRecHitsHBHEModuleLabel = "caloRecHits"
+replace particleFlowCluster.hcalRecHitsHBHEModuleLabel = "hcalRecHits"
 replace particleFlowSimParticle.SimModuleLabel = "famosSimHits"
 #replace elecpreid.RefitModuleLabel = "gsWithMaterialTracks"
 replace elecpreid.TkColList = {gsWithMaterialTracks}
@@ -63,10 +69,13 @@ replace elecpreid.TkColList = {gsWithMaterialTracks}
 # Calo Towers
 include "RecoJets/Configuration/data/CaloTowersRec.cff" 
 #include "RecoJets/Configuration/data/RecoJets.cff"
-replace towerMaker.ecalInputs = { "caloRecHits:EcalRecHitsEB", "caloRecHits:EcalRecHitsEE" }
-replace towerMaker.hbheInput = caloRecHits
-replace towerMaker.hoInput = caloRecHits
-replace towerMaker.hfInput = caloRecHits
+replace towerMaker.ecalInputs = { 
+    "caloRecHits:EcalRecHitsEB", 
+    "caloRecHits:EcalRecHitsEE" 
+}
+replace towerMaker.hbheInput = hcalRecHits:RecalibHBHE
+replace towerMaker.hfInput = hcalRecHits:RecalibHF
+replace towerMaker.hoInput = hcalRecHits:RecalibHO
 
 # Jets
 include "Configuration/JetMET/data/calorimetry-jetmet-gen.cff" 
@@ -113,7 +122,8 @@ replace pixelMatchGsfFitBarrel.TTRHBuilder = "WithoutRefit"
 module pixelMatchGsfFitEndcap = pixelMatchGsfFit from "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfFit.cfi"
 replace pixelMatchGsfFitEndcap.src = "electronGSGsfTrackCandidatesEndcap"
 replace pixelMatchGsfFitEndcap.TTRHBuilder = "WithoutRefit"
-replace pixelMatchGsfElectrons.hbheModule = "caloRecHits"
+replace pixelMatchGsfElectrons.hbheModule = "hcalRecHits"
+replace pixelMatchGsfElectrons.hbheInstance = "RecalibHBHE"
 replace pixelMatchGsfElectrons.SCLBarrelLabel = "electronGSPixelSeeds"
 replace pixelMatchGsfElectrons.SCLEndcapLabel = "electronGSPixelSeeds"
 sequence famosElectronSequence = {
@@ -201,7 +211,7 @@ sequence famosWithCaloHits = {
     famosPileUp,
     famosSimHits,
     mix, 
-    caloRecHits   
+    caloRecHitSequence   
 }	
 
 sequence famosWithEcalClusters = { 
@@ -211,7 +221,7 @@ sequence famosWithEcalClusters = {
 
 sequence famosWithTracksAndCaloHits = { 
     famosWithTracks,
-    caloRecHits   
+    caloRecHitSequence   
 }
 
 sequence famosWithTracksAndEcalClusters = { 
@@ -271,21 +281,21 @@ sequence famosWithMuonsAndIsolation = {
 
 sequence famosWithElectrons = {
     famosWithTrackerHits,
-    caloRecHits,
+    caloRecHitSequence,
     ecalClusteringSequence,
     famosElectronSequence
 }
 
 sequence famosWithPhotons = {
     famosWithTrackerHits,
-    caloRecHits,
+    caloRecHitSequence,
     ecalClusteringSequence,
     photonSequence
 }
 
 sequence famosWithElectronsAndPhotons = {
     famosWithTrackerHits,
-    caloRecHits,
+    caloRecHitSequence,
     ecalClusteringSequence,
     famosElectronSequence,
     photonSequence
