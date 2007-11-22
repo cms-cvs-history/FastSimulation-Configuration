@@ -6,6 +6,7 @@ include "SimGeneral/HepPDTESSource/data/pythiapdt.cfi"
 include "Geometry/TrackerNumberingBuilder/data/trackerNumberingGeometry.cfi"
 include "FastSimulation/Configuration/data/trackerGeometry.cfi"
 include "FastSimulation/Configuration/data/TrackerRecoGeometryESProducer.cfi"
+include "FastSimulation/TrackerSetup/data/TrackerInteractionGeometryESProducer.cfi"
 
 #The Magnetic Field ESProducer
 include "MagneticField/Engine/data/volumeBasedMagneticField.cfi"
