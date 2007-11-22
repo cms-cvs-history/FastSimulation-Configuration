@@ -8,8 +8,9 @@ include "FastSimulation/Configuration/data/trackerGeometry.cfi"
 include "FastSimulation/Configuration/data/TrackerRecoGeometryESProducer.cfi"
 include "FastSimulation/TrackerSetup/data/TrackerInteractionGeometryESProducer.cfi"
 
-#The Magnetic Field ESProducer
+#The Magnetic Field ESProducer's 
 include "MagneticField/Engine/data/volumeBasedMagneticField.cfi"
+include "FastSimulation/ParticlePropagator/data/MagneticFieldMapESProducer.cfi"
 
 # The Calo geometry service model
 include "Geometry/CaloEventSetup/data/CaloGeometry.cff"
