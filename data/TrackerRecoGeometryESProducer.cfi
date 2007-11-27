@@ -1,0 +1,7 @@
+include "RecoTracker/GeometryESProducer/data/TrackerRecoGeometryESProducer.cfi"
+
+# The same as above but with a misaligned tracker geometry
+es_module misalignedGeomSearchTracker = TrackerRecoGeometryESProducer {
+    untracked string trackerGeometryLabel = "MisAligned"
+    string appendToDataLabel = "MisAligned"
+}
