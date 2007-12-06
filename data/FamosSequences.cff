@@ -38,8 +38,7 @@ include "RecoPixelVertexing/PixelVertexFinding/data/PixelVertexes.cfi"
 include "FastSimulation/CaloRecHitsProducer/data/CaloRecHits.cff"	
 include "FastSimulation/CaloRecHitsProducer/data/HcalMisCalib.cff"
 sequence caloRecHitSequence = { 
-    caloRecHits,   // Bare recHits + optional ECAL miscalibration
-    hcalRecHits    // + optional HCAL miscalibration
+    caloRecHits   // Bare recHits + optional ECAL and HCAL miscalibration
 }
 
 # ECAL clusters (this will generate harmless warnings...)
@@ -58,13 +57,13 @@ replace towerMakerPF.ecalInputs = {
     "caloRecHits:EcalRecHitsEB", 
     "caloRecHits:EcalRecHitsEE" 
 }
-replace towerMakerPF.hbheInput = hcalRecHits:RecalibHBHE
-replace towerMakerPF.hoInput = hcalRecHits:RecalibHBHE
-replace towerMakerPF.hfInput = hcalRecHits:RecalibHBHE
+replace towerMakerPF.hbheInput = caloRecHits
+replace towerMakerPF.hoInput = caloRecHits
+replace towerMakerPF.hfInput = caloRecHits
 replace particleFlowCluster.ecalRecHitsEBModuleLabel = "caloRecHits"
 replace particleFlowCluster.ecalRecHitsEEModuleLabel = "caloRecHits"
 replace particleFlowCluster.ecalRecHitsESModuleLabel = "caloRecHits"
-replace particleFlowCluster.hcalRecHitsHBHEModuleLabel = "hcalRecHits"
+replace particleFlowCluster.hcalRecHitsHBHEModuleLabel = "caloRecHits"
 replace particleFlowSimParticle.SimModuleLabel = "famosSimHits"
 #replace elecpreid.RefitModuleLabel = "gsWithMaterialTracks"
 replace elecpreid.TkColList = {gsWithMaterialTracks}
@@ -75,9 +74,9 @@ replace towerMaker.ecalInputs = {
     "caloRecHits:EcalRecHitsEB", 
     "caloRecHits:EcalRecHitsEE" 
 }
-replace towerMaker.hbheInput = hcalRecHits:RecalibHBHE
-replace towerMaker.hfInput = hcalRecHits:RecalibHF
-replace towerMaker.hoInput = hcalRecHits:RecalibHO
+replace towerMaker.hbheInput = caloRecHits
+replace towerMaker.hfInput = caloRecHits
+replace towerMaker.hoInput = caloRecHits
 
 # Jets
 include "Configuration/JetMET/data/calorimetry-jetmet-gen.cff" 
@@ -118,16 +117,16 @@ replace muons.inputCollectionLabels = { gsWithMaterialTracks, globalMuons, stand
 replace muons.TrackAssociatorParameters.EBRecHitCollectionLabel = caloRecHits:EcalRecHitsEB
 replace muons.TrackAssociatorParameters.EERecHitCollectionLabel = caloRecHits:EcalRecHitsEE
 replace muons.TrackAssociatorParameters.CaloTowerCollectionLabel = towerMaker
-replace muons.TrackAssociatorParameters.HBHERecHitCollectionLabel = hcalRecHits:RecalibHBHE
-replace muons.TrackAssociatorParameters.HORecHitCollectionLabel = hcalRecHits:RecalibHO
+replace muons.TrackAssociatorParameters.HBHERecHitCollectionLabel = caloRecHits
+replace muons.TrackAssociatorParameters.HORecHitCollectionLabel = caloRecHits
 replace muons.TrackExtractorPSet = { using MIsoTrackExtractorGsBlock }
 # Use FastSim tracks and calo hits for calo muon id
 replace calomuons.inputTracks = gsWithMaterialTracks
 replace calomuons.TrackAssociatorParameters.EBRecHitCollectionLabel = caloRecHits:EcalRecHitsEB
 replace calomuons.TrackAssociatorParameters.EERecHitCollectionLabel = caloRecHits:EcalRecHitsEE
 replace calomuons.TrackAssociatorParameters.CaloTowerCollectionLabel = towerMaker
-replace calomuons.TrackAssociatorParameters.HBHERecHitCollectionLabel = hcalRecHits:RecalibHBHE
-replace calomuons.TrackAssociatorParameters.HORecHitCollectionLabel = hcalRecHits:RecalibHO
+replace calomuons.TrackAssociatorParameters.HBHERecHitCollectionLabel = caloRecHits
+replace calomuons.TrackAssociatorParameters.HORecHitCollectionLabel = caloRecHits
 
 #Muon isolation
 #include "RecoMuon/MuonIsolationProducers/data/muIsolation.cff"
@@ -148,8 +147,8 @@ include "TrackingTools/GsfTracking/data/GsfElectronFit.cff"
 module pixelMatchGsfFit = GsfElectrons from "TrackingTools/GsfTracking/data/GsfElectronFit.cfi"
 replace pixelMatchGsfFit.src = "electronGSGsfTrackCandidates"
 replace pixelMatchGsfFit.TTRHBuilder = "WithoutRefit"
-replace pixelMatchGsfElectrons.hbheModule = "hcalRecHits"
-replace pixelMatchGsfElectrons.hbheInstance = "RecalibHBHE"
+replace pixelMatchGsfElectrons.hbheModule = "caloRecHits"
+replace pixelMatchGsfElectrons.hbheInstance = ""
 replace pixelMatchGsfElectrons.SCLBarrelLabel = "electronGSPixelSeeds"
 replace pixelMatchGsfElectrons.SCLEndcapLabel = "electronGSPixelSeeds"
 sequence famosElectronSequence = {
