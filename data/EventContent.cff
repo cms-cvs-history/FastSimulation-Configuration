@@ -138,26 +138,38 @@ block FastSimRecoLocalCaloAOD =
 
 #Full Event content 
 block FastSimRecoTrackerFEVT = {
-  untracked vstring outputCommands = {
-#Tracks
-    "keep *_gsWithMaterialTracks_*_*"
-  }		
+    untracked vstring outputCommands = {
+	#Tracks
+	"keep *_ctfGSWithMaterialTracks_*_*",
+	"keep *_firstGSVertexFilter_*_*",
+	"keep *_secondGSVertexFilter_*_*",
+	"keep *_thirdGSVertexFilter_*_*",
+	"keep *_fourthGSVertexFilter_*_*"
+    }		
 }	
 
 #RECO content
 block FastSimRecoTrackerRECO = {
-  untracked vstring outputCommands = {
-#Tracks
-    "keep *_gsWithMaterialTracks_*_*"
-  }		
+    untracked vstring outputCommands = {
+	#Tracks
+	"keep *_ctfGSWithMaterialTracks_*_*",
+	"keep *_firstGSVertexFilter_*_*",
+	"keep *_secondGSVertexFilter_*_*",
+	"keep *_thirdGSVertexFilter_*_*",
+	"keep *_fourthGSVertexFilter_*_*"
+    }		
 }	
 
 #AOD content
 block FastSimRecoTrackerAOD = {
-  untracked vstring outputCommands = {
-#Tracks without extra and hits
-    "keep recoTracks_gsWithMaterialTracks_*_*"
-  }		
+    untracked vstring outputCommands = {
+	#Tracks without extra and hits
+	"keep recoTracks_ctfGSWithMaterialTracks_*_*",
+	"keep recoTracks_firstGSVertexFilter_*_*",
+	"keep recoTracks_secondGSVertexFilter_*_*",
+	"keep recoTracks_thirdGSVertexFilter_*_*",
+	"keep recoTracks_fourthGSVertexFilter_*_*"
+    }		
 }	
 
 #####################################################################
@@ -166,32 +178,32 @@ block FastSimRecoTrackerAOD = {
 
 #Full Event content 
 block FastSimParamMuonFEVT = {
-  untracked vstring outputCommands = {
-#Tracks
-    "keep *_paramMuons_*_*",
-#MuIsoDeposits
-    "keep *_muParamGlobalIsoDepositGsTk_*_*",
-    "keep *_muParamGlobalIsoDepositCalEcal_*_*",
-    "keep *_muParamGlobalIsoDepositCalHcal_*_*",
-    "keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*",
-    "keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*",
-    "keep *_muParamGlobalIsoDepositJets_*_*"
-  }
+    untracked vstring outputCommands = {
+	#Tracks
+	"keep *_paramMuons_*_*",
+	#MuIsoDeposits
+	"keep *_muParamGlobalIsoDepositGsTk_*_*",
+	"keep *_muParamGlobalIsoDepositCalEcal_*_*",
+	"keep *_muParamGlobalIsoDepositCalHcal_*_*",
+	"keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*",
+	"keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*",
+	"keep *_muParamGlobalIsoDepositJets_*_*"
+    }
 }	
 
 #RECO content
 block FastSimParamMuonRECO = {
-  untracked vstring outputCommands = {
-#Tracks
-    "keep *_paramMuons_*_*",
-#MuIsoDeposits
-    "keep *_muParamGlobalIsoDepositGsTk_*_*",
-    "keep *_muParamGlobalIsoDepositCalEcal_*_*",
-    "keep *_muParamGlobalIsoDepositCalHcal_*_*",
-    "keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*",
-    "keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*",
-    "keep *_muParamGlobalIsoDepositJets_*_*"
-  }		
+    untracked vstring outputCommands = {
+	#Tracks
+	"keep *_paramMuons_*_*",
+	#MuIsoDeposits
+	"keep *_muParamGlobalIsoDepositGsTk_*_*",
+	"keep *_muParamGlobalIsoDepositCalEcal_*_*",
+	"keep *_muParamGlobalIsoDepositCalHcal_*_*",
+	"keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*",
+	"keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*",
+	"keep *_muParamGlobalIsoDepositJets_*_*"
+    }		
 }	
 
 #AOD content

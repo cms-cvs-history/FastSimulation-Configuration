@@ -6,8 +6,8 @@ include "HLTrigger/btau/data/tau/DoubleTau.cff"
 
 
 #PixelTracks and Vertices
-include "FastSimulation/Tracking/data/PixelTracksMaker.cfi"
-include "RecoPixelVertexing/PixelVertexFinding/data/PixelVertexes.cfi"
+include "FastSimulation/Tracking/data/PixelTracksProducer.cfi"
+include "FastSimulation/Tracking/data/PixelVertices.cfi"
 
 
 #L1 SeedFilter not anylonger in use in Full Simulation
@@ -144,13 +144,13 @@ replace ecalDoubleTauIsolated.TauSrc= {ecalDoubleTauIsolFast}
 #TrackIsolation modules
 
 #JetTrackAssociator
-replace associatorL3SingleTau.tracks = gsWithMaterialTracks 
+replace associatorL3SingleTau.tracks = ctfGSWithMaterialTracks 
 replace associatorL3SingleTau.jets = ecalSingleTauIsolated:Isolated
 
-replace associatorL3SingleTauMET.tracks = gsWithMaterialTracks
+replace associatorL3SingleTauMET.tracks = ctfGSWithMaterialTracks
 replace associatorL3SingleTauMET.jets   = ecalSingleTauMETIsolated:Isolated
 
-replace associatorL25PixelTauIsolated.tracks = pixelTracks
+replace associatorL25PixelTauIsolated.tracks = pixelGSTracks
 replace associatorL25PixelTauIsolated.jets   = ecalDoubleTauIsolated:Isolated
 
 #All the rest is the same!
@@ -169,8 +169,8 @@ l2SingleTauJetsFast&
 singleTauJetCrystalsAssociatorFast&ecalSingleTauIsolFast&ecalSingleTauIsolated&
 filterSingleTauEcalIsolation&
 famosWithTracks&
-pixelTracks&
-pixelVertices&
+pixelGSTracks&
+pixelGSVertices&
 (associatorL3SingleTau,coneIsolationL3SingleTau,isolatedL3SingleTau,filterL3SingleTau)
 }
 
@@ -183,8 +183,8 @@ l2SingleTauMETJetsFast&
 singleTauMETJetCrystalsAssociatorFast&ecalSingleTauMETIsolFast&ecalSingleTauMETIsolated&
 filterSingleTauMETEcalIsolation&
 famosWithTracks&
-pixelTracks&
-pixelVertices&
+pixelGSTracks&
+pixelGSVertices&
 (associatorL3SingleTauMET,coneIsolationL3SingleTauMET,isolatedL3SingleTauMET,filterL3SingleTauMET)
 }
 
@@ -195,8 +195,8 @@ l2DoubleTauJetsFast&
 doubleTauJetCrystalsAssociatorFast&ecalDoubleTauIsolFast&ecalDoubleTauIsolated&
 filterDoubleTauEcalIsolation&
 famosWithTrackerHits&
-pixelTracks&
-pixelVertices&
+pixelGSTracks&
+pixelGSVertices&
 (associatorL25PixelTauIsolated,coneIsolationL25PixelTauIsolated,isolatedL25PixelTau,filterL25PixelTau)
 }
 

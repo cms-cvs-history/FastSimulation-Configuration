@@ -12,6 +12,7 @@ include "RecoMuon/MuonIsolationProducers/data/muIsoDepositCtfTk.cfi"
 include "RecoMuon/MuonIsolationProducers/data/muIsoDepositJets.cfi"
 include "RecoMuon/MuonIsolationProducers/data/muIsoDepositCalByAssociatorTowers.cfi"
 
+replace MIsoTrackExtractorGsBlock.inputTrackCollection = ctfGSWithMaterialTracks
 #now the derived ones
 #muTracker and muGlobal are for backward compatibility (to be deprecated?)
 module muIsoDepositGsTk 
