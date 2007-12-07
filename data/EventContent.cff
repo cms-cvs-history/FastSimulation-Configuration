@@ -141,10 +141,7 @@ block FastSimRecoTrackerFEVT = {
     untracked vstring outputCommands = {
 	#Tracks
 	"keep *_ctfGSWithMaterialTracks_*_*",
-	"keep *_firstGSVertexFilter_*_*",
-	"keep *_secondGSVertexFilter_*_*",
-	"keep *_thirdGSVertexFilter_*_*",
-	"keep *_fourthGSVertexFilter_*_*"
+	"keep *_iterativeGSWithMaterialTracks_*_*"
     }		
 }	
 
@@ -153,10 +150,7 @@ block FastSimRecoTrackerRECO = {
     untracked vstring outputCommands = {
 	#Tracks
 	"keep *_ctfGSWithMaterialTracks_*_*",
-	"keep *_firstGSVertexFilter_*_*",
-	"keep *_secondGSVertexFilter_*_*",
-	"keep *_thirdGSVertexFilter_*_*",
-	"keep *_fourthGSVertexFilter_*_*"
+	"keep *_iterativeGSWithMaterialTracks_*_*"
     }		
 }	
 
@@ -165,10 +159,7 @@ block FastSimRecoTrackerAOD = {
     untracked vstring outputCommands = {
 	#Tracks without extra and hits
 	"keep recoTracks_ctfGSWithMaterialTracks_*_*",
-	"keep recoTracks_firstGSVertexFilter_*_*",
-	"keep recoTracks_secondGSVertexFilter_*_*",
-	"keep recoTracks_thirdGSVertexFilter_*_*",
-	"keep recoTracks_fourthGSVertexFilter_*_*"
+	"keep recoTracks_iterativeGSWithMaterialTracks_*_*"
     }		
 }	
 

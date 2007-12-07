@@ -6,8 +6,8 @@ include "HLTrigger/btau/data/tau/DoubleTau.cff"
 
 
 #PixelTracks and Vertices
-include "FastSimulation/Tracking/data/PixelTracksProducer.cfi"
-include "FastSimulation/Tracking/data/PixelVertices.cfi"
+include "FastSimulation/Tracking/data/PixelTracksProducer.cff"
+include "FastSimulation/Tracking/data/PixelVerticesProducer.cff"
 
 
 #L1 SeedFilter not anylonger in use in Full Simulation
@@ -169,8 +169,8 @@ l2SingleTauJetsFast&
 singleTauJetCrystalsAssociatorFast&ecalSingleTauIsolFast&ecalSingleTauIsolated&
 filterSingleTauEcalIsolation&
 famosWithTracks&
-pixelGSTracks&
-pixelGSVertices&
+pixelGSTracking&
+pixelGSVertexing&
 (associatorL3SingleTau,coneIsolationL3SingleTau,isolatedL3SingleTau,filterL3SingleTau)
 }
 
@@ -183,8 +183,8 @@ l2SingleTauMETJetsFast&
 singleTauMETJetCrystalsAssociatorFast&ecalSingleTauMETIsolFast&ecalSingleTauMETIsolated&
 filterSingleTauMETEcalIsolation&
 famosWithTracks&
-pixelGSTracks&
-pixelGSVertices&
+pixelGSTracking&
+pixelGSVertexing&
 (associatorL3SingleTauMET,coneIsolationL3SingleTauMET,isolatedL3SingleTauMET,filterL3SingleTauMET)
 }
 
@@ -195,8 +195,8 @@ l2DoubleTauJetsFast&
 doubleTauJetCrystalsAssociatorFast&ecalDoubleTauIsolFast&ecalDoubleTauIsolated&
 filterDoubleTauEcalIsolation&
 famosWithTrackerHits&
-pixelGSTracks&
-pixelGSVertices&
+pixelGSTracking&
+pixelGSVertexing&
 (associatorL25PixelTauIsolated,coneIsolationL25PixelTauIsolated,isolatedL25PixelTau,filterL25PixelTau)
 }
 
