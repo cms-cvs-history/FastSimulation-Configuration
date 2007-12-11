@@ -59,10 +59,14 @@ replace particleFlowCluster.hcalRecHitsHBHEModuleLabel = "caloRecHits"
 replace particleFlowSimParticle.SimModuleLabel = "famosSimHits"
 #replace elecpreid.TkColList = {ctfGSWithMaterialTracks}
 replace elecpreid.TkColList = {	
-    firstGSVertexFilter,
-    secondGSVertexFilter,
-    thirdGSVertexFilter,
-    fourthGSVertexFilter
+    firstGSVertexFilter1,
+    firstGSVertexFilter2,
+    secondGSVertexFilter1,
+    secondGSVertexFilter2,
+    thirdGSVertexFilter1,
+    thirdGSVertexFilter2,
+    fourthGSVertexFilter1,
+    fourthGSVertexFilter2
 }
 
 # Calo Towers
