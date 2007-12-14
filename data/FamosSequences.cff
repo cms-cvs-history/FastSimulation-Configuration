@@ -203,6 +203,25 @@ replace fastL1CaloSim.EmInputs =
 #Fast Tau HLT
 include "FastSimulation/Configuration/data/fastTauHLT.cff"
 
+
+// Calorimeter emulator (requires doDigis=true)
+include "L1Trigger/Configuration/data/L1CaloEmulator.cff"
+
+// dummy L1 DB objects for L1 Calo configuration
+include "L1TriggerConfig/RCTConfigProducers/data/L1RCTConfig.cff"
+include "L1TriggerConfig/GctConfigProducers/data/L1GctConfig.cff"
+include "L1TriggerConfig/L1ScalesProducers/data/L1CaloScalesConfig.cff"
+include "L1TriggerConfig/L1GtConfigProducers/data/L1GtConfig.cff"
+    
+// GT emulator
+// the replace allows the GT to run without muon inputs
+include "L1Trigger/GlobalTrigger/data/l1GtEmulDigis.cfi"
+replace l1GtParameters.DaqActiveBoards = 0xFEFF
+
+// L1Extra - provides 4-vector representation of L1 trigger objects - not needed by HLT
+include "L1Trigger/Configuration/data/L1Extra.cff"
+replace l1extraParticles.produceMuonParticles=false
+
 # Famos pre-defined sequences
 sequence famosWithTrackerHits = { 
     famosPileUp,
@@ -395,7 +414,7 @@ sequence famosWithEverything = {
 }
 
 #Trigger sequences . These sequence require "caloRecHits.RecHitsFactory.doDigis=true" 
-
+# this one cannot be used by the HLT as of 17X  use the following sequence instead 
 sequence famosWithL1 = { 
         famosWithCaloTowers& 
         ecalTriggerPrimitiveDigis& 
@@ -404,6 +423,15 @@ sequence famosWithL1 = {
         fastL1extraParticleMap 
 } 
 
+sequence famosWithL1Emulator =
+{
+         famosWithTracksAndCaloTowers& 
+         ecalTriggerPrimitiveDigis& 
+         hcalTriggerPrimitiveDigis& 
+         L1CaloEmulator&
+         l1GtEmulDigis&
+         l1extraParticles 
+}
 
 sequence famosWithSingleTauTrigger = {
     famosWithL1 &	
