@@ -222,6 +222,16 @@ replace l1GtParameters.DaqActiveBoards = 0xFEFF
 include "L1Trigger/Configuration/data/L1Extra.cff"
 replace l1extraParticles.produceMuonParticles=false
 
+// The hltbegin sequence (requires doDigis=true) and the hlt global setup
+#include "FastSimulation/HighLevelTrigger/data/common/HLTSetup.cff"
+sequence hltBegin = { 
+    ecalTriggerPrimitiveDigis& 
+    hcalTriggerPrimitiveDigis& 
+    L1CaloEmulator&
+    l1GtEmulDigis&
+    l1extraParticles
+}
+
 # Famos pre-defined sequences
 sequence famosWithTrackerHits = { 
     famosPileUp,
@@ -340,9 +350,9 @@ sequence famosWithMuons = {
 }
 
 sequence famosWithMuonsAndIsolation = {
-     famosWithTracksAndCaloTowers,
-     paramMuons,
-     muIsolation_ParamGlobalMuons
+    famosWithTracksAndCaloTowers,
+    paramMuons,
+    muIsolation_ParamGlobalMuons
 }
 
 sequence famosWithElectrons = {
@@ -416,21 +426,17 @@ sequence famosWithEverything = {
 #Trigger sequences . These sequence require "caloRecHits.RecHitsFactory.doDigis=true" 
 # this one cannot be used by the HLT as of 17X  use the following sequence instead 
 sequence famosWithL1 = { 
-        famosWithCaloTowers& 
-        ecalTriggerPrimitiveDigis& 
-        hcalTriggerPrimitiveDigis& 
-        fastL1CaloSim& 
-        fastL1extraParticleMap 
+    famosWithCaloTowers& 
+    ecalTriggerPrimitiveDigis& 
+    hcalTriggerPrimitiveDigis& 
+    fastL1CaloSim& 
+    fastL1extraParticleMap 
 } 
 
 sequence famosWithL1Emulator =
 {
-         famosWithTracksAndCaloTowers& 
-         ecalTriggerPrimitiveDigis& 
-         hcalTriggerPrimitiveDigis& 
-         L1CaloEmulator&
-         l1GtEmulDigis&
-         l1extraParticles 
+    famosWithTracksAndCaloHits& 
+    hltBegin
 }
 
 sequence famosWithSingleTauTrigger = {
