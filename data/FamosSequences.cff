@@ -163,6 +163,8 @@ sequence famosElectronSequence = {
 include "RecoEgamma/EgammaPhotonProducers/data/photonSequence.cff"
 replace photons.barrelHitProducer="caloRecHits"
 replace photons.endcapHitProducer="caloRecHits"
+replace photons.hbheModule="caloRecHits"
+replace photons.hbheInstance = ""
 replace photons.pixelSeedProducer="electronGSPixelSeeds"
 
 # B tagging
