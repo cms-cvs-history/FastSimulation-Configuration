@@ -26,6 +26,7 @@ include "FastSimulation/TrackingRecHitProducer/data/TrackingRecHitTranslator.cfi
 
 # CTF and Iterative tracking (contains pixelTracks and pixelVertices)
 include "FastSimulation/Tracking/data/GSTrackFinalFitCommon.cff"
+include "FastSimulation/Tracking/data/GlobalPixelTracking.cff"
 include "FastSimulation/Tracking/data/CTFDefaultTracking.cff"
 include "FastSimulation/Tracking/data/IterativeTracking.cff"
 
@@ -225,7 +226,7 @@ include "L1Trigger/Configuration/data/L1Extra.cff"
 replace l1extraParticles.produceMuonParticles=false
 
 // The hltbegin sequence (requires doDigis=true) and the hlt global setup
-#include "FastSimulation/HighLevelTrigger/data/common/HLTSetup.cff"
+include "FastSimulation/HighLevelTrigger/data/common/HLTSetup.cff"
 sequence hltBegin = { 
     ecalTriggerPrimitiveDigis& 
     hcalTriggerPrimitiveDigis& 
@@ -240,7 +241,12 @@ sequence famosWithTrackerHits = {
     famosSimHits,
     mix, 
     siTrackerGaussianSmearingRecHits
-}	
+}
+
+sequence famosWithTrackerAndCaloHits = { 
+    famosWithTrackerHits, 
+    caloRecHits
+}
 
 sequence famosWithTracks = { 
     famosWithTrackerHits,
