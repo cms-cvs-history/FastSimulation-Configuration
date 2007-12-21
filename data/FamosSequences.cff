@@ -197,15 +197,13 @@ replace pfRecoTauProducer.PVProducer = "offlinePrimaryVerticesFromCTFTracks"
 sequence famosPFTauTaggingSequence = {
 PFTau
 }
+
 #Fast L1 Trigger
 include "FastSimulation/L1CaloTriggerProducer/data/fastl1calosim.cfi"
 include "FastSimulation/L1CaloTriggerProducer/data/fastL1extraParticleMap.cfi"
 replace fastL1CaloSim.AlgorithmSource = "RecHits"
 replace fastL1CaloSim.EmInputs =
 	 { "caloRecHits:EcalRecHitsEB", "caloRecHits:EcalRecHitsEE"  }	
-#Fast Tau HLT
-include "FastSimulation/Configuration/data/fastTauHLT.cff"
-
 
 // Calorimeter emulator (requires doDigis=true)
 include "L1Trigger/Configuration/data/L1CaloEmulator.cff"
@@ -251,7 +249,6 @@ sequence famosWithTrackerAndCaloHits = {
 sequence famosWithTracks = { 
     famosWithTrackerHits,
     ctfGSTracking
-#    iterativeGSTracking
 }	
 
 sequence famosWithIterativeTracking = { 
@@ -443,21 +440,7 @@ sequence famosWithL1 = {
 
 sequence famosWithL1Emulator =
 {
-    famosWithTracksAndCaloHits& 
+    famosWithTrackerAndCaloHits& 
     hltBegin
 }
 
-sequence famosWithSingleTauTrigger = {
-    famosWithL1 &	
-    fastSingleTauTrigger
-}
-
-sequence famosWithSingleTauMETTrigger = {
-    famosWithL1 & 
-    fastSingleTauMETTrigger
-}
- 
-sequence famosWithDoubleTauTrigger = {
-    famosWithL1 &
-    fastDoubleTauTrigger
-}
