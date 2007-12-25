@@ -208,6 +208,9 @@ replace fastL1CaloSim.EmInputs =
 // Calorimeter emulator (requires doDigis=true)
 include "L1Trigger/Configuration/data/L1CaloEmulator.cff"
 
+// Muon emulator (doDigis=true by default here)
+include "L1Trigger/Configuration/data/L1MuonEmulator.cff"
+
 // dummy L1 DB objects for L1 Calo configuration
 include "L1TriggerConfig/RCTConfigProducers/data/L1RCTConfig.cff"
 include "L1TriggerConfig/GctConfigProducers/data/L1GctConfig.cff"
@@ -225,12 +228,24 @@ replace l1extraParticles.produceMuonParticles=false
 
 // The hltbegin sequence (requires doDigis=true) and the hlt global setup
 include "FastSimulation/HighLevelTrigger/data/common/HLTSetup.cff"
+
+/*
+module l1ParamMuons = paramMuons from "FastSimulation/ParamL3MuonProducer/data/ParamL3Muon.cfi"
+replace l1ParamMuons.MUONS.ProduceL1Muons = true 
+replace l1ParamMuons.MUONS.ProduceL3Muons = false
+replace l1ParamMuons.MUONS.ProduceGlobalMuons = false
+*/
+
 sequence hltBegin = { 
     ecalTriggerPrimitiveDigis& 
     hcalTriggerPrimitiveDigis& 
+#    muonDigi&
     L1CaloEmulator&
+#    L1MuonEmulator&
     l1GtEmulDigis&
-    l1extraParticles
+    l1extraParticles,
+    l1GtTrigReport
+#    l1ParamMuons
 }
 
 # Famos pre-defined sequences
@@ -243,6 +258,15 @@ sequence famosWithTrackerHits = {
 
 sequence famosWithTrackerAndCaloHits = { 
     famosWithTrackerHits, 
+    caloRecHits
+}
+
+sequence famosWithAllHits = { 
+    famosPileUp,
+    famosSimHits,
+    MuonSimHits,
+    mix, 
+    siTrackerGaussianSmearingRecHits,
     caloRecHits
 }
 

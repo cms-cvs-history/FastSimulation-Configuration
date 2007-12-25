@@ -24,6 +24,9 @@ include "RecoMuon/DetLayers/data/muonDetLayerGeometry.cfi"
 include "CalibMuon/Configuration/data/DT_FrontierConditions.cff"
 include "CalibMuon/Configuration/data/CSC_FrontierDBConditions.cff"
 
+# L1 Muon configuration
+#include "L1Trigger/Configuration/data/L1DBConfig.cff"
+
 #Services from the CondDB
 include "CondCore/DBCommon/data/CondDBSetup.cfi"
 include "RecoVertex/BeamSpotProducer/data/BeamSpotSimpleGaussian.cff"
