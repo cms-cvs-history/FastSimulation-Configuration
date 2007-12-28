@@ -208,9 +208,6 @@ replace fastL1CaloSim.EmInputs =
 // Calorimeter emulator (requires doDigis=true)
 include "L1Trigger/Configuration/data/L1CaloEmulator.cff"
 
-// Muon emulator (doDigis=true by default here)
-include "L1Trigger/Configuration/data/L1MuonEmulator.cff"
-
 // dummy L1 DB objects for L1 Calo configuration
 include "L1TriggerConfig/RCTConfigProducers/data/L1RCTConfig.cff"
 include "L1TriggerConfig/GctConfigProducers/data/L1GctConfig.cff"
@@ -218,34 +215,31 @@ include "L1TriggerConfig/L1ScalesProducers/data/L1CaloScalesConfig.cff"
 include "L1TriggerConfig/L1GtConfigProducers/data/L1GtConfig.cff"
     
 // GT emulator
-// the replace allows the GT to run without muon inputs
+// the replace of the DaqActiveBoard allows the GT to run without muon inputs (no longer needed)
 include "L1Trigger/GlobalTrigger/data/l1GtEmulDigis.cfi"
-replace l1GtParameters.DaqActiveBoards = 0xFEFF
+#replace l1GtParameters.DaqActiveBoards = 0xFEFF
+replace l1GtEmulDigis.GmtInputTag = l1ParamMuons
 
 // L1Extra - provides 4-vector representation of L1 trigger objects - not needed by HLT
+// The muon extra particles are done by L1ParamMuons, but could be done here too.
+// Need to check the difference of efficiencies first.
 include "L1Trigger/Configuration/data/L1Extra.cff"
 replace l1extraParticles.produceMuonParticles=false
+replace l1extraParticles.muonSource = l1ParamMuons
 
 // The hltbegin sequence (requires doDigis=true) and the hlt global setup
 include "FastSimulation/HighLevelTrigger/data/common/HLTSetup.cff"
 
-/*
-module l1ParamMuons = paramMuons from "FastSimulation/ParamL3MuonProducer/data/ParamL3Muon.cfi"
-replace l1ParamMuons.MUONS.ProduceL1Muons = true 
-replace l1ParamMuons.MUONS.ProduceL3Muons = false
-replace l1ParamMuons.MUONS.ProduceGlobalMuons = false
-*/
+include "FastSimulation/Muons/data/L1Muons.cfi"
 
 sequence hltBegin = { 
     ecalTriggerPrimitiveDigis& 
     hcalTriggerPrimitiveDigis& 
-#    muonDigi&
     L1CaloEmulator&
-#    L1MuonEmulator&
+    l1ParamMuons&
     l1GtEmulDigis&
-    l1extraParticles,
+    l1extraParticles&
     l1GtTrigReport
-#    l1ParamMuons
 }
 
 # Famos pre-defined sequences
