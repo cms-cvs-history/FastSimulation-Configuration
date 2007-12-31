@@ -1,0 +1,30 @@
+source = PythiaSource 
+{
+    untracked bool pythiaVerbosity = false
+    #  possibility to run single or double back-to-back particles with PYTHIA
+    # if ParticleID = 0, run PYTHIA
+    untracked int32 ParticleID = -15
+    untracked bool DoubleParticle = true
+    untracked double Ptmin = 20. 
+    untracked double Ptmax = 420.
+    untracked double Etamin = 0. 
+    untracked double Etamax = 2.4
+    untracked double Phimin = 0. 
+    untracked double Phimax = 360.
+    
+    PSet PythiaParameters = 
+    {
+	# This is a vector of ParameterSet names to be read, in this order
+	vstring parameterSets = 
+	{
+	    "pythiaTauJets"
+	}
+	
+	# Tau jets only
+	vstring pythiaTauJets = 
+	{
+	    'MDME(89,1)=0      ! no tau->electron',
+	    'MDME(90,1)=0      ! no tau->muon'
+	}
+    }
+}
