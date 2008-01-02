@@ -25,7 +25,19 @@ include "FastSimulation/TrackingRecHitProducer/data/SiTrackerGaussianSmearingRec
 include "FastSimulation/TrackingRecHitProducer/data/TrackingRecHitTranslator.cfi"
 
 # CTF and Iterative tracking (contains pixelTracks and pixelVertices)
+
+# 1) Common algorithms and configuration taken from full reconstruction
+# Note: The runge-kutta propagator is not used here 
+# (because no magnetic field inhomogeneities are simulated between layers)
 include "FastSimulation/Tracking/data/GSTrackFinalFitCommon.cff"
+
+# 2) Specific cuts
+# Add a chi**2 cut to retain/reject hits
+replace KFFittingSmoother.EstimateCut = 15.0
+# Request three hits to make a track
+replace KFFittingSmoother.MinNumberOfHits = 3
+
+# 3) Fast Simulation tracking sequences
 include "FastSimulation/Tracking/data/GlobalPixelTracking.cff"
 include "FastSimulation/Tracking/data/CTFDefaultTracking.cff"
 include "FastSimulation/Tracking/data/IterativeTracking.cff"
