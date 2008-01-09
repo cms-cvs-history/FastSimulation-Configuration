@@ -16,3 +16,6 @@ es_source trackerAlignment = PoolDBESSource {
 }
 
 es_prefer trackerAlignment = PoolDBESSource {}
+
+replace trackerAlignment.catalog = "relationalcatalog_frontier://cms_conditions_data/CMS_COND_16X_FRONTIER"
+
