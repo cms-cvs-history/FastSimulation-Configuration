@@ -3,8 +3,8 @@
 #
 include "RecoLocalCalo/EcalRecProducers/data/getEcalConditions_frontier.cff"
 
-# Production database
-replace ecalConditions.connect="frontier://Frontier/CMS_COND_18X_ECAL" 
+# Integration database
+replace ecalConditions.connect="frontier://cms_conditions_data/CMS_COND_18X_ECAL"  
 
 # the following is an example to change the calibration conditions
 

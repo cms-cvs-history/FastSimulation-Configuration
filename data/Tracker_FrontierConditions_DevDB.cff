@@ -8,14 +8,11 @@ es_source trackerAlignment = PoolDBESSource {
     string timetype = "runnumber"
     
     # FRONTIER
-    string connect="frontier://Frontier/CMS_COND_18X_ALIGNMENT"  
+    string connect="frontier://FrontierDev/CMS_COND_18X_ALIGNMENT"  
 
 }
 
 es_prefer trackerAlignment = PoolDBESSource {}
-
-# For development data base
-replace trackerAlignment.connect="frontier://FrontierDev/CMS_COND_ALIGNMENT"
 
 // The following is needed to change the misalignment conditions
 /*
