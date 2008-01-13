@@ -178,7 +178,9 @@ block FastSimParamMuonFEVT = {
 	"keep *_muParamGlobalIsoDepositCalHcal_*_*",
 	"keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*",
 	"keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*",
-	"keep *_muParamGlobalIsoDepositJets_*_*"
+	"keep *_muParamGlobalIsoDepositJets_*_*",
+	"keep l1extraL1MuonParticles_l1ParamMuons_*_*"
+
     }
 }	
 
@@ -193,22 +195,25 @@ block FastSimParamMuonRECO = {
 	"keep *_muParamGlobalIsoDepositCalHcal_*_*",
 	"keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*",
 	"keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*",
-	"keep *_muParamGlobalIsoDepositJets_*_*"
+	"keep *_muParamGlobalIsoDepositJets_*_*",
+	"keep l1extraL1MuonParticles_l1ParamMuons_*_*"
     }		
 }	
 
 #AOD content
 block FastSimParamMuonAOD = {
-  untracked vstring outputCommands = {
-#Tracks without extra and hits
-    "keep recoMuons_paramMuons_*_*",
-#MuIsoDeposits
-    "keep *_muParamGlobalIsoDepositGsTk_*_*",
-    "keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*",
-    "keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*",
-    "keep *_muParamGlobalIsoDepositJets_*_*"
-  }		
-}	
+    untracked vstring outputCommands = {
+	#Tracks without extra and hits
+	"keep recoMuons_paramMuons_*_*",
+	#MuIsoDeposits
+	"keep *_muParamGlobalIsoDepositGsTk_*_*",
+	"keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*",
+	"keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*",
+	"keep *_muParamGlobalIsoDepositJets_*_*",
+	"keep l1extraL1MuonParticles_l1ParamMuons_*_*"
+    }		
+}
+
 
 # Addition to the event content
 # We don't need to remove anything, as the corresponding products are
