@@ -44,7 +44,6 @@ include "FastSimulation/Tracking/data/IterativeTracking.cff"
 
 # Calo RecHits producer (with no HCAL miscalibration by default)
 include "FastSimulation/CaloRecHitsProducer/data/CaloRecHits.cff"	
-include "FastSimulation/CaloRecHitsProducer/data/HcalMisCalib.cff"
 
 # ECAL clusters (this will generate harmless warnings...)
 include "RecoEcal/EgammaClusterProducers/data/ecalClusteringSequence.cff"
@@ -392,5 +391,40 @@ sequence famosWithEverything = {
     famosPFTauTaggingSequence
 }
 
+# The simulation sequence
+sequence simulationWithFamos = { 
+    famosPileUp,
+    famosSimHits,
+    MuonSimHits,
+    mix, 
+    siTrackerGaussianSmearingRecHits,
+    caloRecHits
+}
+
+# The reconstruction sequence
+sequence reconstructionWithFamos = {
+    ctfGSTracking &
+    iterativeGSTracking &
+    caloTowersPFRec &
+    particleFlowCluster &
+    elecpreid &
+    particleFlowBlock &
+    particleFlow &
+    towerMaker &
+    caloTowers &
+    ecalClusteringSequence &
+    famosElectronSequence &
+    photonSequence &
+    caloJetMetGen &
+    caloJetMet &
+    paramMuons &
+    muIsolation_ParamGlobalMuons &
+    offlineBeamSpot &
+    vertexreco &
+    ic5JetTracksAssociatorAtVertex &
+    famosBTaggingSequence &
+    famosTauTaggingSequence &
+    famosPFTauTaggingSequence
+}
 
 
