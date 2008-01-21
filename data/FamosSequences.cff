@@ -89,9 +89,6 @@ include "Configuration/JetMET/data/calorimetry-jetmet.cff"
 replace genParticleCandidates.src="source" 
 replace genCandidatesForMET.verbose=false
 
-# Muon Isolation
-#include "RecoMuon/MuonIsolationProducers/data/muIsolation.cff"
-
 # Muon simHit sequence 
 include "FastSimulation/MuonSimHitProducer/data/MuonSimHitProducer.cfi"
 
@@ -133,8 +130,8 @@ replace calomuons.TrackAssociatorParameters.HBHERecHitCollectionLabel = caloRecH
 replace calomuons.TrackAssociatorParameters.HORecHitCollectionLabel = caloRecHits
 
 #Muon isolation
-#include "RecoMuon/MuonIsolationProducers/data/muIsolation.cff"
-include "FastSimulation/Configuration/data/muIsolation.cff"
+include "RecoMuon/MuonIsolationProducers/data/muIsolation.cff"
+replace muIsoDepositCtfTk.ExtractorPSet = { using MIsoTrackExtractorGsBlock }
 sequence famosMuonSequence = { 
     muonDigi, 
     muonlocalreco, 
@@ -324,6 +321,7 @@ sequence famosWithMuons = {
 sequence famosWithMuonsAndIsolation = {
     famosWithTracksAndCaloTowers,
     paramMuons,
+    midPointCone5CaloJets,
     muIsolation_ParamGlobalMuons
 }
 
@@ -382,10 +380,10 @@ sequence famosWithEverything = {
     ecalClusteringSequence,
     famosElectronSequence,
     photonSequence,
-    paramMuons,
-    muIsolation_ParamGlobalMuons,
     caloJetMetGen,
     caloJetMet,
+    paramMuons,
+    muIsolation_ParamGlobalMuons,
     offlineBeamSpot,
     vertexreco,
     ic5JetTracksAssociatorAtVertex,

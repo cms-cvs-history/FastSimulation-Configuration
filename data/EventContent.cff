@@ -172,33 +172,24 @@ block FastSimParamMuonFEVT = {
     untracked vstring outputCommands = {
 	#Tracks
 	"keep *_paramMuons_*_*",
-	#MuIsoDeposits
-	"keep *_muParamGlobalIsoDepositGsTk_*_*",
-	"keep *_muParamGlobalIsoDepositCalEcal_*_*",
-	"keep *_muParamGlobalIsoDepositCalHcal_*_*",
-	"keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*",
-	"keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*",
-	"keep *_muParamGlobalIsoDepositJets_*_*",
+	# L1 Muons
 	"keep l1extraL1MuonParticles_l1ParamMuons_*_*"
-
     }
-}	
+}
+#MuIsoDeposits
+replace FastSimParamMuonFEVT.outputCommands += RecoMuonIsolationParamGlobal.outputCommands
 
 #RECO content
 block FastSimParamMuonRECO = {
     untracked vstring outputCommands = {
 	#Tracks
 	"keep *_paramMuons_*_*",
-	#MuIsoDeposits
-	"keep *_muParamGlobalIsoDepositGsTk_*_*",
-	"keep *_muParamGlobalIsoDepositCalEcal_*_*",
-	"keep *_muParamGlobalIsoDepositCalHcal_*_*",
-	"keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*",
-	"keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*",
-	"keep *_muParamGlobalIsoDepositJets_*_*",
+	# L1 Muons
 	"keep l1extraL1MuonParticles_l1ParamMuons_*_*"
     }		
 }	
+#MuIsoDeposits
+replace FastSimParamMuonRECO.outputCommands += RecoMuonIsolationParamGlobal.outputCommands
 
 #AOD content
 block FastSimParamMuonAOD = {
@@ -206,10 +197,11 @@ block FastSimParamMuonAOD = {
 	#Tracks without extra and hits
 	"keep recoMuons_paramMuons_*_*",
 	#MuIsoDeposits
-	"keep *_muParamGlobalIsoDepositGsTk_*_*",
+	"keep *_muParamGlobalIsoDepositCtfTk_*_*",
 	"keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*",
 	"keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*",
 	"keep *_muParamGlobalIsoDepositJets_*_*",
+	# L1 muons
 	"keep l1extraL1MuonParticles_l1ParamMuons_*_*"
     }		
 }
