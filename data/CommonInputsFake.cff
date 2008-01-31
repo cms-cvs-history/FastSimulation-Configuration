@@ -32,6 +32,3 @@ include "RecoBTau/Configuration/data/RecoBTau_FakeConditions.cff"
 include "CalibCalorimetry/Configuration/data/Hcal_FakeConditions.cff"
 include "CalibCalorimetry/Configuration/data/Ecal_FakeConditions.cff"
 include "CalibTracker/Configuration/data/Tracker_FakeAlignment.cff" 
-
-// Make the b-tagging work : temporary work-around
-replace BeamSpotFakeConditions.BeamType = "SimpleGaussian"
