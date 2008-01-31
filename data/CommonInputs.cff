@@ -53,3 +53,10 @@ include "FastSimulation/Configuration/data/Tracker_FrontierConditions_IntDB.cff"
 #include "FastSimulation/Configuration/data/Ecal_FrontierConditions.cff"
 #include "FastSimulation/Configuration/data/Tracker_FrontierConditions.cff" 
 
+// Make the b-tagging work : temporary work-around
+replace BeamSpotEarlyCollision.toGet = { 
+    { 
+	string record = "BeamSpotObjectsRcd"
+	string tag = "SimpleGaussian"
+    }
+}

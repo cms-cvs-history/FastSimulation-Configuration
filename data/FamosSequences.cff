@@ -80,6 +80,13 @@ replace elecpreid.TkColList = {
     fourthGSVertexFilter1,
     fourthGSVertexFilter2
 }
+sequence famosParticleFlowSequence = { 
+    caloTowersPFRec &
+    particleFlowCluster &
+    elecpreid &
+    particleFlowBlock &
+    particleFlow
+}
 
 
 # Jets
@@ -109,6 +116,14 @@ include "FastSimulation/Configuration/data/globalMuons.cff"
 replace GlobalTrajectoryBuilderCommon.TrackRecHitBuilder = "WithoutRefit"
 replace GlobalTrajectoryBuilderCommon.TrackTransformer.TrackerRecHitBuilder = "WithoutRefit"
 replace globalMuons.TrackerCollectionLabel = ctfGSWithMaterialTracks
+sequence famosMuonSequence = { 
+    muonDigi &
+    muonlocalreco & 
+    MuonSeed & 
+    standAloneMuons &
+    globalMuons
+}
+
 #Muon identification sequence
 #include "RecoMuon/MuonIdentification/data/muonIdProducerSequence.cff"
 include "FastSimulation/Configuration/data/muonIdentification.cff"
@@ -131,12 +146,10 @@ replace calomuons.TrackAssociatorParameters.HORecHitCollectionLabel = caloRecHit
 #Muon isolation
 include "RecoMuon/MuonIsolationProducers/data/muIsolation.cff"
 replace muIsoDepositCtfTk.ExtractorPSet = { using MIsoTrackExtractorGsBlock }
-sequence famosMuonSequence = { 
-    muonDigi, 
-    muonlocalreco, 
-    MuonSeed, 
-    standAloneMuons,
-    globalMuons
+sequence famosMuonIdAndIsolationSequence = { 
+    muonIdProducerSequence & 
+    midPointCone5CaloJets &
+    muIsolation
 }
 
 # Electron reconstruction
@@ -152,9 +165,9 @@ replace pixelMatchGsfElectrons.hbheInstance = ""
 replace pixelMatchGsfElectrons.SCLBarrelLabel = "electronGSPixelSeeds"
 replace pixelMatchGsfElectrons.SCLEndcapLabel = "electronGSPixelSeeds"
 sequence famosElectronSequence = {
-    electronGSPixelSeeds,
-    electronGSGsfTrackCandidates,
-    pixelMatchGsfFit,
+    electronGSPixelSeeds &
+    electronGSGsfTrackCandidates &
+    pixelMatchGsfFit &
     pixelMatchGsfElectrons
 }
 
@@ -200,6 +213,7 @@ PFTau
 sequence famosWithTrackerHits = { 
     famosPileUp,
     famosSimHits,
+    MuonSimHits,
     mix, 
     siTrackerGaussianSmearingRecHits
 }
@@ -241,14 +255,13 @@ sequence famosWithTracksAndMuons = {
     caloRecHits,
     towerMaker,
     caloTowers,
-    muonIdProducerSequence,
-    midPointCone5CaloJets,
-    muIsolation
+    famosMuonIdAndIsolationSequence
 }
 
 sequence famosWithCaloHits = { 
     famosPileUp,
     famosSimHits,
+    MuonSimHits,
     mix, 
     caloRecHits   
 }	
@@ -275,11 +288,7 @@ sequence famosWithTracksAndEcalClusters = {
 
 sequence famosWithParticleFlow = {
     famosWithIterativeTrackingAndCaloHits,
-    caloTowersPFRec,
-    particleFlowCluster,
-    elecpreid,
-    particleFlowBlock,
-    particleFlow
+    famosParticleFlowSequence 
 }
 
 sequence famosWithCaloTowers = {
@@ -378,16 +387,18 @@ sequence famosWithEverything = {
     famosWithCaloTowersAndParticleFlow,
     ecalClusteringSequence,
     famosElectronSequence,
-    photonSequence,
-    caloJetMetGen,
-    caloJetMet,
-    paramMuons,
-    muIsolation_ParamGlobalMuons,
-    offlineBeamSpot,
-    vertexreco,
-    ic5JetTracksAssociatorAtVertex,
-    famosBTaggingSequence,
-    famosTauTaggingSequence,
+    photonSequence &
+    famosMuonSequence &
+    famosMuonIdAndIsolationSequence &
+    caloJetMetGen &
+    caloJetMet &
+    paramMuons &
+    muIsolation_ParamGlobalMuons &
+    offlineBeamSpot &
+    vertexreco &
+    ic5JetTracksAssociatorAtVertex &
+    famosBTaggingSequence &
+    famosTauTaggingSequence &
     famosPFTauTaggingSequence
 }
 
@@ -405,16 +416,14 @@ sequence simulationWithFamos = {
 sequence reconstructionWithFamos = {
     ctfGSTracking &
     iterativeGSTracking &
-    caloTowersPFRec &
-    particleFlowCluster &
-    elecpreid &
-    particleFlowBlock &
-    particleFlow &
     towerMaker &
     caloTowers &
     ecalClusteringSequence &
     famosElectronSequence &
     photonSequence &
+    famosMuonSequence &
+    famosMuonIdAndIsolationSequence &
+    famosParticleFlowSequence &
     caloJetMetGen &
     caloJetMet &
     paramMuons &
