@@ -213,6 +213,7 @@ PFTau
 sequence famosWithTrackerHits = { 
     famosPileUp,
     famosSimHits,
+    genParticleCandidates,
     MuonSimHits,
     mix, 
     siTrackerGaussianSmearingRecHits
@@ -237,6 +238,7 @@ sequence famosWithIterativeTracking = {
 sequence famosWithTracksAndMuonHits = { 
     famosPileUp,
     famosSimHits,
+    genParticleCandidates,
     MuonSimHits,
     mix, 
     siTrackerGaussianSmearingRecHits,
@@ -247,6 +249,7 @@ sequence famosWithTracksAndMuonHits = {
 sequence famosWithTracksAndMuons = { 
     famosPileUp,
     famosSimHits,
+    genParticleCandidates,
     MuonSimHits,
     mix, 
     siTrackerGaussianSmearingRecHits,
@@ -261,6 +264,7 @@ sequence famosWithTracksAndMuons = {
 sequence famosWithCaloHits = { 
     famosPileUp,
     famosSimHits,
+    genParticleCandidates,
     MuonSimHits,
     mix, 
     caloRecHits   
@@ -406,6 +410,7 @@ sequence famosWithEverything = {
 sequence simulationWithFamos = { 
     famosPileUp,
     famosSimHits,
+    genParticleCandidates,
     MuonSimHits,
     mix, 
     siTrackerGaussianSmearingRecHits,
