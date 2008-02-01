@@ -209,13 +209,17 @@ sequence famosPFTauTaggingSequence = {
 PFTau
 }
 
+# The sole simulation sequence
+sequence famosSimulationSequence = { 
+    famosPileUp &
+    famosSimHits &
+    genParticleCandidates &
+    MuonSimHits &
+    mix 
+}
 # Famos pre-defined sequences
 sequence famosWithTrackerHits = { 
-    famosPileUp,
-    famosSimHits,
-    genParticleCandidates,
-    MuonSimHits,
-    mix, 
+    famosSimulationSequence &
     siTrackerGaussianSmearingRecHits
 }
 
@@ -236,37 +240,25 @@ sequence famosWithIterativeTracking = {
 }	
 
 sequence famosWithTracksAndMuonHits = { 
-    famosPileUp,
-    famosSimHits,
-    genParticleCandidates,
-    MuonSimHits,
-    mix, 
-    siTrackerGaussianSmearingRecHits,
-    ctfGSTracking,
+    famosSimulationSequence &
+    siTrackerGaussianSmearingRecHits &
+    ctfGSTracking &
     famosMuonSequence
 }
 
 sequence famosWithTracksAndMuons = { 
-    famosPileUp,
-    famosSimHits,
-    genParticleCandidates,
-    MuonSimHits,
-    mix, 
-    siTrackerGaussianSmearingRecHits,
-    ctfGSTracking,
-    famosMuonSequence,
-    caloRecHits,
-    towerMaker,
-    caloTowers,
+    famosSimulationSequence &
+    siTrackerGaussianSmearingRecHits &
+    ctfGSTracking &
+    famosMuonSequence &
+    caloRecHits &
+    towerMaker &
+    caloTowers &
     famosMuonIdAndIsolationSequence
 }
 
 sequence famosWithCaloHits = { 
-    famosPileUp,
-    famosSimHits,
-    genParticleCandidates,
-    MuonSimHits,
-    mix, 
+    famosSimulationSequence &
     caloRecHits   
 }	
 
@@ -408,12 +400,8 @@ sequence famosWithEverything = {
 
 # The simulation sequence
 sequence simulationWithFamos = { 
-    famosPileUp,
-    famosSimHits,
-    genParticleCandidates,
-    MuonSimHits,
-    mix, 
-    siTrackerGaussianSmearingRecHits,
+    famosSimulationSequence &
+    siTrackerGaussianSmearingRecHits &
     caloRecHits
 }
 
