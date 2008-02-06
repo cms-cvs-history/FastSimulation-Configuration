@@ -52,11 +52,3 @@ include "FastSimulation/Configuration/data/Tracker_FrontierConditions_IntDB.cff"
 #include "FastSimulation/Configuration/data/Hcal_FrontierConditions.cff"
 #include "FastSimulation/Configuration/data/Ecal_FrontierConditions.cff"
 #include "FastSimulation/Configuration/data/Tracker_FrontierConditions.cff" 
-
-# Early condition vertex smearing
-include "FastSimulation/Event/data/EarlyCollision.cff"
-#include "FastSimulation/Event/data/NominalCollision.cff"
-#include "FastSimulation/Event/data/NominalCollision1.cff"
-#include "FastSimulation/Event/data/NominalCollision2.cff"
-#include "FastSimulation/Event/data/NominalCollision3.cff"
-#include "FastSimulation/Event/data/NominalCollision4.cff"

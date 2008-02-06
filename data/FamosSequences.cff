@@ -64,11 +64,11 @@ replace towerMakerPF.ecalInputs = {
 replace towerMakerPF.hbheInput = caloRecHits
 replace towerMakerPF.hoInput = caloRecHits
 replace towerMakerPF.hfInput = caloRecHits
-replace particleFlowCluster.ecalRecHitsEBModuleLabel = "caloRecHits"
-replace particleFlowCluster.ecalRecHitsEEModuleLabel = "caloRecHits"
-replace particleFlowCluster.ecalRecHitsESModuleLabel = "caloRecHits"
-replace particleFlowCluster.hcalRecHitsHBHEModuleLabel = "caloRecHits"
-replace particleFlowSimParticle.SimModuleLabel = "famosSimHits"
+replace particleFlowCluster.ecalRecHitsEB = caloRecHits:EcalRecHitsEB
+replace particleFlowCluster.ecalRecHitsEE = caloRecHits:EcalRecHitsEE
+replace particleFlowCluster.ecalRecHitsES = caloRecHits:EcalRecHitsES
+replace particleFlowCluster.hcalRecHitsHBHE = caloRecHits:
+replace particleFlowSimParticle.sim = famosSimHits
 #replace elecpreid.TkColList = {ctfGSWithMaterialTracks}
 replace elecpreid.TkColList = {	
     firstGSVertexFilter1,

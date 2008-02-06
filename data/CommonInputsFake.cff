@@ -32,11 +32,3 @@ include "RecoBTau/Configuration/data/RecoBTau_FakeConditions.cff"
 include "CalibCalorimetry/Configuration/data/Hcal_FakeConditions.cff"
 include "CalibCalorimetry/Configuration/data/Ecal_FakeConditions.cff"
 include "CalibTracker/Configuration/data/Tracker_FakeAlignment.cff" 
-
-# Early condition vertex smearing
-include "FastSimulation/Event/data/EarlyCollision.cff"
-#include "FastSimulation/Event/data/NominalCollision.cff"
-#include "FastSimulation/Event/data/NominalCollision1.cff"
-#include "FastSimulation/Event/data/NominalCollision2.cff"
-#include "FastSimulation/Event/data/NominalCollision3.cff"
-#include "FastSimulation/Event/data/NominalCollision4.cff"
