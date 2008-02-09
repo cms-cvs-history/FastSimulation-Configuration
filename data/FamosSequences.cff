@@ -69,6 +69,24 @@ replace particleFlowCluster.ecalRecHitsEE = caloRecHits:EcalRecHitsEE
 replace particleFlowCluster.ecalRecHitsES = caloRecHits:EcalRecHitsES
 replace particleFlowCluster.hcalRecHitsHBHE = caloRecHits:
 replace particleFlowSimParticle.sim = famosSimHits
+
+
+replace elecpreid.NHitsInSeed =1
+
+module fsGsfElCandidates = trackCandidateProducer from
+"FastSimulation/Tracking/data/TrackCandidateProducer.cfi"
+replace fsGsfElCandidates.SeedProducer = elecpreid:SeedsForGsf
+replace fsGsfElCandidates.TrackProducer = None:None
+replace fsGsfElCandidates.SeedCleaning = true
+replace fsGsfElCandidates.MinNumberOfCrossedLayers = 5
+
+module fsgsfPFtracks = GsfGlobalElectronTest from "TrackingTools/GsfTracking/data/GsfElectronFit.cfi"
+replace fsgsfPFtracks.src = "fsGsfElCandidates"
+replace fsgsfPFtracks.TTRHBuilder = "WithoutRefit"
+replace fsgsfPFtracks.TrajectoryInEvent = true
+
+replace pfTrackElec.GsfTrackModuleLabel ="fsgsfPFtracks" 
+
 #replace elecpreid.TkColList = {ctfGSWithMaterialTracks}
 replace elecpreid.TkColList = {	
     firstGSVertexFilter1,
@@ -83,7 +101,10 @@ replace elecpreid.TkColList = {
 sequence famosParticleFlowSequence = { 
     caloTowersPFRec &
     particleFlowCluster &
-    elecpreid &
+    elecpreid &    
+    fsGsfElCandidates&
+    fsgsfPFtracks &
+    pfTrackElec &   
     particleFlowBlock &
     particleFlow
 }
@@ -274,7 +295,8 @@ sequence famosWithTracksAndCaloHits = {
 
 sequence famosWithIterativeTrackingAndCaloHits = { 
     famosWithIterativeTracking,
-    caloRecHits   
+    caloRecHits
+
 }
 
 sequence famosWithTracksAndEcalClusters = { 
