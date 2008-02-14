@@ -233,6 +233,7 @@ PFTau
 
 # The sole simulation sequence
 sequence famosSimulationSequence = { 
+    offlineBeamSpot &
     famosPileUp &
     famosSimHits &
     genParticleCandidates &
@@ -377,7 +378,6 @@ sequence famosWithElectronsAndPhotons = {
 
 sequence famosWithBTagging = {
     famosWithTracksAndCaloTowers,
-    offlineBeamSpot,
     vertexreco,
     iterativeCone5CaloJets,
     ic5JetTracksAssociatorAtVertex,
@@ -386,7 +386,6 @@ sequence famosWithBTagging = {
 
 sequence famosWithTauTagging = {
     famosWithTracksAndCaloTowers,
-    offlineBeamSpot,
     vertexreco,
     iterativeCone5CaloJets,
     ic5JetTracksAssociatorAtVertex,
@@ -396,7 +395,6 @@ sequence famosWithTauTagging = {
 
 sequence famosWithPFTauTagging = {
     famosWithCaloTowersAndParticleFlow,
-    offlineBeamSpot,
     vertexreco,
     famosPFTauTaggingSequence
 }
@@ -413,7 +411,6 @@ sequence famosWithEverything = {
     caloJetMet &
     paramMuons &
     muIsolation_ParamGlobalMuons &
-    offlineBeamSpot &
     vertexreco &
     ic5JetTracksAssociatorAtVertex &
     famosBTaggingSequence &
@@ -444,7 +441,6 @@ sequence reconstructionWithFamos = {
     caloJetMet &
     paramMuons &
     muIsolation_ParamGlobalMuons &
-    offlineBeamSpot &
     vertexreco &
     ic5JetTracksAssociatorAtVertex &
     famosBTaggingSequence &
