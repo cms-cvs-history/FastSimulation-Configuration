@@ -342,6 +342,22 @@ sequence famosWithEverything = {
 
 }
 
+sequence famosWithEverythingButJetMetGen = {
+    famosWithCaloTowersAndParticleFlow,
+    ecalClusteringSequence,
+    famosElectronSequence,
+    photonSequence,
+    paramMuons,
+    muIsolation_ParamGlobalMuons,
+    caloJetMet,
+    vertexreco,
+    jetTracksAssociator,
+    famosBTaggingSequence,
+    famosTauTaggingSequence,
+    famosPFTauTaggingSequence
+
+}
+
 #Trigger sequences
 sequence famosWithSingleTauTrigger = {
     famosWithCaloTowers&
