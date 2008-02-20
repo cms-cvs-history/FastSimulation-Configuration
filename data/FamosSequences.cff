@@ -193,14 +193,13 @@ sequence famosElectronSequence = {
 }
 
 # Photon reconstruction
-include "RecoEgamma/EgammaPhotonProducers/data/photons.cfi"
+include "RecoEgamma/EgammaPhotonProducers/data/photonSequence.cff"
 replace photons.barrelHitProducer="caloRecHits"
 replace photons.endcapHitProducer="caloRecHits"
 replace photons.hbheModule="caloRecHits"
 replace photons.hbheInstance = ""
 replace photons.pixelSeedProducer="electronGSPixelSeeds"
-module photonsWithConversions = correctedPhotons from "RecoEgamma/EgammaPhotonProducers/data/correctedPhotons.cfi"
-sequence famosPhotonSequence = { photons, photonsWithConversions }
+sequence famosPhotonSequence = { photons, correctedPhotons }
 
 # B tagging
 include "RecoJets/JetAssociationProducers/data/ic5JetTracksAssociatorAtVertex.cfi"
@@ -403,6 +402,7 @@ sequence famosWithPFTauTagging = {
 
 sequence famosWithEverything = {
     famosWithCaloTowersAndParticleFlow,
+    vertexreco &
     ecalClusteringSequence,
     famosElectronSequence,
     famosPhotonSequence &
@@ -412,7 +412,6 @@ sequence famosWithEverything = {
     caloJetMet &
     paramMuons &
     muIsolation_ParamGlobalMuons &
-    vertexreco &
     ic5JetTracksAssociatorAtVertex &
     famosBTaggingSequence &
     famosTauTaggingSequence &
@@ -430,6 +429,7 @@ sequence simulationWithFamos = {
 sequence reconstructionWithFamos = {
     ctfGSTracking &
     iterativeGSTracking &
+    vertexreco &
     towerMaker &
     caloTowers &
     ecalClusteringSequence &
@@ -442,7 +442,6 @@ sequence reconstructionWithFamos = {
     caloJetMet &
     paramMuons &
     muIsolation_ParamGlobalMuons &
-    vertexreco &
     ic5JetTracksAssociatorAtVertex &
     famosBTaggingSequence &
     famosTauTaggingSequence &
