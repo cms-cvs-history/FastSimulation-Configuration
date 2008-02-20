@@ -18,6 +18,7 @@ block FastSimCoreFEVT = {
     "keep *_famosSimHits_*_*",
     "keep edmHepMCProduct_source_*_*",
     "keep edmGenInfoProduct_source_*_*",
+    "keep *_genParticleCandidates_*_*",
     "keep *_genParticles_*_*",
     "keep *_genEventWeight_*_*",
     "keep *_genEventScale_*_*",
@@ -31,6 +32,7 @@ block FastSimCoreFEVT = {
 #RECO content
 block FastSimCoreRECO = {
   untracked vstring outputCommands = {
+    "keep *_genParticleCandidates_*_*",
     "keep *_genParticles_*_*",
     "keep *_genEventWeight_*_*",
     "keep *_genEventScale_*_*",
@@ -49,6 +51,7 @@ block FastSimCoreRECO = {
 block FastSimCoreAOD = {
   untracked vstring outputCommands = {
     "keep edmGenInfoProduct_source_*_*",
+    "keep *_genParticleCandidates_*_*",
     "keep *_genParticles_*_*",
     "keep *_genEventWeight_*_*",
     "keep *_genEventScale_*_*",

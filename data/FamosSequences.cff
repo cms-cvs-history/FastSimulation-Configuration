@@ -193,13 +193,14 @@ sequence famosElectronSequence = {
 }
 
 # Photon reconstruction
-include "RecoEgamma/EgammaPhotonProducers/data/photonSequence.cff"
+include "RecoEgamma/EgammaPhotonProducers/data/photons.cfi"
 replace photons.barrelHitProducer="caloRecHits"
 replace photons.endcapHitProducer="caloRecHits"
 replace photons.hbheModule="caloRecHits"
 replace photons.hbheInstance = ""
 replace photons.pixelSeedProducer="electronGSPixelSeeds"
-sequence famosPhotonSequence = { photons, correctedPhotons }
+module photonsWithConversions = correctedPhotons from "RecoEgamma/EgammaPhotonProducers/data/correctedPhotons.cfi"
+sequence famosPhotonSequence = { photons, photonsWithConversions }
 
 # B tagging
 include "RecoJets/JetAssociationProducers/data/ic5JetTracksAssociatorAtVertex.cfi"
