@@ -199,7 +199,7 @@ replace photons.endcapHitProducer="caloRecHits"
 replace photons.hbheModule="caloRecHits"
 replace photons.hbheInstance = ""
 replace photons.pixelSeedProducer="electronGSPixelSeeds"
-sequence famosPhotonSequence = { photons, correctedPhotons }
+sequence famosPhotonSequence = { photonSequence }
 
 # B tagging
 include "RecoJets/JetAssociationProducers/data/ic5JetTracksAssociatorAtVertex.cfi"
