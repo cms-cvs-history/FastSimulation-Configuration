@@ -166,7 +166,7 @@ replace calomuons.TrackAssociatorParameters.HORecHitCollectionLabel = caloRecHit
 
 #Muon isolation
 include "RecoMuon/MuonIsolationProducers/data/muIsolation.cff"
-replace muIsoDepositCtfTk.ExtractorPSet = { using MIsoTrackExtractorGsBlock }
+replace muIsoDepositTk.ExtractorPSet = { using MIsoTrackExtractorGsBlock }
 sequence famosMuonIdAndIsolationSequence = { 
     muonIdProducerSequence & 
     midPointCone5CaloJets &
