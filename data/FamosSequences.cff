@@ -64,10 +64,9 @@ replace towerMakerPF.ecalInputs = {
 replace towerMakerPF.hbheInput = caloRecHits
 replace towerMakerPF.hoInput = caloRecHits
 replace towerMakerPF.hfInput = caloRecHits
-replace particleFlowCluster.ecalRecHitsEB = caloRecHits:EcalRecHitsEB
-replace particleFlowCluster.ecalRecHitsEE = caloRecHits:EcalRecHitsEE
-replace particleFlowCluster.ecalRecHitsES = caloRecHits:EcalRecHitsES
-replace particleFlowCluster.hcalRecHitsHBHE = caloRecHits:
+replace particleFlowRecHitECAL.ecalRecHitsEB = caloRecHits:EcalRecHitsEB
+replace particleFlowRecHitECAL.ecalRecHitsEE = caloRecHits:EcalRecHitsEE
+replace particleFlowRecHitPS.ecalRecHitsES = caloRecHits:EcalRecHitsES
 replace particleFlowSimParticle.sim = famosSimHits
 
 
@@ -81,7 +80,7 @@ replace fsGsfElCandidates.SeedCleaning = true
 replace fsGsfElCandidates.MinNumberOfCrossedLayers = 5
 
 module fsgsfPFtracks = GsfGlobalElectronTest from "TrackingTools/GsfTracking/data/GsfElectronFit.cfi"
-replace fsgsfPFtracks.src = "fsGsfElCandidates"
+replace fsgsfPFtracks.src = fsGsfElCandidates
 replace fsgsfPFtracks.TTRHBuilder = "WithoutRefit"
 replace fsgsfPFtracks.TrajectoryInEvent = true
 
