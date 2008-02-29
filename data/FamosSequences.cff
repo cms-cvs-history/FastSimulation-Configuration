@@ -56,7 +56,12 @@ replace correctedIslandEndcapSuperClusters.recHitProducer="caloRecHits"
 replace correctedEndcapSuperClustersWithPreshower.preshRecHitProducer = "caloRecHits"
 
 # Particle Flow
-include "RecoParticleFlow/Configuration/data/RecoParticleFlow.cff"
+include "RecoParticleFlow/PFClusterProducer/data/towerMakerPF.cff"
+include "RecoParticleFlow/PFClusterProducer/data/particleFlowCluster.cff"
+include "RecoParticleFlow/PFTracking/data/particleFlowTrack.cff" 
+include "RecoParticleFlow/PFBlockProducer/data/particleFlowSimParticle.cff"
+include "RecoParticleFlow/PFBlockProducer/data/particleFlowBlock.cff"
+include "RecoParticleFlow/PFProducer/data/particleFlow.cff"
 replace towerMakerPF.ecalInputs = { 
     "caloRecHits:EcalRecHitsEB", 
     "caloRecHits:EcalRecHitsEE" 
@@ -246,32 +251,32 @@ sequence famosWithTrackerHits = {
 }
 
 sequence famosWithTrackerAndCaloHits = { 
-    famosWithTrackerHits, 
+    famosWithTrackerHits & 
     caloRecHits
 }
 
 sequence famosWithTracks = { 
-    famosWithTrackerHits,
-    ctfGSTracking
+    famosWithTrackerHits &
+    generalTracking
 }	
 
 sequence famosWithIterativeTracking = { 
-    famosWithTrackerHits,
-    ctfGSTracking,
+    famosWithTrackerHits &
+    generalTracking &
     iterativeGSTracking
 }	
 
 sequence famosWithTracksAndMuonHits = { 
     famosSimulationSequence &
     siTrackerGaussianSmearingRecHits &
-    ctfGSTracking &
+    generalTracking &
     famosMuonSequence
 }
 
 sequence famosWithTracksAndMuons = { 
     famosSimulationSequence &
     siTrackerGaussianSmearingRecHits &
-    ctfGSTracking &
+    generalTracking &
     famosMuonSequence &
     caloRecHits &
     towerMaker &
@@ -285,125 +290,125 @@ sequence famosWithCaloHits = {
 }	
 
 sequence famosWithEcalClusters = { 
-    famosWithCaloHits,
+    famosWithCaloHits &
     ecalClusteringSequence
 }	
 
 sequence famosWithTracksAndCaloHits = { 
-    famosWithTracks,
+    famosWithTracks &
     caloRecHits   
 }
 
 sequence famosWithIterativeTrackingAndCaloHits = { 
-    famosWithIterativeTracking,
+    famosWithIterativeTracking &
     caloRecHits
 
 }
 
 sequence famosWithTracksAndEcalClusters = { 
-    famosWithTracksAndCaloHits,
+    famosWithTracksAndCaloHits &
     ecalClusteringSequence
 }
 
 sequence famosWithParticleFlow = {
-    famosWithIterativeTrackingAndCaloHits,
+    famosWithIterativeTrackingAndCaloHits &
     famosParticleFlowSequence 
 }
 
 sequence famosWithCaloTowers = {
-    famosWithCaloHits,
-    towerMaker,
+    famosWithCaloHits&
+    towerMaker&
     caloTowers
 }
 
 sequence famosWithJets = {
-    famosWithCaloTowers,
-    caloJetMetGen,
+    famosWithCaloTowers&
+    caloJetMetGen&
     caloJetMet	
 }
 
 sequence famosWithTracksAndCaloTowers = {
-    famosWithTracksAndCaloHits,
-    towerMaker,
+    famosWithTracksAndCaloHits&
+    towerMaker&
     caloTowers
 }
 
 sequence famosWithTracksAndJets ={
-   famosWithTracksAndCaloTowers,
-   caloJetMetGen,
+   famosWithTracksAndCaloTowers&
+   caloJetMetGen&
    caloJetMet	
 }
 
 sequence famosWithCaloTowersAndParticleFlow = {
-    famosWithParticleFlow,
-    towerMaker,
+    famosWithParticleFlow&
+    towerMaker&
     caloTowers
 }
 
 sequence famosWithMuons = {
-    famosWithTracks,
+    famosWithTracks&
     paramMuons
 }
 
 sequence famosWithMuonsAndIsolation = {
-    famosWithTracksAndCaloTowers,
-    paramMuons,
-    midPointCone5CaloJets,
+    famosWithTracksAndCaloTowers&
+    paramMuons&
+    midPointCone5CaloJets&
     muIsolation_ParamGlobalMuons
 }
 
 sequence famosWithElectrons = {
-    famosWithTrackerHits,
-    caloRecHits,
-    ecalClusteringSequence,
+    famosWithTrackerHits&
+    caloRecHits&
+    ecalClusteringSequence&
     famosElectronSequence
 }
 
 sequence famosWithPhotons = {
-    famosWithTrackerHits,
-    caloRecHits,
-    ecalClusteringSequence,
+    famosWithTrackerHits&
+    caloRecHits&
+    ecalClusteringSequence&
     famosPhotonSequence
 }
 
 sequence famosWithElectronsAndPhotons = {
-    famosWithTrackerHits,
-    caloRecHits,
-    ecalClusteringSequence,
-    famosElectronSequence,
+    famosWithTrackerHits&
+    caloRecHits&
+    ecalClusteringSequence&
+    famosElectronSequence&
     famosPhotonSequence
 }
 
 
 sequence famosWithBTagging = {
-    famosWithTracksAndCaloTowers,
-    vertexreco,
-    iterativeCone5CaloJets,
-    ic5JetTracksAssociatorAtVertex,
+    famosWithTracksAndCaloTowers&
+    vertexreco&
+    iterativeCone5CaloJets&
+    ic5JetTracksAssociatorAtVertex&
     famosBTaggingSequence
 }
 
 sequence famosWithTauTagging = {
-    famosWithTracksAndCaloTowers,
-    vertexreco,
-    iterativeCone5CaloJets,
-    ic5JetTracksAssociatorAtVertex,
-    ecalClusteringSequence,
+    famosWithTracksAndCaloTowers&
+    vertexreco&
+    iterativeCone5CaloJets&
+    ic5JetTracksAssociatorAtVertex&
+    ecalClusteringSequence&
     famosTauTaggingSequence
 }
 
 sequence famosWithPFTauTagging = {
-    famosWithCaloTowersAndParticleFlow,
-    vertexreco,
+    famosWithCaloTowersAndParticleFlow&
+    vertexreco&
     famosPFTauTaggingSequence
 }
 
 
 sequence famosWithEverything = {
-    famosWithCaloTowersAndParticleFlow,
+    famosWithCaloTowersAndParticleFlow&
     vertexreco &
-    ecalClusteringSequence,
-    famosElectronSequence,
+    ecalClusteringSequence&
+    famosElectronSequence&
     famosPhotonSequence &
     famosMuonSequence &
     famosMuonIdAndIsolationSequence &
@@ -426,7 +431,7 @@ sequence simulationWithFamos = {
 
 # The reconstruction sequence
 sequence reconstructionWithFamos = {
-    ctfGSTracking &
+    generalTracking &
     iterativeGSTracking &
     vertexreco &
     towerMaker &
