@@ -39,8 +39,9 @@ replace KFFittingSmoother.MinNumberOfHits = 3
 
 # 3) Fast Simulation tracking sequences
 include "FastSimulation/Tracking/data/GlobalPixelTracking.cff"
-include "FastSimulation/Tracking/data/CTFDefaultTracking.cff"
+//include "FastSimulation/Tracking/data/CTFDefaultTracking.cff"
 include "FastSimulation/Tracking/data/IterativeTracking.cff"
+include "FastSimulation/Tracking/data/GeneralTracking.cff"
 
 # Calo RecHits producer (with no HCAL miscalibration by default)
 include "FastSimulation/CaloRecHitsProducer/data/CaloRecHits.cff"	
@@ -140,7 +141,7 @@ include "RecoMuon/StandAloneMuonProducer/data/standAloneMuons.cfi"
 include "FastSimulation/Configuration/data/globalMuons.cff"
 replace GlobalTrajectoryBuilderCommon.TrackRecHitBuilder = "WithoutRefit"
 replace GlobalTrajectoryBuilderCommon.TrackTransformer.TrackerRecHitBuilder = "WithoutRefit"
-replace globalMuons.TrackerCollectionLabel = ctfGSWithMaterialTracks
+replace globalMuons.TrackerCollectionLabel = generalTracks
 sequence famosMuonSequence = { 
     muonDigi &
     muonlocalreco & 
@@ -153,15 +154,15 @@ sequence famosMuonSequence = {
 #include "RecoMuon/MuonIdentification/data/muonIdProducerSequence.cff"
 include "FastSimulation/Configuration/data/muonIdentification.cff"
 # Use FastSim tracks and calo hits for muon id
-replace muons.inputCollectionLabels = { ctfGSWithMaterialTracks, globalMuons, standAloneMuons:UpdatedAtVtx }
+replace muons.inputCollectionLabels = { generalTracks, globalMuons, standAloneMuons:UpdatedAtVtx }
 replace muons.TrackAssociatorParameters.EBRecHitCollectionLabel = caloRecHits:EcalRecHitsEB
 replace muons.TrackAssociatorParameters.EERecHitCollectionLabel = caloRecHits:EcalRecHitsEE
 replace muons.TrackAssociatorParameters.CaloTowerCollectionLabel = towerMaker
 replace muons.TrackAssociatorParameters.HBHERecHitCollectionLabel = caloRecHits
 replace muons.TrackAssociatorParameters.HORecHitCollectionLabel = caloRecHits
-replace muons.TrackExtractorPSet = { using MIsoTrackExtractorGsBlock }
+//replace muons.TrackExtractorPSet = { using MIsoTrackExtractorGsBlock }
 # Use FastSim tracks and calo hits for calo muon id
-replace calomuons.inputTracks = ctfGSWithMaterialTracks
+replace calomuons.inputTracks = generalTracks
 replace calomuons.TrackAssociatorParameters.EBRecHitCollectionLabel = caloRecHits:EcalRecHitsEB
 replace calomuons.TrackAssociatorParameters.EERecHitCollectionLabel = caloRecHits:EcalRecHitsEE
 replace calomuons.TrackAssociatorParameters.CaloTowerCollectionLabel = towerMaker
@@ -170,7 +171,7 @@ replace calomuons.TrackAssociatorParameters.HORecHitCollectionLabel = caloRecHit
 
 #Muon isolation
 include "RecoMuon/MuonIsolationProducers/data/muIsolation.cff"
-replace muIsoDepositTk.ExtractorPSet = { using MIsoTrackExtractorGsBlock }
+//replace muIsoDepositTk.ExtractorPSet = { using MIsoTrackExtractorGsBlock }
 sequence famosMuonIdAndIsolationSequence = { 
     muonIdProducerSequence & 
     midPointCone5CaloJets &
@@ -207,12 +208,12 @@ sequence famosPhotonSequence = { photonSequence }
 
 # B tagging
 include "RecoJets/JetAssociationProducers/data/ic5JetTracksAssociatorAtVertex.cfi"
-replace ic5JetTracksAssociatorAtVertex.tracks = ctfGSWithMaterialTracks
-replace ic5PFJetTracksAssociatorAtVertex.tracks = ctfGSWithMaterialTracks
+replace ic5JetTracksAssociatorAtVertex.tracks = generalTracks
+replace ic5PFJetTracksAssociatorAtVertex.tracks = generalTracks
 include "RecoVertex/Configuration/data/RecoVertex.cff"
 include "RecoVertex/BeamSpotProducer/data/BeamSpot.cff"
 include "RecoBTag/Configuration/data/RecoBTag.cff"
-replace offlinePrimaryVerticesFromCTFTracks.TrackLabel = "ctfGSWithMaterialTracks"
+replace offlinePrimaryVerticesFromCTFTracks.TrackLabel = "generalTracks"
 sequence famosBTaggingSequence = {
   ( impactParameterTagInfos, ( jetBProbabilityBJetTags & jetProbabilityBJetTags & trackCountingHighPurBJetTags & trackCountingHighEffBJetTags & impactParameterMVABJetTags ) ,
    secondaryVertexTagInfos, ( simpleSecondaryVertexBJetTags & combinedSecondaryVertexBJetTags & combinedSecondaryVertexMVABJetTags )     ) 
@@ -415,7 +416,7 @@ sequence famosWithEverything = {
     caloJetMetGen &
     caloJetMet &
     paramMuons &
-    muIsolation_ParamGlobalMuons &
+//    muIsolation_ParamGlobalMuons &
     ic5JetTracksAssociatorAtVertex &
     famosBTaggingSequence &
     famosTauTaggingSequence &
@@ -445,7 +446,7 @@ sequence reconstructionWithFamos = {
     caloJetMetGen &
     caloJetMet &
     paramMuons &
-    muIsolation_ParamGlobalMuons &
+//    muIsolation_ParamGlobalMuons &
     ic5JetTracksAssociatorAtVertex &
     famosBTaggingSequence &
     famosTauTaggingSequence &

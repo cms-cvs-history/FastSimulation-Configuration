@@ -128,7 +128,6 @@ block FastSimRecoLocalCaloAOD =
 block FastSimRecoTrackerFEVT = {
     untracked vstring outputCommands = {
 	#Tracks
-	"keep *_ctfGSWithMaterialTracks_*_*",
 	"keep *_iterativeGSWithMaterialTracks_*_*"
     }		
 }	
@@ -137,7 +136,6 @@ block FastSimRecoTrackerFEVT = {
 block FastSimRecoTrackerRECO = {
     untracked vstring outputCommands = {
 	#Tracks
-	"keep *_ctfGSWithMaterialTracks_*_*",
 	"keep *_iterativeGSWithMaterialTracks_*_*"
     }		
 }	
@@ -146,7 +144,6 @@ block FastSimRecoTrackerRECO = {
 block FastSimRecoTrackerAOD = {
     untracked vstring outputCommands = {
 	#Tracks without extra and hits
-	"keep recoTracks_ctfGSWithMaterialTracks_*_*",
 	"keep recoTracks_iterativeGSWithMaterialTracks_*_*"
     }		
 }	
