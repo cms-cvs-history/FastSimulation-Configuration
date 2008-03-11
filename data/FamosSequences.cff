@@ -182,7 +182,7 @@ include "RecoMuon/MuonIsolationProducers/data/muIsolation.cff"
 //replace muIsoDepositTk.ExtractorPSet = { using MIsoTrackExtractorGsBlock }
 sequence famosMuonIdAndIsolationSequence = { 
     muonIdProducerSequence & 
-    midPointCone5CaloJets &
+    sisCone5CaloJets &
     muIsolation
 }
 
@@ -362,7 +362,7 @@ sequence famosWithMuons = {
 sequence famosWithMuonsAndIsolation = {
     famosWithTracksAndCaloTowers&
     paramMuons&
-    midPointCone5CaloJets&
+    sisCone5CaloJets&
     muIsolation_ParamGlobalMuons
 }
 
@@ -424,7 +424,7 @@ sequence famosWithEverything = {
     caloJetMetGen &
     caloJetMet &
     paramMuons &
-//    muIsolation_ParamGlobalMuons &
+    muIsolation_ParamGlobalMuons &
     ic5JetTracksAssociatorAtVertex &
     famosBTaggingSequence &
     famosTauTaggingSequence &
@@ -454,7 +454,7 @@ sequence reconstructionWithFamos = {
     caloJetMetGen &
     caloJetMet &
     paramMuons &
-//    muIsolation_ParamGlobalMuons &
+    muIsolation_ParamGlobalMuons &
     ic5JetTracksAssociatorAtVertex &
     famosBTaggingSequence &
     famosTauTaggingSequence &
