@@ -102,15 +102,9 @@ replace pfTrackElec.GsfTrackModuleLabel ="fsgsfPFtracks"
 
 #replace elecpreid.TkColList = {ctfGSWithMaterialTracks}
 replace elecpreid.TkColList = {	
-    firstGSVertexFilter1,
-    firstGSVertexFilter2,
-    secondGSVertexFilter1,
-    secondGSVertexFilter2,
-    thirdGSVertexFilter1,
-    thirdGSVertexFilter2,
-    fourthGSVertexFilter1,
-    fourthGSVertexFilter2
+    generalTracks
 }
+
 sequence famosParticleFlowSequence = { 
     caloTowersPFRec &
     particleFlowCluster &
@@ -269,10 +263,9 @@ sequence famosWithTracks = {
     generalTracking
 }	
 
-sequence famosWithIterativeTracking = { 
+sequence famosWithGeneralTracking = { 
     famosWithTrackerHits &
-    generalTracking &
-    iterativeGSTracking
+    generalTracking
 }	
 
 sequence famosWithTracksAndMuonHits = { 
@@ -308,8 +301,8 @@ sequence famosWithTracksAndCaloHits = {
     caloRecHits   
 }
 
-sequence famosWithIterativeTrackingAndCaloHits = { 
-    famosWithIterativeTracking &
+sequence famosWithGeneralTrackingAndCaloHits = { 
+    famosWithGeneralTracking &
     caloRecHits
 
 }
@@ -320,7 +313,7 @@ sequence famosWithTracksAndEcalClusters = {
 }
 
 sequence famosWithParticleFlow = {
-    famosWithIterativeTrackingAndCaloHits &
+    famosWithGeneralTrackingAndCaloHits &
     famosParticleFlowSequence 
 }
 
@@ -441,7 +434,6 @@ sequence simulationWithFamos = {
 # The reconstruction sequence
 sequence reconstructionWithFamos = {
     generalTracking &
-    iterativeGSTracking &
     vertexreco &
     towerMaker &
     caloTowers &
