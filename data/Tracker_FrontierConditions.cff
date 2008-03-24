@@ -17,9 +17,6 @@ es_source trackerAlignment = PoolDBESSource {
 
 es_prefer trackerAlignment = PoolDBESSource {}
 
-# For development data base
-replace trackerAlignment.connect="frontier://FrontierDev/CMS_COND_ALIGNMENT"
-
 // The following is needed to change the misalignment conditions
 /*
 replace misalignedTrackerGeometry.applyAlignment = true
