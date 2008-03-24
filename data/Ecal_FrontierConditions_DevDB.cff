@@ -4,7 +4,7 @@
 include "RecoLocalCalo/EcalRecProducers/data/getEcalConditions_frontier.cff"
 
 # For development data base
-replace ecalConditions.connect="frontier://FrontierDev/CMS_COND_ALIGNMENT"
+replace ecalConditions.connect="frontier://FrontierDev/CMS_COND_ECAL"
 
 # the following is an example to change the calibration conditions
 
@@ -16,7 +16,19 @@ replace ecalConditions.toGet = {
 	{ string record = "EcalADCToGeVConstantRcd"
 	    string tag = "EcalADCToGeVConstant_trivial" },
 	{ string record = "EcalGainRatiosRcd"
-	    string tag = "EcalGainRatios_trivial" }
+	    string tag = "EcalGainRatios_trivial" },
+	{ string record = "EcalIntercalibConstantsRcd"
+	    string tag = "EcalIntercalibConstants_trivial" },
+	{ string record = "EcalWeightXtalGroupsRcd"
+	    string tag = "EcalWeightXtalGroups_trivial" },
+	{ string record = "EcalTBWeightsRcd"
+	    string tag = "EcalTBWeights_trivial" },
+	{ string record = "EcalLaserAlphasRcd" 
+	    string tag = "EcalLaserAlphas_trivial" },
+	{ string record = "EcalLaserAPDPNRatiosRcd" 
+	    string tag = "EcalLaserAPDPNRatios_trivial" },
+	{ string record = "EcalLaserAPDPNRatiosRefRcd" 
+	    string tag = "EcalLaserAPDPNRatiosRef_trivial" }
      }
 replace src2.producedEcalIntercalibConstants = true
 */

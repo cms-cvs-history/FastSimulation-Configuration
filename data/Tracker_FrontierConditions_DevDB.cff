@@ -4,13 +4,14 @@ es_source trackerAlignment = PoolDBESSource {
 
     using CondDBSetup
     VPSet toGet = {
-	{ string record = "TrackerAlignmentRcd"      string tag = "TrackerIdealGeometry170" },
-	{ string record = "TrackerAlignmentErrorRcd" string tag = "TrackerIdealGeometryErrors170" }
+	{ string record = "GlobalPositionRcd"        string tag = "IdealGeometry" },
+	{ string record = "TrackerAlignmentRcd"      string tag = "TrackerIdealGeometry200" },
+	{ string record = "TrackerAlignmentErrorRcd" string tag = "TrackerIdealGeometryErrors200" }
     }
     string timetype = "runnumber"
     
     # FRONTIER
-    string connect="frontier://FrontierDev/CMS_COND_18X_ALIGNMENT"  
+    string connect="frontier://FrontierDev/CMS_COND_20X_ALIGNMENT"  
 
 }
 
@@ -20,7 +21,8 @@ es_prefer trackerAlignment = PoolDBESSource {}
 /*
 replace misalignedTrackerGeometry.applyAlignment = true
 replace trackerAlignment.toGet = {
-    { string record = "TrackerAlignmentRcd" string tag = "Tracker100pbScenario170" },
-    { string record = "TrackerAlignmentErrorRcd" string tag = "Tracker100pbScenarioErrors170" }
+    { string record = "GlobalPositionRcd"        string tag = "IdealGeometry" },
+    { string record = "TrackerAlignmentRcd"      string tag = "Tracker100pbScenario200" },
+    { string record = "TrackerAlignmentErrorRcd" string tag = "Tracker100pbScenarioErrors200" }
 }
 */
