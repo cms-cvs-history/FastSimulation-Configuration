@@ -39,9 +39,7 @@ replace KFFittingSmoother.MinNumberOfHits = 3
 
 # 3) Fast Simulation tracking sequences
 include "FastSimulation/Tracking/data/GlobalPixelTracking.cff"
-//include "FastSimulation/Tracking/data/CTFDefaultTracking.cff"
 include "FastSimulation/Tracking/data/IterativeTracking.cff"
-include "FastSimulation/Tracking/data/GeneralTracking.cff"
 
 # Calo RecHits producer (with no HCAL miscalibration by default)
 include "FastSimulation/CaloRecHitsProducer/data/CaloRecHits.cff"	
@@ -90,7 +88,6 @@ module fsGsfElCandidates = trackCandidateProducer from
 "FastSimulation/Tracking/data/TrackCandidateProducer.cfi"
 replace fsGsfElCandidates.SeedProducer = elecpreid:SeedsForGsf
 replace fsGsfElCandidates.TrackProducer = None:None
-replace fsGsfElCandidates.SeedCleaning = true
 replace fsGsfElCandidates.MinNumberOfCrossedLayers = 5
 
 module fsgsfPFtracks = GsfGlobalElectronTest from "TrackingTools/GsfTracking/data/GsfElectronFit.cfi"
@@ -99,11 +96,6 @@ replace fsgsfPFtracks.TTRHBuilder = "WithoutRefit"
 replace fsgsfPFtracks.TrajectoryInEvent = true
 
 replace pfTrackElec.GsfTrackModuleLabel ="fsgsfPFtracks" 
-
-#replace elecpreid.TkColList = {ctfGSWithMaterialTracks}
-replace elecpreid.TkColList = {	
-    generalTracks
-}
 
 sequence famosParticleFlowSequence = { 
     caloTowersPFRec &
@@ -188,10 +180,15 @@ include "TrackingTools/GsfTracking/data/GsfElectronFit.cff"
 module pixelMatchGsfFit = GsfGlobalElectronTest from "TrackingTools/GsfTracking/data/GsfElectronFit.cfi"
 replace pixelMatchGsfFit.src = "electronGSGsfTrackCandidates"
 replace pixelMatchGsfFit.TTRHBuilder = "WithoutRefit"
+/*
 replace pixelMatchGsfElectrons.hbheModule = "caloRecHits"
 replace pixelMatchGsfElectrons.hbheInstance = ""
 replace pixelMatchGsfElectrons.SCLBarrelLabel = "electronGSPixelSeeds"
 replace pixelMatchGsfElectrons.SCLEndcapLabel = "electronGSPixelSeeds"
+*/
+replace pixelMatchGsfElectrons.hcalRecHits = caloRecHits
+replace pixelMatchGsfElectrons.barrelSuperClusters = correctedHybridSuperClusters:electronGSPixelSeeds
+replace pixelMatchGsfElectrons.endcapSuperClusters = correctedEndcapSuperClustersWithPreshower:electronGSPixelSeeds
 sequence famosElectronSequence = {
     electronGSPixelSeeds &
     electronGSGsfTrackCandidates &
@@ -260,25 +257,20 @@ sequence famosWithTrackerAndCaloHits = {
 
 sequence famosWithTracks = { 
     famosWithTrackerHits &
-    generalTracking
-}	
-
-sequence famosWithGeneralTracking = { 
-    famosWithTrackerHits &
-    generalTracking
+    iterativeTracking
 }	
 
 sequence famosWithTracksAndMuonHits = { 
     famosSimulationSequence &
     siTrackerGaussianSmearingRecHits &
-    generalTracking &
+    iterativeTracking &
     famosMuonSequence
 }
 
 sequence famosWithTracksAndMuons = { 
     famosSimulationSequence &
     siTrackerGaussianSmearingRecHits &
-    generalTracking &
+    iterativeTracking &
     famosMuonSequence &
     caloRecHits &
     towerMaker &
@@ -301,19 +293,13 @@ sequence famosWithTracksAndCaloHits = {
     caloRecHits   
 }
 
-sequence famosWithGeneralTrackingAndCaloHits = { 
-    famosWithGeneralTracking &
-    caloRecHits
-
-}
-
 sequence famosWithTracksAndEcalClusters = { 
     famosWithTracksAndCaloHits &
     ecalClusteringSequence
 }
 
 sequence famosWithParticleFlow = {
-    famosWithGeneralTrackingAndCaloHits &
+    famosWithTracksAndCaloHits &
     famosParticleFlowSequence 
 }
 
@@ -433,7 +419,7 @@ sequence simulationWithFamos = {
 
 # The reconstruction sequence
 sequence reconstructionWithFamos = {
-    generalTracking &
+    iterativeTracking &
     vertexreco &
     towerMaker &
     caloTowers &
