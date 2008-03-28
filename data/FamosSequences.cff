@@ -49,18 +49,18 @@ include "RecoEcal/EgammaClusterProducers/data/ecalClusteringSequence.cff"
 replace islandBasicClusters.barrelHitProducer="caloRecHits"
 replace islandBasicClusters.endcapHitProducer="caloRecHits"
 replace hybridSuperClusters.ecalhitproducer="caloRecHits"
-replace correctedHybridSuperClusters.recHitProducer="caloRecHits"
-replace correctedIslandBarrelSuperClusters.recHitProducer="caloRecHits"
-replace correctedIslandEndcapSuperClusters.recHitProducer="caloRecHits"
-replace correctedEndcapSuperClustersWithPreshower.preshRecHitProducer = "caloRecHits"
-replace preshowerClusterShape.preshRecHitProducer = "caloRecHits"
+replace correctedHybridSuperClusters.recHitProducer=caloRecHits:EcalRecHitsEB
+replace correctedIslandBarrelSuperClusters.recHitProducer=caloRecHits:EcalRecHitsEB
+replace correctedIslandEndcapSuperClusters.recHitProducer=caloRecHits:EcalRecHitsEE
+replace correctedEndcapSuperClustersWithPreshower.preshRecHitProducer = caloRecHits:EcalRecHitsES
+replace preshowerClusterShape.preshRecHitProducer = caloRecHits:EcalRecHitsES
 replace dynamicHybridSuperClusters.ecalhitproducer = "caloRecHits"
-replace correctedDynamicHybridSuperClusters.recHitProducer = "caloRecHits"
+replace correctedDynamicHybridSuperClusters.recHitProducer = caloRecHits:EcalRecHitsEB
 replace fixedMatrixBasicClusters.barrelHitProducer = "caloRecHits"
 replace fixedMatrixBasicClusters.endcapHitProducer = "caloRecHits"
-replace fixedMatrixPreshowerClusterShape.preshRecHitProducer = "caloRecHits"
-replace fixedMatrixSuperClustersWithPreshower.preshRecHitProducer = "caloRecHits"
-replace correctedFixedMatrixSuperClustersWithPreshower.recHitProducer = "caloRecHits"
+replace fixedMatrixPreshowerClusterShape.preshRecHitProducer = caloRecHits:EcalRecHitsES
+replace fixedMatrixSuperClustersWithPreshower.preshRecHitProducer = caloRecHits:EcalRecHitsES
+replace correctedFixedMatrixSuperClustersWithPreshower.recHitProducer = caloRecHits:EcalRecHitsEE
 
 # Particle Flow
 include "RecoParticleFlow/PFClusterProducer/data/towerMakerPF.cff"
