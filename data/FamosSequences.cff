@@ -109,11 +109,34 @@ sequence famosParticleFlowSequence = {
 }
 
 
-# Jets
-include "Configuration/JetMET/data/calorimetry-jetmet-gen.cff" 
-include "Configuration/JetMET/data/calorimetry-jetmet.cff" 
-replace genParticleCandidates.src="source" 
+# Reco Jets
+include "RecoJets/Configuration/data/RecoJets.cff"
+include "RecoMET/Configuration/data/RecoMET.cff"
+replace calotoweroptmaker.hbheInput = caloRecHits
+replace calotoweroptmaker.hoInput = caloRecHits
+replace calotoweroptmaker.hfInput = caloRecHits
+replace calotoweroptmaker.ecalInputs = { caloRecHits:EcalRecHitsEB, caloRecHits:EcalRecHitsEE }
+sequence caloJetMet = { 
+    recoJets & 
+    metreco 
+}
+
+# Gen Jets
+include "PhysicsTools/HepMCCandAlgos/data/genParticles.cfi"
+include "RecoJets/Configuration/data/GenJetParticles.cff"
+include "RecoJets/Configuration/data/RecoGenJets.cff"
+include "RecoMET/Configuration/data/GenMETParticles.cff"
+include "RecoMET/Configuration/data/RecoGenMET.cff"
+#include "Configuration/JetMET/data/calorimetry-jetmet-gen.cff" 
+#replace genParticleCandidates.src="source" 
 replace genCandidatesForMET.verbose=false
+sequence caloJetMetGen = { 
+    genParticles & 
+    genJetParticles & 
+    recoGenJets & 
+    genMETParticles & 
+    recoGenMET 
+}
 
 # Muon simHit sequence 
 include "FastSimulation/MuonSimHitProducer/data/MuonSimHitProducer.cfi"
