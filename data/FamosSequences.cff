@@ -267,7 +267,6 @@ sequence famosSimulationSequence = {
     offlineBeamSpot &
     famosPileUp &
     famosSimHits &
-    genParticleCandidates &
     MuonSimHits &
     mix 
 }
