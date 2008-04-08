@@ -109,8 +109,9 @@ sequence famosParticleFlowSequence = {
 }
 
 
-# Reco Jets
+# Reco Jets and MET
 include "RecoJets/Configuration/data/RecoJets.cff"
+include "RecoJets/Configuration/data/RecoPFJets.cff"
 include "RecoMET/Configuration/data/RecoMET.cff"
 replace calotoweroptmaker.hbheInput = caloRecHits
 replace calotoweroptmaker.hoInput = caloRecHits
@@ -119,6 +120,9 @@ replace calotoweroptmaker.ecalInputs = { caloRecHits:EcalRecHitsEB, caloRecHits:
 sequence caloJetMet = { 
     recoJets & 
     metreco 
+}
+sequence PFJetMet = { 
+    recoPFJets
 }
 
 # Gen Jets
@@ -323,7 +327,8 @@ sequence famosWithTracksAndEcalClusters = {
 
 sequence famosWithParticleFlow = {
     famosWithTracksAndCaloHits &
-    famosParticleFlowSequence 
+    famosParticleFlowSequence &
+    PFJetMet
 }
 
 sequence famosWithCaloTowers = {
