@@ -23,6 +23,12 @@ include "RecoMuon/DetLayers/data/muonDetLayerGeometry.cfi"
 # The condDB setup
 include "CondCore/DBCommon/data/CondDBSetup.cfi"
 
+es_module hcal_db_producer = HcalDbProducer {
+         untracked vstring dump = {""}
+         untracked string file = ""
+}
+es_source es_hardcode = HcalHardcodeCalibrations {untracked vstring toGet = {"GainWidths", "channelQuality", "ZSThresholds"}}
+
 #Services from the CondDB (DevDB)
 #include "FastSimulation/Configuration/data/GlobalTag_DevDB.cfi" 
 
