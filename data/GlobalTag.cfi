@@ -1,3 +1,4 @@
+include "CondCore/DBCommon/data/CondDBSetup.cfi"
 es_source GlobalTag = PoolDBESSource {
     using CondDBSetup
     string connect = "frontier://FrontierProd/CMS_COND_20X_GLOBALTAG"
