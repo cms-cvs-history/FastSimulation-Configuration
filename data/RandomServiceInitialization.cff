@@ -1,20 +1,52 @@
 # Set random seeds. 
 service =  RandomNumberGeneratorService {
-	# This is to initialize the random engine of the source
-	untracked uint32 sourceSeed = 123456789
-	# This is to initialize the random engines of Famos
-	PSet moduleSeeds =
-	{
-	    untracked uint32 VtxSmeared = 123456789
-	    untracked uint32 famosPileUp = 918273
-	    untracked uint32 famosSimHits = 13579
-	    untracked uint32 siTrackerGaussianSmearingRecHits = 24680
-	    untracked uint32 caloRecHits = 654321
-	    untracked uint32 paramMuons = 54525
-	    untracked uint32 l1ParamMuons = 54525
-	    untracked uint32 MuonSimHits = 97531
-	    untracked uint32 simMuonDTDigis = 67673876
-	    untracked uint32 simMuonCSCDigis = 525432
-	    untracked uint32 simMuonRPCDigis = 524964
-	}
+
+    # To save the status of the last event (useful for crashes)
+    # Just give a name to the file you want the status to be saved
+    # otherwise just put saveFileName = ""
+    untracked string saveFileName = ""
+
+    # To restore the status of the last event, just un-comment the
+    # following line (and comment the saveFileName line!)
+    # untracked string restoreFileName = "RandomEngineState.log"
+
+    # To reproduce events using the RandomEngineStateProducer (source
+    # excluded), comment the sourceSeed definition, and un-comment 
+    # the restoreStateLabel
+    # untracked string restoreStateLabel = "randomEngineStateProducer"
+    
+    # This is to initialize the random engine of the source
+    untracked uint32 sourceSeed = 123456789
+
+    # This is to initialize the random engines of Famos
+    PSet moduleSeeds =
+    {
+	untracked uint32 VtxSmeared = 123456789
+	untracked uint32 famosPileUp = 918273
+	untracked uint32 famosSimHits = 13579
+	untracked uint32 siTrackerGaussianSmearingRecHits = 24680
+	untracked uint32 caloRecHits = 654321
+	untracked uint32 paramMuons = 54525
+	untracked uint32 l1ParamMuons = 54525
+	untracked uint32 MuonSimHits = 97531
+	untracked uint32 simMuonDTDigis = 67673876
+	untracked uint32 simMuonCSCDigis = 525432
+	untracked uint32 simMuonRPCDigis = 524964
     }
+
+    PSet moduleEngines =
+    {
+	untracked string VtxSmeared = "TRandom3"
+	untracked string famosPileUp = "TRandom3"
+	untracked string famosSimHits = "TRandom3"
+	untracked string siTrackerGaussianSmearingRecHits = "TRandom3"
+	untracked string caloRecHits = "TRandom3"
+	untracked string paramMuons = "TRandom3"
+	untracked string l1ParamMuons = "TRandom3"
+	untracked string MuonSimHits = "TRandom3"
+	untracked string simMuonDTDigis = "TRandom3"
+	untracked string simMuonCSCDigis = "TRandom3"
+	untracked string simMuonRPCDigis = "TRandom3"
+    }
+
+}
