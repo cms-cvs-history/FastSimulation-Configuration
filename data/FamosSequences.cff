@@ -148,6 +148,10 @@ sequence caloJetMetGen = {
     recoGenMET 
 }
 
+
+# Muon parametrization
+include "FastSimulation/ParamL3MuonProducer/data/ParamL3Muon.cfi"
+
 # Muon simHit sequence 
 include "FastSimulation/MuonSimHitProducer/data/MuonSimHitProducer.cfi"
 
