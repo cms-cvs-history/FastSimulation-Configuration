@@ -142,6 +142,10 @@ sequence caloJetMetGen = {
     recoGenMET 
 }
 
+
+# Muon parametrization
+include "FastSimulation/ParamL3MuonProducer/data/ParamL3Muon.cfi"
+
 # Muon simHit sequence 
 include "FastSimulation/MuonSimHitProducer/data/MuonSimHitProducer.cfi"
 
@@ -200,10 +204,12 @@ sequence famosMuonIdAndIsolationSequence = {
 }
 
 # Electron reconstruction
+include "FastSimulation/Tracking/data/GlobalMixedSeedProducer.cff"
 include "FastSimulation/EgammaElectronAlgos/data/electronGSPixelSeeds.cfi"
 include "FastSimulation/EgammaElectronAlgos/data/electronGSGsfTrackCandidates.cff"
 include "RecoEgamma/EgammaElectronProducers/data/pixelMatchGsfElectrons.cff"
 include "TrackingTools/GsfTracking/data/GsfElectronFit.cff"
+replace electronGSPixelSeeds.SeedConfiguration.initialSeeds = globalMixedSeeds:GlobalMixed
 module pixelMatchGsfFit = GsfGlobalElectronTest from "TrackingTools/GsfTracking/data/GsfElectronFit.cfi"
 replace pixelMatchGsfFit.src = "electronGSGsfTrackCandidates"
 replace pixelMatchGsfFit.TTRHBuilder = "WithoutRefit"
@@ -217,6 +223,7 @@ replace pixelMatchGsfElectrons.hcalRecHits = caloRecHits
 replace pixelMatchGsfElectrons.barrelSuperClusters = correctedHybridSuperClusters:electronGSPixelSeeds
 replace pixelMatchGsfElectrons.endcapSuperClusters = correctedEndcapSuperClustersWithPreshower:electronGSPixelSeeds
 sequence famosElectronSequence = {
+    globalMixedSeeds &
     electronGSPixelSeeds &
     electronGSGsfTrackCandidates &
     pixelMatchGsfFit &
