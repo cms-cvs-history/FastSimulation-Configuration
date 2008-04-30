@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Usage: ./getGEN-HLTcff.py <Version from ConfDB> <Name of cff file> <process Name>
+# Usage: ./getFastSimHLTcff.py <Version from ConfDB> <Name of cff file> <optional L1 Menu> <optional subset of paths>
 
 import sys
 import os
@@ -9,24 +9,33 @@ import getopt
 import fileinput
 
 def usage():
-    print "Usage: ./getGEN-HLTcff.py <Version from ConfDB> <Name of cff> <optional L1 Menu>" 
+    print "Usage: ./getFastSimHLTcff.py <Version from ConfDB> <Name of cff> <optional L1 Menu> <optional subset of paths>"
+    print "       Default L1 Menu: L1Menu2008_2E30"
+    print "       Define subset of paths as comma-separated list: a,b,c (Default is to run all paths)" 
     sys.exit(1)
 
 argc = len(sys.argv)
 
+usePaths = "All"
+L1Menu   = "L1Menu2008_2E30"
+
 if argc == 3:
-    dbName = sys.argv[1]
+    dbName  = sys.argv[1]
     cffName = sys.argv[2]
-    L1Menu = "L1Menu2008_2E30"
 elif argc == 4:
-    dbName = sys.argv[1]
+    dbName  = sys.argv[1]
     cffName = sys.argv[2]
-    L1Menu = sys.argv[3]
+    L1Menu  = sys.argv[3]
+elif argc == 5:
+    dbName   = sys.argv[1]
+    cffName  = sys.argv[2]
+    L1Menu   = sys.argv[3]
+    usePaths = sys.argv[4]
 else:
     usage()
 
 if os.path.exists(cffName):
-    print cffName, "already exists"
+    print cffName, "already exists.  WARNING: No new file created!"
 else:
     essources = "--essources "
     #--- Recall that data is not unpacked by FastSim...can remove the cabling
@@ -335,7 +344,11 @@ else:
     modules += "-hltMuonDTDigis,"
     modules += "-hltMuonRPCDigis,"
     modules += "-hltFilterTriggerType,"
-    modules += "-hltGtDigis"
+    modules += "-hltGtDigis,"
+    #--- The following modules must always be present to allow for individual paths to be run
+    modules += "hltCsc2DRecHits,"
+    modules += "hltDt1DRecHits,"
+    modules += "hltRpcRecHits"
 
     #--- Some notes about removed sequences ---#
     #--- HLTL1[Non]IsoEgammaRegionalRecoTrackerSequence defined in FastSimulation/EgammaElectronAlgos/data/l1[Non]IsoEgammaRegionalRecoTracker.cff
@@ -343,7 +356,6 @@ else:
     #--- HLTL1[Non]IsoLargeWindowElectronsRegionalRecoTrackerSequence defined in FastSimulation/EgammaElectronAlgos/data/l1[Non]IsoLargeWindowElectronsRegionalRecoTracker.cff
     #--- HLTPixelMatchElectronL1[Non]IsoSequence defined in FastSimulation/EgammaElectronAlgos/data/pixelMatchElectronL1[Non]IsoSequenceForHLT.cff
     #--- HLTPixelMatchElectronL1[Non]IsoLargeWindow[Tracking]Sequence defined in FastSimulation/EgammaElectronAlgos/data/pixelMatchElectronL1[Non]IsoLargeWindowSequenceForHLT.cff
-    #--- HLTL3muonisorecoSequence defined in FastSimulation/HighLevelTrigger/data/Muon/HLTFastRecoForMuon.cff
     #--- HLTDoLocal[Pixel/Strip]Sequence defined in FastSimulation/HighLevelTrigger/data/common/HLTSetup.cff
     #--- HLTrecopixelvertexingSequence defined in FastSimulation/Tracking/data/PixelVerticesProducer.cff
     #--- HLTL3displacedMumurecoSequence defined in FastSimulation/HighLevelTrigger/data/btau/L3ForDisplacedMumuTrigger.cff
@@ -390,6 +402,10 @@ else:
         paths += "-HLTXElectron3Jet30,"
     paths += "-HLTEndpath1"
 
+    #--- Special case: Running a user-specified set of paths ---#
+    if usePaths != "All":
+        paths = "--paths " + usePaths
+
     services = "--services "
     services += "-PrescaleService,"
     services += "-MessageLogger"
@@ -398,16 +414,21 @@ else:
     psets += "-options,"
     psets += "-maxEvents"
 
+    #--- Adapt for python ---#
+    subStart = cffName.find(".")
+    subEnd = len(cffName)
+    cffType = cffName[subStart:subEnd]
+    baseCommand = "edmConfigFromDB --cff --configName " + dbName
+    if cffType == ".py":
+        baseCommand += " --format Python"
+
     # myGetCff = "edmConfigFromDB --cff --configName " + dbName + " " + essources + " " + esmodules + " " + services + " " + psets + " > " + cffName
-    myGetCff = "edmConfigFromDB --cff --configName " + dbName + " " + essources + " " + esmodules + " " + blocks + " " + sequences + " " + modules + " " + paths + " " + services + " " + psets + " > " + cffName
+    myGetCff = baseCommand + " " + essources + " " + esmodules + " " + blocks + " " + sequences + " " + modules + " " + paths + " " + services + " " + psets + " > " + cffName
     # myGetCff = "edmConfigFromDB --cff --configName " + dbName + " " + essources + " " + esmodules + " " + blocks + " " + sequences + " " + paths + " " + services + " " + psets + " > " + cffName
     os.system(myGetCff)
 
     # myReplaceTrigResults = "replace TriggerResults::HLT " + process + " -- " + cffName
     # os.system(myReplaceTrigResults)
-
-    myBits = "wc -l " + cffName
-    os.system(myBits)
 
     # Make replace statements at the beginning of the cff
     mName = "None"
