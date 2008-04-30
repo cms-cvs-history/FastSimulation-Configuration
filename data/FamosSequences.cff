@@ -62,6 +62,16 @@ replace fixedMatrixPreshowerClusterShape.preshRecHitProducer = caloRecHits:EcalR
 replace fixedMatrixSuperClustersWithPreshower.preshRecHitProducer = caloRecHits:EcalRecHitsES
 replace correctedFixedMatrixSuperClustersWithPreshower.recHitProducer = caloRecHits:EcalRecHitsEE
 
+# Calo Towers
+include "RecoJets/Configuration/data/CaloTowersRec.cff" 
+replace towerMaker.ecalInputs = { 
+    "caloRecHits:EcalRecHitsEB", 
+    "caloRecHits:EcalRecHitsEE" 
+}
+replace towerMaker.hbheInput = caloRecHits
+replace towerMaker.hfInput = caloRecHits
+replace towerMaker.hoInput = caloRecHits
+
 # Particle Flow
 include "RecoParticleFlow/PFClusterProducer/data/towerMakerPF.cff"
 include "RecoParticleFlow/PFClusterProducer/data/particleFlowCluster.cff"
