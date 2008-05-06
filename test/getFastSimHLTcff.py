@@ -407,6 +407,9 @@ else:
         paths = "--paths " + usePaths
 
     services = "--services "
+    #--- Begin services removed in 21X ---#
+    services += "-UpdaterService,"
+    #--- End services removed in 21X ---#
     services += "-PrescaleService,"
     services += "-MessageLogger"
 
