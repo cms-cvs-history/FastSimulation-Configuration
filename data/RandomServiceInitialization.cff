@@ -16,37 +16,65 @@ service =  RandomNumberGeneratorService {
     # untracked string restoreStateLabel = "randomEngineStateProducer"
     
     # This is to initialize the random engine of the source
-    untracked uint32 sourceSeed = 123456789
-
-    # This is to initialize the random engines of Famos
-    PSet moduleSeeds =
-    {
-	untracked uint32 VtxSmeared = 123456789
-	untracked uint32 famosPileUp = 918273
-	untracked uint32 famosSimHits = 13579
-	untracked uint32 siTrackerGaussianSmearingRecHits = 24680
-	untracked uint32 caloRecHits = 654321
-	untracked uint32 paramMuons = 54525
-	untracked uint32 l1ParamMuons = 54525
-	untracked uint32 MuonSimHits = 97531
-	untracked uint32 simMuonDTDigis = 67673876
-	untracked uint32 simMuonCSCDigis = 525432
-	untracked uint32 simMuonRPCDigis = 524964
+    PSet theSource = { 
+	untracked string engineName = "TRandom3"
+	untracked uint32 initialSeed = 123456789
     }
 
-    PSet moduleEngines =
-    {
-	untracked string VtxSmeared = "TRandom3"
-	untracked string famosPileUp = "TRandom3"
-	untracked string famosSimHits = "TRandom3"
-	untracked string siTrackerGaussianSmearingRecHits = "TRandom3"
-	untracked string caloRecHits = "TRandom3"
-	untracked string paramMuons = "TRandom3"
-	untracked string l1ParamMuons = "TRandom3"
-	untracked string MuonSimHits = "TRandom3"
-	untracked string simMuonDTDigis = "TRandom3"
-	untracked string simMuonCSCDigis = "TRandom3"
-	untracked string simMuonRPCDigis = "TRandom3"
+    # This is to initialize the random engines used for  Famos
+    PSet VtxSmeared = { 
+	untracked string engineName = "TRandom3"
+	untracked uint32 initialSeed = 123456789
+    }
+
+    PSet famosPileUp = { 
+	untracked string engineName = "TRandom3"
+	untracked uint32 initialSeed = 918273
+    }
+
+    PSet famosSimHits = { 
+	untracked string engineName = "TRandom3"
+	untracked uint32 initialSeed = 13579
+    }
+
+    PSet siTrackerGaussianSmearingRecHits = { 
+	untracked string engineName = "TRandom3"
+	untracked uint32 initialSeed = 24680
+    }
+
+    PSet caloRecHits = { 
+	untracked string engineName = "TRandom3"
+	untracked uint32 initialSeed = 654321
+    }
+
+    PSet paramMuons = { 
+	untracked string engineName = "TRandom3"
+	untracked uint32 initialSeed = 54525
+    }
+
+    PSet l1ParamMuons = { 
+	untracked string engineName = "TRandom3"
+	untracked uint32 initialSeed = 6453209
+    }
+
+    PSet MuonSimHits = { 
+	untracked string engineName = "TRandom3"
+	untracked uint32 initialSeed = 987346
+    }
+
+    PSet simMuonDTDigis = { 
+	untracked string engineName = "TRandom3"
+	untracked uint32 initialSeed = 67673876
+    }
+
+    PSet simMuonCSCDigis = { 
+	untracked string engineName = "TRandom3"
+	untracked uint32 initialSeed = 525432
+    }
+
+    PSet simMuonRPCDigis = { 
+	untracked string engineName = "TRandom3"
+	untracked uint32 initialSeed = 524964
     }
 
 }
