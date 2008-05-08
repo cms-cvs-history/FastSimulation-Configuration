@@ -97,7 +97,7 @@ replace elecpreid.NHitsInSeed =1
 module fsGsfElCandidates = trackCandidateProducer from
 "FastSimulation/Tracking/data/TrackCandidateProducer.cfi"
 replace fsGsfElCandidates.SeedProducer = elecpreid:SeedsForGsf
-replace fsGsfElCandidates.TrackProducer = None:None
+replace fsGsfElCandidates.TrackProducers = { }
 replace fsGsfElCandidates.MinNumberOfCrossedLayers = 5
 
 module fsgsfPFtracks = GsfGlobalElectronTest from "TrackingTools/GsfTracking/data/GsfElectronFit.cfi"
@@ -444,24 +444,6 @@ sequence famosWithPFTauTagging = {
 }
 
 
-sequence famosWithEverything = {
-    famosWithCaloTowersAndParticleFlow&
-    vertexreco &
-    ecalClusteringSequence&
-    famosElectronSequence&
-    famosPhotonSequence &
-    famosMuonSequence &
-    famosMuonIdAndIsolationSequence &
-    caloJetMetGen &
-    caloJetMet &
-    paramMuons &
-    muIsolation_ParamGlobalMuons &
-    ic5JetTracksAssociatorAtVertex &
-    famosBTaggingSequence &
-    famosTauTaggingSequence &
-    famosPFTauTaggingSequence
-}
-
 # The simulation sequence
 sequence simulationWithFamos = { 
     famosSimulationSequence &
@@ -483,12 +465,18 @@ sequence reconstructionWithFamos = {
     famosParticleFlowSequence &
     caloJetMetGen &
     caloJetMet &
+    PFJetMet &
     paramMuons &
     muIsolation_ParamGlobalMuons &
     ic5JetTracksAssociatorAtVertex &
     famosBTaggingSequence &
     famosTauTaggingSequence &
     famosPFTauTaggingSequence
+}
+
+sequence famosWithEverything = {
+    simulationWithFamos & 
+    reconstructionWithFamos
 }
 
 
