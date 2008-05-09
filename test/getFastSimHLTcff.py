@@ -452,7 +452,7 @@ else:
             bName = line[subStart:subEnd]
 
         if line.find("sequence HLTL3PixelIsolFilterSequence") == 0:
-            line = line.replace('hltPixelTracks','hltPixelGSTracking')
+            line = line.replace('hltPixelTracks','hltPixelTracking')
             print line[:-1]
         elif line.find("GMTReadoutCollection") > 0:
             if mName == "hltL2MuonSeeds":
@@ -497,7 +497,7 @@ else:
                 print "// L1GtReadoutRecordTag: hltGtDigis recast as gtDigis"
                 print "// hltMuon[CSC/DT/RPC]Digis changed to muon[CSC/DT/RPC]Digis"
                 print "// Replace hltOfflineBeamSpot with offlineBeamSpot"
-                print "// AlCaIsoTrack needs HLTpixelGSTracking instead of pixelTracks"
+                print "// AlCaIsoTrack needs HLTpixelTracking instead of pixelTracks"
                 print "// Some HLT modules were recast as FastSim sequences: "
                 print "//   - hltL3TrackCandidateFromL2, see FastSimulation/HighLevelTrigger/data/Muon/HLTFastRecoForMuon.cff"
                 print "//   - hltCkfTrackCandidatesL3SingleTau[MET][Relaxed], see FastSimulation/HighLevelTrigger/data/btau/HLTFastRecoForTau.cff"
@@ -515,11 +515,11 @@ else:
             if line.find("hltOfflineBeamSpot") > 0:
                 line = line.replace('hltOfflineBeamSpot','offlineBeamSpot') 
             if line.find("hltMuonCSCDigis") > 0:
-                line = line.replace('hltMuonCSCDigis','muonCSCDigis') 
+                line = line.replace('hltMuonCSCDigis','simMuonCSCDigis') 
             if line.find("hltMuonDTDigis") > 0:
-                line = line.replace('hltMuonDTDigis','muonDTDigis') 
+                line = line.replace('hltMuonDTDigis','simMuonDTDigis') 
             if line.find("hltMuonRPCDigis") > 0:
-                line = line.replace('hltMuonRPCDigis','muonRPCDigis') 
+                line = line.replace('hltMuonRPCDigis','simMuonRPCDigis') 
             if line.find("hltL1extraParticles") > 0:
                 line = line.replace('hltL1extraParticles','l1extraParticles') 
             if line.find("QuadJet30") > 0:
