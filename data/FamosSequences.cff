@@ -246,8 +246,8 @@ sequence famosElectronSequence = {
 
 # Photon reconstruction
 include "RecoEgamma/EgammaPhotonProducers/data/photonSequence.cff"
-replace photons.barrelHitProducer="caloRecHits"
-replace photons.endcapHitProducer="caloRecHits"
+replace photons.barrelEcalHits=caloRecHits:EcalRecHitsEB
+replace photons.endcapEcalHits=caloRecHits:EcalRecHitsEE
 replace photons.hbheModule="caloRecHits"
 replace photons.hbheInstance = ""
 replace photons.pixelSeedProducer="electronGSPixelSeeds"
