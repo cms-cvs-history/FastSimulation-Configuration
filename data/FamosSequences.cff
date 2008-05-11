@@ -14,9 +14,7 @@ include "FastSimulation/PileUpProducer/data/PileUpProducer.cff"
 include "FastSimulation/EventProducer/data/FamosSimHits.cff"
 
 # Mixing module 
-include "SimGeneral/MixingModule/data/mixNoPU.cfi"
-#include "SimGeneral/MixingModule/data/mixLowLumPU.cfi"
-#include "SimGeneral/MixingModule/data/mixHighPU.cfi"
+include "FastSimulation/Configuration/data/mixNoPU.cfi"
 
 # Gaussian Smearing RecHit producer
 include "FastSimulation/TrackingRecHitProducer/data/SiTrackerGaussianSmearingRecHitConverter.cfi"
