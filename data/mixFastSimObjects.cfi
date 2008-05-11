@@ -1,0 +1,29 @@
+block mixSimHits={ string type="PSimHit"
+    vstring subdets={"MuonCSCHits","MuonDTHits","MuonRPCHits","TrackerHits"}
+    VInputTag input ={"MuonSimHits:MuonCSCHits","MuonSimHits:MuonDTHits",
+	              "MuonSimHits:MuonRPCHits","famosSimHits:TrackerHits"}
+}
+
+block mixCaloHits={ string type="PCaloHit"
+    vstring subdets={"EcalHitsEB","EcalHitsEE","EcalHitsES","HcalHits"}
+    VInputTag input ={"famosSimHits:EcalHitsEB","famosSimHits:EcalHitsEE","famosSimHits:EcalHitsES",
+                      "famosSimHits:HcalHits"}
+}
+
+block mixSimTracks= { string type="SimTrack"
+    VInputTag input ={"famosSimHits"}
+}
+
+block mixMuonSimTracks= { string type="SimTrack"
+    VInputTag input ={"famosSimHits:MuonSimTracks"}
+}
+
+block mixSimVertices= { string type="SimVertex"
+    VInputTag input ={"famosSimHits"}
+}
+
+block mixHepMCProducts= { string type="HepMCProduct"
+    VInputTag input ={"famosSimHits"}
+}
+
+
