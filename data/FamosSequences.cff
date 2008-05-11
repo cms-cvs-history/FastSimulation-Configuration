@@ -320,8 +320,7 @@ sequence famosWithTracksAndMuons = {
     iterativeTracking &
     famosMuonSequence &
     caloRecHits &
-    towerMaker &
-    caloTowers &
+    caloTowersRec &
     famosMuonIdAndIsolationSequence
 }
 
@@ -353,8 +352,7 @@ sequence famosWithParticleFlow = {
 
 sequence famosWithCaloTowers = {
     famosWithCaloHits&
-    towerMaker&
-    caloTowers
+    caloTowersRec
 }
 
 sequence famosWithJets = {
@@ -365,8 +363,7 @@ sequence famosWithJets = {
 
 sequence famosWithTracksAndCaloTowers = {
     famosWithTracksAndCaloHits&
-    towerMaker&
-    caloTowers
+    caloTowersRec
 }
 
 sequence famosWithTracksAndJets ={
@@ -377,8 +374,7 @@ sequence famosWithTracksAndJets ={
 
 sequence famosWithCaloTowersAndParticleFlow = {
     famosWithParticleFlow&
-    towerMaker&
-    caloTowers
+    caloTowersRec
 }
 
 sequence famosWithMuons = {
@@ -453,8 +449,7 @@ sequence simulationWithFamos = {
 sequence reconstructionWithFamos = {
     iterativeTracking &
     vertexreco &
-    towerMaker &
-    caloTowers &
+    caloTowersRec &
     ecalClusteringSequence &
     famosElectronSequence &
     famosPhotonSequence &
