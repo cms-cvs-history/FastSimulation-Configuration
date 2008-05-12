@@ -160,6 +160,9 @@ include "FastSimulation/MuonSimHitProducer/data/MuonSimHitProducer.cfi"
 # Muon Digi sequence
 include "SimMuon/Configuration/data/SimMuon.cff"
 replace simMuonCSCDigis.strips.doCorrelatedNoise = false // Saves a little bit of time
+replace simMuonCSCDigis.InputCollection = "MuonSimHitsMuonCSCHits"
+replace simMuonDTDigis.InputCollection = "MuonSimHitsMuonDTHits"
+replace simMuonRPCDigis.InputCollection = "MuonSimHitsMuonRPCHits"
 
 # Muon RecHit sequence
 include "RecoLocalMuon/Configuration/data/RecoLocalMuon.cff"
