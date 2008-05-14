@@ -216,7 +216,8 @@ else:
     blocks += "hltL1NonIsoStartUpElectronPixelSeeds::SeedConfiguration,"
     blocks += "hltL1NonIsoElectronPixelSeeds::SeedConfiguration,"
     blocks += "hltL1IsoStartUpElectronPixelSeeds::SeedConfiguration,"
-    blocks += "hltL1IsoElectronPixelSeeds::SeedConfiguration"
+    blocks += "hltL1IsoElectronPixelSeeds::SeedConfiguration,"
+    blocks += "hltL3TrajectorySeed::MuonTrackingRegionBuilder"
 
 
     #--- Some notes about removed/redefined modules ---#
@@ -400,7 +401,14 @@ else:
         paths += "-CandHLTCSCBeamHaloRing2or3,"
         paths += "-HLT4jet30,"
         paths += "-HLTXElectron3Jet30,"
+
+#    if L1Menu == "L1Menu2008_2E30":
+#        paths += "-AlCaIsoTrack,"
+#        paths += "-AlCaEcalPi0,"
+
+
     paths += "-HLTEndpath1"
+
 
     #--- Special case: Running a user-specified set of paths ---#
     if usePaths != "All":
@@ -475,6 +483,9 @@ else:
             line = line.replace('hltGtDigis','gtDigis') 
             print line[:-1] 
         elif line.find("PSet SeedConfiguration") > 0:
+            if bName == "None":
+                print line[:-1]
+        elif line.find("PSet MuonTrackingRegionBuilder") > 0:
             if bName == "None":
                 print line[:-1]
         elif line.find("}") > 0:
