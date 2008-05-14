@@ -167,8 +167,9 @@ replace simMuonRPCDigis.InputCollection = "MuonSimHitsMuonRPCHits"
 # Muon RecHit sequence
 include "RecoLocalMuon/Configuration/data/RecoLocalMuon.cff"
 #replace  DTParametrizedDriftAlgo_CSA07.recAlgoConfig.tTrigModeConfig.doT0Correction = false
-replace csc2DRecHits.CSCStripDigiProducer = "simMuonCSCDigis"
-replace csc2DRecHits.CSCWireDigiProducer = "simMuonCSCDigis"
+replace csc2DRecHits.stripDigiTag = simMuonCSCDigis:MuonCSCStripDigi 
+replace csc2DRecHits.wireDigiTag = simMuonCSCDigis:MuonCSCWireDigi
+
 replace rpcRecHits.rpcDigiLabel = simMuonRPCDigis
 replace dt1DRecHits.dtDigiLabel = simMuonDTDigis
 
