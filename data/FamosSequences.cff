@@ -42,7 +42,7 @@ include "FastSimulation/Tracking/data/IterativeTracking.cff"
 # Calo RecHits producer (with no HCAL miscalibration by default)
 include "FastSimulation/CaloRecHitsProducer/data/CaloRecHits.cff"	
 
-# ECAL clusters (this will generate harmless warnings...)
+# ECAL clusters
 include "RecoEcal/EgammaClusterProducers/data/ecalClusteringSequence.cff"
 replace islandBasicClusters.barrelHitProducer="caloRecHits"
 replace islandBasicClusters.endcapHitProducer="caloRecHits"
@@ -54,11 +54,11 @@ replace correctedEndcapSuperClustersWithPreshower.preshRecHitProducer = caloRecH
 replace preshowerClusterShape.preshRecHitProducer = caloRecHits:EcalRecHitsES
 replace dynamicHybridSuperClusters.ecalhitproducer = "caloRecHits"
 replace correctedDynamicHybridSuperClusters.recHitProducer = caloRecHits:EcalRecHitsEB
-replace fixedMatrixBasicClusters.barrelHitProducer = "caloRecHits"
-replace fixedMatrixBasicClusters.endcapHitProducer = "caloRecHits"
-replace fixedMatrixPreshowerClusterShape.preshRecHitProducer = caloRecHits:EcalRecHitsES
-replace fixedMatrixSuperClustersWithPreshower.preshRecHitProducer = caloRecHits:EcalRecHitsES
-replace correctedFixedMatrixSuperClustersWithPreshower.recHitProducer = caloRecHits:EcalRecHitsEE
+replace multi5x5BasicClusters.barrelHitProducer = "caloRecHits"
+replace multi5x5BasicClusters.endcapHitProducer = "caloRecHits"
+replace multi5x5PreshowerClusterShape.preshRecHitProducer = caloRecHits:EcalRecHitsES
+replace multi5x5SuperClustersWithPreshower.preshRecHitProducer = caloRecHits:EcalRecHitsES
+replace correctedMulti5x5SuperClustersWithPreshower.recHitProducer = caloRecHits:EcalRecHitsEE
 
 # Calo Towers
 include "RecoJets/Configuration/data/CaloTowersRec.cff" 
