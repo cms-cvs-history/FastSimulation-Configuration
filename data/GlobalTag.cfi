@@ -1,8 +1,8 @@
 es_source GlobalTag = PoolDBESSource {
     using CondDBSetup
     string connect = "frontier://FrontierProd/CMS_COND_20X_GLOBALTAG"
-    untracked string globaltag = "IDEAL::All"
+    untracked string globaltag = "IDEAL_V2::All"
     untracked string BlobStreamerName = "TBufferBlobStreamingService"
 }
 
-# Other values for globaltag are "STARTUP::All", "1PB::All", "10PB::All"
+    // Values for globaltag are "STARTUP_V2::All", "1PB_V2::All", "10PB_V2::All", "IDEAL_V2::All"
