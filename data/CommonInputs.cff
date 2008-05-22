@@ -30,10 +30,10 @@ es_module hcal_db_producer = HcalDbProducer {
 es_source es_hardcode = HcalHardcodeCalibrations {untracked vstring toGet = {"GainWidths", "channelQuality", "ZSThresholds"}}
 
 #Services from the CondDB (DevDB)
-#include "FastSimulation/Configuration/data/GlobalTag_DevDB.cfi" 
+include "FastSimulation/Configuration/data/GlobalTag_DevDB.cfi" 
 
 #Services from the CondDB (Int)
-include "FastSimulation/Configuration/data/GlobalTag_IntDB.cfi" 
+#include "FastSimulation/Configuration/data/GlobalTag_IntDB.cfi" 
 
 #Services from the CondDB (Pro)
 #include "FastSimulation/Configuration/data/GlobalTag.cfi" 
