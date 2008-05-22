@@ -33,7 +33,7 @@ es_source es_hardcode = HcalHardcodeCalibrations {untracked vstring toGet = {"Ga
 #include "FastSimulation/Configuration/data/GlobalTag_DevDB.cfi" 
 
 #Services from the CondDB (Int)
-#include "FastSimulation/Configuration/data/GlobalTag_IntDB.cfi" 
+include "FastSimulation/Configuration/data/GlobalTag_IntDB.cfi" 
 
 #Services from the CondDB (Pro)
-include "FastSimulation/Configuration/data/GlobalTag.cfi" 
+#include "FastSimulation/Configuration/data/GlobalTag.cfi" 
