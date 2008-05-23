@@ -347,7 +347,10 @@ else:
     modules += "-hltMuonRPCDigis,"
     modules += "-hltFilterTriggerType,"
     modules += "-hltGtDigis,"
-    #--- The following modules must always be present to allow for individual paths to be run
+    modules += "-hltSiStripRegFED,"
+    modules += "-hltEcalRegFED,"
+    modules += "-hltSubdetFED,"
+#--- The following modules must always be present to allow for individual paths to be run
     modules += "hltCsc2DRecHits,"
     modules += "hltDt1DRecHits,"
     modules += "hltRpcRecHits"
