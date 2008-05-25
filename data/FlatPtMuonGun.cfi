@@ -13,5 +13,6 @@ source = FlatRandomPtGunSource
 	untracked double MinPt   = 10.
 	untracked double MaxPt   = 10.
     }      
+    untracked bool AddAntiParticle = false # back-to-back particles
     untracked int32 Verbosity = 0 # for printouts, set it to 1 (or greater)   
 }	

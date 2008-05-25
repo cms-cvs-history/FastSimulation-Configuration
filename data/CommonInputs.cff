@@ -20,8 +20,8 @@ include "Geometry/CaloEventSetup/data/EcalTrigTowerConstituents.cfi"
 # The muon geometry
 include "RecoMuon/DetLayers/data/muonDetLayerGeometry.cfi"
 
-# The condDB setup
-include "CondCore/DBCommon/data/CondDBSetup.cfi"
+# The condDB setup (the global tag refers to DevDB, IntDB or ProDB whenever needed)
+include "Configuration/StandardSequences/data/FrontierConditions_GlobalTag.cfi"
 
 es_module hcal_db_producer = HcalDbProducer {
          untracked vstring dump = {""}
@@ -29,11 +29,3 @@ es_module hcal_db_producer = HcalDbProducer {
 }
 es_source es_hardcode = HcalHardcodeCalibrations {untracked vstring toGet = {"GainWidths", "channelQuality", "ZSThresholds"}}
 
-#Services from the CondDB (DevDB)
-include "FastSimulation/Configuration/data/GlobalTag_DevDB.cfi" 
-
-#Services from the CondDB (Int)
-#include "FastSimulation/Configuration/data/GlobalTag_IntDB.cfi" 
-
-#Services from the CondDB (Pro)
-#include "FastSimulation/Configuration/data/GlobalTag.cfi" 

@@ -2,8 +2,8 @@
 
 # clean
 rm $CMSSW_BASE/src/FastSimulation/Configuration/test/HLT.cff
-rm $CMSSW_BASE/src/FastSimulation/Configuration/test/AODIntegrationTestWithHLT.root
 rm $CMSSW_BASE/src/FastSimulation/Configuration/test/IntegrationTestWithHLT.log
+rm AODIntegrationTestWithHLT.root
 
 # create HLT.cff :  For 2_1_0, use /dev/CMSSW_2_1_0_pre3/HLT/V33
 # For the adventurous user, you may specify the L1 Menu and a select number of HLT paths
