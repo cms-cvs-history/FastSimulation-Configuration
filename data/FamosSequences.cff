@@ -262,7 +262,7 @@ replace ic5PFJetTracksAssociatorAtVertex.tracks = generalTracks
 include "RecoVertex/Configuration/data/RecoVertex.cff"
 include "RecoVertex/BeamSpotProducer/data/BeamSpot.cff"
 include "RecoBTag/Configuration/data/RecoBTag.cff"
-replace offlinePrimaryVerticesFromCTFTracks.TrackLabel = "generalTracks"
+replace offlinePrimaryVerticesWithBS.TrackLabel = "generalTracks"
 replace btagSoftElectrons.HBHERecHitTag = caloRecHits
 replace btagSoftElectrons.TrackAssociatorParameters.EBRecHitCollectionLabel   = caloRecHits:EcalRecHitsEB
 replace btagSoftElectrons.TrackAssociatorParameters.EERecHitCollectionLabel   = caloRecHits:EcalRecHitsEE
@@ -273,7 +273,7 @@ sequence famosBTaggingSequence = { btagging }
 #Tau tagging
 include "RecoTauTag/Configuration/data/RecoTauTag.cff"
 #replace combinedTauTag.PVSrc = "offlinePrimaryVerticesFromCTFTracks"
-replace caloRecoTauProducer.PVProducer = "offlinePrimaryVerticesFromCTFTracks"
+#replace caloRecoTauProducer.PVProducer = "offlinePrimaryVerticesFromCTFTracks"
 replace caloRecoTauTagInfoProducer.EBRecHitsSource = caloRecHits:EcalRecHitsEB
 replace caloRecoTauTagInfoProducer.EERecHitsSource = caloRecHits:EcalRecHitsEE
 
@@ -281,7 +281,7 @@ sequence famosTauTaggingSequence = {
     tautagging
 }
 include "RecoTauTag/Configuration/data/RecoPFTauTag.cff"
-replace pfRecoTauProducer.PVProducer = "offlinePrimaryVerticesFromCTFTracks"
+#replace pfRecoTauProducer.PVProducer = "offlinePrimaryVerticesFromCTFTracks"
 
 sequence famosPFTauTaggingSequence = {
 PFTau
