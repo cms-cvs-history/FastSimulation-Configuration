@@ -16,6 +16,7 @@ include "FastSimulation/ParticlePropagator/data/MagneticFieldMapESProducer.cfi"
 include "Geometry/CaloEventSetup/data/CaloGeometry.cff"
 include "Geometry/CaloEventSetup/data/CaloTopology.cfi"		
 include "Geometry/CaloEventSetup/data/EcalTrigTowerConstituents.cfi"
+include "Geometry/EcalMapping/data/EcalMappingRecord.cfi"
 
 # The muon geometry
 include "RecoMuon/DetLayers/data/muonDetLayerGeometry.cfi"
