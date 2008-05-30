@@ -341,7 +341,7 @@ sequence famosWithCaloHits = {
 
 sequence famosWithEcalClusters = { 
     famosWithCaloHits &
-    ecalClusteringSequence
+    ecalClusters
 }	
 
 sequence famosWithTracksAndCaloHits = { 
@@ -351,7 +351,7 @@ sequence famosWithTracksAndCaloHits = {
 
 sequence famosWithTracksAndEcalClusters = { 
     famosWithTracksAndCaloHits &
-    ecalClusteringSequence
+    ecalClusters
 }
 
 sequence famosWithParticleFlow = {
