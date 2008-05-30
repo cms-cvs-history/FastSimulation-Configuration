@@ -358,6 +358,7 @@ else:
     modules += "-hltSiStripRegFED,"
     modules += "-hltEcalRegFED,"
     modules += "-hltSubdetFED,"
+    modules += "-hltL1gtTrigReport,"
 #--- The following modules must always be present to allow for individual paths to be run
     modules += "hltCsc2DRecHits,"
     modules += "hltDt1DRecHits,"
@@ -403,6 +404,7 @@ else:
     #--- CandHLTCSCBeamHaloOverlapRing2 removed because of L1_SingleMuBeamHalo (not found in L1Menu2007)
     #--- CandHLTCSCBeamHaloRing2or3 removed because of L1_SingleMuBeamHalo (not found in L1Menu2007)
     paths = "--paths "
+    
     if L1Menu == "L1Menu2007":
         paths += "-HLT1MuonL1Open,"
         paths += "-HLTMinBiasHcal,"
@@ -419,7 +421,7 @@ else:
 #        paths += "-AlCaEcalPi0,"
 
 
-    paths += "-HLTEndpath1"
+    paths += "-DummyPath"
 
 
     #--- Special case: Running a user-specified set of paths ---#

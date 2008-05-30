@@ -45,7 +45,6 @@ include "FastSimulation/CaloRecHitsProducer/data/CaloRecHits.cff"
 # ECAL clusters
 
 include "RecoEcal/Configuration/data/RecoEcal.cff"
-#include "RecoEcal/EgammaClusterProducers/data/ecalClusteringSequence.cff"
 replace islandBasicClusters.barrelHitProducer="caloRecHits"
 replace islandBasicClusters.endcapHitProducer="caloRecHits"
 replace hybridSuperClusters.ecalhitproducer="caloRecHits"
@@ -54,8 +53,6 @@ replace correctedIslandBarrelSuperClusters.recHitProducer=caloRecHits:EcalRecHit
 replace correctedIslandEndcapSuperClusters.recHitProducer=caloRecHits:EcalRecHitsEE
 replace correctedEndcapSuperClustersWithPreshower.preshRecHitProducer = caloRecHits:EcalRecHitsES
 replace preshowerClusterShape.preshRecHitProducer = caloRecHits:EcalRecHitsES
-#replace dynamicHybridSuperClusters.ecalhitproducer = "caloRecHits"
-#replace correctedDynamicHybridSuperClusters.recHitProducer = caloRecHits:EcalRecHitsEB
 replace reducedEcalRecHitsEB.recHitsLabel = caloRecHits:EcalRecHitsEB
 replace reducedEcalRecHitsEE.recHitsLabel = caloRecHits:EcalRecHitsEE
 replace interestingEcalDetIdEB.recHitsLabel = caloRecHits:EcalRecHitsEB
