@@ -399,21 +399,21 @@ sequence famosWithMuonsAndIsolation = {
 sequence famosWithElectrons = {
     famosWithTrackerHits&
     caloRecHits&
-    ecalClusteringSequence&
+    ecalClusters&
     famosElectronSequence
 }
 
 sequence famosWithPhotons = {
     famosWithTrackerHits&
     caloRecHits&
-    ecalClusteringSequence&
+    ecalClusters&
     famosPhotonSequence
 }
 
 sequence famosWithElectronsAndPhotons = {
     famosWithTrackerHits&
     caloRecHits&
-    ecalClusteringSequence&
+    ecalClusters&
     famosElectronSequence&
     famosPhotonSequence
 }
@@ -424,7 +424,7 @@ sequence famosWithBTagging = {
     vertexreco&
     iterativeCone5CaloJets&
     ic5JetTracksAssociatorAtVertex&
-    ecalClusteringSequence&
+    ecalClusters&
     famosMuonSequence &
     famosBTaggingSequence
 }
@@ -434,7 +434,7 @@ sequence famosWithTauTagging = {
     vertexreco&
     iterativeCone5CaloJets&
     ic5JetTracksAssociatorAtVertex&
-    ecalClusteringSequence&
+    ecalClusters&
     famosTauTaggingSequence
 }
 
