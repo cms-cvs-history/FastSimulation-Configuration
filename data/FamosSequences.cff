@@ -52,8 +52,8 @@ replace correctedEndcapSuperClustersWithPreshower.preshRecHitProducer = "caloRec
 # Particle Flow
 include "RecoParticleFlow/Configuration/data/RecoParticleFlow.cff"
 replace towerMakerPF.ecalInputs = { 
-    "caloRecHits:EcalRecHitsEB", 
-    "caloRecHits:EcalRecHitsEE" 
+    caloRecHits:EcalRecHitsEB, 
+    caloRecHits:EcalRecHitsEE 
 }
 replace towerMakerPF.hbheInput = hcalRecHits:RecalibHBHE
 replace towerMakerPF.hoInput = hcalRecHits:RecalibHBHE
@@ -74,8 +74,8 @@ replace pfJetTracksAssociator.tracks = gsWithMaterialTracks
 include "RecoJets/Configuration/data/CaloTowersRec.cff" 
 #include "RecoJets/Configuration/data/RecoJets.cff"
 replace towerMaker.ecalInputs = { 
-    "caloRecHits:EcalRecHitsEB", 
-    "caloRecHits:EcalRecHitsEE" 
+    caloRecHits:EcalRecHitsEB, 
+    caloRecHits:EcalRecHitsEE 
 }
 replace towerMaker.hbheInput = hcalRecHits:RecalibHBHE
 replace towerMaker.hfInput = hcalRecHits:RecalibHF
@@ -84,7 +84,7 @@ replace towerMaker.hoInput = hcalRecHits:RecalibHO
 # Jets
 include "Configuration/JetMET/data/calorimetry-jetmet-gen.cff" 
 include "Configuration/JetMET/data/calorimetry-jetmet.cff" 
-replace genParticleCandidates.src="source" 
+replace genParticleCandidates.src=source 
 replace genCandidatesForMET.verbose=false
 
 # Muon parametrization
@@ -180,7 +180,7 @@ sequence famosPFTauTaggingSequence = {
 include "FastSimulation/L1CaloTriggerProducer/data/fastl1calosim.cfi"
 include "FastSimulation/L1CaloTriggerProducer/data/fastL1extraParticleMap.cfi"
 replace fastL1CaloSim.EmInputs =
-	 { "caloRecHits:EcalRecHitsEB", "caloRecHits:EcalRecHitsEE"  }	
+	 { caloRecHits:EcalRecHitsEB, caloRecHits:EcalRecHitsEE  }	
 #Fast Tau HLT
 include "FastSimulation/Configuration/data/fastTauHLT.cff"
 
