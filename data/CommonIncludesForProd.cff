@@ -12,4 +12,4 @@ include "FastSimulation/HighLevelTrigger/data/common/HLTSetup.cff"
 
 
 // prescale factors at L1 : useful for testing all L1 paths
-include "L1TriggerConfig/L1GtConfigProducers/data/L1GtFactorsUnprescale.cff"
+include "Configuration/StandardSequences/data/L1TriggerDefaultMenu.cff"
