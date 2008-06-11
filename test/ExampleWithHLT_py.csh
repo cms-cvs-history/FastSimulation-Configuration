@@ -1,7 +1,7 @@
 #!/bin/csh
 
 # clean
-rm $CMSSW_BASE/src/FastSimulation/Configuration/test/HLT.cff
+rm $CMSSW_BASE/src/FastSimulation/Configuration/test/HLT_cff.py
 rm $CMSSW_BASE/src/FastSimulation/Configuration/test/ExampleWithHLT.log
 rm AODWithHLT.root
 
@@ -13,9 +13,7 @@ rm AODWithHLT.root
 # NOTE: If you choose to run a subset of the HLT, you MUST specify the L1 Menu used
 # If you choose another L1 Menu, you must also change the corresponding include in 
 # FastSimulation/Configuration/test/ExampleWithHLT.cfg
-$CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLTcff.py /dev/CMSSW_2_1_0_pre5/HLT/V31 $CMSSW_BASE/src/FastSimulation/Configuration/test/HLT.cff "L1Menu2008_2E30" "All"
+$CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLTcff.py /dev/CMSSW_2_1_0_pre5/HLT/V31 $CMSSW_BASE/src/FastSimulation/Configuration/test/HLT_cff.py "L1Menu2008_2E30" "All"
 
 # cmsRun 
-cmsRun $CMSSW_BASE/src/FastSimulation/Configuration/test/ExampleWithHLT.cfg |& tee $CMSSW_BASE/src/FastSimulation/Configuration/test/ExampleWithHLT.log
-
-
+cmsRun $CMSSW_BASE/src/FastSimulation/Configuration/test/ExampleWithHLT_cfg.py |& tee $CMSSW_BASE/src/FastSimulation/Configuration/test/ExampleWithHLT_py.log
