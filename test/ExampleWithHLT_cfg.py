@@ -51,7 +51,7 @@ process.outpath = cms.EndPath(process.o1)
 
 # Keep the logging output to a nice level #
 # service = Timing { }
-process.load("FWCore.MessageService.MessageLogger_cfi")
-process.MessageLogger.destinations = ['pyDetailedInfo.txt']
+# process.load("FWCore.MessageService.MessageLogger_cfi")
+# process.MessageLogger.destinations = ['pyDetailedInfo.txt']
 
 
