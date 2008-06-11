@@ -16,4 +16,5 @@ rm AODWithHLT.root
 $CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLTcff.py /dev/CMSSW_2_1_0_pre5/HLT/V31 $CMSSW_BASE/src/FastSimulation/Configuration/test/HLT_cff.py "L1Menu2008_2E30" "All"
 
 # cmsRun 
+cmsenv
 cmsRun $CMSSW_BASE/src/FastSimulation/Configuration/test/ExampleWithHLT_cfg.py |& tee $CMSSW_BASE/src/FastSimulation/Configuration/test/ExampleWithHLT_py.log
