@@ -15,22 +15,24 @@ def usage():
     sys.exit(1)
 
 argc = len(sys.argv)
-
 usePaths = "All"
 L1Menu   = "L1Menu2008_2E30"
 
-if argc == 3:
+if argc == 4:
     dbName  = sys.argv[1]
     cffName = sys.argv[2]
-elif argc == 4:
-    dbName  = sys.argv[1]
-    cffName = sys.argv[2]
-    L1Menu  = sys.argv[3]
+    blockName = sys.argv[3]
 elif argc == 5:
-    dbName   = sys.argv[1]
-    cffName  = sys.argv[2]
-    L1Menu   = sys.argv[3]
-    usePaths = sys.argv[4]
+    dbName  = sys.argv[1]
+    cffName = sys.argv[2]
+    blockName = sys.argv[3]
+    L1Menu  = sys.argv[4]
+elif argc == 6:
+    dbName  = sys.argv[1]
+    cffName = sys.argv[2]
+    blockName = sys.argv[3]
+    L1Menu   = sys.argv[4]
+    usePaths = sys.argv[5]
 else:
     usage()
 
@@ -449,9 +451,20 @@ else:
         baseCommand += " --format Python"
 
     # myGetCff = "edmConfigFromDB --cff --configName " + dbName + " " + essources + " " + esmodules + " " + services + " " + psets + " > " + cffName
-    myGetCff = baseCommand + " " + essources + " " + esmodules + " " + blocks + " " + sequences + " " + modules + " " + paths + " " + services + " " + psets + " > " + cffName
-    # myGetCff = "edmConfigFromDB --cff --configName " + dbName + " " + essources + " " + esmodules + " " + blocks + " " + sequences + " " + paths + " " + services + " " + psets + " > " + cffName
+    if ( blockName == "None" ):
+        myGetCff = baseCommand + " " + essources + " " + esmodules + " " + blocks + " " + sequences + " " + modules + " " + paths + " " + services + " " + psets + " > " + cffName
+    else:
+        blockpaths = "--nopaths"
+        blockessources = "--noessources"
+        blockesmodules = "--noesmodules"
+        blockservices = "--noservices"
+        blockpsets = "--nopsets"
+        myGetCff = baseCommand + " " + essources + " " + esmodules + " " + sequences + " " + modules + " " + paths + " " + services + " " + psets + " > " + cffName
+        myGetBlocks = baseCommand + " " + blockessources + " " + blockesmodules + " " + blockservices + " " + blockpaths + " " + blockpsets + " " + blocks + " > " + blockName 
+        
     os.system(myGetCff)
+    if ( blockName != "None" ) :
+        os.system(myGetBlocks)
 
     # myReplaceTrigResults = "replace TriggerResults::HLT " + process + " -- " + cffName
     # os.system(myReplaceTrigResults)

@@ -1,8 +1,9 @@
 #!/bin/csh
 
 # clean
-rm $CMSSW_BASE/src/FastSimulation/Configuration/test/HLT_cff.py
+rm $CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_cff.py
 rm $CMSSW_BASE/src/FastSimulation/Configuration/test/ExampleWithHLT.log
+rm $CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_cff.py
 rm AODWithHLT.root
 
 # create HLT.cff :  For 2_0_4, use /dev/CMSSW_2_0_0/HLT/V35
@@ -13,7 +14,7 @@ rm AODWithHLT.root
 # NOTE: If you choose to run a subset of the HLT, you MUST specify the L1 Menu used
 # If you choose another L1 Menu, you must also change the corresponding include in 
 # FastSimulation/Configuration/test/ExampleWithHLT.cfg
-$CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLTcff.py /dev/CMSSW_2_1_0_pre5/HLT/V31 $CMSSW_BASE/src/FastSimulation/Configuration/test/HLT_cff.py "L1Menu2008_2E30" "All"
+$CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLTcff.py /dev/CMSSW_2_1_0_pre5/HLT/V33 "$CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_cff.py" "$CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_cff.py" "L1Menu2008_2E30" "All"
 
 # cmsRun 
 cmsenv
