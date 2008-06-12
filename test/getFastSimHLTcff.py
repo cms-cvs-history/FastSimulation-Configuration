@@ -466,9 +466,32 @@ else:
         myGetCff = baseCommand + " " + essources + " " + esmodules + " " + sequences + " " + modules + " " + paths + " " + services + " " + psets + " > " + cffName
         myGetBlocks = baseCommand + " " + blockessources + " " + blockesmodules + " " + blockservices + " " + blockpaths + " " + blockpsets + " " + blocks + " > " + blockName 
         
-    os.system(myGetCff)
+    # Write blocks for electrons and muons, in py configuration
     if ( blockName != "None" ) :
         os.system(myGetBlocks)
+        bName = "None"
+        for line in fileinput.input(blockName,inplace=1):
+            if line.find("block_hlt") == 0:
+                subStart = line.find("_")
+                subEnd = line.find(" ",subStart)
+                bName = line[subStart:subEnd]
+
+            if line.find("SeedConfiguration") == 0:
+                if bName == "None":
+                    print line[:-1]
+            elif line.find("MuonTrackingRegionBuilder") == 0:
+                if bName == "None":
+                    print line[:-1]
+            elif line.find(")") == 0:
+                if bName != "None":
+                    bName = "None"
+                else:
+                    print line[:-1]
+            else:
+                print line[:-1]
+
+    # Write all HLT
+    os.system(myGetCff)
 
     # myReplaceTrigResults = "replace TriggerResults::HLT " + process + " -- " + cffName
     # os.system(myReplaceTrigResults)
@@ -478,20 +501,29 @@ else:
     mType = "None"
     bName = "None"
     for line in fileinput.input(cffName,inplace=1):
-        if line.find("module hlt") >= 0:
-            subStart = line.find("hlt")
-            subEnd = line.find(" ",subStart)
-            mName = line[subStart:subEnd]
-            subStart = line.find("=") + 2
-            subEnd = line.find(" ",subStart)
-            mType = line[subStart:subEnd]
+        if cffType == ".py":
+            if line.find("cms.EDProducer") >= 0:
+                subStart = line.find("hlt")
+                subEnd = line.find(" ",subStart)
+                mName = line[subStart:subEnd]
+                subStart = line.find("=") + 19
+                subEnd = line.find(" ",subStart)
+                mType = line[subStart:subEnd-2]
+        else:
+            if line.find("module hlt") >= 0:
+                subStart = line.find("hlt")
+                subEnd = line.find(" ",subStart)
+                mName = line[subStart:subEnd]
+                subStart = line.find("=") + 2
+                subEnd = line.find(" ",subStart)
+                mType = line[subStart:subEnd]
 
         if line.find("block block_hlt") == 0:
             subStart = line.find("_")
             subEnd = line.find(" ",subStart)
             bName = line[subStart:subEnd]
 
-        if line.find("sequence HLTL3PixelIsolFilterSequence") == 0:
+        if line.find("HLTL3PixelIsolFilterSequence = ") == 0:
             line = line.replace('hltPixelTracks','hltPixelTracking')
             print line[:-1]
         elif line.find("GMTReadoutCollection") > 0:
