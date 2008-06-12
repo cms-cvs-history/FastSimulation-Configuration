@@ -17,8 +17,12 @@ def usage():
 argc = len(sys.argv)
 usePaths = "All"
 L1Menu   = "L1Menu2008_2E30"
+blockName = "None"
 
-if argc == 4:
+if argc == 3:
+    dbName  = sys.argv[1]
+    cffName = sys.argv[2]
+elif argc == 4:
     dbName  = sys.argv[1]
     cffName = sys.argv[2]
     blockName = sys.argv[3]
