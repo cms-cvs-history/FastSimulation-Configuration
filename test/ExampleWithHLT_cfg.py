@@ -48,6 +48,10 @@ process.o1 = cms.OutputModule("PoolOutputModule",
 )
 process.outpath = cms.EndPath(process.o1)
 
+#print "Old value:", process.caloRecHits.RecHitsFactory.doDigis
+process.caloRecHits.RecHitsFactory.doDigis = True
+#print "New value:", process.caloRecHits.RecHitsFactory.doDigis
+
 # Keep the logging output to a nice level #
 # process.Timing =  cms.Service("Timing")
 # process.load("FWCore/MessageService/MessageLogger_cfi")
