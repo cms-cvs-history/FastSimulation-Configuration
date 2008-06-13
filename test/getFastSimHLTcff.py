@@ -593,11 +593,32 @@ else:
             if line.find("hltOfflineBeamSpot") > 0:
                 line = line.replace('hltOfflineBeamSpot','offlineBeamSpot') 
             if line.find("hltMuonCSCDigis") > 0:
-                line = line.replace('hltMuonCSCDigis','simMuonCSCDigis') 
+                if cffType == ".py":
+                    if line.find("hltMuonCSCDigis +") > 0:
+                        line = line.replace('hltMuonCSCDigis','cms.SequencePlaceholder("simMuonCSCDigis")')
+                    else:
+                        line = line.replace('hltMuonCSCDigis','simMuonCSCDigis')
+                else:
+                    line = line.replace('hltMuonCSCDigis','simMuonCSCDigis')
             if line.find("hltMuonDTDigis") > 0:
-                line = line.replace('hltMuonDTDigis','simMuonDTDigis') 
+                if cffType == ".py":
+                    if line.find("hltMuonDTDigis +") > 0:
+                        line = line.replace('hltMuonDTDigis','cms.SequencePlaceholder("simMuonDTDigis")')
+                    else:
+                        line = line.replace('hltMuonDTDigis','simMuonDTDigis')
+                else:
+                    line = line.replace('hltMuonDTDigis','simMuonDTDigis') 
             if line.find("hltMuonRPCDigis") > 0:
-                line = line.replace('hltMuonRPCDigis','simMuonRPCDigis') 
+                if cffType == ".py":
+                    if line.find("hltMuonRPCDigis +") > 0:
+                        line = line.replace('hltMuonRPCDigis','cms.SequencePlaceholder("simMuonRPCDigis")')
+                    else:
+                        line = line.replace('hltMuonRPCDigis','simMuonRPCDigis')
+                else:
+                    line = line.replace('hltMuonRPCDigis','simMuonRPCDigis') 
+            if line.find("HLTEndSequence") > 0:
+                if cffType == ".py":
+                    line = line.replace('HLTEndSequence','cms.SequencePlaceholder("HLTEndSequence")')
             if line.find("hltL1extraParticles") > 0:
                 line = line.replace('hltL1extraParticles','l1extraParticles') 
             if line.find("QuadJet30") > 0:
