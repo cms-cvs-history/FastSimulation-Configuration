@@ -195,15 +195,6 @@ block FastSimParamMuonAOD = {
 # Addition to the event content
 # We don't need to remove anything, as the corresponding products are
 # not produced anyway in a FastSimulation job.
-#####################################################################
-#
-# FEVT Data Tier re-definition
-#
-#####################################################################
-replace FEVTEventContent.outputCommands += FastSimRecoLocalTrackerFEVT.outputCommands
-replace FEVTEventContent.outputCommands += FastSimRecoLocalCaloFEVT.outputCommands
-replace FEVTEventContent.outputCommands += FastSimRecoTrackerFEVT.outputCommands
-replace FEVTEventContent.outputCommands += FastSimParamMuonFEVT.outputCommands
 
 #####################################################################
 #
@@ -225,38 +216,13 @@ replace AODEventContent.outputCommands += FastSimRecoLocalCaloAOD.outputCommands
 replace AODEventContent.outputCommands += FastSimRecoTrackerAOD.outputCommands
 replace AODEventContent.outputCommands += FastSimParamMuonAOD.outputCommands
 
-#####################################################################
-#
-# FEVTSIM Data Tier re-definition
-#
-#####################################################################
-#replace FEVTSIMEventContent.outputCommands -= SimG4CoreFEVT.outputCommands
-replace FEVTSIMEventContent.outputCommands += FastSimCoreFEVT.outputCommands
-replace FEVTSIMEventContent.outputCommands += FastSimRecoLocalTrackerFEVT.outputCommands
-replace FEVTSIMEventContent.outputCommands += FastSimRecoLocalCaloFEVT.outputCommands
-replace FEVTSIMEventContent.outputCommands += FastSimRecoTrackerFEVT.outputCommands
-replace FEVTSIMEventContent.outputCommands += FastSimParamMuonFEVT.outputCommands
-
-
-#####################################################################
-#
-# FEVTSIMDIGI Data Tier re-definition
-#
-#####################################################################
-
-replace FEVTSIMDIGIEventContent.outputCommands += FastSimCoreFEVT.outputCommands
-replace FEVTSIMDIGIEventContent.outputCommands += FastSimRecoLocalTrackerFEVT.outputCommands
-replace FEVTSIMDIGIEventContent.outputCommands += FastSimRecoLocalCaloFEVT.outputCommands
-replace FEVTSIMDIGIEventContent.outputCommands += FastSimRecoTrackerFEVT.outputCommands
-replace FEVTSIMDIGIEventContent.outputCommands += FastSimParamMuonFEVT.outputCommands
-
 
 #####################################################################
 #
 # RECOSIM Data Tier re-definition
 #
 #####################################################################
-#replace RECOSIMEventContent.outputCommands -= SimG4CoreRECO.outputCommands
+
 replace RECOSIMEventContent.outputCommands += FastSimCoreRECO.outputCommands
 replace RECOSIMEventContent.outputCommands += FastSimRecoLocalTrackerRECO.outputCommands
 replace RECOSIMEventContent.outputCommands += FastSimRecoLocalCaloRECO.outputCommands
@@ -268,7 +234,7 @@ replace RECOSIMEventContent.outputCommands += FastSimParamMuonRECO.outputCommand
 # AODSIM Data Tier re-definition
 #
 #####################################################################
-#replace AODSIMEventContent.outputCommands -= SimG4CoreAOD.outputCommands
+
 replace AODSIMEventContent.outputCommands += FastSimCoreAOD.outputCommands
 replace AODSIMEventContent.outputCommands += FastSimRecoLocalTrackerAOD.outputCommands
 replace AODSIMEventContent.outputCommands += FastSimRecoLocalCaloAOD.outputCommands
@@ -276,25 +242,47 @@ replace AODSIMEventContent.outputCommands += FastSimRecoTrackerAOD.outputCommand
 replace AODSIMEventContent.outputCommands += FastSimParamMuonAOD.outputCommands
 
 
+#####################################################################
+#
+# FEVT Data Tier re-definition
+#
+#####################################################################
+
+replace FEVTEventContent.outputCommands += FastSimRecoLocalTrackerFEVT.outputCommands
+replace FEVTEventContent.outputCommands += FastSimRecoLocalCaloFEVT.outputCommands
+replace FEVTEventContent.outputCommands += FastSimRecoTrackerFEVT.outputCommands
+replace FEVTEventContent.outputCommands += FastSimParamMuonFEVT.outputCommands
 
 #####################################################################
 #
-# FEVTSIMHLTDEBUG Data Tier re-definition
+# FEVTSIM Data Tier re-definition
 #
 #####################################################################
-replace FEVTSIMHLTDEBUGEventContent.outputCommands += FastSimCoreFEVT.outputCommands
-replace FEVTSIMHLTDEBUGEventContent.outputCommands += FastSimRecoLocalTrackerFEVT.outputCommands
-replace FEVTSIMHLTDEBUGEventContent.outputCommands += FastSimRecoLocalCaloFEVT.outputCommands
-replace FEVTSIMHLTDEBUGEventContent.outputCommands += FastSimRecoTrackerFEVT.outputCommands
-replace FEVTSIMHLTDEBUGEventContent.outputCommands += FastSimParamMuonFEVT.outputCommands         
+replace FEVTSIMEventContent.outputCommands += FastSimCoreFEVT.outputCommands
+replace FEVTSIMEventContent.outputCommands += FastSimRecoLocalTrackerFEVT.outputCommands
+replace FEVTSIMEventContent.outputCommands += FastSimRecoLocalCaloFEVT.outputCommands
+replace FEVTSIMEventContent.outputCommands += FastSimRecoTrackerFEVT.outputCommands
+replace FEVTSIMEventContent.outputCommands += FastSimParamMuonFEVT.outputCommands
+
 
 #####################################################################
 #
-# FEVTSIMDIGIHLTDEBUG  Data Tier re-definition
+# FEVTDEBUG Data Tier re-definition
 #
 #####################################################################
-replace FEVTSIMDIGIHLTDEBUGEventContent.outputCommands += FastSimCoreFEVT.outputCommands              
-replace FEVTSIMDIGIHLTDEBUGEventContent.outputCommands += FastSimRecoLocalTrackerFEVT.outputCommands  
-replace FEVTSIMDIGIHLTDEBUGEventContent.outputCommands += FastSimRecoLocalCaloFEVT.outputCommands     
-replace FEVTSIMDIGIHLTDEBUGEventContent.outputCommands += FastSimRecoTrackerFEVT.outputCommands       
-replace FEVTSIMDIGIHLTDEBUGEventContent.outputCommands += FastSimParamMuonFEVT.outputCommands         
+replace FEVTDEBUGEventContent.outputCommands += FastSimCoreFEVT.outputCommands
+replace FEVTDEBUGEventContent.outputCommands += FastSimRecoLocalTrackerFEVT.outputCommands
+replace FEVTDEBUGEventContent.outputCommands += FastSimRecoLocalCaloFEVT.outputCommands
+replace FEVTDEBUGEventContent.outputCommands += FastSimRecoTrackerFEVT.outputCommands
+replace FEVTDEBUGEventContent.outputCommands += FastSimParamMuonFEVT.outputCommands         
+
+#####################################################################
+#
+# FEVTDEBUGHLT  Data Tier re-definition
+#
+#####################################################################
+replace FEVTDEBUGHLTEventContent.outputCommands += FastSimCoreFEVT.outputCommands              
+replace FEVTDEBUGHLTEventContent.outputCommands += FastSimRecoLocalTrackerFEVT.outputCommands  
+replace FEVTDEBUGHLTEventContent.outputCommands += FastSimRecoLocalCaloFEVT.outputCommands     
+replace FEVTDEBUGHLTEventContent.outputCommands += FastSimRecoTrackerFEVT.outputCommands       
+replace FEVTDEBUGHLTEventContent.outputCommands += FastSimParamMuonFEVT.outputCommands         
