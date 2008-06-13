@@ -413,15 +413,15 @@ else:
     paths = "--paths "
     
     if L1Menu == "L1Menu2007":
-        paths += "-HLT1MuonL1Open,"
-        paths += "-HLTMinBiasHcal,"
-        paths += "-HLTMinBiasEcal,"
-        paths += "-CandHLTCSCBeamHalo,"
-        paths += "-CandHLTCSCBeamHaloOverlapRing1,"
-        paths += "-CandHLTCSCBeamHaloOverlapRing2,"
-        paths += "-CandHLTCSCBeamHaloRing2or3,"
-        paths += "-HLT4jet30,"
-        paths += "-HLTXElectron3Jet30,"
+        paths += "-HLT_L1MuOpen,"
+        paths += "-HLT_MinBiasHcal,"
+        paths += "-HLT_MinBiasEcal,"
+        paths += "-HLT_CSCBeamHalo,"
+        paths += "-HLT_CSCBeamHaloOverlapRing1,"
+        paths += "-HLT_CSCBeamHaloOverlapRing2,"
+        paths += "-HLT_CSCBeamHaloRing2or3,"
+        paths += "-HLT_QuadJet30,"
+        paths += "-HLT_IsoEle5_TripleJet30,"
 
 #    if L1Menu == "L1Menu2008_2E30":
 #        paths += "-AlCaIsoTrack,"

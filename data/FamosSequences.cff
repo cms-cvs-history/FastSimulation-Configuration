@@ -217,8 +217,8 @@ replace calomuons.TrackAssociatorParameters.HORecHitCollectionLabel = caloRecHit
 include "RecoMuon/MuonIsolationProducers/data/muIsolation.cff"
 //replace muIsoDepositTk.ExtractorPSet = { using MIsoTrackExtractorGsBlock }
 sequence famosMuonIdAndIsolationSequence = { 
-    muonIdProducerSequence & 
     sisCone5CaloJets &
+    muonIdProducerSequence & 
     muIsolation
 }
 
