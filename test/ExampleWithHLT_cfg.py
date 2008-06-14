@@ -19,6 +19,8 @@ process.load("FastSimulation.Configuration.FamosSequences_cff")
 
 # L1 Emulator and HLT Setup
 process.load("FastSimulation.HighLevelTrigger.HLTSetup_cff")
+# The digis must be produced for calorimeters
+process.caloRecHits.RecHitsFactory.doDigis = True
 
 # L1 Menu and prescale factors : useful for testing all L1 paths
 process.load("Configuration.StandardSequences.L1TriggerDefaultMenu_cff")
@@ -48,13 +50,9 @@ process.o1 = cms.OutputModule("PoolOutputModule",
 )
 process.outpath = cms.EndPath(process.o1)
 
-#print "Old value:", process.caloRecHits.RecHitsFactory.doDigis
-process.caloRecHits.RecHitsFactory.doDigis = True
-#print "New value:", process.caloRecHits.RecHitsFactory.doDigis
-
 # Keep the logging output to a nice level #
-# process.Timing =  cms.Service("Timing")
-# process.load("FWCore/MessageService/MessageLogger_cfi")
-# process.MessageLogger.destinations = cms.untracked.vstring("pyDetailedInfo.txt")
+process.Timing =  cms.Service("Timing")
+process.load("FWCore/MessageService/MessageLogger_cfi")
+process.MessageLogger.destinations = cms.untracked.vstring("pyDetailedInfo.txt")
 
 
