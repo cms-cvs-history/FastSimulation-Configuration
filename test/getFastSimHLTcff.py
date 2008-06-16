@@ -471,6 +471,10 @@ else:
         os.system(myGetBlocks)
         bName = "None"
         for line in fileinput.input(blockName,inplace=1):
+
+            if line.find("hltOfflineBeamSpot") > 0:
+                line = line.replace('hltOfflineBeamSpot','offlineBeamSpot') 
+
             if line.find("block_hlt") == 0:
                 subStart = line.find("_")
                 subEnd = line.find(" ",subStart)

@@ -14,7 +14,10 @@ rm AODWithHLT.root
 # NOTE: If you choose to run a subset of the HLT, you MUST specify the L1 Menu used
 # If you choose another L1 Menu, you must also change the corresponding include in 
 # FastSimulation/Configuration/test/ExampleWithHLT.cfg
-$CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLTcff.py /dev/CMSSW_2_1_0_pre5/HLT/V54 "$CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_cff.py" "$CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_cff.py" "L1Menu2008_2E30" "All"
+$CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLTcff.py /dev/CMSSW_2_1_0_pre5/HLT/V59 "$CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_cff.py" "$CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_cff.py" "L1Menu2008_2E30" 
+#"All"
+#"HLTriggerFirstPath"
+#"All"
 
 # Set the environment 
 cmsenv
