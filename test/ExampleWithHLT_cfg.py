@@ -15,12 +15,21 @@ process.load("FastSimulation.Configuration.ttbar_cfi")
 
 # L1 Menu and prescale factors : useful for testing all L1 paths
 process.load("Configuration.StandardSequences.L1TriggerDefaultMenu_cff")
+
 # Common inputs, with fake conditions
 process.load("FastSimulation.Configuration.CommonInputsFake_cff")
+
 # L1 Emulator and HLT Setup
 process.load("FastSimulation.HighLevelTrigger.HLTSetup_cff")
+
 # Famos sequences
 process.load("FastSimulation.Configuration.FamosSequences_cff")
+
+# Parametrized magnetic field (new mapping, 4.0 and 3.8T)
+process.load("Configuration.StandardSequences.MagneticField_40T_cff")
+#process.load("Configuration.StandardSequences.MagneticField_38T_cff")
+process.VolumeBasedMagneticFieldESProducer.useParametrizedTrackerField = True
+
 # HLT paths -- defined from ConfigDB
 # This one is created on the fly by FastSimulation/Configuration/test/ExampleWithHLT_py.csh
 process.load("FastSimulation.Configuration.HLT_cff")
@@ -30,8 +39,6 @@ process.simulation = cms.Sequence(process.simulationWithFamos)
 # You many not want to simulate everything
 process.famosSimHits.SimulateCalorimetry = True
 process.famosSimHits.SimulateTracking = True
-# Parameterized magnetic field
-process.VolumeBasedMagneticFieldESProducer.useParametrizedTrackerField = True
 # Number of pileup events per crossing
 process.famosPileUp.PileUpSimulator.averageNumber = 0.0
 
