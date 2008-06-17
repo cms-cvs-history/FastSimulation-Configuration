@@ -241,12 +241,15 @@ replace pixelMatchGsfElectrons.SCLEndcapLabel = "electronGSPixelSeeds"
 replace pixelMatchGsfElectrons.hcalRecHits = caloRecHits
 replace pixelMatchGsfElectrons.barrelSuperClusters = correctedHybridSuperClusters:electronGSPixelSeeds
 replace pixelMatchGsfElectrons.endcapSuperClusters = correctedEndcapSuperClustersWithPreshower:electronGSPixelSeeds
+include "RecoEgamma/ElectronIdentification/data/electronIdSequence.cff"
+
 sequence famosElectronSequence = {
     globalMixedSeeds &
     electronGSPixelSeeds &
     electronGSGsfTrackCandidates &
     pixelMatchGsfFit &
-    pixelMatchGsfElectrons
+    pixelMatchGsfElectrons &
+    eIdSequence
 }
 
 # Photon reconstruction
@@ -256,7 +259,18 @@ replace photons.endcapEcalHits=caloRecHits:EcalRecHitsEE
 replace photons.hbheModule="caloRecHits"
 replace photons.hbheInstance = ""
 replace photons.pixelSeedProducer="electronGSPixelSeeds"
-sequence famosPhotonSequence = { photonSequence }
+include "RecoEgamma/PhotonIdentification/data/photonId.cff"
+replace PhotonIDProd.barrelEcalRecHitProducer="caloRecHits"
+replace PhotonIDProd.endcapEcalRecHitProducer="caloRecHits"
+replace PhotonIDProd.HcalRecHitProducer="caloRecHits"
+
+sequence famosPhotonSequence = { photonSequence & photonIDSequence}
+
+# For both electrons and photons 
+include "RecoEgamma/EgammaIsolationAlgos/data/egammaIsolationSequence.cff" 
+replace EgammaIsoEcalFromHitsExtractorBlock.barrelRecHits=caloRecHits:EcalRecHitsEB
+replace EgammaIsoEcalFromHitsExtractorBlock.endcapRecHits=caloRecHits:EcalRecHitsEE 
+replace EgammaIsoHcalFromHitsExtractorBlock.hcalRecHits=caloRecHits
 
 # B tagging
 include "RecoJets/JetAssociationProducers/data/ic5JetTracksAssociatorAtVertex.cfi"
@@ -400,14 +414,16 @@ sequence famosWithElectrons = {
     famosWithTrackerHits&
     caloRecHits&
     ecalClusters&
-    famosElectronSequence
+    famosElectronSequence &  
+    egammaIsolationSequence
 }
 
 sequence famosWithPhotons = {
     famosWithTrackerHits&
     caloRecHits&
     ecalClusters&
-    famosPhotonSequence
+    famosPhotonSequence &  
+    egammaIsolationSequence
 }
 
 sequence famosWithElectronsAndPhotons = {
@@ -415,7 +431,8 @@ sequence famosWithElectronsAndPhotons = {
     caloRecHits&
     ecalClusters&
     famosElectronSequence&
-    famosPhotonSequence
+    famosPhotonSequence &  
+    egammaIsolationSequence
 }
 
 
@@ -460,6 +477,7 @@ sequence reconstructionWithFamos = {
     ecalClusters &
     famosElectronSequence &
     famosPhotonSequence &
+    egammaIsolationSequence &
     famosMuonSequence &
     famosMuonIdAndIsolationSequence &
     famosParticleFlowSequence &
