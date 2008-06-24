@@ -414,20 +414,20 @@ sequence famosWithElectrons = {
     famosWithTrackerHits&
     caloRecHits&
     ecalClusters&
-    famosElectronSequence &  
-    egammaIsolationSequence
+    famosElectronSequence
 }
 
 sequence famosWithPhotons = {
-    famosWithTrackerHits&
+    famosWithTracks&
+    vertexreco&
     caloRecHits&
     ecalClusters&
-    famosPhotonSequence &  
-    egammaIsolationSequence
+    famosPhotonSequence
 }
 
 sequence famosWithElectronsAndPhotons = {
-    famosWithTrackerHits&
+    famosWithTracks&
+    vertexreco&
     caloRecHits&
     ecalClusters&
     famosElectronSequence&
