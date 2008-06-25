@@ -13,7 +13,7 @@ rm AODIntegrationTestWithHLT.root
 # NOTE: If you choose to run a subset of the HLT, you MUST specify the L1 Menu used
 # If you choose another L1 Menu, you must also change the corresponding include in 
 # FastSimulation/Configuration/test/ExampleWithHLT.cfg
-$CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLTcff.py /dev/CMSSW_2_1_0_pre5/HLT/V60 $CMSSW_BASE/src/FastSimulation/Configuration/test/HLT.cff "None" "None" "L1Menu2008_2E30" "All"
+$CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLTcff.py /dev/CMSSW_2_1_0_pre6/HLT/V4 $CMSSW_BASE/src/FastSimulation/Configuration/test/HLT.cff "None" "None" "L1Menu2008_2E30" "All"
 
 # cmsRun
 cmsRun $CMSSW_BASE/src/FastSimulation/Configuration/test/IntegrationTestWithHLT.cfg |& tee $CMSSW_BASE/src/FastSimulation/Configuration/test/IntegrationTestWithHLT.log
