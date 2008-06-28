@@ -1,3 +1,0 @@
-# This will have to be modified as soon as the calibration is made
-# off the condition database
-include "CalibCalorimetry/Configuration/data/Hcal_FakeConditions.cff"
