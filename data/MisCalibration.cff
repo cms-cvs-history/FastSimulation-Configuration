@@ -8,9 +8,8 @@ es_source ecalConditions = PoolDBESSource
 	    string tag = "EcalIntercalibConstants_miscalibcsa07"}
     }
     string connect = "frontier://cms_conditions_data/CMS_COND_16X_ECAL"
-    untracked uint32 authenticationMethod = 1
+    untracked bool siteLocalConfig = true
     string timetype = "runnumber"
-    untracked uint32 messagelevel = 0 
 }
 
 replace caloRecHits.RecHitsFactory.doMiscalib=true
