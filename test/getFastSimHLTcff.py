@@ -16,7 +16,7 @@ def usage():
 
 argc = len(sys.argv)
 blockName = "None"
-cfgName = "None"
+#cfgName = "None"
 usePaths = "All"
 L1Menu   = "L1Menu2008_2E30"
 
@@ -27,24 +27,24 @@ elif argc == 4:
     dbName  = sys.argv[1]
     cffName = sys.argv[2]
     blockName = sys.argv[3]
+#elif argc == 5:
+#    dbName  = sys.argv[1]
+#    cffName = sys.argv[2]
+#    blockName = sys.argv[3]
+#    cfgName = sys.argv[4]
 elif argc == 5:
     dbName  = sys.argv[1]
     cffName = sys.argv[2]
     blockName = sys.argv[3]
-    cfgName = sys.argv[4]
+#    cfgName = sys.argv[4]
+    L1Menu  = sys.argv[4]
 elif argc == 6:
     dbName  = sys.argv[1]
     cffName = sys.argv[2]
     blockName = sys.argv[3]
-    cfgName = sys.argv[4]
-    L1Menu  = sys.argv[5]
-elif argc == 7:
-    dbName  = sys.argv[1]
-    cffName = sys.argv[2]
-    blockName = sys.argv[3]
-    cfgName = sys.argv[4]
-    L1Menu   = sys.argv[5]
-    usePaths = sys.argv[6]
+#    cfgName = sys.argv[4]
+    L1Menu   = sys.argv[4]
+    usePaths = sys.argv[5]
 else:
     usage()
 
@@ -512,7 +512,7 @@ else:
     mName = "None"
     mType = "None"
     bName = "None"
-    schedule = "process.schedule = cms.Schedule(process."
+    #schedule = "process.schedule = cms.Schedule(process."
     for line in fileinput.input(cffName,inplace=1):
         if cffType == ".py":
             if line.find("cms.EDProducer") >= 0:
@@ -522,14 +522,14 @@ else:
                 subStart = line.find("=") + 19
                 subEnd = line.find(" ",subStart)
                 mType = line[subStart:subEnd-2]
-            if line.find("cms.Path") > 0:
-                subEnd = line.find("cms.Path")
-                myPath = line[0:subEnd-3]
-                schedule += myPath
-                if myPath != "HLTriggerFinalPath":
-                    schedule += ",process."
-                else:
-                    schedule += ")"                    
+            #if line.find("cms.Path") > 0:
+                #subEnd = line.find("cms.Path")
+                #myPath = line[0:subEnd-3]
+                #schedule += myPath
+                #if myPath != "HLTriggerFinalPath":
+                    #schedule += ",process."
+                #else:
+                    #schedule += ")"                    
         else:
             if line.find("module hlt") >= 0:
                 subStart = line.find("hlt")
@@ -651,9 +651,9 @@ else:
 
         print line[:-1]
 
-    if ( cfgName != "None" ):
-        for line in fileinput.input(cfgName,inplace=1):
-            if line.find("process.schedule =") >= 0 :
-                print schedule
-            else:
-                print line[:-1]
+    #if ( cfgName != "None" ):
+        #for line in fileinput.input(cfgName,inplace=1):
+            #if line.find("process.schedule =") >= 0 :
+                #print schedule
+            #else:
+                #print line[:-1]

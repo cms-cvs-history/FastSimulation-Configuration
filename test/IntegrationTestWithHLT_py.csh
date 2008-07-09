@@ -14,15 +14,16 @@ rm AODIntegrationTestWithHLT.root
 # NOTE: If you choose to run a subset of the HLT, you MUST specify the L1 Menu used
 # If you choose another L1 Menu, you must also change the corresponding include in 
 # FastSimulation/Configuration/test/ExampleWithHLT.cfg
-set HLTVersion=`head -1 HLTVersion`
-$CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLTcff.py $HLTVersion "$CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_cff.py" "$CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_cff.py" "$CMSSW_BASE/src/FastSimulation/Configuration/test/IntegrationTestWithHLT_cfg.py" "L1Menu2008_2E30" 
+set HLTVersion=`head -1 $CMSSW_BASE/src/FastSimulation/Configuration/test/HLTVersion`
+$CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLTcff.py $HLTVersion "$CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_cff.py" "$CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_cff.py" "L1Menu2008_2E30" "All" 
+
+# Set environement
+cmsenv
 
 # Compile the HLT_cff.py file
-cd ..
+cd $CMSSW_BASE/src/FastSimulation/
 scramv1 b python
 cd -
 
-
 # cmsRun 
-cmsenv
 cmsRun $CMSSW_BASE/src/FastSimulation/Configuration/test/IntegrationTestWithHLT_cfg.py |& tee $CMSSW_BASE/src/FastSimulation/Configuration/test/IntegrationTestWithHLT_py.log
