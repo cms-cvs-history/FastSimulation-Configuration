@@ -3,12 +3,9 @@ import FWCore.ParameterSet.Config as cms
 # The CMS Geometry files
 from Configuration.StandardSequences.Geometry_cff import *
 
-# The tracker geometry left-over (for aligned/misaligned geometry)
-# The goemetry used for reconstruction must not be misaligned.
-TrackerDigiGeometryESModule.applyAlignment = False
-# Create a misaligned geometry for simulation
+# The tracker geometry left-over (for misaligned geometry)
 misalignedTrackerGeometry = Geometry.TrackerGeometryBuilder.trackerGeometry_cfi.TrackerDigiGeometryESModule.clone()
-# The misalignment is not applied by default
+# The misalignment won't be applied
 misalignedTrackerGeometry.applyAlignment = False
 # Label of the produced TrackerGeometry:
 misalignedTrackerGeometry.appendToDataLabel = 'MisAligned'
