@@ -181,6 +181,7 @@ else:
     esmodules += "-SmartPropagatorAny,"
     esmodules += "-SmartPropagator,"
     esmodules += "-SiStripRecHitMatcherESProducer,"
+    esmodules += "-SiStripGainESProducer,"
     esmodules += "-RungeKuttaTrackerPropagator,"
     esmodules += "-RPCGeometryESModule,"
     esmodules += "-RKTrackerPropagator,"
