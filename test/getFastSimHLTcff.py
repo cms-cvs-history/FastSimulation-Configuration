@@ -545,6 +545,7 @@ else:
             subEnd = line.find(" ",subStart)
             bName = line[subStart:subEnd]
 
+
         if line.find("HLTL3PixelIsolFilterSequence = ") == 0:
             line = line.replace('hltPixelTracks','hltPixelTracking')
             print line[:-1]
@@ -561,7 +562,7 @@ else:
             print line[:-1] 
         elif line.find("L1CollectionsTag") > 0:
             line = line.replace('hltL1extraParticles','l1extraParticles')
-            print line[:-1] 
+            print line[:-1]
         elif line.find("L1GtObjectMapTag") > 0:
             line = line.replace('hltL1GtObjectMap','gtDigis') 
             print line[:-1]
@@ -574,6 +575,9 @@ else:
         elif line.find("PSet MuonTrackingRegionBuilder") > 0:
             if bName == "None":
                 print line[:-1]
+        elif line.find("CandTag") > 0:
+            line = line.replace('hltL1extraParticles','l1ParamMuons')
+            print line[:-1]
         elif line.find("}") > 0:
             if bName != "None":
                 bName = "None"
