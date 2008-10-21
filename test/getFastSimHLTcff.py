@@ -432,10 +432,8 @@ else:
         paths += "-HLT_QuadJet30,"
         paths += "-HLT_IsoEle5_TripleJet30,"
 
-#    if L1Menu == "L1Menu2008_2E30":
-#        paths += "-AlCaIsoTrack,"
-#        paths += "-AlCaEcalPi0,"
-
+    if L1Menu == "L1Menu2008_2E30":
+        paths += "-AlCa_HcalPhiSym,"
 
     paths += "-DummyPath"
 
