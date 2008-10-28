@@ -196,7 +196,6 @@ globalMuons.TrackerCollectionLabel = 'generalTracks'
 globalMuons.GLBTrajBuilderParameters.TrackRecHitBuilder = 'WithoutRefit'
 globalMuons.GLBTrajBuilderParameters.TrackTransformer.TrackerRecHitBuilder = 'WithoutRefit'
 globalMuons.GLBTrajBuilderParameters.TrackerRecHitBuilder = 'WithoutRefit'
-
 famosMuonSequence = cms.Sequence(
     muonDigi+
     muonlocalreco+
@@ -380,8 +379,9 @@ famosWithTracksAndEcalClusters = cms.Sequence(
 )
 
 famosWithParticleFlow = cms.Sequence(
-    famosWithTracksAndCaloHits+
+    famosWithTracksAndEcalClusters+
     vertexreco+
+    famosElectronSequence+
     famosParticleFlowSequence+
     PFJetMet
 )
@@ -426,9 +426,9 @@ famosWithMuonsAndIsolation = cms.Sequence(
 )
 
 famosWithElectrons = cms.Sequence(
-    famosWithTrackerHits+
+    famosWithTracks+
     caloRecHits+
-    ecalClusters+
+    ecalClusters+ 
     famosElectronSequence
 )
 
