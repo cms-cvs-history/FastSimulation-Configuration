@@ -195,6 +195,7 @@ from FastSimulation.Configuration.globalMuons_cff import *
 globalMuons.TrackerCollectionLabel = 'generalTracks'
 globalMuons.GLBTrajBuilderParameters.TrackRecHitBuilder = 'WithoutRefit'
 globalMuons.GLBTrajBuilderParameters.TrackTransformer.TrackerRecHitBuilder = 'WithoutRefit'
+globalMuons.GLBTrajBuilderParameters.TrackerRecHitBuilder = 'WithoutRefit'
 
 famosMuonSequence = cms.Sequence(
     muonDigi+
