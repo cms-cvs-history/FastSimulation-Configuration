@@ -347,7 +347,7 @@ hltIterativeCone5CaloJets = cms.EDProducer( "IterativeConeJetProducer",
     debugLevel = cms.untracked.int32( 0 ),
     alias = cms.untracked.string( "IC5CaloJet" )
 )
-hltMCJetCorJetIcone5 = cms.EDProducer( "JetCorrectionProducer",
+hltMCJetCorJetIcone5 = cms.EDProducer( "CaloJetCorrectionProducer",
     src = cms.InputTag( "hltIterativeCone5CaloJets" ),
     alias = cms.untracked.string( "MCJetCorJetIcone5" ),
     correctors = cms.vstring( 'MCJetCorrectorIcone5' )
@@ -443,7 +443,7 @@ hltIterativeCone5CaloJetsRegional = cms.EDProducer( "IterativeConeJetProducer",
     debugLevel = cms.untracked.int32( 0 ),
     alias = cms.untracked.string( "IC5CaloJet" )
 )
-hltMCJetCorJetIcone5Regional = cms.EDProducer( "JetCorrectionProducer",
+hltMCJetCorJetIcone5Regional = cms.EDProducer( "CaloJetCorrectionProducer",
     src = cms.InputTag( "hltIterativeCone5CaloJetsRegional" ),
     alias = cms.untracked.string( "corJetIcone5" ),
     correctors = cms.vstring( 'MCJetCorrectorIcone5' )
