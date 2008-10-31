@@ -1,4 +1,4 @@
-# /dev/CMSSW_2_2_0/pre0/HLT/V1 (CMSSW_2_2_X_2008-10-29-1200)
+# /dev/CMSSW_2_2_0/pre0/HLT/V2 (CMSSW_2_2_X_2008-10-31-0000_HLT1)
 # Begin replace statements specific to the FastSim HLT
 # For all HLTLevel1GTSeed objects, make the following replacements:
 #   - L1GtReadoutRecordTag changed from hltGtDigis to gtDigis
@@ -28,7 +28,7 @@ import FWCore.ParameterSet.Config as cms
 
 
 HLTConfigVersion = cms.PSet(
-  tableName = cms.string('/dev/CMSSW_2_2_0/pre0/HLT/V1')
+  tableName = cms.string('/dev/CMSSW_2_2_0/pre0/HLT/V2')
 )
 
 SiStripQualityFakeESSource = cms.ESSource( "SiStripQualityFakeESSource" )
@@ -234,9 +234,13 @@ pixellayertriplets = cms.ESProducer( "PixelLayerTripletsESProducer",
 )
 sistripconn = cms.ESProducer( "SiStripConnectivity" )
 softLeptonByDistance = cms.ESProducer( "LeptonTaggerByDistanceESProducer",
+  appendToDataLabel = cms.string( "" ),
   distance = cms.double( 0.5 )
 )
-softLeptonByPt = cms.ESProducer( "LeptonTaggerByPtESProducer" )
+softLeptonByPt = cms.ESProducer( "LeptonTaggerByPtESProducer",
+  appendToDataLabel = cms.string( "" ),
+  ipSign = cms.string( "any" )
+)
 trajBuilderL3 = cms.ESProducer( "CkfTrajectoryBuilderESProducer",
   ComponentName = cms.string( "trajBuilderL3" ),
   updator = cms.string( "KFUpdator" ),
@@ -3472,7 +3476,8 @@ hltCsc2DRecHits = cms.EDProducer( "CSCRecHitDProducer",
     NoiseLevel_ME41 = cms.untracked.double( 7.0 ),
     XTasymmetry_ME41 = cms.untracked.double( 0.025 ),
     ConstSyst_ME41 = cms.untracked.double( 0.06 ),
-    readBadChannels = cms.bool( False )
+    readBadChannels = cms.bool( False ),
+    readBadChambers = cms.bool( False )
 )
 hltCscSegments = cms.EDProducer( "CSCSegmentProducer",
     inputObjects = cms.InputTag( "hltCsc2DRecHits" ),
@@ -4761,11 +4766,10 @@ hltBLifetimeL25TagInfos = cms.EDProducer( "TrackIPProducer",
     minimumNumberOfHits = cms.int32( 3 ),
     maximumTransverseImpactParameter = cms.double( 0.2 ),
     minimumTransverseMomentum = cms.double( 1.0 ),
-    maximumDecayLength = cms.double( 5.0 ),
     maximumChiSquared = cms.double( 5.0 ),
     maximumLongitudinalImpactParameter = cms.double( 17.0 ),
-    maximumDistanceToJetAxis = cms.double( 0.07 ),
-    jetDirectionUsingTracks = cms.bool( False )
+    jetDirectionUsingTracks = cms.bool( False ),
+    useTrackQuality = cms.bool( False )
 )
 hltBLifetimeL25BJetTags = cms.EDProducer( "JetTagProducer",
     jetTagComputer = cms.string( "trackCounting3D2nd" ),
@@ -4794,11 +4798,10 @@ hltBLifetimeL3TagInfos = cms.EDProducer( "TrackIPProducer",
     minimumNumberOfHits = cms.int32( 8 ),
     maximumTransverseImpactParameter = cms.double( 0.2 ),
     minimumTransverseMomentum = cms.double( 1.0 ),
-    maximumDecayLength = cms.double( 5.0 ),
     maximumChiSquared = cms.double( 5.0 ),
     maximumLongitudinalImpactParameter = cms.double( 17.0 ),
-    maximumDistanceToJetAxis = cms.double( 0.07 ),
-    jetDirectionUsingTracks = cms.bool( False )
+    jetDirectionUsingTracks = cms.bool( False ),
+    useTrackQuality = cms.bool( False )
 )
 hltBLifetimeL3BJetTags = cms.EDProducer( "JetTagProducer",
     jetTagComputer = cms.string( "trackCounting3D2nd" ),
@@ -4844,11 +4847,10 @@ hltBLifetimeL25TagInfosRelaxed = cms.EDProducer( "TrackIPProducer",
     minimumNumberOfHits = cms.int32( 3 ),
     maximumTransverseImpactParameter = cms.double( 0.2 ),
     minimumTransverseMomentum = cms.double( 1.0 ),
-    maximumDecayLength = cms.double( 5.0 ),
     maximumChiSquared = cms.double( 5.0 ),
     maximumLongitudinalImpactParameter = cms.double( 17.0 ),
-    maximumDistanceToJetAxis = cms.double( 0.07 ),
-    jetDirectionUsingTracks = cms.bool( False )
+    jetDirectionUsingTracks = cms.bool( False ),
+    useTrackQuality = cms.bool( False )
 )
 hltBLifetimeL25BJetTagsRelaxed = cms.EDProducer( "JetTagProducer",
     jetTagComputer = cms.string( "trackCounting3D2nd" ),
@@ -4877,11 +4879,10 @@ hltBLifetimeL3TagInfosRelaxed = cms.EDProducer( "TrackIPProducer",
     minimumNumberOfHits = cms.int32( 8 ),
     maximumTransverseImpactParameter = cms.double( 0.2 ),
     minimumTransverseMomentum = cms.double( 1.0 ),
-    maximumDecayLength = cms.double( 5.0 ),
     maximumChiSquared = cms.double( 20.0 ),
     maximumLongitudinalImpactParameter = cms.double( 17.0 ),
-    maximumDistanceToJetAxis = cms.double( 0.07 ),
-    jetDirectionUsingTracks = cms.bool( False )
+    jetDirectionUsingTracks = cms.bool( False ),
+    useTrackQuality = cms.bool( False )
 )
 hltBLifetimeL3BJetTagsRelaxed = cms.EDProducer( "JetTagProducer",
     jetTagComputer = cms.string( "trackCounting3D2nd" ),
