@@ -15,6 +15,7 @@ GlobalTrajectoryBuilderCommon.TrackTransformer.TrackerRecHitBuilder = 'WithoutRe
 
 # The condDB setup (the global tag refers to DevDB, IntDB or ProDB whenever needed)
 from Configuration.StandardSequences.FrontierConditions_GlobalTag_cfi import *
+from CalibMuon.CSCCalibration.CSC_BadChambers_cfi import *
 hcal_db_producer = cms.ESProducer("HcalDbProducer",
     dump = cms.untracked.vstring(''),
     file = cms.untracked.string('')
