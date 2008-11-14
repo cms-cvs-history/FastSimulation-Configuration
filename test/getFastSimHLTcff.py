@@ -311,8 +311,13 @@ else:
     modules += "-hltEcalRegionalMuonsWeightUncalibRecHit,"
     modules += "-hltEcalRegionalMuonsRecHitTmp,"
     modules += "-hltEcalRegionalEgammaFEDs,"
+    modules += "-hltEcalRegionalPi0FEDs,"
     modules += "-hltEcalRegionalEgammaDigis,"
+    modules += "-hltEcalRegionalPi0Digis,"
     modules += "-hltEcalRegionalEgammaWeightUncalibRecHit,"
+    modules += "-hltEcalRegionalPi0WeightUncalibRecHit,"
+    modules += "-hltEcalRegionalPi0RecHitTmp,"
+    modules += "-hltEcalRegionalPi0RecHit,"
     modules += "-hltEcalRegionalEgammaRecHitTmp,"
     modules += "-hltEcalRegionalTausFEDs,"
     modules += "-hltEcalRegionalTausDigis,"
@@ -457,9 +462,14 @@ else:
     psets += "-maxEvents"
 
     #--- Adapt for python ---#
-    subStart = cffName.find(".")
-    subEnd = len(cffName)
-    cffType = cffName[subStart:subEnd]
+    #subStart = cffName.find(".")
+    #subEnd = len(cffName)
+    #cffType = cffName[subStart:subEnd]
+    if cffName.endswith(".py"):
+        cffType = ".py"
+    else:
+        cffType = ".cff"
+        
     baseCommand = "edmConfigFromDB --cff --configName " + dbName
     if cffType == ".py":
         baseCommand += " --format Python"
