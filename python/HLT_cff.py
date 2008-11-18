@@ -1,4 +1,4 @@
-# /dev/CMSSW_2_2_0/pre1/HLT/V5 (CMSSW_2_2_X_2008-11-14-1200_HLT1)
+# /dev/CMSSW_2_2_0/pre1/HLT/V6 (CMSSW_2_2_X_2008-11-14-1200_HLT1)
 # Begin replace statements specific to the FastSim HLT
 # For all HLTLevel1GTSeed objects, make the following replacements:
 #   - L1GtReadoutRecordTag changed from hltGtDigis to gtDigis
@@ -28,7 +28,7 @@ import FWCore.ParameterSet.Config as cms
 
 
 HLTConfigVersion = cms.PSet(
-  tableName = cms.string('/dev/CMSSW_2_2_0/pre1/HLT/V5')
+  tableName = cms.string('/dev/CMSSW_2_2_0/pre1/HLT/V6')
 )
 
 SiStripQualityFakeESSource = cms.ESSource( "SiStripQualityFakeESSource" )
@@ -312,13 +312,13 @@ hltTowerMakerForAll = cms.EDProducer( "CaloTowersCreator",
     HBWeight = cms.double( 1.0 ),
     HESWeight = cms.double( 1.0 ),
     HEDWeight = cms.double( 1.0 ),
-    HOWeight = cms.double( 1.0 ),
+    HOWeight = cms.double( 1.0E-99 ),
     HF1Weight = cms.double( 1.0 ),
     HF2Weight = cms.double( 1.0 ),
     EcutTower = cms.double( -1000.0 ),
     EBSumThreshold = cms.double( 0.2 ),
     EESumThreshold = cms.double( 0.45 ),
-    UseHO = cms.bool( True ),
+    UseHO = cms.bool( False ),
     MomConstrMethod = cms.int32( 0 ),
     MomEmDepth = cms.double( 0.0 ),
     MomHadDepth = cms.double( 0.0 ),
@@ -408,13 +408,13 @@ hltTowerMakerForJets = cms.EDProducer( "CaloTowersCreator",
     HBWeight = cms.double( 1.0 ),
     HESWeight = cms.double( 1.0 ),
     HEDWeight = cms.double( 1.0 ),
-    HOWeight = cms.double( 1.0 ),
+    HOWeight = cms.double( 1.0E-99 ),
     HF1Weight = cms.double( 1.0 ),
     HF2Weight = cms.double( 1.0 ),
     EcutTower = cms.double( -1000.0 ),
     EBSumThreshold = cms.double( 0.2 ),
     EESumThreshold = cms.double( 0.45 ),
-    UseHO = cms.bool( True ),
+    UseHO = cms.bool( False ),
     MomConstrMethod = cms.int32( 0 ),
     MomEmDepth = cms.double( 0.0 ),
     MomHadDepth = cms.double( 0.0 ),
@@ -3851,13 +3851,13 @@ hltTowerMakerForMuons = cms.EDProducer( "CaloTowersCreator",
     HBWeight = cms.double( 1.0 ),
     HESWeight = cms.double( 1.0 ),
     HEDWeight = cms.double( 1.0 ),
-    HOWeight = cms.double( 1.0 ),
+    HOWeight = cms.double( 1.0E-99 ),
     HF1Weight = cms.double( 1.0 ),
     HF2Weight = cms.double( 1.0 ),
     EcutTower = cms.double( -1000.0 ),
     EBSumThreshold = cms.double( 0.2 ),
     EESumThreshold = cms.double( 0.45 ),
-    UseHO = cms.bool( True ),
+    UseHO = cms.bool( False ),
     MomConstrMethod = cms.int32( 0 ),
     MomEmDepth = cms.double( 0.0 ),
     MomHadDepth = cms.double( 0.0 ),
@@ -5657,13 +5657,13 @@ hltTowerMakerForTaus = cms.EDProducer( "CaloTowersCreator",
     HBWeight = cms.double( 1.0 ),
     HESWeight = cms.double( 1.0 ),
     HEDWeight = cms.double( 1.0 ),
-    HOWeight = cms.double( 1.0 ),
+    HOWeight = cms.double( 1.0E-99 ),
     HF1Weight = cms.double( 1.0 ),
     HF2Weight = cms.double( 1.0 ),
     EcutTower = cms.double( -1000.0 ),
     EBSumThreshold = cms.double( 0.2 ),
     EESumThreshold = cms.double( 0.45 ),
-    UseHO = cms.bool( True ),
+    UseHO = cms.bool( False ),
     MomConstrMethod = cms.int32( 0 ),
     MomEmDepth = cms.double( 0.0 ),
     MomHadDepth = cms.double( 0.0 ),
