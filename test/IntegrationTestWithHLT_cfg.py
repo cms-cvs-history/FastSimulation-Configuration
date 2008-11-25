@@ -55,8 +55,8 @@ process.schedule = cms.Schedule()
 process.schedule.extend(process.HLTSchedule)
 
 # If uncommented : All events are reconstructed, including those rejected at L1/HLT
-# process.reconstruction = cms.Path(process.reconstructionWithFamos)
-# process.schedule.append(process.reconstruction)
+process.reconstruction = cms.Path(process.reconstructionWithFamos)
+process.schedule.append(process.reconstruction)
 
 # Simulation sequence
 process.simulation = cms.Sequence(process.simulationWithFamos)
