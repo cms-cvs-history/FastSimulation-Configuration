@@ -1,4 +1,4 @@
-# /dev/CMSSW_2_2_0/HLT/V2 (CMSSW_2_2_0)
+# /dev/CMSSW_2_2_0/HLT/V5 (CMSSW_2_2_0)
 # Begin replace statements specific to the FastSim HLT
 # For all HLTLevel1GTSeed objects, make the following replacements:
 #   - L1GtReadoutRecordTag changed from hltGtDigis to gtDigis
@@ -28,7 +28,7 @@ import FWCore.ParameterSet.Config as cms
 
 
 HLTConfigVersion = cms.PSet(
-  tableName = cms.string('/dev/CMSSW_2_2_0/HLT/V2')
+  tableName = cms.string('/dev/CMSSW_2_2_0/HLT/V5')
 )
 
 SiStripQualityFakeESSource = cms.ESSource( "SiStripQualityFakeESSource" )
@@ -5605,6 +5605,7 @@ hltL2SingleTauIsolationSelectorRelaxed = cms.EDProducer( "L2TauIsolationSelector
 )
 hltFilterSingleTauEcalIsolationRelaxed = cms.EDFilter( "HLT1Tau",
     inputTag = cms.InputTag( 'hltL2SingleTauIsolationSelectorRelaxed','Isolated' ),
+    saveTag = cms.untracked.bool( True ),
     MinPt = cms.double( 1.0 ),
     MaxEta = cms.double( 5.0 ),
     MinN = cms.int32( 1 )
@@ -5629,6 +5630,7 @@ hltL2SingleTauMETIsolationSelectorRelaxed = cms.EDProducer( "L2TauIsolationSelec
 )
 hltFilterSingleTauMETEcalIsolationRelaxed = cms.EDFilter( "HLT1Tau",
     inputTag = cms.InputTag( 'hltL2SingleTauMETIsolationSelectorRelaxed','Isolated' ),
+    saveTag = cms.untracked.bool( True ),
     MinPt = cms.double( 1.0 ),
     MaxEta = cms.double( 5.0 ),
     MinN = cms.int32( 1 )
