@@ -34,7 +34,6 @@ process.load("FastSimulation/Configuration/HZZllll_cfi")
 process.load("FastSimulation/Configuration/CommonInputs_cff")
 process.load("FastSimulation/Configuration/FamosSequences_cff")
 process.GlobalTag.globaltag = "IDEAL_V11::All"
-process.cscprod=cms.ESPrefer("PoolDBESSource","GlobalTag")
 
 # Parametrized magnetic field (new mapping, 4.0 and 3.8T)
 #process.load("Configuration.StandardSequences.MagneticField_40T_cff")
