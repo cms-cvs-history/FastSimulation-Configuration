@@ -31,7 +31,9 @@ process.load("Configuration.StandardSequences.L1TriggerDefaultMenu_cff")
 
 
 # Common inputs, with fake conditions
-process.load("FastSimulation.Configuration.CommonInputsFake_cff")
+process.load("FastSimulation.Configuration.CommonInputs_cff")
+process.GlobalTag.globaltag = "IDEAL_V11::All"
+process.cscprod=cms.ESPrefer("PoolDBESSource","GlobalTag")
 
 # L1 Emulator and HLT Setup
 process.load("FastSimulation.HighLevelTrigger.HLTSetup_cff")
