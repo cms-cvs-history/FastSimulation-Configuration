@@ -17,7 +17,6 @@ GlobalTrajectoryBuilderCommon.TrackTransformer.TrackerRecHitBuilder = 'WithoutRe
 from Configuration.StandardSequences.FrontierConditions_GlobalTag_cfi import *
 es_prefer_GlobalTag = cms.ESPrefer("PoolDBESSource","GlobalTag")
 
-from CalibMuon.CSCCalibration.CSC_BadChambers_cfi import *
 
 hcal_db_producer = cms.ESProducer("HcalDbProducer",
     dump = cms.untracked.vstring(''),
