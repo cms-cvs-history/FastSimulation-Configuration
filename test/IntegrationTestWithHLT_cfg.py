@@ -74,7 +74,10 @@ process.GlobalTag.globaltag = "STARTUP_30X::All"
 
 
 # Apply ECAL and HCAL miscalibration 
-process.caloRecHits.RecHitsFactory.doMiscalib = True
+process.ecalRecHit.doMiscalib = True
+process.hbhereco.doMiscalib = True
+process.horeco.doMiscalib = True
+process.hfreco.doMiscalib = True
 
 # Apply Tracker misalignment
 process.famosSimHits.ApplyAlignment = True
@@ -94,7 +97,7 @@ process.misalignedTrackerGeometry.applyAlignment = True
 # To write out events 
 process.load("FastSimulation.Configuration.EventContent_cff")
 process.o1 = cms.OutputModule("PoolOutputModule",
-    process.AODSIMEventContent,
+#    process.AODSIMEventContent,
     fileName = cms.untracked.string('AODIntegrationTestWithHLT.root')
 )
 process.outpath = cms.EndPath(process.o1)

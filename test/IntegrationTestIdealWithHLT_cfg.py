@@ -73,18 +73,19 @@ process.famosPileUp.PileUpSimulator.averageNumber = 0.0
 process.GlobalTag.globaltag = "IDEAL_30X::All"
 
 
-# Apply ECAL and HCAL miscalibration 
-process.caloRecHits.RecHitsFactory.doMiscalib = False
-
 # Apply Tracker misalignment
 process.famosSimHits.ApplyAlignment = True
 process.misalignedTrackerGeometry.applyAlignment = True
 
 # Apply HCAL miscalibration (not ideal in that case).
 # Choose between hcalmiscalib_startup.xml , hcalmiscalib_1pb.xml , hcalmiscalib_10pb.xml (startup is the default)
-process.caloRecHits.RecHitsFactory.HCAL.Refactor = 1.0
-process.caloRecHits.RecHitsFactory.HCAL.Refactor_mean = 1.0
-#process.caloRecHits.RecHitsFactory.HCAL.fileNameHcal = "hcalmiscalib_startup.xml"
+process.hbhereco.RecHitsFactory.HCAL.Refactor = 1.0
+process.hbhereco.RecHitsFactory.HCAL.Refactor_mean = 1.0
+process.horeco.RecHitsFactory.HCAL.Refactor = 1.0
+process.horeco.RecHitsFactory.HCAL.Refactor_mean = 1.0
+process.hfreco.RecHitsFactory.HCAL.Refactor = 1.0
+process.hfreco.RecHitsFactory.HCAL.Refactor_mean = 1.0
+
 
 
 # Note : if your process is not called HLT, you have to change that! 
@@ -94,7 +95,7 @@ process.caloRecHits.RecHitsFactory.HCAL.Refactor_mean = 1.0
 # To write out events 
 process.load("FastSimulation.Configuration.EventContent_cff")
 process.o1 = cms.OutputModule("PoolOutputModule",
-    process.AODSIMEventContent,
+#    process.AODSIMEventContent,
     fileName = cms.untracked.string('AODIntegrationTestWithHLT.root')
 )
 process.outpath = cms.EndPath(process.o1)
@@ -103,9 +104,9 @@ process.outpath = cms.EndPath(process.o1)
 process.schedule.append(process.outpath)
 
 # Keep the logging output to a nice level #
-# process.Timing =  cms.Service("Timing")
-# process.load("FWCore/MessageService/MessageLogger_cfi")
-# process.MessageLogger.destinations = cms.untracked.vstring("pyDetailedInfo.txt")
+process.Timing =  cms.Service("Timing")
+process.load("FWCore/MessageService/MessageLogger_cfi")
+process.MessageLogger.destinations = cms.untracked.vstring("pyDetailedInfo.txt")
 
 # Make the job crash in case of missing product
 process.options = cms.untracked.PSet( Rethrow = cms.untracked.vstring('ProductNotFound') )
