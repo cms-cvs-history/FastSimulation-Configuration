@@ -43,37 +43,9 @@ from FastSimulation.CaloRecHitsProducer.CaloRecHits_cff import *
 
 # ECAL clusters
 from RecoEcal.Configuration.RecoEcal_cff import *
-#hybridSuperClusters.ecalhitproducer = 'caloRecHits'
-#correctedHybridSuperClusters.recHitProducer = cms.InputTag("caloRecHits","EcalRecHitsEB")
-#correctedMulti5x5SuperClustersWithPreshower.preshRecHitProducer = cms.InputTag("caloRecHits","EcalRecHitsES")
-#reducedEcalRecHitsEB.recHitsLabel = cms.InputTag("caloRecHits","EcalRecHitsEB")
-#reducedEcalRecHitsEE.recHitsLabel = cms.InputTag("caloRecHits","EcalRecHitsEE")
-#interestingEcalDetIdEB.recHitsLabel = cms.InputTag("caloRecHits","EcalRecHitsEB")
-#interestingEcalDetIdEE.recHitsLabel = cms.InputTag("caloRecHits","EcalRecHitsEE")
-#multi5x5BasicClusters.barrelHitProducer = 'caloRecHits'
-#multi5x5BasicClusters.endcapHitProducer = 'caloRecHits'
-#multi5x5PreshowerClusterShape.preshRecHitProducer = cms.InputTag("caloRecHits","EcalRecHitsES")
-#multi5x5SuperClustersWithPreshower.preshRecHitProducer = cms.InputTag("caloRecHits","EcalRecHitsES")
-#correctedMulti5x5SuperClustersWithPreshower.recHitProducer = cms.InputTag("caloRecHits","EcalRecHitsEE")
 
 # Calo Towers
 from RecoJets.Configuration.CaloTowersRec_cff import *
-#towerMaker.ecalInputs = cms.VInputTag(
-#    cms.InputTag("caloRecHits","EcalRecHitsEB"),
-#    cms.InputTag("caloRecHits","EcalRecHitsEE")
-#)
-#towerMaker.hbheInput = 'caloRecHits'
-#towerMaker.hfInput = 'caloRecHits'
-#towerMaker.hoInput = 'caloRecHits'
-
-#towerMakerWithHO.ecalInputs = cms.VInputTag(
-#    cms.InputTag("caloRecHits","EcalRecHitsEB"),
-#    cms.InputTag("caloRecHits","EcalRecHitsEE")
-#)
-#towerMakerWithHO.hbheInput = 'caloRecHits'
-#towerMakerWithHO.hfInput = 'caloRecHits'
-#towerMakerWithHO.hoInput = 'caloRecHits'
-
 
 # Particle Flow
 from RecoParticleFlow.PFClusterProducer.towerMakerPF_cff import *
@@ -82,16 +54,6 @@ from RecoParticleFlow.PFTracking.particleFlowTrack_cff import *
 from RecoParticleFlow.PFBlockProducer.particleFlowSimParticle_cff import *
 from RecoParticleFlow.PFBlockProducer.particleFlowBlock_cff import *
 from RecoParticleFlow.PFProducer.particleFlow_cff import *
-#towerMakerPF.ecalInputs = cms.VInputTag(
-#    cms.InputTag("caloRecHits","EcalRecHitsEB"),
-#    cms.InputTag("caloRecHits","EcalRecHitsEE")
-#)
-#towerMakerPF.hbheInput = 'caloRecHits'
-#towerMakerPF.hoInput = 'caloRecHits'
-#towerMakerPF.hfInput = 'caloRecHits'
-#particleFlowRecHitECAL.ecalRecHitsEB = cms.InputTag("caloRecHits","EcalRecHitsEB")
-#particleFlowRecHitECAL.ecalRecHitsEE = cms.InputTag("caloRecHits","EcalRecHitsEE")
-#particleFlowRecHitPS.ecalRecHitsES = cms.InputTag("caloRecHits","EcalRecHitsES")
 particleFlowSimParticle.sim = 'famosSimHits'
 elecpreid.NHitsInSeed = 1
 
@@ -123,22 +85,8 @@ famosParticleFlowSequence = cms.Sequence(
 # Reco Jets and MET
 from RecoJets.Configuration.RecoJets_cff import *
 from RecoJets.Configuration.RecoPFJets_cff import *
+from RecoMET.Configuration.RecoPFMET_cff import *
 from RecoMET.Configuration.RecoMET_cff import *
-#calotoweroptmaker.hbheInput = 'caloRecHits'
-#calotoweroptmaker.hoInput = 'caloRecHits'
-#calotoweroptmaker.hfInput = 'caloRecHits'
-#calotoweroptmaker.ecalInputs = cms.VInputTag(
-#    cms.InputTag("caloRecHits","EcalRecHitsEB"),
-#    cms.InputTag("caloRecHits","EcalRecHitsEE")
-#)
-#
-#calotoweroptmakerWithHO.hbheInput = 'caloRecHits'
-#calotoweroptmakerWithHO.hoInput = 'caloRecHits'
-#calotoweroptmakerWithHO.hfInput = 'caloRecHits'
-#calotoweroptmakerWithHO.ecalInputs = cms.VInputTag(
-#    cms.InputTag("caloRecHits","EcalRecHitsEB"),
-#    cms.InputTag("caloRecHits","EcalRecHitsEE")
-#)
 
 caloJetMet = cms.Sequence(
     recoJets+
@@ -146,7 +94,8 @@ caloJetMet = cms.Sequence(
 )
 
 PFJetMet = cms.Sequence(
-    recoPFJets
+    recoPFJets+
+    recoPFMET
 )
 
 # Gen Jets
@@ -199,12 +148,24 @@ globalMuons.GLBTrajBuilderParameters.TrackerRecHitBuilder = 'WithoutRefit'
 globalMuons.GLBTrajBuilderParameters.TransformerOutPropagator = cms.string('SmartPropagatorAny')
 globalMuons.GLBTrajBuilderParameters.MatcherOutPropagator = cms.string('SmartPropagator')
 
+from RecoMuon.GlobalMuonProducer.tevMuons_cfi import *
+GlobalMuonRefitter.TrackerRecHitBuilder = 'WithoutRefit'
+GlobalMuonRefitter.Propagator = 'SmartPropagatorAny'
+GlobalTrajectoryBuilderCommon.TrackerRecHitBuilder = 'WithoutRefit'
+tevMuons.RefitterParameters.TrackerRecHitBuilder = 'WithoutRefit'
+tevMuons.RefitterParameters.Propagator =  'SmartPropagatorAny'
+KFSmootherForRefitInsideOut.Propagator = 'SmartPropagatorAny'
+KFSmootherForRefitOutsideIn.Propagator = 'SmartPropagator'
+KFFitterForRefitInsideOut.Propagator = 'SmartPropagatorAny'
+KFFitterForRefitOutsideIn.Propagator = 'SmartPropagatorAny'
+
 famosMuonSequence = cms.Sequence(
     muonDigi+
     muonlocalreco+
     ancientMuonSeed+
     standAloneMuons+
-    globalMuons
+    globalMuons+
+    tevMuons
 )
 
 #Muon identification sequence
@@ -215,18 +176,10 @@ muons.inputCollectionLabels = cms.VInputTag(
     'globalMuons',
     cms.InputTag("standAloneMuons","UpdatedAtVtx")
 )
-#muons.TrackAssociatorParameters.EBRecHitCollectionLabel = cms.InputTag("caloRecHits","EcalRecHitsEB")
-#muons.TrackAssociatorParameters.EERecHitCollectionLabel = cms.InputTag("caloRecHits","EcalRecHitsEE")
 muons.TrackAssociatorParameters.CaloTowerCollectionLabel = 'towerMaker'
-#muons.TrackAssociatorParameters.HBHERecHitCollectionLabel = 'caloRecHits'
-#muons.TrackAssociatorParameters.HORecHitCollectionLabel = 'caloRecHits'
 # Use FastSim tracks and calo hits for calo muon id
 calomuons.inputTracks = 'generalTracks'
-#calomuons.TrackAssociatorParameters.EBRecHitCollectionLabel = cms.InputTag("caloRecHits","EcalRecHitsEB")
-#calomuons.TrackAssociatorParameters.EERecHitCollectionLabel = cms.InputTag("caloRecHits","EcalRecHitsEE")
 calomuons.TrackAssociatorParameters.CaloTowerCollectionLabel = 'towerMaker'
-#calomuons.TrackAssociatorParameters.HBHERecHitCollectionLabel = 'caloRecHits'
-#calomuons.TrackAssociatorParameters.HORecHitCollectionLabel = 'caloRecHits'
 
 # Muon isolation
 from RecoMuon.MuonIsolationProducers.muIsolation_cff import *
@@ -249,12 +202,11 @@ pixelMatchGsfFit = TrackingTools.GsfTracking.GsfElectronFit_cfi.GsfGlobalElectro
 pixelMatchGsfFit.src = 'electronGSGsfTrackCandidates'
 pixelMatchGsfFit.TTRHBuilder = 'WithoutRefit'
 pixelMatchGsfFit.TrajectoryInEvent = True
-#pixelMatchGsfElectrons.hcalRecHits = 'caloRecHits'
+
 pixelMatchGsfElectrons.barrelSuperClusters = cms.InputTag("correctedHybridSuperClusters","electronGSPixelSeeds")
 pixelMatchGsfElectrons.endcapSuperClusters = cms.InputTag("correctedEndcapSuperClustersWithPreshower","electronGSPixelSeeds")
 
 from RecoEgamma.ElectronIdentification.electronIdSequence_cff import *
-
 famosElectronSequence = cms.Sequence(
     iterativeFirstSeeds+
     newCombinedSeeds+
@@ -267,12 +219,6 @@ famosElectronSequence = cms.Sequence(
 
 # Photon reconstruction
 from RecoEgamma.EgammaPhotonProducers.photonSequence_cff import *
-#photons.barrelEcalHits = cms.InputTag("caloRecHits","EcalRecHitsEB")
-#photons.endcapEcalHits = cms.InputTag("caloRecHits","EcalRecHitsEE")
-#photons.isolationSumsCalculatorSet.barrelEcalRecHitProducer = 'caloRecHits'
-#photons.isolationSumsCalculatorSet.endcapEcalRecHitProducer = 'caloRecHits'
-#photons.hbheModule = 'caloRecHits'
-#photons.hbheInstance = ''
 photons.pixelSeedProducer = 'electronGSPixelSeeds'
 from RecoEgamma.PhotonIdentification.photonId_cff import *
 
@@ -281,12 +227,15 @@ famosPhotonSequence = cms.Sequence(
     photonIDSequence
 )
 
-# Add isolation information for electrons and photons
-#from RecoEgamma.EgammaIsolationAlgos.egammaCalExtractorBlocks_cff import *
-#EgammaIsoEcalFromHitsExtractorBlock.barrelRecHits = 'caloRecHits:EcalRecHitsEB'
-#EgammaIsoEcalFromHitsExtractorBlock.endcapRecHits = 'caloRecHits:EcalRecHitsEE'
-#EgammaIsoHcalFromHitsExtractorBlock.hcalRecHits = 'caloRecHits'
-#from RecoEgamma.EgammaIsolationAlgos.egammaIsolationSequence_cff import *
+# Add pre-calculated isolation sums for electrons (NB for photons they are stored in the Photon. All is done in the
+# sequence above
+from RecoEgamma.EgammaIsolationAlgos.egammaIsolationSequence_cff import *
+
+#Add egamma ecal interesting rec hits
+from RecoEgamma.EgammaIsolationAlgos.interestingEleIsoDetIdModule_cff import *
+from RecoEgamma.EgammaIsolationAlgos.interestingGamIsoDetIdModule_cff import *
+
+from RecoEgamma.EgammaIsolationAlgos.interestingEgammaIsoDetIdsSequence_cff import *
 
 # B tagging
 from RecoJets.JetAssociationProducers.ic5JetTracksAssociatorAtVertex_cfi import *
@@ -297,11 +246,7 @@ from RecoVertex.Configuration.RecoVertex_cff import *
 from RecoVertex.BeamSpotProducer.BeamSpot_cff import *
 from RecoBTag.Configuration.RecoBTag_cff import *
 offlinePrimaryVerticesWithBS.TrackLabel = 'generalTracks'
-#btagSoftElectrons.HBHERecHitTag = 'caloRecHits'
-#btagSoftElectrons.TrackAssociatorParameters.EBRecHitCollectionLabel = cms.InputTag("caloRecHits","EcalRecHitsEB")
-#btagSoftElectrons.TrackAssociatorParameters.EERecHitCollectionLabel = cms.InputTag("caloRecHits","EcalRecHitsEE")
 btagSoftElectrons.TrackAssociatorParameters.CaloTowerCollectionLabel = 'towerMaker'
-#btagSoftElectrons.TrackAssociatorParameters.HBHERecHitCollectionLabel = 'caloRecHits'
 
 famosBTaggingSequence = cms.Sequence(
     btagging
@@ -309,8 +254,6 @@ famosBTaggingSequence = cms.Sequence(
 
 #Tau tagging
 from RecoTauTag.Configuration.RecoTauTag_cff import *
-#caloRecoTauTagInfoProducer.EBRecHitsSource = cms.InputTag("caloRecHits","EcalRecHitsEB")
-#caloRecoTauTagInfoProducer.EERecHitsSource = cms.InputTag("caloRecHits","EcalRecHitsEE")
 
 famosTauTaggingSequence = cms.Sequence(tautagging)
 
@@ -431,7 +374,10 @@ famosWithElectrons = cms.Sequence(
     famosWithTracks+
     caloRecHits+
     ecalClusters+ 
-    famosElectronSequence
+    famosElectronSequence+
+    interestingEleIsoDetIdEB+
+    interestingEleIsoDetIdEE+
+    egammaIsolationSequence
 )
 
 famosWithPhotons = cms.Sequence(
@@ -439,7 +385,9 @@ famosWithPhotons = cms.Sequence(
     vertexreco+
     caloRecHits+
     ecalClusters+
-    famosPhotonSequence
+    famosPhotonSequence+
+    interestingGamIsoDetIdEB+
+    interestingGamIsoDetIdEE
 )
 
 famosWithElectronsAndPhotons = cms.Sequence(
@@ -448,7 +396,9 @@ famosWithElectronsAndPhotons = cms.Sequence(
     caloRecHits+
     ecalClusters+
     famosElectronSequence+
-    famosPhotonSequence
+    famosPhotonSequence+
+    interestingEgammaIsoDetIds+
+    egammaIsolationSequence
 )
 
 famosWithBTagging = cms.Sequence(
@@ -490,6 +440,8 @@ reconstructionWithFamos = cms.Sequence(
     ecalClusters+
     famosElectronSequence+
     famosPhotonSequence+
+    egammaIsolationSequence+
+    interestingEgammaIsoDetIds+
     famosMuonSequence+
     famosMuonIdAndIsolationSequence+
     famosParticleFlowSequence+
@@ -499,8 +451,9 @@ reconstructionWithFamos = cms.Sequence(
 #    paramMuons+
 #    muIsolation_ParamGlobalMuons+
     ic5JetTracksAssociatorAtVertex+
-    famosBTaggingSequence+
     famosTauTaggingSequence+
+    reducedRecHitsSequence+
+    famosBTaggingSequence+
     famosPFTauTaggingSequence
 )
 
