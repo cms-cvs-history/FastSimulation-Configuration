@@ -1,4 +1,4 @@
-# /dev/CMSSW_2_2_0/HLT/V10 (CMSSW_2_2_1)
+# /dev/CMSSW_2_2_4/HLT/V3 (CMSSW_2_2_X_2009-02-02-0000)
 # Begin replace statements specific to the FastSim HLT
 # For all HLTLevel1GTSeed objects, make the following replacements:
 #   - L1GtReadoutRecordTag changed from hltGtDigis to gtDigis
@@ -28,7 +28,7 @@ import FWCore.ParameterSet.Config as cms
 
 
 HLTConfigVersion = cms.PSet(
-  tableName = cms.string('/dev/CMSSW_2_2_0/HLT/V10')
+  tableName = cms.string('/dev/CMSSW_2_2_4/HLT/V3')
 )
 
 SiStripQualityFakeESSource = cms.ESSource( "SiStripQualityFakeESSource" )
@@ -46,6 +46,7 @@ AnyDirectionAnalyticalPropagator = cms.ESProducer( "AnalyticalPropagatorESProduc
 ParametrizedMagneticFieldProducer = cms.ESProducer( "ParametrizedMagneticFieldProducer",
   label = cms.untracked.string( "parametrizedField" ),
   version = cms.string( "OAE_1103l_071212" ),
+  appendToDataLabel = cms.string( "" ),
   parameters = cms.PSet(  BValue = cms.string( "3_8T" ) )
 )
 Chi2EstimatorForL2Refit = cms.ESProducer( "Chi2MeasurementEstimatorESProducer",
@@ -109,7 +110,8 @@ bJetRegionalTrajectoryBuilder = cms.ESProducer( "CkfTrajectoryBuilderESProducer"
   maxCand = cms.int32( 1 ),
   lostHitPenalty = cms.double( 30.0 ),
   intermediateCleaning = cms.bool( True ),
-  alwaysUseInvalidHits = cms.bool( False )
+  alwaysUseInvalidHits = cms.bool( False ),
+  appendToDataLabel = cms.string( "" )
 )
 bJetRegionalTrajectoryFilter = cms.ESProducer( "TrajectoryFilterESProducer",
   ComponentName = cms.string( "bJetRegionalTrajectoryFilter" ),
@@ -137,7 +139,8 @@ hltCkfTrajectoryBuilderMumu = cms.ESProducer( "CkfTrajectoryBuilderESProducer",
   maxCand = cms.int32( 3 ),
   lostHitPenalty = cms.double( 30.0 ),
   intermediateCleaning = cms.bool( True ),
-  alwaysUseInvalidHits = cms.bool( False )
+  alwaysUseInvalidHits = cms.bool( False ),
+  appendToDataLabel = cms.string( "" )
 )
 hltCkfTrajectoryBuilderMumuk = cms.ESProducer( "CkfTrajectoryBuilderESProducer",
   ComponentName = cms.string( "hltCkfTrajectoryBuilderMumuk" ),
@@ -151,7 +154,8 @@ hltCkfTrajectoryBuilderMumuk = cms.ESProducer( "CkfTrajectoryBuilderESProducer",
   maxCand = cms.int32( 3 ),
   lostHitPenalty = cms.double( 30.0 ),
   intermediateCleaning = cms.bool( True ),
-  alwaysUseInvalidHits = cms.bool( False )
+  alwaysUseInvalidHits = cms.bool( False ),
+  appendToDataLabel = cms.string( "" )
 )
 hltCkfTrajectoryFilterMumu = cms.ESProducer( "TrajectoryFilterESProducer",
   ComponentName = cms.string( "hltCkfTrajectoryFilterMumu" ),
@@ -254,7 +258,8 @@ trajBuilderL3 = cms.ESProducer( "CkfTrajectoryBuilderESProducer",
   maxCand = cms.int32( 5 ),
   lostHitPenalty = cms.double( 30.0 ),
   intermediateCleaning = cms.bool( True ),
-  alwaysUseInvalidHits = cms.bool( False )
+  alwaysUseInvalidHits = cms.bool( False ),
+  appendToDataLabel = cms.string( "" )
 )
 trajFilterL3 = cms.ESProducer( "TrajectoryFilterESProducer",
   ComponentName = cms.string( "trajFilterL3" ),
@@ -284,8 +289,7 @@ hltL1sL1Jet15 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" ),
-    saveTags = cms.untracked.bool( True )
+    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
 )
 hltPreL1Jet15 = cms.EDFilter( "HLTPrescaler" )
 hltL1sJet30 = cms.EDFilter( "HLTLevel1GTSeed",
@@ -738,8 +742,7 @@ hltL1sL1MET20 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" ),
-    saveTags = cms.untracked.bool( True )
+    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
 )
 hltPreL1MET20 = cms.EDFilter( "HLTPrescaler" )
 hltL1sMET25 = cms.EDFilter( "HLTLevel1GTSeed",
@@ -3413,7 +3416,11 @@ hltDt4DSegments = cms.EDProducer( "DTRecSegment4DProducer",
         debug = cms.untracked.bool( False ),
         nSharedHitsMax = cms.int32( 2 ),
         nUnSharedHitsMin = cms.int32( 2 ),
-        segmCleanerMode = cms.int32( 1 )
+        segmCleanerMode = cms.int32( 1 ),
+        performT0_vdriftSegCorrection = cms.bool( False ),
+        hit_afterT0_resolution = cms.double( 0.03 ),
+        T0SegCorrectionDebug = cms.untracked.bool( False ),
+        performT0SegCorrection = cms.bool( False )
       ),
       Reco2DAlgoName = cms.string( "DTCombinatorialPatternReco" ),
       recAlgoConfig = cms.PSet( 
@@ -3438,7 +3445,11 @@ hltDt4DSegments = cms.EDProducer( "DTRecSegment4DProducer",
       debug = cms.untracked.bool( False ),
       nSharedHitsMax = cms.int32( 2 ),
       nUnSharedHitsMin = cms.int32( 2 ),
-      segmCleanerMode = cms.int32( 1 )
+      segmCleanerMode = cms.int32( 1 ),
+      performT0SegCorrection = cms.bool( False ),
+      performT0_vdriftSegCorrection = cms.bool( False ),
+      hit_afterT0_resolution = cms.double( 0.03 ),
+      T0SegCorrectionDebug = cms.untracked.bool( False )
     )
 )
 hltCsc2DRecHits = cms.EDProducer( "CSCRecHitDProducer",
