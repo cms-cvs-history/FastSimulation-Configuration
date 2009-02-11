@@ -332,6 +332,7 @@ else:
     modules += "-hltEcalPreshowerRecHit,"
     modules += "-hltEcalRecHit,"
     modules += "-hltEcalRegionalRestFEDs,"
+    modules += "-hltEcalRawToRecHitFacility,"
     modules += "-hltEcalRegionalRestDigis,"
     modules += "-hltEcalRegionalRestWeightUncalibRecHit,"
     modules += "-hltEcalRegionalRestRecHitTmp,"
