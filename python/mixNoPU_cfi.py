@@ -7,6 +7,7 @@ mix = cms.EDFilter("MixingModule",
     minBunch = cms.int32(-5),
     bunchspace = cms.int32(25),
     playback = cms.untracked.bool(False),
+    checktof = cms.bool(False),
     mixObjects = cms.PSet(
         mixSH = cms.PSet(
             mixSimHits
