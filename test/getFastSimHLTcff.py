@@ -299,6 +299,8 @@ else:
     modules += "-hltL1NonIsoLargeWindowElectronPixelSeeds,"
     modules += "hltPixelMatchElectronsL1NonIsoLargeWindow,"
     modules += "-hltEcalPreshowerDigis,"
+    modules += "-hltEcalRegionalEtaFEDs,"
+    modules += "-hltEcalRegionalEtaRecHit,"
     modules += "-hltEcalRegionalJetsFEDs,"
     modules += "-hltEcalRegionalJetsDigis,"
     modules += "-hltEcalRegionalJetsWeightUncalibRecHit,"
