@@ -1,4 +1,4 @@
-# /dev/CMSSW_3_0_0/pre7/HLT/V5 (CMSSW_3_0_0_pre7)
+# /dev/CMSSW_3_0_0/pre7/HLT/V22 (CMSSW_3_1_X_2009-02-02-0200)
 # Begin replace statements specific to the FastSim HLT
 # For all HLTLevel1GTSeed objects, make the following replacements:
 #   - L1GtReadoutRecordTag changed from hltGtDigis to gtDigis
@@ -28,13 +28,24 @@ import FWCore.ParameterSet.Config as cms
 
 
 HLTConfigVersion = cms.PSet(
-  tableName = cms.string('/dev/CMSSW_3_0_0/pre7/HLT/V5')
+  tableName = cms.string('/dev/CMSSW_3_0_0/pre7/HLT/V22')
 )
 
-MCJetCorrectorIcone5 = cms.ESSource( "MCJetCorrectionService",
+L3AbsoluteCorrectionService = cms.ESSource( "L3AbsoluteCorrectionService",
   appendToDataLabel = cms.string( "" ),
-  tagName = cms.string( "CMSSW_152_iterativeCone5" ),
-  label = cms.string( "MCJetCorrectorIcone5" )
+  tagName = cms.string( "Summer08_L3Absolute_IC5Calo" ),
+  label = cms.string( "L3AbsoluteJetCorrector" )
+)
+L2RelativeCorrectionService = cms.ESSource( "L2RelativeCorrectionService",
+  appendToDataLabel = cms.string( "" ),
+  tagName = cms.string( "Summer08_L2Relative_IC5Calo" ),
+  label = cms.string( "L2RelativeJetCorrector" )
+)
+MCJetCorrectorIcone5 = cms.ESSource( "JetCorrectionServiceChain",
+  label = cms.string( "MCJetCorrectorIcone5" ),
+  appendToDataLabel = cms.string( "" ),
+  correctors = cms.vstring( 'L2RelativeJetCorrector',
+    'L3AbsoluteJetCorrector' )
 )
 SiStripQualityFakeESSource = cms.ESSource( "SiStripQualityFakeESSource" )
 
@@ -104,6 +115,7 @@ KFTrajectorySmootherForL2Muon = cms.ESProducer( "KFTrajectorySmootherESProducer"
 ParametrizedMagneticFieldProducer = cms.ESProducer( "ParametrizedMagneticFieldProducer",
   label = cms.untracked.string( "parametrizedField" ),
   version = cms.string( "OAE_1103l_071212" ),
+  appendToDataLabel = cms.string( "" ),
   parameters = cms.PSet(  BValue = cms.string( "3_8T" ) )
 )
 PixelCPEGenericESProducer = cms.ESProducer( "PixelCPEGenericESProducer",
@@ -296,9 +308,11 @@ pixellayertriplets = cms.ESProducer( "PixelLayerTripletsESProducer",
 )
 sistripconn = cms.ESProducer( "SiStripConnectivity" )
 softLeptonByDistance = cms.ESProducer( "LeptonTaggerByDistanceESProducer",
+  appendToDataLabel = cms.string( "" ),
   distance = cms.double( 0.5 )
 )
 softLeptonByPt = cms.ESProducer( "LeptonTaggerByPtESProducer",
+  appendToDataLabel = cms.string( "" ),
   ipSign = cms.string( "any" )
 )
 trajBuilderL3 = cms.ESProducer( "CkfTrajectoryBuilderESProducer",
@@ -344,8 +358,7 @@ hltL1sL1Jet15 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" ),
-    saveTags = cms.untracked.bool( True )
+    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
 )
 hltPreL1Jet15 = cms.EDFilter( "HLTPrescaler" )
 hltL1sJet30 = cms.EDFilter( "HLTLevel1GTSeed",
@@ -830,8 +843,7 @@ hltL1sL1MET20 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" ),
-    saveTags = cms.untracked.bool( True )
+    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
 )
 hltPreL1MET20 = cms.EDFilter( "HLTPrescaler" )
 hltL1sMET25 = cms.EDFilter( "HLTLevel1GTSeed",
@@ -5103,7 +5115,8 @@ hltBSoftmuonL25TagInfos = cms.EDProducer( "SoftLepton",
     refineJetAxis = cms.uint32( 0 ),
     leptonDeltaRCut = cms.double( 0.4 ),
     leptonChi2Cut = cms.double( 0.0 ),
-    leptonQualityCut = cms.double( 0.0 )
+    leptonQualityCut = cms.double( 0.0 ),
+    muonSelection = cms.uint32( 0 )
 )
 hltBSoftmuonL25BJetTags = cms.EDProducer( "JetTagProducer",
     jetTagComputer = cms.string( "softLeptonByDistance" ),
@@ -5123,7 +5136,8 @@ hltBSoftmuonL3TagInfos = cms.EDProducer( "SoftLepton",
     refineJetAxis = cms.uint32( 0 ),
     leptonDeltaRCut = cms.double( 0.4 ),
     leptonChi2Cut = cms.double( 0.0 ),
-    leptonQualityCut = cms.double( 0.0 )
+    leptonQualityCut = cms.double( 0.0 ),
+    muonSelection = cms.uint32( 0 )
 )
 hltBSoftmuonL3BJetTags = cms.EDProducer( "JetTagProducer",
     jetTagComputer = cms.string( "softLeptonByPt" ),
@@ -5555,7 +5569,7 @@ hltFilterL2EtCutSingleLooseIsoTau20 = cms.EDFilter( "HLT1Tau",
 hltFilterL2EcalIsolationSingleLooseIsoTau20 = cms.EDFilter( "HLT1Tau",
     inputTag = cms.InputTag( 'hltL2TauRelaxingIsolationSelector','Isolated' ),
     saveTag = cms.untracked.bool( True ),
-    MinPt = cms.double( 15.0 ),
+    MinPt = cms.double( 20.0 ),
     MaxEta = cms.double( 5.0 ),
     MinN = cms.int32( 1 )
 )
@@ -5569,7 +5583,7 @@ hltFilterL2EtCutSingleLooseIsoTau20Trk5 = cms.EDFilter( "HLT1Tau",
 )
 hltFilterL2EcalIsolationSingleLooseIsoTau20Trk5 = cms.EDFilter( "HLT1Tau",
     inputTag = cms.InputTag( 'hltL2TauRelaxingIsolationSelector','Isolated' ),
-    MinPt = cms.double( 15.0 ),
+    MinPt = cms.double( 20.0 ),
     MaxEta = cms.double( 5.0 ),
     MinN = cms.int32( 1 )
 )
@@ -5589,12 +5603,12 @@ hltL25TauConeIsolation = cms.EDProducer( "ConeIsolation",
     MaximumTransverseImpactParameter = cms.double( 300.0 ),
     MinimumTransverseMomentum = cms.double( 1.0 ),
     MaximumChiSquared = cms.double( 100.0 ),
-    DeltaZetTrackVertex = cms.double( 0.2 ),
     MatchingCone = cms.double( 0.2 ),
     SignalCone = cms.double( 0.15 ),
     IsolationCone = cms.double( 0.5 ),
     MinimumTransverseMomentumInIsolationRing = cms.double( 1.0 ),
     MinimumTransverseMomentumLeadingTrack = cms.double( 5.0 ),
+    DeltaZetTrackVertex = cms.double( 0.2 ),
     MaximumNumberOfTracksIsolationRing = cms.int32( 0 ),
     UseFixedSizeCone = cms.bool( True ),
     VariableConeParameter = cms.double( 3.5 ),
@@ -5647,7 +5661,7 @@ hltFilterL2EtCutDoubleLooseIsoTau15Trk5 = cms.EDFilter( "HLT1Tau",
 )
 hltFilterL2EcalIsolationDoubleLooseIsoTau15Trk5 = cms.EDFilter( "HLT1Tau",
     inputTag = cms.InputTag( 'hltL2TauRelaxingIsolationSelector','Isolated' ),
-    MinPt = cms.double( 20.0 ),
+    MinPt = cms.double( 15.0 ),
     MaxEta = cms.double( 5.0 ),
     MinN = cms.int32( 2 )
 )
@@ -5977,12 +5991,12 @@ hltL25TauPixelTracksConeIsolation = cms.EDProducer( "ConeIsolation",
     MaximumTransverseImpactParameter = cms.double( 300.0 ),
     MinimumTransverseMomentum = cms.double( 1.0 ),
     MaximumChiSquared = cms.double( 100.0 ),
-    DeltaZetTrackVertex = cms.double( 0.2 ),
     MatchingCone = cms.double( 0.1 ),
     SignalCone = cms.double( 0.15 ),
     IsolationCone = cms.double( 0.5 ),
     MinimumTransverseMomentumInIsolationRing = cms.double( 1.0 ),
     MinimumTransverseMomentumLeadingTrack = cms.double( 3.0 ),
+    DeltaZetTrackVertex = cms.double( 0.2 ),
     MaximumNumberOfTracksIsolationRing = cms.int32( 0 ),
     UseFixedSizeCone = cms.bool( True ),
     VariableConeParameter = cms.double( 3.5 ),
@@ -6142,12 +6156,12 @@ hltL25TauPixelTracksConeIsolationNoL2 = cms.EDProducer( "ConeIsolation",
     MaximumTransverseImpactParameter = cms.double( 300.0 ),
     MinimumTransverseMomentum = cms.double( 1.0 ),
     MaximumChiSquared = cms.double( 100.0 ),
-    DeltaZetTrackVertex = cms.double( 0.2 ),
     MatchingCone = cms.double( 0.1 ),
     SignalCone = cms.double( 0.15 ),
     IsolationCone = cms.double( 0.5 ),
     MinimumTransverseMomentumInIsolationRing = cms.double( 1.0 ),
     MinimumTransverseMomentumLeadingTrack = cms.double( 5.0 ),
+    DeltaZetTrackVertex = cms.double( 0.2 ),
     MaximumNumberOfTracksIsolationRing = cms.int32( 0 ),
     UseFixedSizeCone = cms.bool( True ),
     VariableConeParameter = cms.double( 3.5 ),
