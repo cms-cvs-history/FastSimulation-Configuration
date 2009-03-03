@@ -1,4 +1,4 @@
-# /dev/CMSSW_2_2_4/HLT/V3 (CMSSW_2_2_X_2009-02-02-0000)
+# /dev/CMSSW_2_2_4/HLT/V5 (CMSSW_2_2_4)
 # Begin replace statements specific to the FastSim HLT
 # For all HLTLevel1GTSeed objects, make the following replacements:
 #   - L1GtReadoutRecordTag changed from hltGtDigis to gtDigis
@@ -28,7 +28,7 @@ import FWCore.ParameterSet.Config as cms
 
 
 HLTConfigVersion = cms.PSet(
-  tableName = cms.string('/dev/CMSSW_2_2_4/HLT/V3')
+  tableName = cms.string('/dev/CMSSW_2_2_4/HLT/V5')
 )
 
 SiStripQualityFakeESSource = cms.ESSource( "SiStripQualityFakeESSource" )

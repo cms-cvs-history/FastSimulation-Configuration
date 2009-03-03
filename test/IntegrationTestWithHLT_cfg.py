@@ -69,8 +69,8 @@ process.VolumeBasedMagneticFieldESProducer.useParametrizedTrackerField = True
 process.famosPileUp.PileUpSimulator.averageNumber = 0.0
 
 # Get frontier conditions   - not applied in the HCAL, see below
-# Values for globaltag are "STARTUP_V7::All", "IDEAL_V11::All"
-process.GlobalTag.globaltag = "STARTUP_V8::All"
+# Values for globaltag are "STARTUP_V7::All", "IDEAL_V12::All"
+process.GlobalTag.globaltag = "STARTUP_V9::All"
 
 
 # Apply ECAL and HCAL miscalibration 

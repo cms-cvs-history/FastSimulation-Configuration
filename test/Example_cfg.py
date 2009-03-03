@@ -33,7 +33,7 @@ process.load("FastSimulation/Configuration/HZZllll_cfi")
 # Famos sequences (Frontier conditions)
 process.load("FastSimulation/Configuration/CommonInputs_cff")
 process.load("FastSimulation/Configuration/FamosSequences_cff")
-process.GlobalTag.globaltag = "IDEAL_V11::All"
+process.GlobalTag.globaltag = "IDEAL_V12::All"
 
 # Parametrized magnetic field (new mapping, 4.0 and 3.8T)
 #process.load("Configuration.StandardSequences.MagneticField_40T_cff")
