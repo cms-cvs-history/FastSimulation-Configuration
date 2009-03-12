@@ -365,6 +365,12 @@ else:
     modules += "-hltL25TauPixelSeeds,"
     modules += "-hltL25TauCkfTrackCandidates,"
     modules += "-hltL25TauCtfWithMaterialTracks," 
+    modules += "-hltBLifetimeRegionalPixelSeedGeneratorStartup,"
+    modules += "-hltBLifetimeRegionalCkfTrackCandidatesStartup,"
+    modules += "-hltBLifetimeRegionalCtfWithMaterialTracksStartup,"
+    modules += "-hltBLifetimeRegionalPixelSeedGeneratorStartupU,"
+    modules += "-hltBLifetimeRegionalCkfTrackCandidatesStartupU,"
+    modules += "-hltBLifetimeRegionalCtfWithMaterialTracksStartupU,"
     modules += "-hltBLifetimeRegionalPixelSeedGenerator,"
     modules += "-hltBLifetimeRegionalCkfTrackCandidates,"
     modules += "-hltBLifetimeRegionalCtfWithMaterialTracks,"
@@ -423,8 +429,10 @@ else:
     sequences += "-HLTL3TauTrackReconstructionSequence,"
     sequences += "-HLTL25TauTrackReconstructionSequence,"    
     sequences += "-HLTEndSequence,"
-    sequences += "-HLTBeginSequence"
-    
+    sequences += "-HLTBeginSequence,"
+    sequences += "-HLTL2HcalIsolTrackSequence,"
+    sequences += "-HLTL3HcalIsolTrackSequence"
+
     #--- Some notes about removed paths: ---#
     #--- CandHLTCSCBeamHalo removed because of L1_SingleMuBeamHalo (not found in L1Menu2007)
     #--- HLT1MuonL1Open removed because of L1_SingleMuOpen (not found in L1Menu2007)
@@ -450,9 +458,12 @@ else:
 
     if L1Menu == "L1Menu2008_2E30":
         paths += "-AlCa_HcalPhiSym,"
-
-    paths += "-DummyPath"
-
+##PAT *** for now REMOVE the new Alca Streams
+        paths += "-HLT_IsoTrack,"
+        
+        
+        paths += "-DummyPath"
+    
 
     #--- Special case: Running a user-specified set of paths ---#
     if usePaths != "All":
@@ -564,7 +575,7 @@ else:
             subEnd = line.find(" ",subStart)
             bName = line[subStart:subEnd]
 
-
+##HLTL3PixelIsolFilterSequence has been removed 
         if line.find("HLTL3PixelIsolFilterSequence = ") == 0:
             line = line.replace('hltPixelTracks','hltPixelTracking')
             print line[:-1]
