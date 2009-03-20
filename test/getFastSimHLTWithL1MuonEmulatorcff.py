@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 # Usage: ./getFastSimHLTandL1MuonEmulatorcff.py <Version from ConfDB> <Name of cff file> <optional L1 Menu> <optional subset of paths>
+##DEFAULT 8E29
 
 import sys
 import os
@@ -10,7 +11,7 @@ import fileinput
 
 def usage():
     print "Usage: ./getFastSimHLTandL1MuonEmulatorcff.py <Version from ConfDB> <Name of cff> <optional L1 Menu> <optional subset of paths>"
-    print "       Default L1 Menu: L1Menu2008_2E30"
+    print "       Default L1 Menu: L1Menu_Commissioning2009_v0"
     print "       Define subset of paths as comma-separated list: a,b,c (Default is to run all paths)" 
     sys.exit(1)
 
@@ -18,7 +19,7 @@ argc = len(sys.argv)
 blockName = "None"
 #cfgName = "None"
 usePaths = "All"
-L1Menu   = "L1Menu2008_2E30"
+L1Menu   = "L1Menu_Commissioning2009_v0"
 
 if argc == 3:
     dbName  = sys.argv[1]
@@ -445,23 +446,10 @@ else:
     #--- CandHLTCSCBeamHaloRing2or3 removed because of L1_SingleMuBeamHalo (not found in L1Menu2007)
     paths = "--paths "
     
-    if L1Menu == "L1Menu2007":
-        paths += "-HLT_L1MuOpen,"
-        paths += "-HLT_MinBiasHcal,"
-        paths += "-HLT_MinBiasEcal,"
-        paths += "-HLT_CSCBeamHalo,"
-        paths += "-HLT_CSCBeamHaloOverlapRing1,"
-        paths += "-HLT_CSCBeamHaloOverlapRing2,"
-        paths += "-HLT_CSCBeamHaloRing2or3,"
-        paths += "-HLT_QuadJet30,"
-        paths += "-HLT_IsoEle5_TripleJet30,"
-
-    if L1Menu == "L1Menu2008_2E30":
+    if L1Menu == "L1Menu_Commissioning2009_v0":
         paths += "-AlCa_HcalPhiSym,"
 ##PAT *** for now REMOVE the new Alca Streams
-        paths += "-HLT_IsoTrack,"
-        
-        
+        paths += "-HLT_IsoTrack_8E29,"
         paths += "-DummyPath"
     
 

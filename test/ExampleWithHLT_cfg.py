@@ -14,7 +14,17 @@ process.load("FastSimulation.Configuration.RandomServiceInitialization_cff")
 process.load("Configuration.Generator.TTbar_cfi")
 
 # L1 Menu and prescale factors : useful for testing all L1 paths
-process.load("Configuration.StandardSequences.L1TriggerDefaultMenu_cff")
+
+# --- This was for 2e30 :
+# process.load("Configuration.StandardSequences.L1TriggerDefaultMenu_cff")
+
+# --- This is for 8e29 :
+process.load('L1Trigger/Configuration/L1StartupConfig_cff')
+process.load('L1TriggerConfig/L1GtConfigProducers/Luminosity/startup/L1Menu_Commissioning2009_v0_L1T_Scales_20080926_startup_Imp0_Unprescaled_cff')
+
+# --- This is for 1e31 :
+#process.load('L1TriggerConfig/L1GtConfigProducers/Luminosity/lumi1031/L1Menu_MC2009_v0_L1T_Scales_20080922_Imp0_Unprescaled_cff')
+
 # Other choices are
 # L1 Menu 2008 2x10E30 - Prescale
 # process.load("L1TriggerConfig/L1GtConfigProducers/Luminosity/lumi1030/L1Menu2008_2E30_cff")
@@ -47,7 +57,7 @@ process.VolumeBasedMagneticFieldESProducer.useParametrizedTrackerField = True
 
 # HLT paths -- defined from ConfigDB
 # This one is created on the fly by FastSimulation/Configuration/test/ExampleWithHLT_py.csh
-process.load("FastSimulation.Configuration.HLT_cff")
+process.load("FastSimulation.Configuration.HLT_8E29_cff")
 
 # Simulation sequence
 process.simulation = cms.Sequence(process.ProductionFilterSequence*process.simulationWithFamos)

@@ -4,15 +4,15 @@ process = cms.Process("HLT")
 
 # Number of events to be generated
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(5)
+    input = cms.untracked.int32(50)
 )
 
 # Include the RandomNumberGeneratorService definition
 process.load("FastSimulation.Configuration.RandomServiceInitialization_cff")
 
 # Generate ttbar events
-#process.load("Configuration.Generator.TTbar_cfi")
-process.load("Configuration.Generator.SingleMuPt100_cfi")
+process.load("Configuration.Generator.TTbar_cfi")
+#process.load("Configuration.Generator.SingleMuPt100_cfi")
 
 # L1 Menu and prescale factors : useful for testing all L1 paths
 process.load("Configuration.StandardSequences.L1TriggerDefaultMenu_cff")
