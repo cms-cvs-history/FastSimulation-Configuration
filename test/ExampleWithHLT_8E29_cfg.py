@@ -15,12 +15,14 @@ process.load("Configuration.Generator.TTbar_cfi")
 
 # L1 Menu and prescale factors : useful for testing all L1 paths
 
+# Note: the L1 conditions and menu now come from the GlobalTag !
+
 # --- This was for 2e30 :
 # process.load("Configuration.StandardSequences.L1TriggerDefaultMenu_cff")
 
 # --- This is for 8e29 :
-process.load('L1Trigger/Configuration/L1StartupConfig_cff')
-process.load('L1TriggerConfig/L1GtConfigProducers/Luminosity/startup/L1Menu_Commissioning2009_v0_L1T_Scales_20080926_startup_Imp0_Unprescaled_cff')
+#process.load('L1Trigger/Configuration/L1StartupConfig_cff')
+#process.load('L1TriggerConfig/L1GtConfigProducers/Luminosity/startup/L1Menu_Commissioning2009_v0_L1T_Scales_20080926_startup_Imp0_Unprescaled_cff')
 
 # --- This is for 1e31 :
 #process.load('L1TriggerConfig/L1GtConfigProducers/Luminosity/lumi1031/L1Menu_MC2009_v0_L1T_Scales_20080922_Imp0_Unprescaled_cff')
@@ -42,7 +44,7 @@ process.load('L1TriggerConfig/L1GtConfigProducers/Luminosity/startup/L1Menu_Comm
 
 # Common inputs, with fake conditions
 process.load("FastSimulation.Configuration.CommonInputs_cff")
-process.GlobalTag.globaltag = "IDEAL_30X::All"
+process.GlobalTag.globaltag = "STARTUP_31X_A::All"
 
 # L1 Emulator and HLT Setup
 process.load("FastSimulation.HighLevelTrigger.HLTSetup_cff")
