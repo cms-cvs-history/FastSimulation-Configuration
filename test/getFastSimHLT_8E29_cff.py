@@ -390,7 +390,7 @@ else:
     modules += "-hltEcalRegFED,"
     modules += "-hltSubdetFED,"
     modules += "-hcalFED,"    
-    modules += "-hltL1gtTrigReport,"
+    modules += "-hltL1GtTrigReport,"
 #--- The following modules must always be present to allow for individual paths to be run
     modules += "hltCsc2DRecHits,"
     modules += "hltDt1DRecHits,"

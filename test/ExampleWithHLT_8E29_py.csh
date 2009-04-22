@@ -1,10 +1,10 @@
 #!/bin/csh
 
 # clean
-rm $CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_8E29_cff.py
-rm $CMSSW_BASE/src/FastSimulation/Configuration/test/ExampleWithHLT_8E29.log
-rm $CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_8E29_cff.py
-rm AODWithHLT.root
+rm -f $CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_8E29_cff.py
+rm -f $CMSSW_BASE/src/FastSimulation/Configuration/test/ExampleWithHLT_8E29.log
+rm -f $CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_8E29_cff.py
+rm -f AODWithHLT.root
 
 # create HLT.cff :  For 2_0_4, use /dev/CMSSW_2_0_0/HLT/V35
 # For the adventurous user, you may specify the L1 Menu and a select number of HLT paths
