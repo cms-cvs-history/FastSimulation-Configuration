@@ -15,7 +15,7 @@ process.load("Configuration.Generator.TTbar_cfi")
 #process.load("Configuration.Generator.SingleMuPt100_cfi")
 
 # L1 Menu and prescale factors : useful for testing all L1 paths
-process.load("Configuration.StandardSequences.L1TriggerDefaultMenu_cff")
+# process.load("Configuration.StandardSequences.L1TriggerDefaultMenu_cff")
 # Other choices are
 # L1 Menu 2008 2x10E30 - Prescale
 # process.load("L1TriggerConfig/L1GtConfigProducers/Luminosity/lumi1030/L1Menu2008_2E30_cff")
@@ -46,7 +46,7 @@ process.VolumeBasedMagneticFieldESProducer.useParametrizedTrackerField = True
 
 # HLT paths - defined by configDB
 # This one is created on the fly by FastSimulation/Configuration/test/IntegrationTestWithHLT_py.csh
-process.load("FastSimulation.Configuration.HLT_cff")
+process.load("FastSimulation.Configuration.HLT_8E29_cff")
 
 # Only event accepted by L1 + HLT are reconstructed
 process.HLTEndSequence = cms.Sequence(process.reconstructionWithFamos)
@@ -72,8 +72,8 @@ process.VolumeBasedMagneticFieldESProducer.useParametrizedTrackerField = True
 process.famosPileUp.PileUpSimulator.averageNumber = 0.0
 
 # Get frontier conditions   - not applied in the HCAL, see below
-# Values for globaltag are "STARTUP_30X::All","IDEAL_30X::All"
-process.GlobalTag.globaltag = "STARTUP_30X::All"
+# Values for globaltag are "STARTUP_31X::All","IDEAL_31X::All"
+process.GlobalTag.globaltag = "STARTUP_31X::All"
 
 
 # Apply ECAL and HCAL miscalibration 
