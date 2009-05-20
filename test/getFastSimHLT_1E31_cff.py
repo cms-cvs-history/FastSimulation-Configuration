@@ -443,6 +443,11 @@ else:
         paths += "-AlCa_HcalPhiSym,"
 ###PAT *** for now REMOVE the new Alca Streams
         paths += "-HLT_IsoTrack_1E31,"
+###PAT REMOVE FOR XXXX_V25
+        paths += "-AlCa_EcalPi0_1E31,"
+        paths += "-AlCa_EcalEta_1E31,"
+        paths += "-HLT_Ele15_SiStrip_L1R,"
+        paths += "-HLT_Ele20_SiStrip_L1R,"
         paths += "-DummyPath"
 
 
