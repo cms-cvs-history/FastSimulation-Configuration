@@ -227,6 +227,8 @@ else:
     #--- Define blocks for ElectronPixelSeeds ---#
     #--- Please see FastSimulation/EgammaElectronAlgos/data/pixelMatchElectronL1[Non]Iso[LargeWindow]SequenceForHLT.cff ---#
     blocks = "--blocks "
+    blocks += "hltL1IsoLargeElectronPixelSeeds::SeedConfiguration,"
+    blocks += "hltL1NonIsoLargeElectronPixelSeeds::SeedConfiguration,"
     blocks += "hltL1NonIsoLargeWindowElectronPixelSeeds::SeedConfiguration,"
     blocks += "hltL1IsoLargeWindowElectronPixelSeeds::SeedConfiguration,"
     blocks += "hltL1NonIsoStartUpElectronPixelSeeds::SeedConfiguration,"
@@ -289,9 +291,11 @@ else:
     modules += "-hltCtfL1NonIsoWithMaterialTracks,"
     modules += "-hltCtfL1NonIsoStartUpWithMaterialTracks,"
     modules += "-hltL1IsoLargeWindowElectronPixelSeeds,"
-    modules += "hltPixelMatchElectronsL1IsoLargeWindow,"
+    modules += "-hltL1IsoLargeElectronPixelSeeds,"
+    modules += "-hltL1NonIsoLargeElectronPixelSeeds,"
+###    modules += "hltPixelMatchElectronsL1IsoLargeWindow,"
     modules += "-hltL1NonIsoLargeWindowElectronPixelSeeds,"
-    modules += "hltPixelMatchElectronsL1NonIsoLargeWindow,"
+###    modules += "hltPixelMatchElectronsL1NonIsoLargeWindow,"
     modules += "-hltEcalPreshowerDigis,"
     modules += "-hltEcalRegionalEtaFEDs,"
     modules += "-hltEcalRegionalEtaRecHit,"
@@ -543,7 +547,7 @@ else:
             #if line.find("cms.Path") > 0:
                 #subEnd = line.find("cms.Path")
                 #myPath = line[0:subEnd-3]
-                #schedule += myPath
+                #schedule += myPathlargh
                 #if myPath != "HLTriggerFinalPath":
                     #schedule += ",process."
                 #else:
