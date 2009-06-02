@@ -442,7 +442,7 @@ else:
     paths = "--paths "
     
     if L1Menu == "L1Menu_Commissioning2009_v0":
-        paths += "-AlCa_HcalPhiSym,"
+        paths += "-AlCa_HcalPhiSym,-HLTOutput,-AlCaOutput,"
 ###PAT *** for now REMOVE the new Alca Streams
         paths += "-HLT_IsoTrack_8E29,"
 ###REMOVE in XXXX_V25: 
