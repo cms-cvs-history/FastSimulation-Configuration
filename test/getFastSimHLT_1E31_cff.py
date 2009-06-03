@@ -452,6 +452,9 @@ else:
         paths += "-AlCa_EcalEta_1E31,"
         paths += "-HLT_Ele15_SiStrip_L1R,"
         paths += "-HLT_Ele20_SiStrip_L1R,"
+###NEED TO REMOVE explicitely the output paths
+        paths += "-HLTOutput,"
+        paths += "-AlCaOutput,"
         paths += "-DummyPath"
 
 
