@@ -449,8 +449,6 @@ else:
         paths += "-HLT_Ele15_SiStrip_L1R,"
         paths += "-AlCa_EcalPi0_8E29,"
         paths += "-AlCa_EcalEta_8E29,"
-        paths += "-HLTOutput,"
-        paths += "-AlCaOutput,"
         paths += "-DummyPath"
         
 
