@@ -278,23 +278,23 @@ else:
     modules = "--modules "
     modules += "hltL3MuonIsolations,"
     modules += "hltPixelVertices,"
-    modules += "-hltL1IsoElectronPixelSeeds,"
-    modules += "-hltL1IsoStartUpElectronPixelSeeds,"
+#    modules += "-hltL1IsoElectronPixelSeeds,"
+#    modules += "-hltL1IsoStartUpElectronPixelSeeds,"
     modules += "-hltCkfL1IsoTrackCandidates,"
     modules += "-hltCkfL1IsoStartUpTrackCandidates,"
     modules += "-hltCtfL1IsoWithMaterialTracks,"
     modules += "-hltCtfL1IsoStartUpWithMaterialTracks,"
-    modules += "-hltL1NonIsoElectronPixelSeeds,"
-    modules += "-hltL1NonIsoStartUpElectronPixelSeeds,"
+#   modules += "-hltL1NonIsoElectronPixelSeeds,"
+#   modules += "-hltL1NonIsoStartUpElectronPixelSeeds,"
     modules += "-hltCkfL1NonIsoTrackCandidates,"
     modules += "-hltCkfL1NonIsoStartUpTrackCandidates,"
     modules += "-hltCtfL1NonIsoWithMaterialTracks,"
     modules += "-hltCtfL1NonIsoStartUpWithMaterialTracks,"
-    modules += "-hltL1IsoLargeWindowElectronPixelSeeds,"
-    modules += "-hltL1IsoLargeElectronPixelSeeds,"
-    modules += "-hltL1NonIsoLargeElectronPixelSeeds,"
+#    modules += "-hltL1IsoLargeWindowElectronPixelSeeds,"
+#    modules += "-hltL1IsoLargeElectronPixelSeeds,"
+#    modules += "-hltL1NonIsoLargeElectronPixelSeeds,"
 ###    modules += "hltPixelMatchElectronsL1IsoLargeWindow,"
-    modules += "-hltL1NonIsoLargeWindowElectronPixelSeeds,"
+#   modules += "-hltL1NonIsoLargeWindowElectronPixelSeeds,"
 ###    modules += "hltPixelMatchElectronsL1NonIsoLargeWindow,"
     modules += "-hltEcalPreshowerDigis,"
     modules += "-hltEcalRegionalEtaFEDs,"
@@ -394,6 +394,8 @@ else:
     modules += "-hltSubdetFED,"
     modules += "-hcalFED,"    
     modules += "-hltL1GtTrigReport,"
+    modules += "hltPixelMatchElectronsL1Iso,"
+    modules += "hltPixelMatchElectronsL1NonIso,"
 #--- The following modules must always be present to allow for individual paths to be run
     modules += "hltCsc2DRecHits,"
     modules += "hltDt1DRecHits,"
@@ -413,14 +415,16 @@ else:
     sequences = "--sequences "
     sequences += "-HLTL1IsoEgammaRegionalRecoTrackerSequence,"
     sequences += "-HLTL1NonIsoEgammaRegionalRecoTrackerSequence,"
-    sequences += "-HLTL1IsoLargeWindowElectronsRegionalRecoTrackerSequence,"
-    sequences += "-HLTL1NonIsoLargeWindowElectronsRegionalRecoTrackerSequence,"
+#    sequences += "-HLTL1IsoLargeWindowElectronsRegionalRecoTrackerSequence,"
+#    sequences += "-HLTL1NonIsoLargeWindowElectronsRegionalRecoTrackerSequence,"
     sequences += "-HLTL1IsoElectronsRegionalRecoTrackerSequence,"
     sequences += "-HLTL1IsoStartUpElectronsRegionalRecoTrackerSequence,"
     sequences += "-HLTL1NonIsoElectronsRegionalRecoTrackerSequence,"
     sequences += "-HLTL1NonIsoStartUpElectronsRegionalRecoTrackerSequence,"
-    sequences += "-HLTPixelMatchElectronL1IsoLargeWindowTrackingSequence,"
-    sequences += "-HLTPixelMatchElectronL1NonIsoLargeWindowTrackingSequence,"
+#    sequences += "-HLTPixelMatchElectronL1IsoLargeWindowTrackingSequence,"
+#    sequences += "-HLTPixelMatchElectronL1NonIsoLargeWindowTrackingSequence,"
+    sequences += "-HLTPixelMatchElectronL1IsoTrackingSequence,"
+    sequences += "-HLTPixelMatchElectronL1NonIsoTrackingSequence,"
     sequences += "-HLTPixelTrackingForMinBiasSequence,"
     sequences += "-HLTDoLocalStripSequence,"
     sequences += "-HLTDoLocalPixelSequence,"
@@ -495,7 +499,9 @@ else:
         blockservices = "--noservices"
         blockpsets = "--nopsets"
         myGetCff = baseCommand + " " + essources + " " + esmodules + " " + sequences + " " + modules + " " + paths + " " + services + " " + psets + " > " + cffName
-        myGetBlocks = baseCommand + " " + blockessources + " " + blockesmodules + " " + blockservices + " " + blockpaths + " " + blockpsets + " " + blocks + " > " + blockName 
+        myGetBlocks = baseCommand + " " + blockessources + " " + blockesmodules + " " + blockservices + " " + blockpaths + " " + blockpsets + " " + blocks + " > " + blockName
+#        Can be useful for debugging
+#        print myGetCff
         
     # Write blocks for electrons and muons, in py configuration
     if ( blockName != "None" ) :
@@ -600,6 +606,12 @@ else:
         elif line.find("CandTag") > 0:
             line = line.replace('hltL1extraParticles','l1ParamMuons')
             print line[:-1]
+        elif line.find("preFilteredSeeds") > 0:
+            line = line.replace('True','False')
+            print line[:-1]
+        elif line.find("initialSeeds") > 0:
+            line = line.replace('noSeedsHere','globalPixelSeeds:GlobalPixel')
+            print line[:-1]
         elif line.find("}") > 0:
             if bName != "None":
                 bName = "None"
@@ -674,7 +686,13 @@ else:
                 line = line.replace('hltL1extraParticles','l1extraParticles') 
             if line.find("QuadJet30") > 0:
                 if L1Menu == "L1Menu2007":
-                    line = line.replace('QuadJet30','QuadJet40') 
+                    line = line.replace('QuadJet30','QuadJet40')
+            if line.find("hltL1IsoStartUpElectronPixelSeeds") > 0:
+                if line.find("Sequence") > 0:
+                    line = line.replace("hltL1IsoStartUpElectronPixelSeeds","hltL1IsoStartUpElectronPixelSeedsSequence")
+            if line.find("hltL1NonIsoStartUpElectronPixelSeeds") > 0:
+                if line.find("Sequence") > 0:
+                    line = line.replace("hltL1NonIsoStartUpElectronPixelSeeds","hltL1NonIsoStartUpElectronPixelSeedsSequence")
 
         print line[:-1]
 

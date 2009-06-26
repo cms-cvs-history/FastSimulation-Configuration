@@ -277,21 +277,21 @@ else:
     modules += "hltL3MuonIsolations,"
     modules += "hltPixelVertices,"
     modules += "-hltL1IsoElectronPixelSeeds,"
-    modules += "-hltL1IsoStartUpElectronPixelSeeds,"
+#    modules += "-hltL1IsoStartUpElectronPixelSeeds,"
     modules += "-hltCkfL1IsoTrackCandidates,"
     modules += "-hltCkfL1IsoStartUpTrackCandidates,"
     modules += "-hltCtfL1IsoWithMaterialTracks,"
     modules += "-hltCtfL1IsoStartUpWithMaterialTracks,"
     modules += "-hltL1NonIsoElectronPixelSeeds,"
-    modules += "-hltL1NonIsoStartUpElectronPixelSeeds,"
+#    modules += "-hltL1NonIsoStartUpElectronPixelSeeds,"
     modules += "-hltCkfL1NonIsoTrackCandidates,"
     modules += "-hltCkfL1NonIsoStartUpTrackCandidates,"
     modules += "-hltCtfL1NonIsoWithMaterialTracks,"
     modules += "-hltCtfL1NonIsoStartUpWithMaterialTracks,"
-    modules += "-hltL1IsoLargeWindowElectronPixelSeeds,"
+#    modules += "-hltL1IsoLargeWindowElectronPixelSeeds,"
 ###    modules += "hltPixelMatchElectronsL1IsoLargeWindow,"
     modules += "hltPixelMatchLargeWindowElectronsL1Iso,"
-    modules += "-hltL1NonIsoLargeWindowElectronPixelSeeds,"
+#    modules += "-hltL1NonIsoLargeWindowElectronPixelSeeds,"
 ###    modules += "hltPixelMatchElectronsL1NonIsoLargeWindow,"
     modules += "hltPixelMatchLargeWindowElectronsL1NonIso,"
     modules += "-hltEcalPreshowerDigis,"
@@ -597,6 +597,12 @@ else:
         elif line.find("CandTag") > 0:
             line = line.replace('hltL1extraParticles','l1ParamMuons')
             print line[:-1]
+        elif line.find("preFilteredSeeds") > 0:
+            line = line.replace('True','False')
+            print line[:-1]
+        elif line.find("initialSeeds") > 0:
+            line = line.replace('noSeedsHere','globalPixelSeeds:GlobalPixel')
+            print line[:-1]
         elif line.find("}") > 0:
             if bName != "None":
                 bName = "None"
@@ -671,7 +677,13 @@ else:
                 line = line.replace('hltL1extraParticles','l1extraParticles') 
             if line.find("QuadJet30") > 0:
                 if L1Menu == "L1Menu2007":
-                    line = line.replace('QuadJet30','QuadJet40') 
+                    line = line.replace('QuadJet30','QuadJet40')
+            if line.find("hltL1IsoLargeWindowElectronPixelSeeds") > 0:
+                if line.find("Sequence") > 0:
+                    line = line.replace("hltL1IsoLargeWindowElectronPixelSeeds","hltL1IsoLargeWindowElectronPixelSeedsSequence")
+            if line.find("hltL1NonIsoLargeWindowElectronPixelSeeds") > 0:
+                if line.find("Sequence") > 0:
+                    line = line.replace("hltL1NonIsoLargeWindowElectronPixelSeeds","hltL1NonIsoLargeWindowElectronPixelSeedsSequence")
 
         print line[:-1]
 
