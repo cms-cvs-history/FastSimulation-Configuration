@@ -297,6 +297,7 @@ else:
     modules += "-hltEcalPreshowerDigis,"
     modules += "-hltEcalRegionalEtaFEDs,"
     modules += "-hltEcalRegionalEtaRecHit,"
+    modules += "-hltESRegionalEgammaRecHit,"
     modules += "-hltEcalRegionalJetsFEDs,"
     modules += "-hltEcalRegionalJetsDigis,"
     modules += "-hltEcalRegionalJetsWeightUncalibRecHit,"
