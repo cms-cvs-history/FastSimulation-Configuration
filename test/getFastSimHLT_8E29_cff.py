@@ -232,8 +232,8 @@ else:
     blocks += "hltL1NonIsoStartUpElectronPixelSeeds::SeedConfiguration,"
     blocks += "hltL1NonIsoElectronPixelSeeds::SeedConfiguration,"
     blocks += "hltL1IsoStartUpElectronPixelSeeds::SeedConfiguration,"
-    blocks += "hltL1IsoElectronPixelSeeds::SeedConfiguration,"
-    blocks += "hltL3TrajectorySeed::MuonTrackingRegionBuilder"
+    blocks += "hltL1IsoElectronPixelSeeds::SeedConfiguration"
+###    blocks += "hltL3TrajectorySeed::MuonTrackingRegionBuilder"
 
 
     #--- Some notes about removed/redefined modules ---#
