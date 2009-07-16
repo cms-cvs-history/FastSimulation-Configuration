@@ -72,8 +72,8 @@ process.VolumeBasedMagneticFieldESProducer.useParametrizedTrackerField = True
 process.famosPileUp.PileUpSimulator.averageNumber = 0.0
 
 # Get frontier conditions   - not applied in the HCAL, see below
-# Values for globaltag are "STARTUP31X_V1::All","MC_31X_V1::All"
-process.GlobalTag.globaltag = "STARTUP31X_V1::All"
+# Values for globaltag are "STARTUP31X_V2::All","MC_31X_V3::All"
+process.GlobalTag.globaltag = "STARTUP31X_V2::All"
 
 
 # Apply ECAL and HCAL miscalibration 
@@ -88,7 +88,7 @@ process.misalignedTrackerGeometry.applyAlignment = True
 process.misalignedDTGeometry.applyAlignment = True
 process.misalignedCSCGeometry.applyAlignment = True
 
-# Attention ! for the HCAL IDEAL==STARTUP
+# Attention ! for the HCAL MC==STARTUP
 # process.caloRecHits.RecHitsFactory.HCAL.Refactor = 1.0
 # process.caloRecHits.RecHitsFactory.HCAL.Refactor_mean = 1.0
 # process.caloRecHits.RecHitsFactory.HCAL.fileNameHcal = "hcalmiscalib_0.0.xml"
