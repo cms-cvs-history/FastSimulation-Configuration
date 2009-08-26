@@ -458,13 +458,7 @@ else:
     if usePaths != "All":
         paths = "--paths " + usePaths
 
-    services = "--services "
-    ###invalid options for 310pre3
-    #--- Begin services removed in 21X ---#
-    services += "-UpdaterService,"
-    #--- End services removed in 21X ---#
-    services += "-PrescaleService,"
-    services += "-MessageLogger"
+    services = "--services -PrescaleService,-MessageLogger,-DQM,-FUShmDQMOutputService,-MicroStateService,-ModuleWebRegistry,-TimeProfilerService,-UpdaterService"
 
     psets = "--psets "
     psets += "-options,"
@@ -498,6 +492,11 @@ else:
     # Write blocks for electrons and muons, in py configuration
     if ( blockName != "None" ) :
         os.system(myGetBlocks)
+
+        # online to offline conversion - taken from HLTrigger/Configuration/test/getHLT.py 
+        # FIXME these should be better integrated with edmConfigFromDB
+        os.system("sed -e'/^streams/,/^)/d' -e'/^datasets/,/^)/d' -i %s" % blockName)
+
         bName = "None"
         for line in fileinput.input(blockName,inplace=1):
 
@@ -525,6 +524,12 @@ else:
 
     # Write all HLT
     os.system(myGetCff)
+  
+    # online to offline conversion - taken from HLTrigger/Configuration/test/getHLT.py 
+    # FIXME these should be better integrated with edmConfigFromDB
+    os.system("sed -e'/^streams/,/^)/d' -e'/^datasets/,/^)/d' -i %s" % cffName)
+    os.system("sed -e 's/cms.InputTag( \"source\" )/cms.InputTag( \"rawDataCollector\" )/' -i %s" % cffName)
+    os.system("sed -e'/DTUnpackingModule/a\ \ \ \ inputLabel = cms.untracked.InputTag( \"rawDataCollector\" ),' -i %s" % cffName)
 
     # myReplaceTrigResults = "replace TriggerResults::HLT " + process + " -- " + cffName
     # os.system(myReplaceTrigResults)
