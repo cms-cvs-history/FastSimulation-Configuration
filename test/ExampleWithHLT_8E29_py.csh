@@ -1,5 +1,9 @@
 #!/bin/csh
 
+# Set the environment 
+cmsenv
+rehash
+
 # clean
 rm -f $CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_8E29_cff.py
 rm -f $CMSSW_BASE/src/FastSimulation/Configuration/test/ExampleWithHLT_8E29.log
@@ -19,9 +23,6 @@ set HLTVersion=`head -1 $CMSSW_BASE/src/FastSimulation/Configuration/test/HLTVer
 $CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLT_8E29_cff.py $HLTVersion "$CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_8E29_cff.py" "$CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_8E29_cff.py" "L1Menu_Commissioning2009_v0" "All" 
 #"HLTriggerFirstPath"
 #"All"
-
-# Set the environment 
-cmsenv
 
 # Compile the HLT_cff.py file
 cd $CMSSW_BASE/src/FastSimulation/
