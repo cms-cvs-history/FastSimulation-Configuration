@@ -130,6 +130,7 @@ else:
     esmodules += "-navigationSchoolESProducer,"
     esmodules += "-muonCkfTrajectoryFilter,"
     esmodules += "-l1GtTriggerMenuXml,"
+    esmodules += "-L1GtTriggerMaskAlgoTrigTrivialProducer,"
     esmodules += "-l1GtTriggerMaskVetoTechTrig,"
     esmodules += "-l1GtTriggerMaskVetoAlgoTrig,"
     esmodules += "-l1GtTriggerMaskTechTrig,"
