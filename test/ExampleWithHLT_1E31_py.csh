@@ -21,8 +21,12 @@ rm -f AODWithHLT.root
 set HLTVersion=`head -1 $CMSSW_BASE/src/FastSimulation/Configuration/test/HLTVersion1E31`
 
 $CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLT_1E31_cff.py $HLTVersion "$CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_1E31_cff.py" "$CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_1E31_cff.py" "L1Menu_MC2009_v0" "All" 
-#"HLTriggerFirstPath"
-#"All"
+# Temporary workaround to override the L1 menu
+cat >> "$CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_1E31_cff.py" << @EOF
+
+from L1TriggerConfig.L1GtConfigProducers.Luminosity.lumi1031.L1Menu_MC2009_v4_L1T_Scales_20090624_Imp0_Unprescaled_cff import *
+es_prefer_l1GtParameters = cms.ESPrefer('L1GtTriggerMenuXmlProducer','l1GtTriggerMenuXml')
+@EOF
 
 # Compile the HLT_cff.py file
 cd $CMSSW_BASE/src/FastSimulation/
