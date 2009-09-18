@@ -101,4 +101,3 @@ process.MessageLogger.categories.append('HLTrigReport')
 
 # Make the job crash in case of missing product
 process.options = cms.untracked.PSet( Rethrow = cms.untracked.vstring('ProductNotFound') )
-
