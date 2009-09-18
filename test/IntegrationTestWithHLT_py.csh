@@ -1,10 +1,14 @@
 #!/bin/csh
 
+# Set the environment 
+cmsenv
+rehash
+
 # clean
-rm $CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_8E29_cff.py
-rm $CMSSW_BASE/src/FastSimulation/Configuration/test/IntegrationTestWithHLT.log
-rm $CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_8E29_cff.py
-rm AODIntegrationTestWithHLT.root
+rm -f $CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_8E29_cff.py
+rm -f $CMSSW_BASE/src/FastSimulation/Configuration/test/IntegrationTestWithHLT.log
+rm -f $CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_8E29_cff.py
+rm -f AODIntegrationTestWithHLT.root
 
 # create HLT.cff :  For 2_0_4, use /dev/CMSSW_2_0_0/HLT/V35
 # For the adventurous user, you may specify the L1 Menu and a select number of HLT paths
@@ -15,15 +19,19 @@ rm AODIntegrationTestWithHLT.root
 # If you choose another L1 Menu, you must also change the corresponding include in 
 # FastSimulation/Configuration/test/ExampleWithHLT.cfg
 set HLTVersion=`head -1 $CMSSW_BASE/src/FastSimulation/Configuration/test/HLTVersion8E29`
-$CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLT_8E29_cff.py $HLTVersion "$CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_8E29_cff.py" "$CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_8E29_cff.py" "L1Menu_Commissioning2009_v0" "All" 
 
-# Set environement
-cmsenv
+$CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLT_8E29_cff.py $HLTVersion "$CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_8E29_cff.py" "$CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_8E29_cff.py" "L1Menu_Commissioning2009_v0" "All" 
+# Temporary workaround to override the L1 menu
+cat >> "$CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_8E29_cff.py" << @EOF
+
+from L1TriggerConfig.L1GtConfigProducers.Luminosity.startup.L1Menu_Commissioning2009_v5_L1T_Scales_20080926_startup_Imp0_Unprescaled_cff import *
+es_prefer_l1GtParameters = cms.ESPrefer('L1GtTriggerMenuXmlProducer','l1GtTriggerMenuXml')
+@EOF
 
 # Compile the HLT_cff.py file
 cd $CMSSW_BASE/src/FastSimulation/
 scramv1 b python
 cd -
 
-# cmsRun 
+# run the Integration test
 cmsRun $CMSSW_BASE/src/FastSimulation/Configuration/test/IntegrationTestWithHLT_cfg.py |& tee $CMSSW_BASE/src/FastSimulation/Configuration/test/IntegrationTestWithHLT_py.log
