@@ -117,6 +117,24 @@ else:
     essources += "-GlobalTag"
 
     esmodules = "--esmodules "
+    # strip automatic magnetic field definition
+    esmodules += "-AutoMagneticFieldESProducer,"
+    esmodules += "-SlaveField0,"
+    esmodules += "-SlaveField20,"
+    esmodules += "-SlaveField30,"
+    esmodules += "-SlaveField35,"
+    esmodules += "-SlaveField38,"
+    esmodules += "-SlaveField40,"
+    esmodules += "-VBF0,"
+    esmodules += "-VBF20,"
+    esmodules += "-VBF30,"
+    esmodules += "-VBF35,"
+    esmodules += "-VBF38,"
+    esmodules += "-VBF40,"
+    # strip static magnetic field definition
+    esmodules += "-VolumeBasedMagneticFieldESProducer,"
+    esmodules += "-ParametrizedMagneticFieldProducer,"
+
     esmodules += "-ttrhbwr,"
     esmodules += "-ttrhbwor,"
     esmodules += "-myTTRHBuilderWithoutAngle,"
@@ -154,7 +172,6 @@ else:
     esmodules += "-ckfBaseTrajectoryFilter,"
     esmodules += "-beamHaloNavigationSchoolESProducer,"
     esmodules += "-ZdcHardcodeGeometryEP,"
-    esmodules += "-VolumeBasedMagneticFieldESProducer,"
     esmodules += "-TransientTrackBuilderESProducer,"
     # esmodules += "-TrajectoryBuilderForPixelMatchElectronsL1NonIsoLargeWindow,"
     # esmodules += "-TrajectoryBuilderForPixelMatchElectronsL1NonIso,"
