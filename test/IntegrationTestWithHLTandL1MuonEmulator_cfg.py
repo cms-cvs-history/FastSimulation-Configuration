@@ -4,7 +4,7 @@ process = cms.Process("HLT")
 
 # Number of events to be generated
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(50)
+    input = cms.untracked.int32(100)
 )
 
 # Include the RandomNumberGeneratorService definition
@@ -14,21 +14,15 @@ process.load("FastSimulation.Configuration.RandomServiceInitialization_cff")
 process.load("Configuration.Generator.TTbar_cfi")
 #process.load("Configuration.Generator.SingleMuPt100_cfi")
 
-# L1 Menu and prescale factors : useful for testing all L1 paths
+# --- This was for 2e30 :
 # process.load("Configuration.StandardSequences.L1TriggerDefaultMenu_cff")
-# Other choices are
-# L1 Menu 2008 2x10E30 - Prescale
-# process.load("L1TriggerConfig/L1GtConfigProducers/Luminosity/lumi1030/L1Menu2008_2E30_cff")
-# L1 Menu 2008 2x10E30 - No Prescale
-#process.load("L1TriggerConfig/L1GtConfigProducers/Luminosity/lumi1030/L1Menu2008_2E30_Unprescaled_cff")
-# L1 Menu 2008 2x10E31 - Prescale
-# process.load("L1TriggerConfig/L1GtConfigProducers/Luminosity/lumi1031/L1Menu2008_2E31_cff")
-# L1 Menu 2008 2x10E31 - No Prescale
-# process.load("L1TriggerConfig/L1GtConfigProducers/Luminosity/lumi1031/L1Menu2008_2E31_Unprescaled_cff")
-# L1 Menu 2008 10E32 - Prescale 
-# process.load("L1TriggerConfig/L1GtConfigProducers/Luminosity/lumi1x1032/L1Menu2007_cff")
-# L1 Menu 2008 10E32 - No Prescale 
-# process.load("L1TriggerConfig/L1GtConfigProducers/Luminosity/lumi1x1032/L1Menu2007_Unprescaled_cff")
+
+# --- This is for 8e29 :NEW DEFAULT 
+#process.load('L1Trigger/Configuration/L1StartupConfig_cff')
+#process.load('L1TriggerConfig/L1GtConfigProducers/Luminosity/startup/L1Menu_Commissioning2009_v0_L1T_Scales_20080926_startup_Imp0_Unprescaled_cff')
+
+# --- This is for 1e31 :
+#process.load('L1TriggerConfig/L1GtConfigProducers/Luminosity/lumi1031/L1Menu_MC2009_v0_L1T_Scales_20080922_Imp0_Unprescaled_cff')
 
 # Common inputs, with fake conditions
 process.load("FastSimulation.Configuration.CommonInputs_cff")

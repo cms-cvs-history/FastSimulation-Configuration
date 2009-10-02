@@ -1,10 +1,14 @@
 #!/bin/csh
 
+# Set the environment 
+cmsenv
+rehash
+
 # clean
-rm $CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_8E29_cff.py
-rm $CMSSW_BASE/src/FastSimulation/Configuration/test/IntegrationTestWithHLTandL1MuonEmulator_py.log
-rm $CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_8E29_cff.py
-rm AODIntegrationTestWithHLTandL1MuonEmulator.root
+rm -f $CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_8E29_cff.py
+rm -f $CMSSW_BASE/src/FastSimulation/Configuration/test/IntegrationTestWithHLTandL1MuonEmulator_py.log
+rm -f $CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_8E29_cff.py
+rm -f AODIntegrationTestWithHLTandL1MuonEmulator.root
 
 # create HLT.cff :  For 2_0_4, use /dev/CMSSW_2_0_0/HLT/V35
 # For the adventurous user, you may specify the L1 Menu and a select number of HLT paths
@@ -16,9 +20,6 @@ rm AODIntegrationTestWithHLTandL1MuonEmulator.root
 # FastSimulation/Configuration/test/ExampleWithHLTandL1MuonEmulator.cfg
 set HLTVersion=`head -1 $CMSSW_BASE/src/FastSimulation/Configuration/test/HLTVersion8E29`
 $CMSSW_BASE/src/FastSimulation/Configuration/test/getFastSimHLTWithL1MuonEmulatorcff.py $HLTVersion "$CMSSW_BASE/src/FastSimulation/Configuration/python/HLT_8E29_cff.py" "$CMSSW_BASE/src/FastSimulation/Configuration/python/blockHLT_8E29_cff.py" "L1Menu_Commissioning2009_v0" "All" 
-
-# Set environement
-cmsenv
 
 # Compile the HLT_cff.py file
 cd $CMSSW_BASE/src/FastSimulation/

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-# Usage: ./getFastSimHLTandL1MuonEmulatorcff.py <Version from ConfDB> <Name of cff file> <optional L1 Menu> <optional subset of paths>
-##DEFAULT 8E29
+# Usage: ./getFastSimHLTcff.py <Version from ConfDB> <Name of cff file> <optional L1 Menu> <optional subset of paths>
+###TABLE FOR 8E29
 
 import sys
 import os
@@ -10,7 +10,7 @@ import getopt
 import fileinput
 
 def usage():
-    print "Usage: ./getFastSimHLTandL1MuonEmulatorcff.py <Version from ConfDB> <Name of cff> <optional L1 Menu> <optional subset of paths>"
+    print "Usage: ./getFastSimHLTcffandL1MuonEmulatorcff.py <Version from ConfDB> <Name of cff> <optional L1 Menu> <optional subset of paths>"
     print "       Default L1 Menu: L1Menu_Commissioning2009_v0"
     print "       Define subset of paths as comma-separated list: a,b,c (Default is to run all paths)" 
     sys.exit(1)
@@ -28,22 +28,15 @@ elif argc == 4:
     dbName  = sys.argv[1]
     cffName = sys.argv[2]
     blockName = sys.argv[3]
-#elif argc == 5:
-#    dbName  = sys.argv[1]
-#    cffName = sys.argv[2]
-#    blockName = sys.argv[3]
-#    cfgName = sys.argv[4]
 elif argc == 5:
     dbName  = sys.argv[1]
     cffName = sys.argv[2]
     blockName = sys.argv[3]
-#    cfgName = sys.argv[4]
     L1Menu  = sys.argv[4]
 elif argc == 6:
     dbName  = sys.argv[1]
     cffName = sys.argv[2]
     blockName = sys.argv[3]
-#    cfgName = sys.argv[4]
     L1Menu   = sys.argv[4]
     usePaths = sys.argv[5]
 else:
@@ -53,124 +46,49 @@ if os.path.exists(cffName):
     print cffName, "already exists.  WARNING: No new file created!"
 else:
     essources = "--essources "
-    #--- Recall that data is not unpacked by FastSim...can remove the cabling
-    essources += "-DTCabling,"
-    essources += "-cscPackingCabling,"
-    essources += "-cscUnpackingCabling,"
-    essources += "-RPCCabling,"
-    essources += "-siPixelCabling,"
-    essources += "-siStripFedCabling,"
-    essources += "-siPixelGainCalibration,"
-    essources += "-siPixelLorentzAngle,"
-    essources += "-siStripApvGain,"
-    essources += "-siStripLorentzAngle,"
-    essources += "-siStripNoise,"
-    # Start of list removing all ESSources
-    essources += "-BeamSpotEarlyCollision,"
-    essources += "-GlobalPosition,"
-    essources += "-cscConditions,"
-    essources += "-ecalConditions,"
-    essources += "-es_pool,"
-    essources += "-maps_frontier,"
-    essources += "-muonAlignment,"
-    essources += "-trackProbabilityFrontierCond,"
-    essources += "-trackerAlignment,"
-    # essources += "-,"
-    # essources += "-,"
-    # essources += "-,"
-    # essources += "-,"
-    # essources += "-,"
-    # End of list removing all ESSources
     essources += "-es_hardcode,"
-    essources += "-tpparams11,"
-    essources += "-tpparams10,"
-    essources += "-tpparams9,"
-    essources += "-tpparams8,"
-    essources += "-tpparams7,"
-    essources += "-tpparams6,"
-    essources += "-tpparams5,"
-    essources += "-tpparams4,"
-    essources += "-tpparams3,"
-    essources += "-tpparams2,"
-    essources += "-tpparams,"
     essources += "-magfield,"
-    essources += "-l1GctParamsRecords,"
-    essources += "-l1GctJcPosParsRecords,"
-    essources += "-l1GctJcNegParsRecords,"
-    essources += "-l1GctConfigRecords,"
-    essources += "-l1CaloGeomRecordSource,"
-    essources += "-jetrcdsrc,"
-    essources += "-emrcdsrc,"
     essources += "-eegeom,"
     essources += "-XMLIdealGeometryESSource,"
-    essources += "-L1MuTriggerScalesRcdSource,"
-    essources += "-L1MuGMTScalesRcdSource,"
-    essources += "-L1MuTriggerPtScaleRcdSource,"
-    essources += "-L1GtTriggerMenuRcdSource,"
-    essources += "-L1GtTriggerMaskVetoTechTrigRcdSource,"
-    essources += "-L1GtTriggerMaskVetoAlgoTrigRcdSource,"
-    essources += "-L1GtTriggerMaskTechTrigRcdSource,"
-    essources += "-L1GtTriggerMaskRcdSource,"
-    essources += "-L1GtTriggerMaskAlgoTrigRcdSource,"
-    essources += "-L1GtStableParametersRcdSource,"
-    essources += "-L1GtPrescaleFactorsTechTrigRcdSource,"
-    essources += "-L1GtPrescaleFactorsRcdSource,"
-    essources += "-L1GtPrescaleFactorsAlgoTrigRcdSource,"
-    essources += "-L1GtParametersRcdSource,"
-    essources += "-L1GtBoardMapsRcdSource,"
     essources += "-HepPDTESSource,"
-    essources += "-BTauMVAJetTagComputerRecord,"
     essources += "-BTagRecord,"
     essources += "-GlobalTag"
 
     esmodules = "--esmodules "
-    esmodules += "-ttrhbwr,"
-    esmodules += "-ttrhbwor,"
-    esmodules += "-myTTRHBuilderWithoutAngle,"
-    esmodules += "-myTTRHBuilderWithoutAngle4PixelPairs,"
-    esmodules += "-myTTRHBuilderWithoutAngle4PixelTriplets,"
+    # strip automatic magnetic field definition
+    esmodules += "-AutoMagneticFieldESProducer,"
+    esmodules += "-SlaveField0,"
+    esmodules += "-SlaveField20,"
+    esmodules += "-SlaveField30,"
+    esmodules += "-SlaveField35,"
+    esmodules += "-SlaveField38,"
+    esmodules += "-SlaveField40,"
+    esmodules += "-VBF0,"
+    esmodules += "-VBF20,"
+    esmodules += "-VBF30,"
+    esmodules += "-VBF35,"
+    esmodules += "-VBF38,"
+    esmodules += "-VBF40,"
+    # strip static magnetic field definition
+    esmodules += "-VolumeBasedMagneticFieldESProducer,"
+    esmodules += "-ParametrizedMagneticFieldProducer,"
+
     esmodules += "-TTRHBuilderPixelOnly,"
     esmodules += "-WithTrackAngle,"
     esmodules += "-trajectoryCleanerBySharedHits,"
-    esmodules += "-trackCounting3D3rd,"
     esmodules += "-trackCounting3D2nd,"
     esmodules += "-navigationSchoolESProducer,"
     esmodules += "-muonCkfTrajectoryFilter,"
     esmodules += "-l1GtTriggerMenuXml,"
-    esmodules += "-l1GtTriggerMaskVetoTechTrig,"
-    esmodules += "-l1GtTriggerMaskVetoAlgoTrig,"
-    esmodules += "-l1GtTriggerMaskTechTrig,"
-    esmodules += "-l1GtTriggerMaskAlgoTrig,"
-    esmodules += "-l1GtStableParameters,"
-    esmodules += "-l1GtPrescaleFactorsTechTrig,"
-    esmodules += "-l1GtPrescaleFactorsAlgoTrig,"
-    esmodules += "-l1GtParameters,"
-    esmodules += "-l1GtFactors,"
-    esmodules += "-l1GtBoardMaps,"
-    esmodules += "-l1CaloScales,"
-    esmodules += "-l1CaloGeometry,"
-    esmodules += "-L1MuTriggerPtScale,"
-    esmodules += "-jetProbability,"
-    esmodules += "-jetBProbability,"
-    esmodules += "-impactParameterMVAComputer,"
+    esmodules += "-L1GtTriggerMaskAlgoTrigTrivialProducer,"
     esmodules += "-hcal_db_producer,"
-    # esmodules += "-egammaHLTChi2MeasurementEstimatorESProducer,"
-    esmodules += "-cosmicsNavigationSchoolESProducer,"
-    esmodules += "-compositeTrajectoryFilterESProducer,"
     esmodules += "-ckfBaseTrajectoryFilter,"
-    esmodules += "-beamHaloNavigationSchoolESProducer,"
     esmodules += "-ZdcHardcodeGeometryEP,"
-    esmodules += "-VolumeBasedMagneticFieldESProducer,"
     esmodules += "-TransientTrackBuilderESProducer,"
-    # esmodules += "-TrajectoryBuilderForPixelMatchElectronsL1NonIsoLargeWindow,"
-    # esmodules += "-TrajectoryBuilderForPixelMatchElectronsL1NonIso,"
-    # esmodules += "-TrajectoryBuilderForPixelMatchElectronsL1IsoLargeWindow,"
-    # esmodules += "-TrajectoryBuilderForPixelMatchElectronsL1Iso,"
     esmodules += "-TrackerRecoGeometryESProducer,"
     esmodules += "-TrackerGeometricDetESModule,"
     esmodules += "-TrackerDigiGeometryESModule,"
     esmodules += "-StripCPEfromTrackAngleESProducer,"
-    esmodules += "-StripCPEESProducer,"
     esmodules += "-SteppingHelixPropagatorOpposite,"
     esmodules += "-SteppingHelixPropagatorAny,"
     esmodules += "-SteppingHelixPropagatorAlong,"
@@ -185,8 +103,6 @@ else:
     esmodules += "-SiStripGainESProducer,"
     esmodules += "-RungeKuttaTrackerPropagator,"
     esmodules += "-RPCGeometryESModule,"
-    esmodules += "-RKTrackerPropagator,"
-    esmodules += "-PixelCPEParmErrorESProducer,"
     esmodules += "-OppositeMaterialPropagator,"
     esmodules += "-MuonTransientTrackingRecHitBuilderESProducer,"
     esmodules += "-MuonNumberingInitialization,"
@@ -195,16 +111,9 @@ else:
     esmodules += "-MeasurementTracker,"
     esmodules += "-MaterialPropagator,"
     esmodules += "-L3MuKFFitter,"
-    esmodules += "-L1MuTriggerScales,"
-    esmodules += "-L1MuGMTScales,"
-    esmodules += "-L1GctConfigProducers,"
     esmodules += "-KFUpdatorESProducer,"
-    esmodules += "-KFTrajectorySmoother,"
-    esmodules += "-KFTrajectoryFitter,"
-    esmodules += "-KFSmootherForRefitOutsideIn,"
     esmodules += "-KFSmootherForRefitInsideOut,"
     esmodules += "-KFSmootherForMuonTrackLoader,"
-    esmodules += "-KFFitterForRefitOutsideIn,"
     esmodules += "-KFFitterForRefitInsideOut,"
     esmodules += "-HcalTopologyIdealEP,"
     esmodules += "-HcalHardcodeGeometryEP,"
@@ -212,8 +121,6 @@ else:
     esmodules += "-GlobalTrackingGeometryESProducer,"
     esmodules += "-FittingSmootherRK,"
     esmodules += "-FitterRK,"
-    esmodules += "-EcalTrigTowerConstituentsMapBuilder,"
-    esmodules += "-EcalTrigPrimESProducer,"
     esmodules += "-EcalPreshowerGeometryEP,"
     esmodules += "-EcalLaserCorrectionService,"
     esmodules += "-EcalEndcapGeometryEP,"
@@ -223,8 +130,6 @@ else:
     esmodules += "-CkfTrajectoryBuilder,"
     esmodules += "-Chi2MeasurementEstimator,"
     esmodules += "-Chi2EstimatorForRefit,"
-    esmodules += "-Chi2EstimatorForMuonTrackLoader,"
-    esmodules += "-Chi2EstimatorForL3Refit,"
     esmodules += "-CaloTowerHardcodeGeometryEP,"
     esmodules += "-CaloTowerConstituentsMapBuilder,"
     esmodules += "-CaloTopologyBuilder,"
@@ -237,10 +142,7 @@ else:
     blocks += "hltL1NonIsoLargeWindowElectronPixelSeeds::SeedConfiguration,"
     blocks += "hltL1IsoLargeWindowElectronPixelSeeds::SeedConfiguration,"
     blocks += "hltL1NonIsoStartUpElectronPixelSeeds::SeedConfiguration,"
-    blocks += "hltL1NonIsoElectronPixelSeeds::SeedConfiguration,"
     blocks += "hltL1IsoStartUpElectronPixelSeeds::SeedConfiguration,"
-    blocks += "hltL1IsoElectronPixelSeeds::SeedConfiguration,"
-    blocks += "hltL3TrajectorySeed::MuonTrackingRegionBuilder"
 
 
     #--- Some notes about removed/redefined modules ---#
@@ -283,83 +185,34 @@ else:
     modules = "--modules "
     modules += "hltL3MuonIsolations,"
     modules += "hltPixelVertices,"
-    modules += "-hltL1IsoElectronPixelSeeds,"
-    modules += "-hltL1IsoStartUpElectronPixelSeeds,"
     modules += "-hltCkfL1IsoTrackCandidates,"
-    modules += "-hltCkfL1IsoStartUpTrackCandidates,"
     modules += "-hltCtfL1IsoWithMaterialTracks,"
-    modules += "-hltCtfL1IsoStartUpWithMaterialTracks,"
-    modules += "-hltL1NonIsoElectronPixelSeeds,"
-    modules += "-hltL1NonIsoStartUpElectronPixelSeeds,"
     modules += "-hltCkfL1NonIsoTrackCandidates,"
-    modules += "-hltCkfL1NonIsoStartUpTrackCandidates,"
     modules += "-hltCtfL1NonIsoWithMaterialTracks,"
-    modules += "-hltCtfL1NonIsoStartUpWithMaterialTracks,"
-    modules += "-hltL1IsoLargeWindowElectronPixelSeeds,"
-    modules += "hltPixelMatchElectronsL1IsoLargeWindow,"
-    modules += "-hltL1NonIsoLargeWindowElectronPixelSeeds,"
-    modules += "hltPixelMatchElectronsL1NonIsoLargeWindow,"
-    modules += "-hltEcalPreshowerDigis,"
-    modules += "-hltEcalRegionalEtaFEDs,"
-    modules += "-hltEcalRegionalEtaRecHit,"
+    modules += "hltPixelMatchLargeWindowElectronsL1Iso,"
+    modules += "hltPixelMatchLargeWindowElectronsL1NonIso,"
+    modules += "-hltESRegionalEgammaRecHit,"
     modules += "-hltEcalRegionalJetsFEDs,"
-    modules += "-hltEcalRegionalJetsDigis,"
-    modules += "-hltEcalRegionalJetsWeightUncalibRecHit,"
     modules += "-hltEcalRegionalJetsRecHitTmp,"
     modules += "-hltEcalRegionalMuonsFEDs,"
-    modules += "-hltEcalRegionalMuonsDigis,"
-    modules += "-hltEcalRegionalMuonsWeightUncalibRecHit,"
     modules += "-hltEcalRegionalMuonsRecHitTmp,"
     modules += "-hltEcalRegionalEgammaFEDs,"
-    modules += "-hltEcalRegionalPi0FEDs,"
-    modules += "-hltEcalRegionalEgammaDigis,"
-    modules += "-hltEcalRegionalPi0Digis,"
-    modules += "-hltEcalRegionalEgammaWeightUncalibRecHit,"
-    modules += "-hltEcalRegionalPi0WeightUncalibRecHit,"
-    modules += "-hltEcalRegionalPi0RecHitTmp,"
-    modules += "-hltEcalRegionalPi0RecHit,"
     modules += "-hltEcalRegionalEgammaRecHitTmp,"
-    modules += "-hltEcalRegionalTausFEDs,"
-    modules += "-hltEcalRegionalTausDigis,"
-    modules += "-hltEcalRegionalTausWeightUncalibRecHit,"
-    modules += "-hltEcalRegionalTausRecHitTmp,"
     modules += "-hltL3Muons,"
-    modules += "-hltL3TrajectorySeed,"
+    modules += "hltL3TrajectorySeed,"
     modules += "-hltL3TrackCandidateFromL2,"
-    modules += "-hltL3TkTracksFromL2,"
-    modules += "-hltL3TkMuons,"
+    modules += "hltL3TkTracksFromL2,"
     modules += "-hltHcalDigis,"
     modules += "-hltHoreco,"
     modules += "-hltHfreco,"
     modules += "-hltHbhereco,"
-    modules += "-hltEcalPreshowerRecHit,"
-    modules += "-hltEcalRecHit,"
     modules += "-hltEcalRegionalRestFEDs,"
     modules += "-hltEcalRawToRecHitFacility,"
-    modules += "-hltEcalRegionalRestDigis,"
-    modules += "-hltEcalRegionalRestWeightUncalibRecHit,"
-    modules += "-hltEcalRegionalRestRecHitTmp,"
+    modules += "-hltESRawToRecHitFacility,"
     modules += "-hltEcalRegionalJetsRecHit,"
-    modules += "-hltEcalRegionalTausRecHit,"
     modules += "-hltEcalRegionalMuonsRecHit,"
     modules += "-hltEcalRegionalEgammaRecHit,"
     modules += "-hltEcalRecHitAll,"
-    modules += "-hltCtfWithMaterialTracksMumu,"
-    modules += "-hltMuTracks,"
-    modules += "-hltEcalDigis,"
-    modules += "-hltEcalWeightUncalibRecHit,"
-#    modules += "-hltL3SingleTauPixelSeeds,"
-#    modules += "-hltL3SingleTauPixelSeedsRelaxed,"
-#    modules += "-hltL3SingleTauMETPixelSeeds,"
-#    modules += "-hltL3SingleTauMETPixelSeedsRelaxed,"
-#    modules += "-hltCkfTrackCandidatesL3SingleTau,"
-#    modules += "-hltCkfTrackCandidatesL3SingleTauRelaxed,"
-#    modules += "-hltCkfTrackCandidatesL3SingleTauMET,"
-#    modules += "-hltCkfTrackCandidatesL3SingleTauMETRelaxed,"
-#    modules += "-hltCtfWithMaterialTracksL3SingleTau,"
-#    modules += "-hltCtfWithMaterialTracksL3SingleTauRelaxed,"
-#    modules += "-hltCtfWithMaterialTracksL3SingleTauMET,"
-#    modules += "-hltCtfWithMaterialTracksL3SingleTauMETRelaxed,"
     modules += "-hltL3TauPixelSeeds,"
     modules += "-hltL3TauCkfTrackCandidates,"
     modules += "-hltL3TauCtfWithMaterialTracks," 
@@ -378,23 +231,11 @@ else:
     modules += "-hltBLifetimeRegionalPixelSeedGeneratorRelaxed,"
     modules += "-hltBLifetimeRegionalCkfTrackCandidatesRelaxed,"
     modules += "-hltBLifetimeRegionalCtfWithMaterialTracksRelaxed,"
-    modules += "-hltMumuPixelSeedFromL2Candidate,"
-    modules += "-hltCkfTrackCandidatesMumu,"
-    modules += "-hltCtfWithMaterialTracksMumu,"
-    modules += "-hltMumukPixelSeedFromL2Candidate,"
-    modules += "-hltCkfTrackCandidatesMumuk,"
-    modules += "-hltCtfWithMaterialTracksMumuk,"
-    modules += "-hltMumukAllConeTracks,"
     modules += "-hltPixelTracksForMinBias,"
     modules += "-hltMuonCSCDigis,"
     modules += "-hltMuonDTDigis,"
     modules += "-hltMuonRPCDigis,"
-    modules += "-hltFilterTriggerType,"
     modules += "-hltGtDigis,"
-    modules += "-hltSiStripRegFED,"
-    modules += "-hltEcalRegFED,"
-    modules += "-hltSubdetFED,"
-    modules += "-hcalFED,"    
     modules += "-hltL1GtTrigReport,"
 #--- The following modules must always be present to allow for individual paths to be run
     modules += "hltCsc2DRecHits,"
@@ -415,14 +256,10 @@ else:
     sequences = "--sequences "
     sequences += "-HLTL1IsoEgammaRegionalRecoTrackerSequence,"
     sequences += "-HLTL1NonIsoEgammaRegionalRecoTrackerSequence,"
-    sequences += "-HLTL1IsoLargeWindowElectronsRegionalRecoTrackerSequence,"
-    sequences += "-HLTL1NonIsoLargeWindowElectronsRegionalRecoTrackerSequence,"
     sequences += "-HLTL1IsoElectronsRegionalRecoTrackerSequence,"
-    sequences += "-HLTL1IsoStartUpElectronsRegionalRecoTrackerSequence,"
     sequences += "-HLTL1NonIsoElectronsRegionalRecoTrackerSequence,"
-    sequences += "-HLTL1NonIsoStartUpElectronsRegionalRecoTrackerSequence,"
-    sequences += "-HLTPixelMatchElectronL1IsoLargeWindowTrackingSequence,"
-    sequences += "-HLTPixelMatchElectronL1NonIsoLargeWindowTrackingSequence,"
+    sequences += "-HLTPixelMatchLargeWindowElectronL1IsoTrackingSequence,"
+    sequences += "-HLTPixelMatchLargeWindowElectronL1NonIsoTrackingSequence,"
     sequences += "-HLTPixelTrackingForMinBiasSequence,"
     sequences += "-HLTDoLocalStripSequence,"
     sequences += "-HLTDoLocalPixelSequence,"
@@ -447,22 +284,20 @@ else:
     paths = "--paths "
     
     if L1Menu == "L1Menu_Commissioning2009_v0":
-        paths += "-AlCa_HcalPhiSym,"
-##PAT *** for now REMOVE the new Alca Streams
+        paths += "-AlCa_HcalPhiSym,-HLTOutput,-AlCaOutput,"
+###PAT *** for now REMOVE the new Alca Streams
+        paths += "-HLT_Ele15_SiStrip_L1R,"
         paths += "-HLT_IsoTrack_8E29,"
+        paths += "-AlCa_EcalPi0_8E29,"
+        paths += "-AlCa_EcalEta_8E29,"
         paths += "-DummyPath"
-    
+        
 
     #--- Special case: Running a user-specified set of paths ---#
     if usePaths != "All":
         paths = "--paths " + usePaths
 
-    services = "--services "
-    #--- Begin services removed in 21X ---#
-    services += "-UpdaterService,"
-    #--- End services removed in 21X ---#
-    services += "-PrescaleService,"
-    services += "-MessageLogger"
+    services = "--services -PrescaleService,-MessageLogger,-DQM,-FUShmDQMOutputService,-MicroStateService,-ModuleWebRegistry,-TimeProfilerService,-UpdaterService"
 
     psets = "--psets "
     psets += "-options,"
@@ -496,6 +331,11 @@ else:
     # Write blocks for electrons and muons, in py configuration
     if ( blockName != "None" ) :
         os.system(myGetBlocks)
+
+        # online to offline conversion - taken from HLTrigger/Configuration/test/getHLT.py 
+        # FIXME these should be better integrated with edmConfigFromDB
+        os.system("sed -e'/^streams/,/^)/d' -e'/^datasets/,/^)/d' -i %s" % blockName)
+
         bName = "None"
         for line in fileinput.input(blockName,inplace=1):
 
@@ -523,6 +363,12 @@ else:
 
     # Write all HLT
     os.system(myGetCff)
+  
+    # online to offline conversion - taken from HLTrigger/Configuration/test/getHLT.py 
+    # FIXME these should be better integrated with edmConfigFromDB
+    os.system("sed -e'/^streams/,/^)/d' -e'/^datasets/,/^)/d' -i %s" % cffName)
+    os.system("sed -e 's/cms.InputTag( \"source\" )/cms.InputTag( \"rawDataCollector\" )/' -i %s" % cffName)
+    os.system("sed -e'/DTUnpackingModule/a\ \ \ \ inputLabel = cms.untracked.InputTag( \"rawDataCollector\" ),' -i %s" % cffName)
 
     # myReplaceTrigResults = "replace TriggerResults::HLT " + process + " -- " + cffName
     # os.system(myReplaceTrigResults)
@@ -596,6 +442,12 @@ else:
         elif line.find("CandTag") > 0:
             line = line.replace('hltL1extraParticles','l1extraParticles')
             print line[:-1]
+        elif line.find("preFilteredSeeds") > 0:
+            line = line.replace('True','False')
+            print line[:-1]
+        elif line.find("initialSeeds") > 0:
+            line = line.replace('noSeedsHere','globalPixelSeeds:GlobalPixel')
+            print line[:-1]
         elif line.find("}") > 0:
             if bName != "None":
                 bName = "None"
@@ -633,8 +485,8 @@ else:
                 if line.find("#") == 0:
                     print "# Additional import to make this file self contained"
                     print "from FastSimulation.HighLevelTrigger.HLTSetupWithL1MuonEmulator_cff import *"
-#                if line.find("cms.EndPath") > 0:
-#                    print schedule
+                #if line.find("cms.EndPath") > 0:
+                    #print schedule
 
     # Now try to make the replacements
     for line in fileinput.input(cffName,inplace=1):
@@ -672,7 +524,13 @@ else:
                 line = line.replace('hltL1extraParticles','l1extraParticles') 
             if line.find("QuadJet30") > 0:
                 if L1Menu == "L1Menu2007":
-                    line = line.replace('QuadJet30','QuadJet40') 
+                    line = line.replace('QuadJet30','QuadJet40')
+            if line.find("hltL1IsoLargeWindowElectronPixelSeeds") > 0:
+                if line.find("Sequence") > 0:
+                    line = line.replace("hltL1IsoLargeWindowElectronPixelSeeds","hltL1IsoLargeWindowElectronPixelSeedsSequence")
+            if line.find("hltL1NonIsoLargeWindowElectronPixelSeeds") > 0:
+                if line.find("Sequence") > 0:
+                    line = line.replace("hltL1NonIsoLargeWindowElectronPixelSeeds","hltL1NonIsoLargeWindowElectronPixelSeedsSequence")
 
         print line[:-1]
 
