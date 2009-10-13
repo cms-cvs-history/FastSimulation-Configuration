@@ -56,7 +56,10 @@ process.schedule.append(process.reconstruction)
 # Simulation sequence
 #process.simulation = cms.Sequence(process.ProductionFilterSequence*process.simulationWithFamos)
 # Simulation and digitization sequence
-process.simulation = cms.Sequence(process.ProductionFilterSequence*process.digitizationWithFamos)
+#process.simulation = cms.Sequence(process.ProductionFilterSequence*process.digitizationWithFamos)
+process.source = cms.Source("EmptySource")
+process.simulation = cms.Sequence(process.generator*process.digitizationWithFamos)
+
 # You many not want to simulate everything
 process.famosSimHits.SimulateCalorimetry = True
 process.famosSimHits.SimulateTracking = True
@@ -66,8 +69,7 @@ process.VolumeBasedMagneticFieldESProducer.useParametrizedTrackerField = True
 process.famosPileUp.PileUpSimulator.averageNumber = 0.0
 
 # Get frontier conditions   - not applied in the HCAL, see below
-# Values for globaltag are "STARTUP31X_V8::All","MC_31X_V9::All"
-process.GlobalTag.globaltag = "STARTUP31X_V8::All"
+process.GlobalTag.globaltag = "STARTUP3XY_V9::All"
 
 # Apply ECAL and HCAL miscalibration 
 process.ecalRecHit.doMiscalib = True

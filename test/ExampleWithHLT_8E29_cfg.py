@@ -44,7 +44,7 @@ process.load("Configuration.Generator.TTbar_cfi")
 
 # Common inputs, with fake conditions
 process.load("FastSimulation.Configuration.CommonInputs_cff")
-process.GlobalTag.globaltag = "STARTUP31X_V8::All"
+process.GlobalTag.globaltag = "STARTUP3XY_V9::All"
 
 # L1 Emulator and HLT Setup
 process.load("FastSimulation.HighLevelTrigger.HLTSetup_cff")
@@ -62,7 +62,11 @@ process.VolumeBasedMagneticFieldESProducer.useParametrizedTrackerField = True
 process.load("FastSimulation.Configuration.HLT_8E29_cff")
 
 # Simulation sequence
-process.simulation = cms.Sequence(process.ProductionFilterSequence*process.simulationWithFamos)
+process.source = cms.Source("EmptySource")
+#process.simulation = cms.Sequence(process.ProductionFilterSequence*process.simulationWithFamos)
+process.simulation = cms.Sequence(process.generator*process.simulationWithFamos)
+
+
 # You many not want to simulate everything
 process.famosSimHits.SimulateCalorimetry = True
 process.famosSimHits.SimulateTracking = True
