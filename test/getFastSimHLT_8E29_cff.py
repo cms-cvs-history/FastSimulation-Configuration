@@ -10,7 +10,7 @@ import getopt
 import fileinput
 
 def usage():
-    print "Usage: ./getFastSimHLTcff.py <Version from ConfDB> <Name of cff> <optional L1 Menu> <optional subset of paths>"
+    print "Usage: ./getFastSimHLT_8E29_cff.py <Version from ConfDB> <Name of cff> <optional L1 Menu> <optional subset of paths>"
     print "       Default L1 Menu: L1Menu_Commissioning2009_v0"
     print "       Define subset of paths as comma-separated list: a,b,c (Default is to run all paths)" 
     sys.exit(1)
@@ -415,14 +415,14 @@ else:
             print line[:-1]
         elif line.find("GMTReadoutCollection") > 0:
             if mName == "hltL2MuonSeeds":
-                line = line.replace('hltGtDigis','l1ParamMuons') 
+                line = line.replace('hltGtDigis','gmtDigis') 
             print line[:-1]
         elif line.find("InputObjects") > 0:
             if mName == "hltL2MuonSeeds":
-                line = line.replace('hltL1extraParticles','l1ParamMuons') 
+                line = line.replace('hltL1extraParticles','l1extraParticles') 
             print line[:-1]
         elif line.find("L1MuonCollectionTag") > 0:
-            line = line.replace('hltL1extraParticles','l1ParamMuons')
+            line = line.replace('hltL1extraParticles','l1extraParticles')
             print line[:-1] 
         elif line.find("L1CollectionsTag") > 0:
             line = line.replace('hltL1extraParticles','l1extraParticles')
@@ -440,7 +440,7 @@ else:
             if bName == "None":
                 print line[:-1]
         elif line.find("CandTag") > 0:
-            line = line.replace('hltL1extraParticles','l1ParamMuons')
+            line = line.replace('hltL1extraParticles','l1extraParticles')
             print line[:-1]
         elif line.find("preFilteredSeeds") > 0:
             line = line.replace('True','False')
@@ -461,8 +461,10 @@ else:
                 print "# For all HLTLevel1GTSeed objects, make the following replacements:"
                 print "#   - L1GtReadoutRecordTag changed from hltGtDigis to gtDigis"
                 print "#   - L1CollectionsTag changed from hltL1extraParticles to l1extraParticles"
-                print "#   - L1MuonCollectionTag changed from hltL1extraParticles to l1ParamMuons"
-                print "# For hltL2MuonSeeds: InputObjects and GMTReadoutCollection set to l1ParamMuons"
+                print "#   - L1MuonCollectionTag changed from hltL1extraParticles to l1extraParticles"
+                print "# For hltL2MuonSeeds: "
+                print "#   - InputObjects changed from hltL1extraParticles to l1extraParticles"
+                print "#   - GMTReadoutCollection changed from hltGtDigis to gmtDigis"
                 print "# All other occurances of hltL1extraParticles recast as l1extraParticles"
                 print "# L1GtObjectMapTag: hltL1GtObjectMap recast as gtDigis"
                 print "# L1GtReadoutRecordTag: hltGtDigis recast as gtDigis"
@@ -475,7 +477,7 @@ else:
                 print "#   - hltCkfTrackCandidatesMumu, see FastSimulation/HighLevelTrigger/data/btau/L3ForDisplacedMumuTrigger.cff"
                 print "#   - hltCkfTrackCandidatesMumuk, see FastSimulation/HighLevelTrigger/data/btau/L3ForMuMuk.cff"
                 print "#   - hltBLifetimeRegionalCkfTrackCandidates[Relaxed], see FastSimulation/HighLevelTrigger/data/btau/lifetimeRegionalTracking.cff"
-                print "# See FastSimulation/Configuration/test/getFastSimHLTcff.py for other documentation"
+                print "# See FastSimulation/Configuration/test/getFastSimHLT_8E29_cff.py for other documentation"
                 print "# (L1Menu2007 only) Replace L1_QuadJet30 with L1_QuadJet40"
                 print "# (Temporary) Remove PSet begin and end from block" 
                 print "# End replace statements specific to the FastSim HLT"
