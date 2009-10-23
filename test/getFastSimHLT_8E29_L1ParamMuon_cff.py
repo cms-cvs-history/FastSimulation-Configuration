@@ -72,7 +72,7 @@ else:
     # strip static magnetic field definition
     esmodules += "-VolumeBasedMagneticFieldESProducer,"
     esmodules += "-ParametrizedMagneticFieldProducer,"
-
+    esmodules += "-SiPixelTemplateDBObjectESProducer,"
     esmodules += "-TTRHBuilderPixelOnly,"
     esmodules += "-WithTrackAngle,"
     esmodules += "-trajectoryCleanerBySharedHits,"
