@@ -268,6 +268,7 @@ else:
     sequences += "-HLTL25TauTrackReconstructionSequence,"    
     sequences += "-HLTEndSequence,"
     sequences += "-HLTBeginSequence,"
+    sequences += "-HLTBeginSequenceNZS,"
     sequences += "-HLTL2HcalIsolTrackSequence,"
     sequences += "-HLTL3HcalIsolTrackSequence"
 
@@ -284,7 +285,7 @@ else:
     paths = "--paths "
     
     if L1Menu == "L1Menu_Commissioning2009_v0":
-        paths += "-AlCa_HcalPhiSym,-HLTOutput,-AlCaOutput,"
+        paths += "-HLT_HcalPhiSym,-HLTOutput,-AlCaOutput,"
 ###PAT *** for now REMOVE the new Alca Streams
         paths += "-HLT_Ele15_SiStrip_L1R,"
         paths += "-HLT_IsoTrack_8E29,"
