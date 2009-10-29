@@ -1,4 +1,4 @@
-# /dev/CMSSW_3_3_0/8E29/V3 (CMSSW_3_3_X_2009-09-17-0100_HLT3)
+# /dev/CMSSW_3_3_0/backport/8E29/V6 (CMSSW_3_3_0_HLT1)
 # Begin replace statements specific to the FastSim HLT
 # For all HLTLevel1GTSeed objects, make the following replacements:
 #   - L1GtReadoutRecordTag changed from hltGtDigis to gtDigis
@@ -17,7 +17,7 @@
 #   - hltCkfTrackCandidatesMumu, see FastSimulation/HighLevelTrigger/data/btau/L3ForDisplacedMumuTrigger.cff
 #   - hltCkfTrackCandidatesMumuk, see FastSimulation/HighLevelTrigger/data/btau/L3ForMuMuk.cff
 #   - hltBLifetimeRegionalCkfTrackCandidates[Relaxed], see FastSimulation/HighLevelTrigger/data/btau/lifetimeRegionalTracking.cff
-# See FastSimulation/Configuration/test/getFastSimHLTcff.py for other documentation
+# See FastSimulation/Configuration/test/getFastSimHLT_8E29_cff.py for other documentation
 # (L1Menu2007 only) Replace L1_QuadJet30 with L1_QuadJet40
 # (Temporary) Remove PSet begin and end from block
 # End replace statements specific to the FastSim HLT
@@ -28,30 +28,14 @@ import FWCore.ParameterSet.Config as cms
 
 
 HLTConfigVersion = cms.PSet(
-  tableName = cms.string('/dev/CMSSW_3_3_0/8E29/V3')
+  tableName = cms.string('/dev/CMSSW_3_3_0/backport/8E29/V6')
 )
 
 
-essourceSev = cms.ESSource( "EmptyESSource",
-  recordName = cms.string( "HcalSeverityLevelComputerRcd" ),
-  iovIsRunNotTime = cms.bool( True ),
-  appendToDataLabel = cms.string( "" ),
-  firstValid = cms.vuint32( 1 )
-)
 L2RelativeCorrectionService = cms.ESSource( "L2RelativeCorrectionService",
   appendToDataLabel = cms.string( "" ),
   tagName = cms.string( "Summer08_L2Relative_IC5Calo" ),
   label = cms.string( "L2RelativeJetCorrector" )
-)
-MCJetCorrectorIcone5HF07 = cms.ESSource( "L2RelativeCorrectionService",
-  appendToDataLabel = cms.string( "" ),
-  tagName = cms.string( "HLT_L2Relative" ),
-  label = cms.string( "MCJetCorrectorIcone5HF07" )
-)
-MCJetCorrectorIcone5Unit = cms.ESSource( "L2RelativeCorrectionService",
-  appendToDataLabel = cms.string( "" ),
-  tagName = cms.string( "HLT_L2RelativeFlat" ),
-  label = cms.string( "MCJetCorrectorIcone5Unit" )
 )
 L3AbsoluteCorrectionService = cms.ESSource( "L3AbsoluteCorrectionService",
   appendToDataLabel = cms.string( "" ),
@@ -64,7 +48,22 @@ MCJetCorrectorIcone5 = cms.ESSource( "JetCorrectionServiceChain",
   correctors = cms.vstring( 'L2RelativeJetCorrector',
     'L3AbsoluteJetCorrector' )
 )
-SiStripQualityFakeESSource = cms.ESSource( "SiStripQualityFakeESSource" )
+MCJetCorrectorIcone5HF07 = cms.ESSource( "L2RelativeCorrectionService",
+  appendToDataLabel = cms.string( "" ),
+  tagName = cms.string( "HLT_L2Relative" ),
+  label = cms.string( "MCJetCorrectorIcone5HF07" )
+)
+MCJetCorrectorIcone5Unit = cms.ESSource( "L2RelativeCorrectionService",
+  appendToDataLabel = cms.string( "" ),
+  tagName = cms.string( "HLT_L2RelativeFlat" ),
+  label = cms.string( "MCJetCorrectorIcone5Unit" )
+)
+essourceSev = cms.ESSource( "EmptyESSource",
+  recordName = cms.string( "HcalSeverityLevelComputerRcd" ),
+  iovIsRunNotTime = cms.bool( True ),
+  appendToDataLabel = cms.string( "" ),
+  firstValid = cms.vuint32( 1 )
+)
 
 AnalyticalPropagator = cms.ESProducer( "AnalyticalPropagatorESProducer",
   ComponentName = cms.string( "AnalyticalPropagator" ),
@@ -122,7 +121,8 @@ EcalUnpackerWorkerESProducer = cms.ESProducer( "EcalUnpackerWorkerESProducer",
     Type = cms.string( "EcalRecHitWorkerSimple" ),
     ChannelStatusToBeExcluded = cms.vint32(  ),
     flagsMapDBReco = cms.vint32( 0, 0, 0, 0, 4, -1, -1, -1, 4, 4, 6, 6, 6, 7, 8 ),
-    killDeadChannels = cms.bool( True )
+    killDeadChannels = cms.bool( True ),
+    laserCorrection = cms.bool( False )
   )
 )
 FastSteppingHelixPropagatorAny = cms.ESProducer( "SteppingHelixPropagatorESProducer",
@@ -228,10 +228,42 @@ PixelCPEGenericESProducer = cms.ESProducer( "PixelCPEGenericESProducer",
   Alpha2Order = cms.bool( True ),
   ClusterProbComputationFlag = cms.int32( 0 )
 )
+SiStripQualityESProducer = cms.ESProducer( "SiStripQualityESProducer",
+  appendToDataLabel = cms.string( "" ),
+  PrintDebugOutput = cms.bool( False ),
+  ThresholdForReducedGranularity = cms.double( 0.3 ),
+  UseEmptyRunInfo = cms.bool( False ),
+  ReduceGranularity = cms.bool( False ),
+  ListOfRecordToMerge = cms.VPSet( 
+    cms.PSet(  record = cms.string( "SiStripDetVOffRcd" ),
+      tag = cms.string( "" )
+    ),
+    cms.PSet(  record = cms.string( "SiStripDetCablingRcd" ),
+      tag = cms.string( "" )
+    ),
+    cms.PSet(  record = cms.string( "RunInfoRcd" ),
+      tag = cms.string( "" )
+    ),
+    cms.PSet(  record = cms.string( "SiStripBadChannelRcd" ),
+      tag = cms.string( "" )
+    ),
+    cms.PSet(  record = cms.string( "SiStripBadFiberRcd" ),
+      tag = cms.string( "" )
+    ),
+    cms.PSet(  record = cms.string( "SiStripBadModuleRcd" ),
+      tag = cms.string( "" )
+    )
+  )
+)
 SiStripRegionConnectivity = cms.ESProducer( "SiStripRegionConnectivity",
   EtaDivisions = cms.untracked.uint32( 20 ),
   PhiDivisions = cms.untracked.uint32( 20 ),
   EtaMax = cms.untracked.double( 2.5 )
+)
+StraightLinePropagator = cms.ESProducer( "StraightLinePropagatorESProducer",
+  ComponentName = cms.string( "StraightLinePropagator" ),
+  PropagationDirection = cms.string( "alongMomentum" ),
+  appendToDataLabel = cms.string( "" )
 )
 bJetRegionalTrajectoryBuilder = cms.ESProducer( "CkfTrajectoryBuilderESProducer",
   ComponentName = cms.string( "bJetRegionalTrajectoryBuilder" ),
@@ -2276,7 +2308,7 @@ hltL1NonIsoHLTNonIsoSingleElectronLWEt10EleIdDetaFilter = cms.EDFilter( "HLTElec
     nonIsoTag = cms.InputTag( 'hltElectronL1NonIsoLargeWindowDetaDphi','Deta' ),
     lessThan = cms.bool( True ),
     thrRegularEB = cms.double( 0.0080 ),
-    thrRegularEE = cms.double( 0.0080 ),
+    thrRegularEE = cms.double( 0.011 ),
     thrOverPtEB = cms.double( -1.0 ),
     thrOverPtEE = cms.double( -1.0 ),
     thrTimesPtEB = cms.double( -1.0 ),
@@ -3009,8 +3041,8 @@ hltL1NonIsoSinglePhotonEt15HTITrackIsolFilter = cms.EDFilter( "HLTEgammaGenericF
     nonIsoTag = cms.InputTag( "hltL1NonIsoPhotonHollowTrackIsol" ),
     lessThan = cms.bool( True ),
     useEt = cms.bool( True ),
-    thrRegularEB = cms.double( 0.0 ),
-    thrRegularEE = cms.double( 0.0 ),
+    thrRegularEB = cms.double( 4.0 ),
+    thrRegularEE = cms.double( 4.0 ),
     thrOverEEB = cms.double( 0.05 ),
     thrOverEEE = cms.double( 0.05 ),
     thrOverE2EB = cms.double( -1.0 ),
@@ -3052,8 +3084,8 @@ hltL1NonIsoSinglePhotonEt15LEIEcalIsolFilter = cms.EDFilter( "HLTEgammaGenericFi
     useEt = cms.bool( False ),
     thrRegularEB = cms.double( 3.0 ),
     thrRegularEE = cms.double( 3.0 ),
-    thrOverEEB = cms.double( 0.2 ),
-    thrOverEEE = cms.double( 0.2 ),
+    thrOverEEB = cms.double( 0.1 ),
+    thrOverEEE = cms.double( 0.1 ),
     thrOverE2EB = cms.double( -1.0 ),
     thrOverE2EE = cms.double( -1.0 ),
     ncandcut = cms.int32( 1 ),
@@ -3899,7 +3931,7 @@ hltPreZeroBias = cms.EDFilter( "HLTPrescaler" )
 hltL1sMinBiasHcal = cms.EDFilter( "HLTLevel1GTSeed",
     L1TechTriggerSeeding = cms.bool( False ),
     L1UseAliasesForSeeding = cms.bool( True ),
-    L1SeedsLogicalExpression = cms.string( "L1_SingleHfBitCountsRing1_1 OR L1_DoubleHfBitCountsRing1_P1N1 OR L1_SingleHfRingEtSumsRing1_4 OR L1_DoubleHfRingEtSumsRing1_P4N4 OR L1_SingleHfRingEtSumsRing2_4 OR L1_DoubleHfRingEtSumsRing2_P4N4" ),
+    L1SeedsLogicalExpression = cms.string( "L1_SingleHfBitCountsRing1_1 OR L1_SingleHfBitCountsRing2_1 OR L1_DoubleHfBitCountsRing1_P1N1 OR L1_DoubleHfBitCountsRing2_P1N1 OR L1_SingleHfRingEtSumsRing1_4 OR L1_DoubleHfRingEtSumsRing1_P4N4 OR L1_SingleHfRingEtSumsRing2_4 OR L1_DoubleHfRingEtSumsRing2_P4N4" ),
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),

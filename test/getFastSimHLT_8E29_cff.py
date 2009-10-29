@@ -10,7 +10,7 @@ import getopt
 import fileinput
 
 def usage():
-    print "Usage: ./getFastSimHLTcff.py <Version from ConfDB> <Name of cff> <optional L1 Menu> <optional subset of paths>"
+    print "Usage: ./getFastSimHLT_8E29_cff.py <Version from ConfDB> <Name of cff> <optional L1 Menu> <optional subset of paths>"
     print "       Default L1 Menu: L1Menu_Commissioning2009_v0"
     print "       Define subset of paths as comma-separated list: a,b,c (Default is to run all paths)" 
     sys.exit(1)
@@ -268,6 +268,7 @@ else:
     sequences += "-HLTL25TauTrackReconstructionSequence,"    
     sequences += "-HLTEndSequence,"
     sequences += "-HLTBeginSequence,"
+    sequences += "-HLTBeginSequenceNZS,"
     sequences += "-HLTL2HcalIsolTrackSequence,"
     sequences += "-HLTL3HcalIsolTrackSequence"
 
@@ -284,7 +285,7 @@ else:
     paths = "--paths "
     
     if L1Menu == "L1Menu_Commissioning2009_v0":
-        paths += "-AlCa_HcalPhiSym,-HLTOutput,-AlCaOutput,"
+        paths += "-HLT_HcalPhiSym,-HLTOutput,-AlCaOutput,"
 ###PAT *** for now REMOVE the new Alca Streams
         paths += "-HLT_Ele15_SiStrip_L1R,"
         paths += "-HLT_IsoTrack_8E29,"
@@ -475,7 +476,7 @@ else:
                 print "#   - hltCkfTrackCandidatesMumu, see FastSimulation/HighLevelTrigger/data/btau/L3ForDisplacedMumuTrigger.cff"
                 print "#   - hltCkfTrackCandidatesMumuk, see FastSimulation/HighLevelTrigger/data/btau/L3ForMuMuk.cff"
                 print "#   - hltBLifetimeRegionalCkfTrackCandidates[Relaxed], see FastSimulation/HighLevelTrigger/data/btau/lifetimeRegionalTracking.cff"
-                print "# See FastSimulation/Configuration/test/getFastSimHLTcff.py for other documentation"
+                print "# See FastSimulation/Configuration/test/getFastSimHLT_8E29_cff.py for other documentation"
                 print "# (L1Menu2007 only) Replace L1_QuadJet30 with L1_QuadJet40"
                 print "# (Temporary) Remove PSet begin and end from block" 
                 print "# End replace statements specific to the FastSim HLT"
