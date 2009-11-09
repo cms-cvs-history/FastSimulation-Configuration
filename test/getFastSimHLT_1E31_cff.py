@@ -296,6 +296,7 @@ else:
         paths += "-HLT_IsoTrack_1E31,"
         paths += "-HLT_IsoTrackHB_1E31,"
         paths += "-HLT_IsoTrackHE_1E31,"
+        paths += "-HLT_HcalNZS_1E31,"
         paths += "-AlCa_EcalPi0_1E31,"
         paths += "-AlCa_EcalEta_1E31,"
         paths += "-DummyPath"

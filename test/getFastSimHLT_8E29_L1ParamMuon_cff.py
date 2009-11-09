@@ -285,10 +285,15 @@ else:
     paths = "--paths "
     
     if L1Menu == "L1Menu_Commissioning2009_v0":
-        paths += "-HLT_HcalPhiSym,-HLTOutput,-AlCaOutput,"
+        paths += "-HLT_HcalPhiSym,"
+        paths += "-HLTOutput,"
+        paths += "-AlCaOutput,"
 ###PAT *** for now REMOVE the new Alca Streams
         paths += "-HLT_Ele15_SiStrip_L1R,"
         paths += "-HLT_IsoTrack_8E29,"
+        paths += "-HLT_IsoTrackHB_8E29,"
+        paths += "-HLT_IsoTrackHE_8E29,"
+        paths += "-HLT_HcalNZS_8E29,"
         paths += "-AlCa_EcalPi0_8E29,"
         paths += "-AlCa_EcalEta_8E29,"
         paths += "-DummyPath"
