@@ -3,8 +3,10 @@
 # For all HLTLevel1GTSeed objects, make the following replacements:
 #   - L1GtReadoutRecordTag changed from hltGtDigis to gtDigis
 #   - L1CollectionsTag changed from l1extraParticles to l1extraParticles
-#   - L1MuonCollectionTag changed from l1extraParticles to l1ParamMuons
-# For hltL2MuonSeeds: InputObjects and GMTReadoutCollection set to l1ParamMuons
+#   - L1MuonCollectionTag changed from l1extraParticles to l1extraParticles
+# For hltL2MuonSeeds:
+#   - InputObjects set to l1extraParticles
+#   - GMTReadoutCollection changed from hltGtDigis to gmtDigis
 # All other occurances of l1extraParticles recast as l1extraParticles
 # L1GtObjectMapTag: hltL1GtObjectMap recast as gtDigis
 # L1GtReadoutRecordTag: hltGtDigis recast as gtDigis
@@ -17,7 +19,7 @@
 #   - hltCkfTrackCandidatesMumu, see FastSimulation/HighLevelTrigger/data/btau/L3ForDisplacedMumuTrigger.cff
 #   - hltCkfTrackCandidatesMumuk, see FastSimulation/HighLevelTrigger/data/btau/L3ForMuMuk.cff
 #   - hltBLifetimeRegionalCkfTrackCandidates[Relaxed], see FastSimulation/HighLevelTrigger/data/btau/lifetimeRegionalTracking.cff
-# See FastSimulation/Configuration/test/getFastSimHLTcff.py for other documentation
+# See FastSimulation/Configuration/test/getFastSimHLT_8E29_cff.py for other documentation
 # (L1Menu2007 only) Replace L1_QuadJet30 with L1_QuadJet40
 # (Temporary) Remove PSet begin and end from block
 # End replace statements specific to the FastSim HLT
@@ -479,7 +481,7 @@ hltL1sL1Jet6U = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreL1Jet6U = cms.EDFilter( "HLTPrescaler" )
 hltL1sJet15U = cms.EDFilter( "HLTLevel1GTSeed",
@@ -489,7 +491,7 @@ hltL1sJet15U = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreJet15U = cms.EDFilter( "HLTPrescaler" )
 hltTowerMakerForAll = cms.EDProducer( "CaloTowersCreator",
@@ -593,7 +595,7 @@ hltL1sJet30U = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreJet30U = cms.EDFilter( "HLTPrescaler" )
 hlt1jet30U = cms.EDFilter( "HLT1CaloJet",
@@ -610,7 +612,7 @@ hltL1sJet50U = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreJet50U = cms.EDFilter( "HLTPrescaler" )
 hlt1jet50U = cms.EDFilter( "HLT1CaloJet",
@@ -627,7 +629,7 @@ hltL1sFwdJet20U = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreFwdJet20U = cms.EDFilter( "HLTPrescaler" )
 hltRapGap20U = cms.EDFilter( "HLTRapGapFilter",
@@ -644,7 +646,7 @@ hltL1sDiJetAve15U8E29 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreDiJetAve15U8E29 = cms.EDFilter( "HLTPrescaler" )
 hltDiJetAve15U8E29 = cms.EDFilter( "HLTDiJetAveFilter",
@@ -661,7 +663,7 @@ hltL1sDiJetAve30U8E29 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreDiJetAve30U8E29 = cms.EDFilter( "HLTPrescaler" )
 hltDiJetAve30U8E29 = cms.EDFilter( "HLTDiJetAveFilter",
@@ -678,7 +680,7 @@ hltL1sQuadJet15U = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreQuadJet15U = cms.EDFilter( "HLTPrescaler" )
 hlt4jet15U = cms.EDFilter( "HLT1CaloJet",
@@ -695,7 +697,7 @@ hltL1sL1MET20 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreL1MET20 = cms.EDFilter( "HLTPrescaler" )
 hltL1sMET45 = cms.EDFilter( "HLTLevel1GTSeed",
@@ -705,7 +707,7 @@ hltL1sMET45 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreMET45 = cms.EDFilter( "HLTPrescaler" )
 hltMet = cms.EDProducer( "METProducer",
@@ -742,7 +744,7 @@ hltL1sMET100 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreMET100 = cms.EDFilter( "HLTPrescaler" )
 hlt1MET100 = cms.EDFilter( "HLT1CaloMET",
@@ -759,7 +761,7 @@ hltL1sHT100 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreHT100 = cms.EDFilter( "HLTPrescaler" )
 hltJet15UHt = cms.EDProducer( "METProducer",
@@ -797,11 +799,11 @@ hltL1sL1SingleMuOpenL1SingleMu0 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreL1MuOpen = cms.EDFilter( "HLTPrescaler" )
 hltL1MuOpenL1Filtered0 = cms.EDFilter( "HLTMuonL1Filter",
-    CandTag = cms.InputTag( "l1ParamMuons" ),
+    CandTag = cms.InputTag( "l1extraParticles" ),
     PreviousCandTag = cms.InputTag( "hltL1sL1SingleMuOpenL1SingleMu0" ),
     MaxEta = cms.double( 2.5 ),
     MinPt = cms.double( 0.0 ),
@@ -816,11 +818,11 @@ hltL1sL1Mu = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreL1Mu = cms.EDFilter( "HLTPrescaler" )
 hltL1MuL1Filtered0 = cms.EDFilter( "HLTMuonL1Filter",
-    CandTag = cms.InputTag( "l1ParamMuons" ),
+    CandTag = cms.InputTag( "l1extraParticles" ),
     PreviousCandTag = cms.InputTag( "hltL1sL1Mu" ),
     MaxEta = cms.double( 2.5 ),
     MinPt = cms.double( 0.0 ),
@@ -835,11 +837,11 @@ hltL1sL1SingleMu20 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreL1Mu20 = cms.EDFilter( "HLTPrescaler" )
 hltL1Mu20L1Filtered20 = cms.EDFilter( "HLTMuonL1Filter",
-    CandTag = cms.InputTag( "l1ParamMuons" ),
+    CandTag = cms.InputTag( "l1extraParticles" ),
     PreviousCandTag = cms.InputTag( "hltL1sL1SingleMu20" ),
     MaxEta = cms.double( 2.5 ),
     MinPt = cms.double( 20.0 ),
@@ -854,11 +856,11 @@ hltL1sL1SingleMu7 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreL2Mu9 = cms.EDFilter( "HLTPrescaler" )
 hltL1SingleMu7L1Filtered0 = cms.EDFilter( "HLTMuonL1Filter",
-    CandTag = cms.InputTag( "l1ParamMuons" ),
+    CandTag = cms.InputTag( "l1extraParticles" ),
     PreviousCandTag = cms.InputTag( "hltL1sL1SingleMu7" ),
     MaxEta = cms.double( 2.5 ),
     MinPt = cms.double( 0.0 ),
@@ -1074,8 +1076,8 @@ hltRpcRecHits = cms.EDProducer( "RPCRecHitProducer",
     recAlgoConfig = cms.PSet(  )
 )
 hltL2MuonSeeds = cms.EDProducer( "L2MuonSeedGenerator",
-    InputObjects = cms.InputTag( "l1ParamMuons" ),
-    GMTReadoutCollection = cms.InputTag( "l1ParamMuons" ),
+    InputObjects = cms.InputTag( "l1extraParticles" ),
+    GMTReadoutCollection = cms.InputTag( "gmtDigis" ),
     Propagator = cms.string( "SteppingHelixPropagatorAny" ),
     L1MinPt = cms.double( 0.0 ),
     L1MaxEta = cms.double( 2.5 ),
@@ -1204,11 +1206,11 @@ hltL1sL1SingleMu3 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreIsoMu3 = cms.EDFilter( "HLTPrescaler" )
 hltSingleMuIsoL1Filtered3 = cms.EDFilter( "HLTMuonL1Filter",
-    CandTag = cms.InputTag( "l1ParamMuons" ),
+    CandTag = cms.InputTag( "l1extraParticles" ),
     PreviousCandTag = cms.InputTag( "hltL1sL1SingleMu3" ),
     MaxEta = cms.double( 2.5 ),
     MinPt = cms.double( 0.0 ),
@@ -1381,11 +1383,11 @@ hltL1sL1SingleMuOpenL1SingleMu0L1SingleMu3 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreMu3 = cms.EDFilter( "HLTPrescaler" )
 hltL1SingleMu0L1Filtered0 = cms.EDFilter( "HLTMuonL1Filter",
-    CandTag = cms.InputTag( "l1ParamMuons" ),
+    CandTag = cms.InputTag( "l1extraParticles" ),
     PreviousCandTag = cms.InputTag( "hltL1sL1SingleMuOpenL1SingleMu0L1SingleMu3" ),
     MaxEta = cms.double( 2.5 ),
     MinPt = cms.double( 0.0 ),
@@ -1419,7 +1421,7 @@ hltSingleMu3L3Filtered3 = cms.EDFilter( "HLTMuonL3PreFilter",
 )
 hltPreMu5 = cms.EDFilter( "HLTPrescaler" )
 hltL1SingleMu3L1Filtered0 = cms.EDFilter( "HLTMuonL1Filter",
-    CandTag = cms.InputTag( "l1ParamMuons" ),
+    CandTag = cms.InputTag( "l1extraParticles" ),
     PreviousCandTag = cms.InputTag( "hltL1sL1SingleMu3" ),
     MaxEta = cms.double( 2.5 ),
     MinPt = cms.double( 0.0 ),
@@ -1484,11 +1486,11 @@ hltL1sL1DoubleMuOpen = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreL1DoubleMuOpen = cms.EDFilter( "HLTPrescaler" )
 hltDoubleMuLevel1PathL1OpenFiltered = cms.EDFilter( "HLTMuonL1Filter",
-    CandTag = cms.InputTag( "l1ParamMuons" ),
+    CandTag = cms.InputTag( "l1extraParticles" ),
     PreviousCandTag = cms.InputTag( "hltL1sL1DoubleMuOpen" ),
     MaxEta = cms.double( 2.5 ),
     MinPt = cms.double( 0.0 ),
@@ -1498,7 +1500,7 @@ hltDoubleMuLevel1PathL1OpenFiltered = cms.EDFilter( "HLTMuonL1Filter",
 )
 hltPreDoubleMu0 = cms.EDFilter( "HLTPrescaler" )
 hltDiMuonL1Filtered0 = cms.EDFilter( "HLTMuonL1Filter",
-    CandTag = cms.InputTag( "l1ParamMuons" ),
+    CandTag = cms.InputTag( "l1extraParticles" ),
     PreviousCandTag = cms.InputTag( "hltL1sL1DoubleMuOpen" ),
     MaxEta = cms.double( 2.5 ),
     MinPt = cms.double( 0.0 ),
@@ -1537,11 +1539,11 @@ hltL1sL1DoubleMu3 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreDoubleMu3 = cms.EDFilter( "HLTPrescaler" )
 hltDiMuonL1Filtered = cms.EDFilter( "HLTMuonL1Filter",
-    CandTag = cms.InputTag( "l1ParamMuons" ),
+    CandTag = cms.InputTag( "l1extraParticles" ),
     PreviousCandTag = cms.InputTag( "hltL1sL1DoubleMu3" ),
     MaxEta = cms.double( 2.5 ),
     MinPt = cms.double( 0.0 ),
@@ -1580,7 +1582,7 @@ hltL1sRelaxedSingleEgammaEt5 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreL1SingleEG5 = cms.EDFilter( "HLTPrescaler" )
 hltL1sRelaxedSingleEgammaEt8 = cms.EDFilter( "HLTLevel1GTSeed",
@@ -1590,7 +1592,7 @@ hltL1sRelaxedSingleEgammaEt8 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreL1SingleEG8 = cms.EDFilter( "HLTPrescaler" )
 hltPreEle10LWL1R = cms.EDFilter( "HLTPrescaler" )
@@ -2232,7 +2234,7 @@ hltL1sRelaxedDoubleEgammaEt5 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreL1DoubleEG5 = cms.EDFilter( "HLTPrescaler" )
 hltPreDoubleEle5SWL1R = cms.EDFilter( "HLTPrescaler" )
@@ -2392,7 +2394,7 @@ hltL1sRelaxedEgammaEt8orDouble5 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreDoublePhoton5eeResL1R = cms.EDFilter( "HLTPrescaler" )
 hltL1NonIsoDoublePhotonEt5eeResL1MatchFilterRegional = cms.EDFilter( "HLTEgammaL1MatchFilterRegional",
@@ -2938,7 +2940,7 @@ hltL1sSingleLooseIsoTau20 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreSingleLooseIsoTau20 = cms.EDFilter( "HLTPrescaler" )
 hltTowerMakerForJets = cms.EDProducer( "CaloTowersCreator",
@@ -3290,7 +3292,7 @@ hltL1sDoubleLooseIsoTau15 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreDoubleLooseIsoTau15 = cms.EDFilter( "HLTPrescaler" )
 hltFilterL2EtCutDoubleLooseIsoTau15 = cms.EDFilter( "HLT1Tau",
@@ -3318,7 +3320,7 @@ hltL1sBTagMuJet10U = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreBTagMuJet10U = cms.EDFilter( "HLTPrescaler" )
 hltBJet10U = cms.EDFilter( "HLT1CaloBJet",
@@ -3391,7 +3393,7 @@ hltL1sBTagIPJet50U = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreBTagIPJet50U = cms.EDFilter( "HLTPrescaler" )
 hltBJet50U = cms.EDFilter( "HLT1CaloBJet",
@@ -3480,7 +3482,7 @@ hltL1sStoppedHSCP8E29 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" ),
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" ),
     saveTags = cms.untracked.bool( False )
 )
 hltPreStoppedHSCP8E29 = cms.EDFilter( "HLTPrescaler" )
@@ -3586,7 +3588,7 @@ hltL1sL1Mu14L1SingleEG10 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreL1Mu14L1SingleEG10 = cms.EDFilter( "HLTPrescaler" )
 hltL1sL1Mu14L1SingleJet6U = cms.EDFilter( "HLTLevel1GTSeed",
@@ -3596,7 +3598,7 @@ hltL1sL1Mu14L1SingleJet6U = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreL1Mu14L1SingleJet6U = cms.EDFilter( "HLTPrescaler" )
 hltL1sL1Mu14L1ETM30 = cms.EDFilter( "HLTLevel1GTSeed",
@@ -3606,7 +3608,7 @@ hltL1sL1Mu14L1ETM30 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreL1Mu14L1ETM30 = cms.EDFilter( "HLTPrescaler" )
 hltL1sZeroBias = cms.EDFilter( "HLTLevel1GTSeed",
@@ -3616,7 +3618,7 @@ hltL1sZeroBias = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreZeroBias = cms.EDFilter( "HLTPrescaler" )
 hltL1sMinBiasHcal = cms.EDFilter( "HLTLevel1GTSeed",
@@ -3626,7 +3628,7 @@ hltL1sMinBiasHcal = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreMinBiasHcal = cms.EDFilter( "HLTPrescaler" )
 hltL1sMinBiasEcal = cms.EDFilter( "HLTLevel1GTSeed",
@@ -3636,7 +3638,7 @@ hltL1sMinBiasEcal = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreMinBiasEcal = cms.EDFilter( "HLTPrescaler" )
 hltL1sMinBiasPixel = cms.EDFilter( "HLTLevel1GTSeed",
@@ -3646,7 +3648,7 @@ hltL1sMinBiasPixel = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreMinBiasPixel = cms.EDFilter( "HLTPrescaler" )
 hltPixelCands = cms.EDProducer( "ConcreteChargedCandidateProducer",
@@ -3674,7 +3676,7 @@ hltL1sCSCBeamHalo = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreCSCBeamHalo = cms.EDFilter( "HLTPrescaler" )
 hltL1sCSCBeamHaloOverlapRing1 = cms.EDFilter( "HLTLevel1GTSeed",
@@ -3684,7 +3686,7 @@ hltL1sCSCBeamHaloOverlapRing1 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreCSCBeamHaloOverlapRing1 = cms.EDFilter( "HLTPrescaler" )
 hltOverlapsHLTCSCBeamHaloOverlapRing1 = cms.EDFilter( "HLTCSCOverlapFilter",
@@ -3703,7 +3705,7 @@ hltL1sCSCBeamHaloOverlapRing2 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreCSCBeamHaloOverlapRing2 = cms.EDFilter( "HLTPrescaler" )
 hltOverlapsHLTCSCBeamHaloOverlapRing2 = cms.EDFilter( "HLTCSCOverlapFilter",
@@ -3722,7 +3724,7 @@ hltL1sCSCBeamHaloRing2or3 = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreCSCBeamHaloRing2or3 = cms.EDFilter( "HLTPrescaler" )
 hltFilter23HLTCSCBeamHaloRing2or3 = cms.EDFilter( "HLTCSCRing2or3Filter",
@@ -3738,7 +3740,7 @@ hltL1sBackwardBSC = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreBackwardBSC = cms.EDFilter( "HLTPrescaler" )
 hltL1sForwardBSC = cms.EDFilter( "HLTLevel1GTSeed",
@@ -3748,7 +3750,7 @@ hltL1sForwardBSC = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreForwardBSC = cms.EDFilter( "HLTPrescaler" )
 hltL1sTrackerCosmics = cms.EDFilter( "HLTLevel1GTSeed",
@@ -3758,7 +3760,7 @@ hltL1sTrackerCosmics = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreTrackerCosmics = cms.EDFilter( "HLTPrescaler" )
 hltL1sAlCaEcalPhiSym = cms.EDFilter( "HLTLevel1GTSeed",
@@ -3768,7 +3770,7 @@ hltL1sAlCaEcalPhiSym = cms.EDFilter( "HLTLevel1GTSeed",
     L1GtReadoutRecordTag = cms.InputTag( "gtDigis" ),
     L1GtObjectMapTag = cms.InputTag( "gtDigis" ),
     L1CollectionsTag = cms.InputTag( "l1extraParticles" ),
-    L1MuonCollectionTag = cms.InputTag( "l1ParamMuons" )
+    L1MuonCollectionTag = cms.InputTag( "l1extraParticles" )
 )
 hltPreAlCaEcalPhiSym = cms.EDFilter( "HLTPrescaler" )
 hltAlCaPhiSymStream = cms.EDFilter( "HLTEcalPhiSymFilter",
@@ -3781,7 +3783,7 @@ hltAlCaPhiSymStream = cms.EDFilter( "HLTEcalPhiSymFilter",
 )
 hltPreRPCMuonNoHits = cms.EDFilter( "HLTPrescaler" )
 hltRPCMuonNoHitsL1Filtered0 = cms.EDFilter( "HLTMuonL1Filter",
-    CandTag = cms.InputTag( "l1ParamMuons" ),
+    CandTag = cms.InputTag( "l1extraParticles" ),
     PreviousCandTag = cms.InputTag( "hltL1sL1SingleMuOpenL1SingleMu0" ),
     MaxEta = cms.double( 1.6 ),
     MinPt = cms.double( 0.0 ),
@@ -3791,7 +3793,7 @@ hltRPCMuonNoHitsL1Filtered0 = cms.EDFilter( "HLTMuonL1Filter",
 )
 hltPreRPCMuonNorma = cms.EDFilter( "HLTPrescaler" )
 hltRPCMuonNormaL1Filtered0 = cms.EDFilter( "HLTMuonL1Filter",
-    CandTag = cms.InputTag( "l1ParamMuons" ),
+    CandTag = cms.InputTag( "l1extraParticles" ),
     PreviousCandTag = cms.InputTag( "hltL1sL1SingleMuOpenL1SingleMu0" ),
     MaxEta = cms.double( 1.6 ),
     MinPt = cms.double( 0.0 ),
