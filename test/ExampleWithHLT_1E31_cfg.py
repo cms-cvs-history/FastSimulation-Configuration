@@ -44,7 +44,7 @@ process.load("Configuration.Generator.TTbar_cfi")
 
 # Common inputs, with fake conditions
 process.load("FastSimulation.Configuration.CommonInputs_cff")
-process.GlobalTag.globaltag = "MC_3XY_V13::All"
+process.GlobalTag.globaltag = "MC_3XY_V14::All"
 
 # L1 Emulator and HLT Setup
 process.load("FastSimulation.HighLevelTrigger.HLTSetup_cff")
