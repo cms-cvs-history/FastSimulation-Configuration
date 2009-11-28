@@ -268,6 +268,8 @@ else:
     sequences += "-HLTL25TauTrackReconstructionSequence,"    
     sequences += "-HLTEndSequence,"
     sequences += "-HLTBeginSequence,"
+    sequences += "-HLTBeginSequenceNZS,"
+    sequences += "-HLTBeginSequenceBPTX,"
     sequences += "-HLTL2HcalIsolTrackSequence,"
     sequences += "-HLTL3HcalIsolTrackSequence"
 
