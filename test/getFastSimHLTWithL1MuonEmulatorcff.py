@@ -81,6 +81,7 @@ else:
     esmodules += "-muonCkfTrajectoryFilter,"
     esmodules += "-l1GtTriggerMenuXml,"
     esmodules += "-L1GtTriggerMaskAlgoTrigTrivialProducer,"
+    esmodules += "-L1GtTriggerMaskTechTrigTrivialProducer,"
     esmodules += "-hcal_db_producer,"
     esmodules += "-ckfBaseTrajectoryFilter,"
     esmodules += "-ZdcHardcodeGeometryEP,"
