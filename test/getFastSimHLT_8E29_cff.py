@@ -426,14 +426,14 @@ else:
             print line[:-1]
         elif line.find("GMTReadoutCollection") > 0:
             if mName == "hltL2MuonSeeds":
-                line = line.replace('hltGtDigis','l1ParamMuons') 
+                line = line.replace('hltGtDigis','gmtDigis') 
             print line[:-1]
         elif line.find("InputObjects") > 0:
             if mName == "hltL2MuonSeeds":
-                line = line.replace('hltL1extraParticles','l1ParamMuons') 
+                line = line.replace('hltL1extraParticles','l1extraParticles') 
             print line[:-1]
         elif line.find("L1MuonCollectionTag") > 0:
-            line = line.replace('hltL1extraParticles','l1ParamMuons')
+            line = line.replace('hltL1extraParticles','l1extraParticles')
             print line[:-1] 
         elif line.find("L1CollectionsTag") > 0:
             line = line.replace('hltL1extraParticles','l1extraParticles')
@@ -451,7 +451,7 @@ else:
             if bName == "None":
                 print line[:-1]
         elif line.find("CandTag") > 0:
-            line = line.replace('hltL1extraParticles','l1ParamMuons')
+            line = line.replace('hltL1extraParticles','l1extraParticles')
             print line[:-1]
         elif line.find("preFilteredSeeds") > 0:
             line = line.replace('True','False')
@@ -472,8 +472,10 @@ else:
                 print "# For all HLTLevel1GTSeed objects, make the following replacements:"
                 print "#   - L1GtReadoutRecordTag changed from hltGtDigis to gtDigis"
                 print "#   - L1CollectionsTag changed from hltL1extraParticles to l1extraParticles"
-                print "#   - L1MuonCollectionTag changed from hltL1extraParticles to l1ParamMuons"
-                print "# For hltL2MuonSeeds: InputObjects and GMTReadoutCollection set to l1ParamMuons"
+                print "#   - L1MuonCollectionTag changed from hltL1extraParticles to l1extraParticles"
+                print "# For hltL2MuonSeeds: "
+                print "#   - InputObjects changed from hltL1extraParticles to l1extraParticles"
+                print "#   - GMTReadoutCollection changed from hltGtDigis to gmtDigis"
                 print "# All other occurances of hltL1extraParticles recast as l1extraParticles"
                 print "# L1GtObjectMapTag: hltL1GtObjectMap recast as gtDigis"
                 print "# L1GtReadoutRecordTag: hltGtDigis recast as gtDigis"
