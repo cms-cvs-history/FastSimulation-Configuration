@@ -52,7 +52,8 @@ else:
     essources += "-XMLIdealGeometryESSource,"
     essources += "-HepPDTESSource,"
     essources += "-BTagRecord,"
-    essources += "-GlobalTag"
+    essources += "-GlobalTag,"
+    essources += "-Level1MenuOverride"
 
     esmodules = "--esmodules "
     # strip automatic magnetic field definition
@@ -81,6 +82,7 @@ else:
     esmodules += "-muonCkfTrajectoryFilter,"
     esmodules += "-l1GtTriggerMenuXml,"
     esmodules += "-L1GtTriggerMaskAlgoTrigTrivialProducer,"
+    esmodules += "-L1GtTriggerMaskTechTrigTrivialProducer,"
     esmodules += "-hcal_db_producer,"
     esmodules += "-ckfBaseTrajectoryFilter,"
     esmodules += "-ZdcHardcodeGeometryEP,"
@@ -269,6 +271,7 @@ else:
     sequences += "-HLTEndSequence,"
     sequences += "-HLTBeginSequence,"
     sequences += "-HLTBeginSequenceNZS,"
+    sequences += "-HLTBeginSequenceBPTX,"
     sequences += "-HLTL2HcalIsolTrackSequence,"
     sequences += "-HLTL3HcalIsolTrackSequence"
 
