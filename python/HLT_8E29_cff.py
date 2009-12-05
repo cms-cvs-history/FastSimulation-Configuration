@@ -1,4 +1,4 @@
-# /dev/CMSSW_3_3_3/8E29/V30 (CMSSW_3_3_3_HLT8)
+# /dev/CMSSW_3_3_3/8E29/V32 (CMSSW_3_3_3_HLT8)
 # Begin replace statements specific to the FastSim HLT
 # For all HLTLevel1GTSeed objects, make the following replacements:
 #   - L1GtReadoutRecordTag changed from hltGtDigis to gtDigis
@@ -30,7 +30,7 @@ import FWCore.ParameterSet.Config as cms
 
 
 HLTConfigVersion = cms.PSet(
-  tableName = cms.string('/dev/CMSSW_3_3_3/8E29/V30')
+  tableName = cms.string('/dev/CMSSW_3_3_3/8E29/V32')
 )
 
 
