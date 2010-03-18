@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Usage: ./getFastSimHLTcff.py <Version from ConfDB> <Name of cff file> <optional L1 Menu> <optional subset of paths>
-###TABLE FOR 1E31 
+###TABLE FOR 1E31
 
 import sys
 import os
@@ -12,7 +12,7 @@ import fileinput
 def usage():
     print "Usage: ./getFastSimHLTcff.py <Version from ConfDB> <Name of cff> <optional L1 Menu> <optional subset of paths>"
     print "       Default L1 Menu: L1Menu2008_2E30"
-    print "       Define subset of paths as comma-separated list: a,b,c (Default is to run all paths)" 
+    print "       Define subset of paths as comma-separated list: a,b,c (Default is to run all paths)"
     sys.exit(1)
 
 argc = len(sys.argv)
@@ -217,10 +217,10 @@ else:
     modules += "-hltEcalRecHitAll,"
     modules += "-hltL3TauPixelSeeds,"
     modules += "-hltL3TauCkfTrackCandidates,"
-    modules += "-hltL3TauCtfWithMaterialTracks," 
+    modules += "-hltL3TauCtfWithMaterialTracks,"
     modules += "-hltL25TauPixelSeeds,"
     modules += "-hltL25TauCkfTrackCandidates,"
-    modules += "-hltL25TauCtfWithMaterialTracks," 
+    modules += "-hltL25TauCtfWithMaterialTracks,"
     modules += "-hltBLifetimeRegionalPixelSeedGeneratorStartup,"
     modules += "-hltBLifetimeRegionalCkfTrackCandidatesStartup,"
     modules += "-hltBLifetimeRegionalCtfWithMaterialTracksStartup,"
@@ -267,7 +267,7 @@ else:
     sequences += "-HLTDoLocalPixelSequence,"
     sequences += "-HLTRecopixelvertexingSequence,"
     sequences += "-HLTL3TauTrackReconstructionSequence,"
-    sequences += "-HLTL25TauTrackReconstructionSequence,"    
+    sequences += "-HLTL25TauTrackReconstructionSequence,"
     sequences += "-HLTEndSequence,"
     sequences += "-HLTBeginSequence,"
     sequences += "-HLTBeginSequenceNZS,"
@@ -288,7 +288,7 @@ else:
     #--- CandHLTCSCBeamHaloOverlapRing2 removed because of L1_SingleMuBeamHalo (not found in L1Menu2007)
     #--- CandHLTCSCBeamHaloRing2or3 removed because of L1_SingleMuBeamHalo (not found in L1Menu2007)
     paths = "--paths "
-    
+
     if L1Menu == "L1Menu_MC2009_v0":
         paths += "-HLT_HcalPhiSym,"
         paths += "-HLTOutput,"
@@ -323,7 +323,7 @@ else:
         cffType = ".py"
     else:
         cffType = ".cff"
-        
+
     baseCommand = "edmConfigFromDB --cff --configName " + dbName
     if cffType == ".py":
         baseCommand += " --format Python"
@@ -339,12 +339,12 @@ else:
         blockpsets = "--nopsets"
         myGetCff = baseCommand + " " + essources + " " + esmodules + " " + sequences + " " + modules + " " + paths + " " + services + " " + psets + " > " + cffName
         myGetBlocks = baseCommand + " " + blockessources + " " + blockesmodules + " " + blockservices + " " + blockpaths + " " + blockpsets + " " + blocks + " > " + blockName
-        
+
     # Write blocks for electrons and muons, in py configuration
     if ( blockName != "None" ) :
         os.system(myGetBlocks)
 
-        # online to offline conversion - taken from HLTrigger/Configuration/test/getHLT.py 
+        # online to offline conversion - taken from HLTrigger/Configuration/test/getHLT.py
         # FIXME these should be better integrated with edmConfigFromDB
         os.system("sed -e'/^streams/,/^)/d' -e'/^datasets/,/^)/d' -i %s" % blockName)
 
@@ -352,7 +352,7 @@ else:
         for line in fileinput.input(blockName,inplace=1):
 
             if line.find("hltOfflineBeamSpot") > 0:
-                line = line.replace('hltOfflineBeamSpot','offlineBeamSpot') 
+                line = line.replace('hltOfflineBeamSpot','offlineBeamSpot')
 
             if line.find("block_hlt") == 0:
                 subStart = line.find("_")
@@ -376,7 +376,7 @@ else:
     # Write all HLT
     os.system(myGetCff)
 
-    # online to offline conversion - taken from HLTrigger/Configuration/test/getHLT.py 
+    # online to offline conversion - taken from HLTrigger/Configuration/test/getHLT.py
     # FIXME these should be better integrated with edmConfigFromDB
     os.system("sed -e'/^streams/,/^)/d' -e'/^datasets/,/^)/d' -i %s" % cffName)
     os.system("sed -e 's/cms.InputTag( \"source\" )/cms.InputTag( \"rawDataCollector\" )/' -i %s" % cffName)
@@ -406,7 +406,7 @@ else:
                 #if myPath != "HLTriggerFinalPath":
                     #schedule += ",process."
                 #else:
-                    #schedule += ")"                    
+                    #schedule += ")"
         else:
             if line.find("module hlt") >= 0:
                 subStart = line.find("hlt")
@@ -421,30 +421,30 @@ else:
             subEnd = line.find(" ",subStart)
             bName = line[subStart:subEnd]
 
-##HLTL3PixelIsolFilterSequence has been removed 
+##HLTL3PixelIsolFilterSequence has been removed
         if line.find("HLTL3PixelIsolFilterSequence = ") == 0:
             line = line.replace('hltPixelTracks','hltPixelTracking')
             print line[:-1]
         elif line.find("GMTReadoutCollection") > 0:
             if mName == "hltL2MuonSeeds":
-                line = line.replace('hltGtDigis','gmtDigis') 
+                line = line.replace('hltGtDigis','gmtDigis')
             print line[:-1]
         elif line.find("InputObjects") > 0:
             if mName == "hltL2MuonSeeds":
-                line = line.replace('hltL1extraParticles','l1extraParticles') 
+                line = line.replace('hltL1extraParticles','l1extraParticles')
             print line[:-1]
         elif line.find("L1MuonCollectionTag") > 0:
             line = line.replace('hltL1extraParticles','l1extraParticles')
-            print line[:-1] 
+            print line[:-1]
         elif line.find("L1CollectionsTag") > 0:
             line = line.replace('hltL1extraParticles','l1extraParticles')
             print line[:-1]
         elif line.find("L1GtObjectMapTag") > 0:
-            line = line.replace('hltL1GtObjectMap','gtDigis') 
+            line = line.replace('hltL1GtObjectMap','gtDigis')
             print line[:-1]
         elif line.find("L1GtReadoutRecordTag") > 0:
-            line = line.replace('hltGtDigis','gtDigis') 
-            print line[:-1] 
+            line = line.replace('hltGtDigis','gtDigis')
+            print line[:-1]
         elif line.find("PSet SeedConfiguration") > 0:
             if bName == "None":
                 print line[:-1]
@@ -467,7 +467,7 @@ else:
                 print line[:-1]
         else:
             print line[:-1]
-            # The first line should be where the comments go 
+            # The first line should be where the comments go
             if line.find("//") == 0 or line.find("#") == 0:
                 print "# Begin replace statements specific to the FastSim HLT"
                 print "# For all HLTLevel1GTSeed objects, make the following replacements:"
@@ -491,9 +491,9 @@ else:
                 print "#   - hltBLifetimeRegionalCkfTrackCandidates[Relaxed], see FastSimulation/HighLevelTrigger/data/btau/lifetimeRegionalTracking.cff"
                 print "# See FastSimulation/Configuration/test/getFastSimHLTcff.py for other documentation"
                 print "# (L1Menu2007 only) Replace L1_QuadJet30 with L1_QuadJet40"
-                print "# (Temporary) Remove PSet begin and end from block" 
+                print "# (Temporary) Remove PSet begin and end from block"
                 print "# End replace statements specific to the FastSim HLT"
-            if cffType == ".py":    
+            if cffType == ".py":
                 if line.find("#") == 0:
                     print "# Additional import to make this file self contained"
                     print "from FastSimulation.HighLevelTrigger.HLTSetup_cff import *"
@@ -504,7 +504,7 @@ else:
     for line in fileinput.input(cffName,inplace=1):
         if line.find("//") < 0:
             if line.find("hltOfflineBeamSpot") > 0:
-                line = line.replace('hltOfflineBeamSpot','offlineBeamSpot') 
+                line = line.replace('hltOfflineBeamSpot','offlineBeamSpot')
             if line.find("hltMuonCSCDigis") > 0:
                 if cffType == ".py":
                     if line.find("hltMuonCSCDigis +") > 0:
@@ -520,7 +520,7 @@ else:
                     else:
                         line = line.replace('hltMuonDTDigis','simMuonDTDigis')
                 else:
-                    line = line.replace('hltMuonDTDigis','simMuonDTDigis') 
+                    line = line.replace('hltMuonDTDigis','simMuonDTDigis')
             if line.find("hltMuonRPCDigis") > 0:
                 if cffType == ".py":
                     if line.find("hltMuonRPCDigis +") > 0:
@@ -528,12 +528,12 @@ else:
                     else:
                         line = line.replace('hltMuonRPCDigis','simMuonRPCDigis')
                 else:
-                    line = line.replace('hltMuonRPCDigis','simMuonRPCDigis') 
+                    line = line.replace('hltMuonRPCDigis','simMuonRPCDigis')
             if line.find("HLTEndSequence") > 0:
                 if cffType == ".py":
                     line = line.replace('HLTEndSequence','cms.SequencePlaceholder("HLTEndSequence")')
             if line.find("hltL1extraParticles") > 0:
-                line = line.replace('hltL1extraParticles','l1extraParticles') 
+                line = line.replace('hltL1extraParticles','l1extraParticles')
             if line.find("QuadJet30") > 0:
                 if L1Menu == "L1Menu2007":
                     line = line.replace('QuadJet30','QuadJet40')
