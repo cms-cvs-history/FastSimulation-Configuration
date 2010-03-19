@@ -288,10 +288,19 @@ else:
     paths = "--paths "
 
     if L1Menu == "L1Menu_Commissioning2009_v0":
-        paths += "-HLT_HcalPhiSym,"
+        # remove output endpaths
         paths += "-HLTOutput,"
         paths += "-AlCaOutput,"
-###PAT *** for now REMOVE the new Alca Streams
+        paths += "-ExpressOutput,"
+        paths += "-EventDisplayOutput,"
+        paths += "-DQMOutput,"
+        paths += "-HLTDQMOutput,"
+        paths += "-HLTMONOutput,"
+        # remove unsupported paths
+        paths += "-HLT_HcalPhiSym,"
+        paths += "-HLT_Mu0_Track0_Jpsi,"
+        paths += "-HLT_Mu3_Track0_Jpsi,"
+        paths += "-HLT_Mu5_Track0_Jpsi,"
         paths += "-HLT_Ele15_SiStrip_L1R,"
         paths += "-HLT_IsoTrack_8E29,"
         paths += "-HLT_IsoTrackHB_8E29,"
@@ -309,11 +318,6 @@ else:
         paths += "-HLT_L2Mu0_NoVertex,"
         paths += "-HLT_TkMu3_NoVertex,"
         paths += "-HLT_EgammaSuperClusterOnly_L1R,"
-        paths += "-ExpressOutput,"
-        paths += "-EventDisplayOutput,"
-        paths += "-DQMOutput,"
-        paths += "-HLTDQMOutput,"
-        paths += "-HLTMONOutput,"
         paths += "-HLT_Random,"
         paths += "-HLT_Calibration,"
         paths += "-HLT_EcalCalibration,"
