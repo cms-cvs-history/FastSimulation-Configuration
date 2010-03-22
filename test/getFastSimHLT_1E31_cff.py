@@ -291,6 +291,9 @@ else:
 
     if L1Menu == "L1Menu_MC2009_v0":
         paths += "-HLT_HcalPhiSym,"
+        paths += "-HLT_Mu0_Track0_Jpsi,"
+        paths += "-HLT_Mu3_Track0_Jpsi,"
+        paths += "-HLT_Mu5_Track0_Jpsi,"
         paths += "-HLTOutput,"
         paths += "-AlCaOutput,"
 ###PAT *** for now REMOVE the new Alca Streams
