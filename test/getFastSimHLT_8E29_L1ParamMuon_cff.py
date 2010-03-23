@@ -301,6 +301,8 @@ else:
         paths += "-HLT_Mu0_Track0_Jpsi,"
         paths += "-HLT_Mu3_Track0_Jpsi,"
         paths += "-HLT_Mu5_Track0_Jpsi,"
+        paths += "-HLT_SelectEcalSpikes_L1R,"
+        paths += "-HLT_SelectEcalSpikesHighEt_L1R,"
         paths += "-HLT_Ele15_SiStrip_L1R,"
         paths += "-HLT_IsoTrack_8E29,"
         paths += "-HLT_IsoTrackHB_8E29,"

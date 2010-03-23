@@ -297,6 +297,8 @@ else:
         paths += "-HLTOutput,"
         paths += "-AlCaOutput,"
 ###PAT *** for now REMOVE the new Alca Streams
+        paths += "-HLT_SelectEcalSpikes_L1R,"
+        paths += "-HLT_SelectEcalSpikesHighEt_L1R,"
         paths += "-HLT_Ele15_SiStrip_L1R,"
         paths += "-HLT_Ele20_SiStrip_L1R,"
         paths += "-HLT_IsoTrack_1E31,"
