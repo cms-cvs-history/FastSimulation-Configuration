@@ -328,6 +328,14 @@ else:
         paths += "-HLT_HcalCalibration,"
         paths += "-AlCa_EcalPi0_8E29,"
         paths += "-AlCa_EcalEta_8E29,"
+###AP *** other paths removed with V01-16-23 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_5_5/XXXX/V21
+        paths += "-HLT_MinBiasEcal,"
+        paths += "-HLT_DoublePhoton4_eeRes_L1R,"
+        paths += "-HLT_DoublePhoton4_Jpsi_L1R,"
+        paths += "-HLT_DoublePhoton4_Upsilon_L1R,"
+        paths += "-DQM_FEDIntegrity,"
+        paths += "-AlCa_EcalPhiSym,"
+###
         paths += "-DummyPath"
 
 
