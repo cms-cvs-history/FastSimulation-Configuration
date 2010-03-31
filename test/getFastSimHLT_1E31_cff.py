@@ -310,6 +310,8 @@ else:
 ###AP *** other paths removed with V01-16-23 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_5_5/XXXX/V21
         paths += "-HLT_MinBiasEcal,"
         paths += "-AlCa_EcalPhiSym,"
+###AP *** other paths removed with V01-17-02 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_6_0/pre4/XXXX/V7
+        paths += "-HLT_HighMult40,"
 ###
         paths += "-DummyPath"
 
