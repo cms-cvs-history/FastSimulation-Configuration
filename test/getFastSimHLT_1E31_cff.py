@@ -307,6 +307,12 @@ else:
         paths += "-HLT_HcalNZS_1E31,"
         paths += "-AlCa_EcalPi0_1E31,"
         paths += "-AlCa_EcalEta_1E31,"
+###AP *** other paths removed with V01-16-23 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_5_5/XXXX/V21
+        paths += "-HLT_MinBiasEcal,"
+        paths += "-AlCa_EcalPhiSym,"
+###AP *** other paths removed with V01-16-25 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_5_5/XXXX/V26
+        paths += "-HLT_HighMult40,"
+###
         paths += "-DummyPath"
 
 
@@ -385,7 +391,8 @@ else:
     # FIXME these should be better integrated with edmConfigFromDB
     os.system("sed -e'/^streams/,/^)/d' -e'/^datasets/,/^)/d' -i %s" % cffName)
     os.system("sed -e 's/cms.InputTag( \"source\" )/cms.InputTag( \"rawDataCollector\" )/' -i %s" % cffName)
-    os.system("sed -e'/DTUnpackingModule/a\ \ \ \ inputLabel = cms.untracked.InputTag( \"rawDataCollector\" ),' -i %s" % cffName)
+    # FIXME - DTUnpackingModule should not have untracked parameters
+    # os.system("sed -e'/DTUnpackingModule/a\ \ \ \ inputLabel = cms.untracked.InputTag( \"rawDataCollector\" ),' -i %s" % cffName)
 
     # myReplaceTrigResults = "replace TriggerResults::HLT " + process + " -- " + cffName
     # os.system(myReplaceTrigResults)
