@@ -272,6 +272,7 @@ else:
     sequences += "-HLTBeginSequence,"
     sequences += "-HLTBeginSequenceNZS,"
     sequences += "-HLTBeginSequenceBPTX,"
+    sequences += "-HLTBeginSequenceAntiBPTX,"
     sequences += "-HLTL2HcalIsolTrackSequence,"
     sequences += "-HLTL2HcalIsolTrackSequenceHB,"
     sequences += "-HLTL2HcalIsolTrackSequenceHE,"
@@ -337,6 +338,8 @@ else:
         paths += "-AlCa_EcalPhiSym,"
 ###AP *** other paths removed with V01-16-25 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_5_5/XXXX/V26
         paths += "-HLT_HighMult40,"
+###SA *** removed with V01-16-28  HLTrigger/Configuration,  ConfDB /dev/CMSSW_3_5_5/1E31/V31
+        paths += "-HLT_L1MuOpen_AntiBPTX,"
 ###
         paths += "-DummyPath"
 
