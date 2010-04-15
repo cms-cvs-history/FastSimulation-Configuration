@@ -272,9 +272,11 @@ else:
     sequences += "-HLTBeginSequence,"
     sequences += "-HLTBeginSequenceNZS,"
     sequences += "-HLTBeginSequenceBPTX,"
+    sequences += "-HLTBeginSequenceAntiBPTX,"
+    sequences += "-HLTL2HcalIsolTrackSequenceHB,"
+    sequences += "-HLTL2HcalIsolTrackSequenceHE,"
     sequences += "-HLTL2HcalIsolTrackSequence,"
     sequences += "-HLTL3HcalIsolTrackSequence"
-
     #--- Some notes about removed paths: ---#
     #--- CandHLTCSCBeamHalo removed because of L1_SingleMuBeamHalo (not found in L1Menu2007)
     #--- HLT1MuonL1Open removed because of L1_SingleMuOpen (not found in L1Menu2007)
@@ -335,6 +337,10 @@ else:
         paths += "-AlCa_EcalPhiSym,"
 ###AP *** other paths removed with V01-16-25 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_5_5/XXXX/V26
         paths += "-HLT_HighMult40,"
+###SA *** removed with V01-16-28  HLTrigger/Configuration,  ConfDB /dev/CMSSW_3_5_5/1E31/V31
+        paths += "-HLT_L1MuOpen_AntiBPTX,"
+###AP *** removed with V01-16-35  HLTrigger/Configuration,  ConfDB /dev/CMSSW_3_5_5/XXXX/V34
+        paths += "-HLT_L1_BscMinBiasOR_BeamGas,"
 ###
         paths += "-DummyPath"
 
@@ -414,7 +420,7 @@ else:
     # FIXME these should be better integrated with edmConfigFromDB
     os.system("sed -e'/^streams/,/^)/d' -e'/^datasets/,/^)/d' -i %s" % cffName)
     os.system("sed -e 's/cms.InputTag( \"source\" )/cms.InputTag( \"rawDataCollector\" )/' -i %s" % cffName)
-    # FIXME - DTUnpackingModule should not have untracked parameter
+    # FIXME - DTUnpackingModule should not have untracked parameters
     # os.system("sed -e'/DTUnpackingModule/a\ \ \ \ inputLabel = cms.untracked.InputTag( \"rawDataCollector\" ),' -i %s" % cffName)
 
     # myReplaceTrigResults = "replace TriggerResults::HLT " + process + " -- " + cffName

@@ -340,6 +340,8 @@ else:
         paths += "-HLT_HighMult40,"
 ###SA *** removed with V01-16-28  HLTrigger/Configuration,  ConfDB /dev/CMSSW_3_5_5/1E31/V31
         paths += "-HLT_L1MuOpen_AntiBPTX,"
+###AP *** removed with V01-16-35  HLTrigger/Configuration,  ConfDB /dev/CMSSW_3_5_5/XXXX/V34
+        paths += "-HLT_L1_BscMinBiasOR_BeamGas,"
 ###
         paths += "-DummyPath"
 
