@@ -272,7 +272,10 @@ else:
     sequences += "-HLTBeginSequence,"
     sequences += "-HLTBeginSequenceNZS,"
     sequences += "-HLTBeginSequenceBPTX,"
+    sequences += "-HLTBeginSequenceAntiBPTX,"
     sequences += "-HLTL2HcalIsolTrackSequence,"
+    sequences += "-HLTL2HcalIsolTrackSequenceHB,"
+    sequences += "-HLTL2HcalIsolTrackSequenceHE,"
     sequences += "-HLTL3HcalIsolTrackSequence"
 
     #--- Some notes about removed paths: ---#
@@ -333,8 +336,8 @@ else:
         paths += "-HLT_DoublePhoton4_Upsilon_L1R,"
         paths += "-DQM_FEDIntegrity,"
         paths += "-AlCa_EcalPhiSym,"
-###AP *** other paths removed with V01-17-02 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_6_0/pre4/XXXX/V7
-        paths += "-HLT_HighMult40,"
+###SA *** removed with V01-17-07 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_6_0/pre4/XXXX/V13
+        paths += "-HLT_L1MuOpen_AntiBPTX,"
 ###
         paths += "-DummyPath"
 
@@ -414,7 +417,8 @@ else:
     # FIXME these should be better integrated with edmConfigFromDB
     os.system("sed -e'/^streams/,/^)/d' -e'/^datasets/,/^)/d' -i %s" % cffName)
     os.system("sed -e 's/cms.InputTag( \"source\" )/cms.InputTag( \"rawDataCollector\" )/' -i %s" % cffName)
-    os.system("sed -e'/DTUnpackingModule/a\ \ \ \ inputLabel = cms.untracked.InputTag( \"rawDataCollector\" ),' -i %s" % cffName)
+    # FIXME - DTUnpackingModule should not have untracked parameters
+    # os.system("sed -e'/DTUnpackingModule/a\ \ \ \ inputLabel = cms.untracked.InputTag( \"rawDataCollector\" ),' -i %s" % cffName)
 
     # myReplaceTrigResults = "replace TriggerResults::HLT " + process + " -- " + cffName
     # os.system(myReplaceTrigResults)
@@ -458,6 +462,9 @@ else:
 ##HLTL3PixelIsolFilterSequence has been removed
         if line.find("HLTL3PixelIsolFilterSequence = ") == 0:
             line = line.replace('hltPixelTracks','hltPixelTracking')
+            print line[:-1]
+        elif line.find("HLTRecopixelvertexingForMinBiasSequence = ") == 0:
+            line = line.replace('hltPixelTracksForMinBias','pixelTripletSeedsForMinBias*hltPixelTracksForMinBias')
             print line[:-1]
         elif line.find("GMTReadoutCollection") > 0:
             if mName == "hltL2MuonSeeds":

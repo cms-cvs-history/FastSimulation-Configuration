@@ -336,8 +336,6 @@ else:
         paths += "-HLT_DoublePhoton4_Upsilon_L1R,"
         paths += "-DQM_FEDIntegrity,"
         paths += "-AlCa_EcalPhiSym,"
-###AP *** other paths removed with V01-17-02 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_6_0/pre4/XXXX/V7
-        paths += "-HLT_HighMult40,"
 ###SA *** removed with V01-17-07 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_6_0/pre4/XXXX/V13
         paths += "-HLT_L1MuOpen_AntiBPTX,"
 ###
@@ -464,6 +462,9 @@ else:
 ##HLTL3PixelIsolFilterSequence has been removed
         if line.find("HLTL3PixelIsolFilterSequence = ") == 0:
             line = line.replace('hltPixelTracks','hltPixelTracking')
+            print line[:-1]
+        elif line.find("HLTRecopixelvertexingForMinBiasSequence = ") == 0:
+            line = line.replace('hltPixelTracksForMinBias','pixelTripletSeedsForMinBias*hltPixelTracksForMinBias')
             print line[:-1]
         elif line.find("GMTReadoutCollection") > 0:
             if mName == "hltL2MuonSeeds":
