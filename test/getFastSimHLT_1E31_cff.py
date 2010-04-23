@@ -308,6 +308,7 @@ else:
         paths += "-AlCa_EcalPi0_1E31,"
         paths += "-AlCa_EcalEta_1E31,"
 ###AP *** other paths removed with V01-16-23 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_5_5/XXXX/V21
+        paths += "-HLT_MinBiasEcal,"
         paths += "-AlCa_EcalPhiSym,"
 ###
         paths += "-DummyPath"
