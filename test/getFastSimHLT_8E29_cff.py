@@ -234,6 +234,7 @@ else:
     modules += "-hltBLifetimeRegionalCkfTrackCandidatesRelaxed,"
     modules += "-hltBLifetimeRegionalCtfWithMaterialTracksRelaxed,"
     modules += "-hltPixelTracksForMinBias,"
+    modules += "-hltPixelTracksForHighMult,"
     modules += "-hltMuonCSCDigis,"
     modules += "-hltMuonDTDigis,"
     modules += "-hltMuonRPCDigis,"
