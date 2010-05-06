@@ -338,6 +338,8 @@ else:
         paths += "-AlCa_EcalPhiSym,"
 ###SA *** removed with V01-17-07 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_6_0/pre4/XXXX/V13
         paths += "-HLT_L1MuOpen_AntiBPTX,"
+###SA *** removed with V01-17-29 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_6_0/GRun/V15
+        paths += "-HLT_Jet15U_HcalNoiseFiltered,"
 ###
         paths += "-DummyPath"
 

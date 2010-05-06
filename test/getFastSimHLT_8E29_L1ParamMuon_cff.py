@@ -10,7 +10,7 @@ import getopt
 import fileinput
 
 def usage():
-    print "Usage: ./getFastSimHLTcff.py <Version from ConfDB> <Name of cff> <optional L1 Menu> <optional subset of paths>"
+    print "Usage: ./getFastSimHLT_8E29_cff.py <Version from ConfDB> <Name of cff> <optional L1 Menu> <optional subset of paths>"
     print "       Default L1 Menu: L1Menu_Commissioning2009_v0"
     print "       Define subset of paths as comma-separated list: a,b,c (Default is to run all paths)"
     sys.exit(1)
@@ -234,6 +234,7 @@ else:
     modules += "-hltBLifetimeRegionalCkfTrackCandidatesRelaxed,"
     modules += "-hltBLifetimeRegionalCtfWithMaterialTracksRelaxed,"
     modules += "-hltPixelTracksForMinBias,"
+    modules += "-hltPixelTracksForHighMult,"
     modules += "-hltMuonCSCDigis,"
     modules += "-hltMuonDTDigis,"
     modules += "-hltMuonRPCDigis,"
@@ -337,6 +338,8 @@ else:
         paths += "-AlCa_EcalPhiSym,"
 ###SA *** removed with V01-17-07 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_6_0/pre4/XXXX/V13
         paths += "-HLT_L1MuOpen_AntiBPTX,"
+###SA *** removed with V01-17-29 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_6_0/GRun/V15
+        paths += "-HLT_Jet15U_HcalNoiseFiltered,"
 ###
         paths += "-DummyPath"
 
