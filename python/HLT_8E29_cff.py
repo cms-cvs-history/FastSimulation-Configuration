@@ -1,4 +1,4 @@
-# /dev/CMSSW_3_5_5/8E29/V60 (CMSSW_3_5_8_HLT1)
+# /dev/CMSSW_3_5_5/8E29/V61 (CMSSW_3_5_8_HLT1)
 # Begin replace statements specific to the FastSim HLT
 # For all HLTLevel1GTSeed objects, make the following replacements:
 #   - L1GtReadoutRecordTag changed from hltGtDigis to gtDigis
@@ -30,7 +30,7 @@ import FWCore.ParameterSet.Config as cms
 
 
 HLTConfigVersion = cms.PSet(
-  tableName = cms.string('/dev/CMSSW_3_5_5/8E29/V60')
+  tableName = cms.string('/dev/CMSSW_3_5_5/8E29/V61')
 )
 
 
@@ -1473,7 +1473,8 @@ hltL2Muons = cms.EDProducer( "L2MuonProducer",
         Propagator = cms.string( "FastSteppingHelixPropagatorOpposite" ),
         BeamSpotPositionErrors = cms.vdouble( 0.1, 0.1, 5.3 )
       ),
-      VertexConstraint = cms.bool( True )
+      VertexConstraint = cms.bool( True ),
+      beamSpot = cms.InputTag( "offlineBeamSpot" )
     )
 )
 hltL2MuonCandidates = cms.EDProducer( "L2MuonCandidateProducer",
