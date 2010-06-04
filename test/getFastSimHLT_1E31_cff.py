@@ -559,6 +559,13 @@ else:
                     line = line.replace("hltL1NonIsoStartUpElectronPixelSeeds","hltL1NonIsoStartUpElectronPixelSeedsSequence")
 
         print line[:-1]
+   
+    # override the preshower baseline setting 
+    out = open(cffName, 'a') 
+    out.write("\n")
+    out.write("# override the preshower baseline setting for MC\n")
+    out.write("ESUnpackerWorkerESProducer.RHAlgo.ESBaseline = 1000\n")
+    out.close()
 
     #if ( cfgName != "None" ):
         #for line in fileinput.input(cfgName,inplace=1):
