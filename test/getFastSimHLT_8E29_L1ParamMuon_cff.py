@@ -318,6 +318,8 @@ else:
         paths += "-HLT_Activity_DT_Tuned,"
         paths += "-HLT_Activity_Ecal,"
         paths += "-HLT_Activity_EcalREM,"
+        paths += "-HLT_Activity_Ecal_SC7,"
+        paths += "-HLT_Activity_Ecal_SC15,"
         paths += "-HLT_DTErrors,"
         paths += "-HLT_HFThreshold3,"
         paths += "-HLT_HFThreshold10,"
