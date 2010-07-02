@@ -305,6 +305,7 @@ else:
         paths += "-HLT_Mu0_Track0_Jpsi,"
         paths += "-HLT_Mu3_Track0_Jpsi,"
         paths += "-HLT_Mu5_Track0_Jpsi,"
+        paths += "-HLT_L1DoubleMuOpen_Tight,"
         paths += "-HLT_SelectEcalSpikes_L1R,"
         paths += "-HLT_SelectEcalSpikesHighEt_L1R,"
         paths += "-HLT_Ele15_SiStrip_L1R,"
@@ -423,8 +424,6 @@ else:
     os.system("sed -e 's/cms.InputTag( \"source\" )/cms.InputTag( \"rawDataCollector\" )/' -i %s" % cffName)
     # FIXME - DTUnpackingModule should not have untracked parameters
     # os.system("sed -e'/DTUnpackingModule/a\ \ \ \ inputLabel = cms.untracked.InputTag( \"rawDataCollector\" ),' -i %s" % cffName)
-    # FIXME - this should be changed to a "tracked" parameter ASAP
-    os.system("sed -e 's/cms.EDProducer( \"CSCTFUnpacker\",\\s*/&\\n    source = cms.untracked.InputTag( \"rawDataCollector\" ),/' -i " + cffName)
 
     # myReplaceTrigResults = "replace TriggerResults::HLT " + process + " -- " + cffName
     # os.system(myReplaceTrigResults)
