@@ -305,6 +305,7 @@ else:
         paths += "-HLT_Mu0_Track0_Jpsi,"
         paths += "-HLT_Mu3_Track0_Jpsi,"
         paths += "-HLT_Mu5_Track0_Jpsi,"
+        paths += "-HLT_L1DoubleMuOpen_Tight,"
         paths += "-HLT_SelectEcalSpikes_L1R,"
         paths += "-HLT_SelectEcalSpikesHighEt_L1R,"
         paths += "-HLT_Ele15_SiStrip_L1R,"
@@ -588,6 +589,13 @@ else:
                     line = line.replace("hltL1NonIsoLargeWindowElectronPixelSeeds","hltL1NonIsoLargeWindowElectronPixelSeedsSequence")
 
         print line[:-1]
+
+    # override the preshower baseline setting 
+    out = open(cffName, 'a') 
+    out.write("\n")
+    out.write("# override the preshower baseline setting for MC\n")
+    out.write("ESUnpackerWorkerESProducer.RHAlgo.ESBaseline = 1000\n")
+    out.close()
 
     #if ( cfgName != "None" ):
         #for line in fileinput.input(cfgName,inplace=1):
