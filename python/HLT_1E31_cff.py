@@ -1,4 +1,4 @@
-# /dev/CMSSW_3_6_2/1E31/V18 (CMSSW_3_6_2_HLT8)
+# /dev/CMSSW_3_6_2/1E31/V20 (CMSSW_3_6_2_HLT8)
 # Begin replace statements specific to the FastSim HLT
 # For all HLTLevel1GTSeed objects, make the following replacements:
 #   - L1GtReadoutRecordTag changed from hltGtDigis to gtDigis
@@ -30,7 +30,7 @@ import FWCore.ParameterSet.Config as cms
 
 
 HLTConfigVersion = cms.PSet(
-  tableName = cms.string('/dev/CMSSW_3_6_2/1E31/V18')
+  tableName = cms.string('/dev/CMSSW_3_6_2/1E31/V20')
 )
 
 
@@ -6350,10 +6350,10 @@ HLT_Jet140 = cms.Path( HLTBeginSequence + hltL1sJet140 + hltPreJet140 + HLTRecoJ
 HLT_Jet180 = cms.Path( HLTBeginSequence + hltL1sJet180 + hltPreJet180 + HLTRecoJetRegionalSequence + hlt1jet180regional + cms.SequencePlaceholder("HLTEndSequence") )
 HLT_FwdJet40 = cms.Path( HLTBeginSequence + hltL1sFwdJet40 + hltPreFwdJet40 + HLTRecoJetSequence + hltRapGap40 + cms.SequencePlaceholder("HLTEndSequence") )
 HLT_DiJetAve15U_1E31 = cms.Path( HLTBeginSequenceBPTX + hltL1sDiJetAve15U1E31 + hltPreDiJetAve15U1E31 + HLTDoCaloSequence + hltIterativeCone5CaloJets + hltDiJetAve15U + cms.SequencePlaceholder("HLTEndSequence") )
-HLT_DiJetAve30U_1E31 = cms.Path( HLTBeginSequence + hltL1sDiJetAve30U1E31 + hltPreDiJetAve30U1E31 + HLTDoCaloSequence + hltIterativeCone5CaloJets + hltDiJetAve30U + cms.SequencePlaceholder("HLTEndSequence") )
-HLT_DiJetAve50U_1E31 = cms.Path( HLTBeginSequence + hltL1sDiJetAve50U1E31 + hltPreDiJetAve50U1E31 + HLTDoCaloSequence + hltIterativeCone5CaloJets + hltDiJetAve50U + cms.SequencePlaceholder("HLTEndSequence") )
-HLT_DiJetAve70U = cms.Path( HLTBeginSequence + hltL1sDiJetAve70U + hltPreDiJetAve70U + HLTDoCaloSequence + hltIterativeCone5CaloJets + hltDiJetAve70U + cms.SequencePlaceholder("HLTEndSequence") )
-HLT_DiJetAve130U = cms.Path( HLTBeginSequence + hltL1sDiJetAve130U + hltPreDiJetAve130U + HLTDoCaloSequence + hltIterativeCone5CaloJets + hltDiJetAve130U + cms.SequencePlaceholder("HLTEndSequence") )
+HLT_DiJetAve30U_1E31 = cms.Path( HLTBeginSequenceBPTX + hltL1sDiJetAve30U1E31 + hltPreDiJetAve30U1E31 + HLTDoCaloSequence + hltIterativeCone5CaloJets + hltDiJetAve30U + cms.SequencePlaceholder("HLTEndSequence") )
+HLT_DiJetAve50U_1E31 = cms.Path( HLTBeginSequenceBPTX + hltL1sDiJetAve50U1E31 + hltPreDiJetAve50U1E31 + HLTDoCaloSequence + hltIterativeCone5CaloJets + hltDiJetAve50U + cms.SequencePlaceholder("HLTEndSequence") )
+HLT_DiJetAve70U = cms.Path( HLTBeginSequenceBPTX + hltL1sDiJetAve70U + hltPreDiJetAve70U + HLTDoCaloSequence + hltIterativeCone5CaloJets + hltDiJetAve70U + cms.SequencePlaceholder("HLTEndSequence") )
+HLT_DiJetAve130U = cms.Path( HLTBeginSequenceBPTX + hltL1sDiJetAve130U + hltPreDiJetAve130U + HLTDoCaloSequence + hltIterativeCone5CaloJets + hltDiJetAve130U + cms.SequencePlaceholder("HLTEndSequence") )
 HLT_QuadJet30 = cms.Path( HLTBeginSequence + hltL1sQuadJet30 + hltPreQuadJet30 + HLTRecoJetSequence + hlt4jet30 + cms.SequencePlaceholder("HLTEndSequence") )
 HLT_SumET120 = cms.Path( HLTBeginSequenceBPTX + hltL1sSumET120 + hltPreSumET120 + HLTRecoMETSequence + hlt1SumET120 + cms.SequencePlaceholder("HLTEndSequence") )
 HLT_L1MET20 = cms.Path( HLTBeginSequenceBPTX + hltL1sL1MET20 + hltPreL1MET20 + cms.SequencePlaceholder("HLTEndSequence") )
