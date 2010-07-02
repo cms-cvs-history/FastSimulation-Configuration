@@ -392,6 +392,8 @@ else:
     os.system("sed -e 's/cms.InputTag( \"source\" )/cms.InputTag( \"rawDataCollector\" )/' -i %s" % cffName)
     # FIXME - DTUnpackingModule should not have untracked parameters
     # os.system("sed -e'/DTUnpackingModule/a\ \ \ \ inputLabel = cms.untracked.InputTag( \"rawDataCollector\" ),' -i %s" % cffName)
+    # FIXME - this should be changed to a "tracked" parameter ASAP
+    os.system("sed -e 's/cms.EDProducer( \"CSCTFUnpacker\",\\s*/&\\n    source = cms.untracked.InputTag( \"rawDataCollector\" ),/' -i " + menuOutName)
 
     # myReplaceTrigResults = "replace TriggerResults::HLT " + process + " -- " + cffName
     # os.system(myReplaceTrigResults)
