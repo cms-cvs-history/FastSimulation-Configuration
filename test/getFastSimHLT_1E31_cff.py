@@ -558,6 +558,8 @@ else:
             if line.find("hltL1NonIsoStartUpElectronPixelSeeds") > 0:
                 if line.find("Sequence") > 0:
                     line = line.replace("hltL1NonIsoStartUpElectronPixelSeeds","hltL1NonIsoStartUpElectronPixelSeedsSequence")
+            if line.find("cms.Path") > 0:
+                line = line.replace('hltGtDigis', 'HLTBeginSequence')
 
         print line[:-1]
    
