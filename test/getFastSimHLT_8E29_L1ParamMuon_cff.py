@@ -341,6 +341,10 @@ else:
         paths += "-HLT_L1MuOpen_AntiBPTX,"
 ###AP *** removed with V01-16-35  HLTrigger/Configuration,  ConfDB /dev/CMSSW_3_5_5/XXXX/V34
         paths += "-HLT_L1_BscMinBiasOR_BeamGas,"
+###AP *** remove useless (and trouble prone) AlCa paths:
+        paths += "-AlCa_RPCMuonNoHits,"
+        paths += "-AlCa_RPCMuonNoTriggers,"
+        paths += "-AlCa_RPCMuonNormalisation,"
 ###
         paths += "-DummyPath"
 

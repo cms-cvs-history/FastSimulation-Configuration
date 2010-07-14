@@ -311,6 +311,10 @@ else:
 ###AP *** other paths removed with V01-16-23 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_5_5/XXXX/V21
         paths += "-HLT_MinBiasEcal,"
         paths += "-AlCa_EcalPhiSym,"
+###AP *** remove useless (and trouble prone) AlCa paths:
+        paths += "-AlCa_RPCMuonNoHits,"
+        paths += "-AlCa_RPCMuonNoTriggers,"
+        paths += "-AlCa_RPCMuonNormalisation,"
 ###
         paths += "-DummyPath"
 

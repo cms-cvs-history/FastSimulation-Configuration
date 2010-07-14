@@ -343,7 +343,11 @@ else:
         paths += "-HLT_L1_BscMinBiasOR_BeamGas,"
 ###SA *** removed with  V01-16-55  HLTrigger/Configuration  ConfDB /dev/CMSSW_3_5_5/GRun/V60 
         paths += "-HLT_Jet15U_HcalNoiseFiltered,"
-###        
+###AP *** remove useless (and trouble prone) AlCa paths:
+        paths += "-AlCa_RPCMuonNoHits,"
+        paths += "-AlCa_RPCMuonNoTriggers,"
+        paths += "-AlCa_RPCMuonNormalisation,"
+##        
         paths += "-DummyPath"
 
 
