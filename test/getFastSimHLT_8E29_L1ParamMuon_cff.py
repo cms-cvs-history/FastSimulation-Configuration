@@ -343,6 +343,10 @@ else:
         paths += "-HLT_L1MuOpen_AntiBPTX,"
 ###SA *** removed with V01-17-29 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_6_0/GRun/V15
         paths += "-HLT_Jet15U_HcalNoiseFiltered,"
+###AP *** remove useless (and trouble prone) AlCa paths:
+        paths += "-AlCa_RPCMuonNoHits,"
+        paths += "-AlCa_RPCMuonNoTriggers,"
+        paths += "-AlCa_RPCMuonNormalisation,"
 ###
         paths += "-DummyPath"
 
