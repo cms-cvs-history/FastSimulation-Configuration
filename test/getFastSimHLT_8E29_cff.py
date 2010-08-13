@@ -355,7 +355,7 @@ else:
         paths += "-AlCa_RPCMuonNoHits,"
         paths += "-AlCa_RPCMuonNoTriggers,"
         paths += "-AlCa_RPCMuonNormalisation,"
-###AP *** remove on 13/08/2010:
+###AP *** remove on 13/08/2010 (3.5E30 menu):
         paths += "-HLT_DoubleEle4_SW_eeRes_L1R,"
 ###
         paths += "-DummyPath"

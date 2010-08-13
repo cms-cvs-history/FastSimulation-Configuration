@@ -309,6 +309,7 @@ else:
         paths += "-HLT_SelectEcalSpikes_L1R,"
         paths += "-HLT_SelectEcalSpikesHighEt_L1R,"
         paths += "-HLT_Ele15_SiStrip_L1R,"
+        paths += "-HLT_Ele20_SiStrip_L1R,"
         paths += "-HLT_IsoTrack,"
         paths += "-HLT_IsoTrackHB,"
         paths += "-HLT_IsoTrackHE,"
@@ -347,6 +348,8 @@ else:
         paths += "-AlCa_RPCMuonNoHits,"
         paths += "-AlCa_RPCMuonNoTriggers,"
         paths += "-AlCa_RPCMuonNormalisation,"
+###AP *** remove on 13/08/2010 (3.5E30 menu):
+        paths += "-HLT_DoubleEle4_SW_eeRes_L1R,"
 ###
         paths += "-DummyPath"
 
