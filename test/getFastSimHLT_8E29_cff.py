@@ -315,6 +315,7 @@ else:
         paths += "-HLT_SelectEcalSpikes_L1R,"
         paths += "-HLT_SelectEcalSpikesHighEt_L1R,"
         paths += "-HLT_Ele15_SiStrip_L1R,"
+        paths += "-HLT_Ele20_SiStrip_L1R,"
         paths += "-HLT_IsoTrack,"
         paths += "-HLT_IsoTrackHB,"
         paths += "-HLT_IsoTrackHE,"
@@ -327,6 +328,7 @@ else:
         paths += "-HLT_Activity_EcalREM,"
         paths += "-HLT_Activity_Ecal_SC7,"
         paths += "-HLT_Activity_Ecal_SC15,"
+        paths += "-HLT_Activity_Ecal_SC17,"
         paths += "-HLT_DTErrors,"
         paths += "-HLT_HFThreshold3,"
         paths += "-HLT_HFThreshold10,"
@@ -353,6 +355,8 @@ else:
         paths += "-AlCa_RPCMuonNoHits,"
         paths += "-AlCa_RPCMuonNoTriggers,"
         paths += "-AlCa_RPCMuonNormalisation,"
+###AP *** remove on 13/08/2010:
+        paths += "-HLT_DoubleEle4_SW_eeRes_L1R,"
 ###
         paths += "-DummyPath"
 
