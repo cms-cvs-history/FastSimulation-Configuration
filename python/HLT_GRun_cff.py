@@ -6383,3 +6383,12 @@ HLTSchedule = cms.Schedule( *(HLTriggerFirstPath, HLT_Activity_CSC, HLT_L1Single
 
 # override the preshower baseline setting for MC
 ESUnpackerWorkerESProducer.RHAlgo.ESBaseline = 1000
+
+# hand-made corrections to test new CSC and DT conditions                                                                                                                                                                                   
+hltCsc2DRecHits.CSCUseTimingCorrections = True                                                                                                                                                                                              
+hltDt1DRecHits.recAlgoConfig.tTrigModeConfig.wirePropCorrType = 0                                                                                                                                                                           
+hltDt1DRecHits.recAlgoConfig.tTrigModeConfig.tofCorrType = 0                                                                                                                                                                                
+hltDt4DSegments.Reco4DAlgoConfig.Reco2DAlgoConfig.recAlgoConfig.tTrigModeConfig.wirePropCorrType = 0                                                                                                                                        
+hltDt4DSegments.Reco4DAlgoConfig.Reco2DAlgoConfig.recAlgoConfig.tTrigModeConfig.tofCorrType = 0                                                                                                                                             
+hltDt4DSegments.Reco4DAlgoConfig.recAlgoConfig.tTrigModeConfig.wirePropCorrType = 0                                                                                                                                                         
+hltDt4DSegments.Reco4DAlgoConfig.recAlgoConfig.tTrigModeConfig.tofCorrType = 0                                                                                                                                                              
