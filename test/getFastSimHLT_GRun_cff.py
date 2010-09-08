@@ -200,6 +200,7 @@ else:
     modules += "-hltEcalRegionalMuonsRecHitTmp,"
     modules += "-hltEcalRegionalEgammaFEDs,"
     modules += "-hltEcalRegionalEgammaRecHitTmp,"
+    modules += "-hltFEDSelector,"
     #--- ADAM for muon cascade algo
     #modules += "-hltL3Muons,"
     #modules += "-hltL3TrajectorySeed,"
@@ -210,6 +211,7 @@ else:
     modules += "-hltL3TrackCandidateFromL2OIState,"
     modules += "-hltL3TrackCandidateFromL2OIHit,"
     modules += "-hltL3TrackCandidateFromL2IOHit,"
+    modules += "-hltL3TrackCandidateFromL2NoVtx,"
     modules += "-hltHcalDigis,"
     modules += "-hltHoreco,"
     modules += "-hltHfreco,"
@@ -222,7 +224,9 @@ else:
     modules += "-hltEcalRegionalEgammaRecHit,"
     modules += "-hltEcalRecHitAll,"
     modules += "-hltL3TauPixelSeeds,"
+    modules += "-hltL3TauHighPtPixelSeeds,"
     modules += "-hltL3TauCkfTrackCandidates,"
+    modules += "-hltL3TauCkfHighPtTrackCandidates,"
     modules += "-hltL3TauCtfWithMaterialTracks,"
     modules += "-hltL25TauPixelSeeds,"
     modules += "-hltL25TauCkfTrackCandidates,"
@@ -277,6 +281,7 @@ else:
     #---
     sequences += "-HLTRecopixelvertexingSequence,"
     sequences += "-HLTL3TauTrackReconstructionSequence,"
+    sequences += "-HLTL3TauHighPtTrackReconstructionSequence,"
     sequences += "-HLTL25TauTrackReconstructionSequence,"
     sequences += "-HLTEndSequence,"
     sequences += "-HLTBeginSequence,"
@@ -341,8 +346,6 @@ else:
         paths += "-HLT_DTErrors,"
         paths += "-HLT_HFThreshold3,"
         paths += "-HLT_HFThreshold10,"
-        paths += "-HLT_L2Mu0_NoVertex,"
-        paths += "-HLT_TkMu3_NoVertex,"
         paths += "-HLT_EgammaSuperClusterOnly_L1R,"
         paths += "-HLT_Random,"
         paths += "-HLT_Calibration,"
@@ -366,6 +369,8 @@ else:
         paths += "-AlCa_RPCMuonNormalisation,"
 ###AP *** remove on 13/08/2010 (3.5E30 menu):
         paths += "-HLT_DoubleEle4_SW_eeRes_L1R,"
+###AP *** remove on 08/09/2010 (2E31 menu)
+        paths += "-HLT_Mu3_Track3_Jpsi,"
 ###
         paths += "-DummyPath"
 
