@@ -314,6 +314,8 @@ else:
         paths += "-DQMOutput,"
         paths += "-HLTDQMOutput,"
         paths += "-HLTMONOutput,"
+        paths += "-HLTDQMResultsOutput,"
+        paths += "-NanoDSTOutput,"
         # remove unsupported paths
         paths += "-HLT_HcalPhiSym,"
         paths += "-HLT_Mu0_Track0_Jpsi,"
