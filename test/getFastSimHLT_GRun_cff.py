@@ -110,7 +110,7 @@ else:
     esmodules += "-MuonNumberingInitialization,"
     esmodules += "-MuonDetLayerGeometryESProducer,"
     esmodules += "-MuonCkfTrajectoryBuilder,"
-    esmodules += "-MeasurementTracker,"
+    esmodules += "-hltMeasurementTracker,"
     esmodules += "-MaterialPropagator,"
     esmodules += "-L3MuKFFitter,"
     esmodules += "-KFUpdatorESProducer,"
@@ -129,7 +129,7 @@ else:
     esmodules += "-EcalElectronicsMappingBuilder,"
     esmodules += "-EcalBarrelGeometryEP,"
     esmodules += "-DTGeometryESModule,"
-    esmodules += "-CkfTrajectoryBuilder,"
+    esmodules += "-hltCkfTrajectoryBuilder,"
     esmodules += "-Chi2MeasurementEstimator,"
     esmodules += "-Chi2EstimatorForRefit,"
     esmodules += "-CaloTowerHardcodeGeometryEP,"
@@ -321,12 +321,9 @@ else:
         paths += "-HLT_Mu0_Track0_Jpsi,"
         paths += "-HLT_Mu3_Track0_Jpsi,"
         paths += "-HLT_Mu5_Track0_Jpsi,"
-        paths += "-HLT_Mu0_TkMu0_Jpsi,"
-        paths += "-HLT_Mu0_TkMu0_Jpsi_NoCharge,"
-        paths += "-HLT_Mu3_TkMu0_Jpsi,"
-        paths += "-HLT_Mu3_TkMu0_Jpsi_NoCharge,"
-        paths += "-HLT_Mu5_TkMu0_Jpsi,"
-        paths += "-HLT_Mu5_TkMu0_Jpsi_NoCharge,"
+        paths += "-HLT_Mu0_TkMu0_OST_Jpsi,"
+        paths += "-HLT_Mu3_TkMu0_OST_Jpsi,"
+        paths += "-HLT_Mu5_TkMu0_OST_Jpsi,"
         paths += "-HLT_L1DoubleMuOpen_Tight,"
         paths += "-HLT_SelectEcalSpikes_L1R,"
         paths += "-HLT_SelectEcalSpikesHighEt_L1R,"
@@ -541,6 +538,12 @@ else:
                 bName = "None"
             else:
                 print line[:-1]
+        elif line.find("hltMeasurementTracker") > 0:
+            line = line.replace('hltMeasurementTracker', '')
+            print line[:-1]
+        elif line.find("hltCkfTrajectoryBuilder") > 0:
+            line = line.replace('hltCkfTrajectoryBuilder', 'CkfTrajectoryBuilder')
+            print line[:-1]
         else:
             print line[:-1]
             # The first line should be where the comments go
