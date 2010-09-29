@@ -10,7 +10,7 @@ import getopt
 import fileinput
 
 def usage():
-    print "Usage: ./getFastSimHLT_8E29_cff.py <Version from ConfDB> <Name of cff> <optional L1 Menu> <optional subset of paths>"
+    print "Usage: ./getFastSimHLT_GRun_cff.py <Version from ConfDB> <Name of cff> <optional L1 Menu> <optional subset of paths>"
     print "       Default L1 Menu: L1Menu_Commissioning2009_v0"
     print "       Define subset of paths as comma-separated list: a,b,c (Default is to run all paths)"
     sys.exit(1)
@@ -163,7 +163,7 @@ else:
     #--- hlt[Hbhe/Ho/Hf]reco --> defined in FastSimulation/HighLevelTrigger/data/common/RecoLocalCalo.cff
     #--- hltEcal[Preshower]RecHit --> defined in FastSimulation/HighLevelTrigger/data/common/RecoLocalCalo.cff
     #--- hltEcalRegional[Jets/Egamma/Muons/Taus]RecHit --> defined in FastSimulation/HighLevelTrigger/data/common/EcalRegionalReco.cff
-    #--- hltEcalRecHitAll --> defined in FastSimulation/HighLevelTrigger/data/common/EcalRegionalReco.cff
+    #--- hlt[Ecal/ES]RecHitAll --> defined in FastSimulation/HighLevelTrigger/data/common/EcalRegionalReco.cff
     #--- hltPixelVertices --> kept when HLTRecopixelvertexingSequence removed from HLT.cff
     #--- hltCtfWithMaterialTracksMumu,hltMuTracks defined in FastSimulation/HighLevelTrigger/data/btau/L3ForDisplacedMumuTrigger.cff
     #--- hltEcalDigis, hltEcalWeightUncalibRecHit redefined as dummyModules in FastSimulation/HighLevelTrigger/data/common/HLTSetup.cff
@@ -217,12 +217,14 @@ else:
     modules += "-hltHfreco,"
     modules += "-hltHbhereco,"
     modules += "-hltEcalRegionalRestFEDs,"
+    modules += "-hltEcalRegionalESRestFEDs,"
     modules += "-hltEcalRawToRecHitFacility,"
     modules += "-hltESRawToRecHitFacility,"
     modules += "-hltEcalRegionalJetsRecHit,"
     modules += "-hltEcalRegionalMuonsRecHit,"
     modules += "-hltEcalRegionalEgammaRecHit,"
     modules += "-hltEcalRecHitAll,"
+    modules += "-hltESRecHitAll,"
     modules += "-hltL3TauPixelSeeds,"
     modules += "-hltL3TauHighPtPixelSeeds,"
     modules += "-hltL3TauCkfTrackCandidates,"
@@ -276,6 +278,7 @@ else:
     sequences += "-HLTPixelTrackingForMinBiasSequence,"
     sequences += "-HLTDoLocalStripSequence,"
     sequences += "-HLTDoLocalPixelSequence,"
+    #
     #--- ADAM for muon cascade algo
     #sequences += "-HLTL3muonTkCandidateSequence,"
     #---
@@ -320,8 +323,11 @@ else:
         paths += "-HLT_HcalPhiSym,"
         paths += "-HLT_Mu0_Track0_Jpsi,"
         paths += "-HLT_Mu3_Track0_Jpsi,"
+        paths += "-HLT_Mu3_Track3_Jpsi,"
+        paths += "-HLT_Mu3_Track5_Jpsi,"
         paths += "-HLT_Mu5_Track0_Jpsi,"
         paths += "-HLT_Mu0_TkMu0_OST_Jpsi,"
+        paths += "-HLT_Mu0_TkMu0_OST_Jpsi_Tight,"
         paths += "-HLT_Mu3_TkMu0_OST_Jpsi,"
         paths += "-HLT_Mu5_TkMu0_OST_Jpsi,"
         paths += "-HLT_L1DoubleMuOpen_Tight,"
@@ -622,6 +628,10 @@ else:
             if line.find("hltL1NonIsoLargeWindowElectronPixelSeeds") > 0:
                 if line.find("Sequence") > 0:
                     line = line.replace("hltL1NonIsoLargeWindowElectronPixelSeeds","hltL1NonIsoLargeWindowElectronPixelSeedsSequence")
+            if line.find("hltL1IsoEgammaRegionalPixelSeedGenerator + hltL1IsoEgammaRegionalCkfTrackCandidates + hltL1IsoEgammaRegionalCTFFinalFitWithMaterial") > 0:
+                line = line.replace('hltL1IsoEgammaRegionalPixelSeedGenerator + hltL1IsoEgammaRegionalCkfTrackCandidates + hltL1IsoEgammaRegionalCTFFinalFitWithMaterial', 'HLTL1IsoEgammaRegionalRecoTrackerSequence')
+            if line.find("hltL1NonIsoEgammaRegionalPixelSeedGenerator + hltL1NonIsoEgammaRegionalCkfTrackCandidates + hltL1NonIsoEgammaRegionalCTFFinalFitWithMaterial") > 0:
+                line = line.replace('hltL1NonIsoEgammaRegionalPixelSeedGenerator + hltL1NonIsoEgammaRegionalCkfTrackCandidates + hltL1NonIsoEgammaRegionalCTFFinalFitWithMaterial', 'HLTL1NonIsoEgammaRegionalRecoTrackerSequence')
             if line.find("cms.Path") > 0:
                 line = line.replace('hltGtDigis', 'HLTBeginSequence')
 
