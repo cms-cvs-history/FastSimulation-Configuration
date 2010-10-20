@@ -258,7 +258,7 @@ else:
     modules += "hltCsc2DRecHits,"
     modules += "hltDt1DRecHits,"
     modules += "hltRpcRecHits"
-
+    
     #--- Some notes about removed sequences ---#
     #--- HLTL1[Non]IsoEgammaRegionalRecoTrackerSequence defined in FastSimulation/EgammaElectronAlgos/data/l1[Non]IsoEgammaRegionalRecoTracker.cff
     #--- HLTL1[Non]Iso[Startup]ElectronsRegionalRecoTrackerSequence defined in FastSimulation/EgammaElectronAlgos/data/l1[Non]IsoElectronsRegionalRecoTracker.cff
@@ -316,6 +316,8 @@ else:
         # remove output endpaths
         paths += "-HLTOutput,"
         paths += "-AlCaOutput,"
+        paths += "-AlCaPPOutput,"
+        paths += "-AlCaHIOutput,"
         paths += "-ExpressOutput,"
         paths += "-EventDisplayOutput,"
         paths += "-DQMOutput,"
@@ -328,12 +330,16 @@ else:
         paths += "-HLT_Mu0_Track0_Jpsi,"
         paths += "-HLT_Mu3_Track0_Jpsi,"
         paths += "-HLT_Mu3_Track3_Jpsi,"
+        paths += "-HLT_Mu3_Track3_Jpsi_v2,"
         paths += "-HLT_Mu3_Track5_Jpsi_v1,"
+        paths += "-HLT_Mu3_Track5_Jpsi_v2,"
         paths += "-HLT_Mu5_Track0_Jpsi,"
         paths += "-HLT_Mu0_TkMu0_OST_Jpsi,"
         paths += "-HLT_Mu0_TkMu0_OST_Jpsi_Tight_v1,"
+        paths += "-HLT_Mu0_TkMu0_OST_Jpsi_Tight_v2,"
         paths += "-HLT_Mu3_TkMu0_OST_Jpsi,"
         paths += "-HLT_Mu3_TkMu0_OST_Jpsi_Tight_v1,"
+        paths += "-HLT_Mu3_TkMu0_OST_Jpsi_Tight_v2,"
         paths += "-HLT_Mu5_TkMu0_OST_Jpsi,"
         paths += "-HLT_Mu5_TkMu0_OST_Jpsi_Tight_v1,"
         paths += "-HLT_L1DoubleMuOpen_Tight,"
@@ -375,6 +381,7 @@ else:
         paths += "-AlCa_EcalPhiSym,"
 ###SA *** removed with V01-17-07 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_6_0/pre4/XXXX/V13
         paths += "-HLT_L1MuOpen_AntiBPTX,"
+        paths += "-HLT_L1MuOpen_AntiBPTX_v2,"
 ###SA *** removed with V01-17-29 HLTrigger/Configuration - ConfDB /dev/CMSSW_3_6_0/GRun/V15
         paths += "-HLT_Jet15U_HcalNoiseFiltered,"
         paths += "-HLT_Jet15U_HcalNoiseFiltered_v3,"
