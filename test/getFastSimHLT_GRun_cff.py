@@ -376,6 +376,7 @@ else:
         paths += "-HLT_DoublePhoton4_Jpsi_L1R,"
         paths += "-HLT_DoublePhoton4_Upsilon_L1R,"
         paths += "-HLT_DoubleEle5_SW_Upsilon_L1R_v1,"
+        paths += "-HLT_DoubleEle5_SW_Upsilon_L1R_v2,"
         paths += "-DQM_FEDIntegrity,"
         paths += "-DQM_FEDIntegrity_v2,"
         paths += "-AlCa_EcalPhiSym,"
@@ -391,6 +392,7 @@ else:
         paths += "-AlCa_RPCMuonNormalisation,"
 ###AP *** remove on 13/08/2010 (3.5E30 menu):
         paths += "-HLT_DoubleEle4_SW_eeRes_L1R,"
+        paths += "-HLT_DoubleEle4_SW_eeRes_L1R_v2,"
 ###AP *** remove on 08/09/2010 (2E31 menu)
         paths += "-HLT_Mu3_Track3_Jpsi,"
 ###
