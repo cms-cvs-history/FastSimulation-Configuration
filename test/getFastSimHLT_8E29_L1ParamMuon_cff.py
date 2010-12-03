@@ -334,7 +334,7 @@ else:
         paths += "-HLT_DTErrors,"
         paths += "-HLT_HFThreshold3,"
         paths += "-HLT_HFThreshold10,"
-        paths += "-HLT_L2Mu0_NoVertex_v2,"
+        paths += "-HLT_L2Mu0_NoVertex,"
         paths += "-HLT_TkMu3_NoVertex,"
         paths += "-HLT_EgammaSuperClusterOnly_L1R,"
         paths += "-HLT_Random,"
