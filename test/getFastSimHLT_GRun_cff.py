@@ -136,7 +136,12 @@ else:
     esmodules += "-CaloTowerConstituentsMapBuilder,"
     esmodules += "-CaloTopologyBuilder,"
     esmodules += "-CaloGeometryBuilder,"
-    esmodules += "-CSCGeometryESModule"
+    esmodules += "-CSCGeometryESModule,"
+# Added since re-labelling of many ES plugins used by HLT in  V11-02-00  HLTrigger/Configuration
+    esmodules += "-hltESPEcalTrigTowerConstituentsMapBuilder,"
+    esmodules += "-hltESPMuonDetLayerGeometryESProducer,"
+    esmodules += "-hltESPTrackerRecoGeometryESProducer,"
+    esmodules += "-hltESPGlobalTrackingGeometryESProducer"
 
     #--- Define blocks for ElectronPixelSeeds ---#
     #--- Please see FastSimulation/EgammaElectronAlgos/data/pixelMatchElectronL1[Non]Iso[LargeWindow]SequenceForHLT.cff ---#
@@ -667,7 +672,7 @@ else:
     out = open(cffName, 'a') 
     out.write("\n")
     out.write("# override the preshower baseline setting for MC\n")
-    out.write("ESUnpackerWorkerESProducer.RHAlgo.ESBaseline = 1000\n")
+    out.write("hltESPESUnpackerWorker.RHAlgo.ESBaseline = 1000\n")
     out.close()
 
     #if ( cfgName != "None" ):
