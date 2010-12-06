@@ -349,6 +349,7 @@ else:
         paths += "-HLT_Mu3_TkMu0_OST_Jpsi_Tight_v3,"
         paths += "-HLT_Mu3_TkMu0_OST_Jpsi_Tight_v4,"
         paths += "-HLT_Mu5_TkMu0_OST_Jpsi,"
+        paths += "-HLT_Mu5_TkMu0_OST_Jpsi_Tight_v2,"
         paths += "-HLT_Mu5_TkMu0_OST_Jpsi_Tight_v3,"
         paths += "-HLT_Mu5_TkMu0_OST_Jpsi_Tight_v4,"
         paths += "-HLT_L1DoubleMuOpen_Tight,"
