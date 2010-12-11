@@ -1,7 +1,5 @@
 import FWCore.ParameterSet.Config as cms
 
-from FastSimulation.Configuration.CommonInputs_cff import *
-
 # Primary vertex smearing.
 from IOMC.EventVertexGenerators.VtxSmearedGauss_cfi import *
 
