@@ -103,6 +103,7 @@ else:
     esmodules += "-SmartPropagator,"
     esmodules += "-SiStripRecHitMatcherESProducer,"
     esmodules += "-SiStripGainESProducer,"
+    esmodules += "-SiStripQualityESProducer,"
     esmodules += "-RungeKuttaTrackerPropagator,"
     esmodules += "-RPCGeometryESModule,"
     esmodules += "-OppositeMaterialPropagator,"
