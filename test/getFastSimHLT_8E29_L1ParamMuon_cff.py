@@ -612,17 +612,3 @@ else:
                 line = line.replace('hltGtDigis', 'HLTBeginSequence')
 
         print line[:-1]
-
-    # override the preshower baseline setting 
-    out = open(cffName, 'a') 
-    out.write("\n")
-    out.write("# override the preshower baseline setting for MC\n")
-    out.write("hltESPESUnpackerWorker.RHAlgo.ESBaseline = 1000\n")
-    out.close()
-
-    #if ( cfgName != "None" ):
-        #for line in fileinput.input(cfgName,inplace=1):
-            #if line.find("process.schedule =") >= 0 :
-                #print schedule
-            #else:
-                #print line[:-1]
