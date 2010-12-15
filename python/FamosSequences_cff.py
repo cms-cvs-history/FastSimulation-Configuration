@@ -535,8 +535,8 @@ reconstructionWithFamos = cms.Sequence(
     ak5JetTracksAssociatorAtVertex+
     famosTauTaggingSequence+
     reducedRecHits+
-    famosBTaggingSequence+
-    famosPFTauTaggingSequence
+    famosBTaggingSequence#+
+#    famosPFTauTaggingSequence
 )
 
 # Simulation plus reconstruction
