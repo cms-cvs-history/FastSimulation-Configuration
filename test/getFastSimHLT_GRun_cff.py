@@ -406,6 +406,8 @@ else:
         paths += "-HLT_DoubleEle4_SW_eeRes_L1R_v2,"
 ###AP *** remove on 08/09/2010 (2E31 menu)
         paths += "-HLT_Mu3_Track3_Jpsi,"
+###AP *** save cpu time by removing HLTAnalyzerEndpath
+        paths += "-HLTAnalyzerEndpath,"
 ###
         paths += "-DummyPath"
 
