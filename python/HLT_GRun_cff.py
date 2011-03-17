@@ -1,11 +1,11 @@
-# /dev/CMSSW_3_11_0/GRun/V12 (CMSSW_3_11_0_HLT8)
+# /dev/CMSSW_3_11_0/GRun/V16 (CMSSW_3_11_0_HLT18)
 
 import FWCore.ParameterSet.Config as cms
 from FastSimulation.HighLevelTrigger.HLTSetup_cff import *
 
 
 HLTConfigVersion = cms.PSet(
-  tableName = cms.string('/dev/CMSSW_3_11_0/GRun/V12')
+  tableName = cms.string('/dev/CMSSW_3_11_0/GRun/V16')
 )
 
 hltESSBTagRecord = cms.ESSource( "EmptyESSource",
@@ -1505,7 +1505,7 @@ hltDiJet20UMeff180U = cms.EDFilter( "HLTMhtHtFilter",
     minPT12 = cms.double( 0.0 ),
     minMeff = cms.double( 180.0 ),
     minHt = cms.double( 0.0 ),
-    minMht2Ht = cms.double( 0.0 ),
+    minAlphaT = cms.double( 0.0 ),
     minPtJet = cms.vdouble( 20.0, 20.0 ),
     etaJet = cms.vdouble( 9999.0, 9999.0 )
 )
@@ -1522,7 +1522,7 @@ hltDiJet50UPT50U = cms.EDFilter( "HLTMhtHtFilter",
     minPT12 = cms.double( 50.0 ),
     minMeff = cms.double( 0.0 ),
     minHt = cms.double( 0.0 ),
-    minMht2Ht = cms.double( 0.0 ),
+    minAlphaT = cms.double( 0.0 ),
     minPtJet = cms.vdouble( 50.0, 50.0 ),
     etaJet = cms.vdouble( 9999.0, 9999.0 )
 )
@@ -3848,6 +3848,7 @@ hltDoubleMu0QuarkoniumL3PreFiltered = cms.EDFilter( "HLTMuonDimuonL3Filter",
     MaxPtBalance = cms.double( 999999.0 ),
     NSigmaPt = cms.double( 0.0 ),
     MaxDzMuMu = cms.double( 999999.0 ),
+    MaxRapidityPair = cms.double( 999999.0 ),
     SaveTag = cms.untracked.bool( True )
 )
 hltPreDoubleMu3 = cms.EDFilter( "HLTPrescaler",
