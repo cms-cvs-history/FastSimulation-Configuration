@@ -59,57 +59,15 @@ reducedRecHits = cms.Sequence ( reducedEcalRecHitsSequence * reducedHcalRecHitsS
 # Calo Towers
 from RecoJets.Configuration.CaloTowersRec_cff import *
 
-# Particle Flow
-from RecoParticleFlow.PFClusterProducer.particleFlowCluster_cff import *
-#from RecoParticleFlow.PFTracking.particleFlowTrack_cff import *
-from RecoParticleFlow.PFTracking.particleFlowTrackWithDisplacedVertex_cff import *
-from RecoParticleFlow.PFProducer.particleFlowSimParticle_cff import *
-from RecoParticleFlow.PFProducer.particleFlowBlock_cff import *
-from RecoParticleFlow.PFProducer.particleFlow_cff import *
-from RecoParticleFlow.PFProducer.pfElectronTranslator_cff import *
-from RecoParticleFlow.PFTracking.trackerDrivenElectronSeeds_cff import *
+# Particle Flow (all interactions with ParticleFlow are dealt with in the following configuration)
+from FastSimulation.ParticleFlow.ParticleFlowFastSim_cff import *
+#from FastSimulation.ParticleFlow.ParticleFlowFastSimNeutralHadron_cff import *
 
-particleFlowSimParticle.sim = 'famosSimHits'
-
-#Deactivate the recovery of dead towers since dead towers are not simulated
-particleFlowRecHitHCAL.ECAL_Compensate = cms.bool(False)
-#Similarly, deactivate HF cleaning for spikes
-particleFlowRecHitHCAL.ShortFibre_Cut = cms.double(1E5)
-particleFlowRecHitHCAL.LongFibre_Cut = cms.double(1E5)
-particleFlowRecHitHCAL.LongShortFibre_Cut = cms.double(1E5)
-particleFlowRecHitHCAL.ApplyLongShortDPG = cms.bool(False)
-particleFlowClusterHFEM.thresh_Clean_Barrel = cms.double(1E5)
-particleFlowClusterHFEM.thresh_Clean_Endcap = cms.double(1E5)
-particleFlowClusterHFHAD.thresh_Clean_Barrel = cms.double(1E5)
-particleFlowClusterHFHAD.thresh_Clean_Endcap = cms.double(1E5)
-
-#particleFlowBlock.useNuclear = cms.bool(True)
-#particleFlowBlock.useConversions = cms.bool(True)
-#particleFlowBlock.useV0 = cms.bool(True)
-
-#particleFlow.rejectTracks_Bad =  cms.bool(False)
-#particleFlow.rejectTracks_Step45 = cms.bool(False)
-
-#particleFlow.usePFNuclearInteractions = cms.bool(True)
-#particleFlow.usePFConversions = cms.bool(True)
-#particleFlow.usePFDecays = cms.bool(True)
-
-
-famosParticleFlowSequence = cms.Sequence(
-    caloTowersRec+
-#    pfTrackElec+
-    particleFlowTrackWithDisplacedVertex+
-    particleFlowBlock+
-    particleFlow+
-    pfElectronTranslatorSequence    
-)
 
 # Reco Jets and MET
 from RecoJets.Configuration.RecoJetsGlobal_cff import *
 #from RecoJets.Configuration.JetIDProducers_cff import *
-#from RecoJets.Configuration.RecoPFJets_cff import *
 from RecoMET.Configuration.RecoMET_cff import *
-from RecoMET.Configuration.RecoPFMET_cff import *
 
 caloJetMet = cms.Sequence(
     recoJets+
@@ -119,10 +77,7 @@ caloJetMet = cms.Sequence(
     metreco
 )
 
-PFJetMet = cms.Sequence(
-    recoPFJets+
-    recoPFMET
-)
+
 
 # Gen Jets
 from PhysicsTools.HepMCCandAlgos.genParticles_cfi import *
@@ -141,7 +96,7 @@ caloJetMetGen = cms.Sequence(
 )
 
 # Muon parametrization
-from FastSimulation.ParamL3MuonProducer.ParamL3Muon_cfi import *
+#from FastSimulation.ParamL3MuonProducer.ParamL3Muon_cfi import *
 
 # Muon simHit sequence 
 from FastSimulation.MuonSimHitProducer.MuonSimHitProducer_cfi import *
@@ -195,7 +150,8 @@ famosMuonSequence = cms.Sequence(
 )
 
 #Muon identification sequence
-from FastSimulation.Configuration.muonIdentification_cff import *
+#from FastSimulation.Configuration.muonIdentification_cff import *
+from RecoMuon.MuonIdentification.muonIdProducerSequence_cff import *
 # Use FastSim tracks and calo hits for muon id
 muons.inputCollectionLabels = cms.VInputTag(
     'generalTracks',
@@ -216,12 +172,15 @@ famosMuonIdAndIsolationSequence = cms.Sequence(
 
 # Electron reconstruction
 from FastSimulation.Tracking.globalCombinedSeeds_cfi import *
+#from RecoEgamma.Configuration.RecoEgamma_cff import *
+from RecoEgamma.EgammaHFProducers.hfEMClusteringSequence_cff import *
 from RecoEgamma.EgammaElectronProducers.ecalDrivenElectronSeeds_cfi import *
 from FastSimulation.EgammaElectronAlgos.electronGSGsfTrackCandidates_cff import *
 from RecoEgamma.EgammaElectronProducers.gsfElectronSequence_cff import *
 from TrackingTools.GsfTracking.GsfElectronFit_cff import *
 from RecoEgamma.EgammaPhotonProducers.conversionTrackSequence_cff import *
 from RecoEgamma.EgammaPhotonProducers.allConversionSequence_cff import *
+from RecoEgamma.Configuration.RecoEgamma_cff import egammaHighLevelRecoPostPF
 allConversions.src = 'gsfGeneralConversionTrackMerger'
 famosConversionSequence = cms.Sequence(conversionTrackSequenceNoEcalSeeded*allConversionSequence)
 
@@ -229,12 +188,14 @@ from TrackingTools.GsfTracking.CkfElectronCandidateMaker_cff import *
 from TrackingTools.GsfTracking.FwdElectronPropagator_cfi import *
 import TrackingTools.GsfTracking.GsfElectronFit_cfi
 
+egammaEcalDrivenReco = cms.Sequence(gsfEcalDrivenElectronSequence)
 electronGsfTracks = TrackingTools.GsfTracking.GsfElectronFit_cfi.GsfGlobalElectronTest.clone()
 electronGsfTracks.src = 'electronGSGsfTrackCandidates'
 electronGsfTracks.TTRHBuilder = 'WithoutRefit'
 electronGsfTracks.TrajectoryInEvent = True
 
-from RecoParticleFlow.PFTracking.mergedElectronSeeds_cfi import *
+
+# PF related electron sequences defined in FastSimulation.ParticleFlow.ParticleFlowFastSim_cff
 from RecoEgamma.ElectronIdentification.electronIdSequence_cff import *
 
 famosGsfTrackSequence = cms.Sequence(
@@ -284,18 +245,8 @@ famosBTaggingSequence = cms.Sequence(
     btagging
 )
 
-#Tau tagging
-from RecoJets.JetAssociationProducers.ic5JetTracksAssociatorAtVertex_cfi import *
-from RecoJets.JetAssociationProducers.ic5PFJetTracksAssociatorAtVertex_cfi import *
-ic5JetTracksAssociatorAtVertex.tracks = 'generalTracks'
-ic5PFJetTracksAssociatorAtVertex.tracks = 'generalTracks'
-from RecoTauTag.Configuration.RecoTauTag_cff import *
-
-famosTauTaggingSequence = cms.Sequence(tautagging)
-
-from RecoTauTag.Configuration.RecoPFTauTag_cff import *
-
-famosPFTauTaggingSequence = cms.Sequence(PFTau)
+# Tau tagging
+# All tau tagging sequences defined in FastSimulation/ParticleFlow/python
 
 # The sole simulation sequence
 famosSimulationSequence = cms.Sequence(
@@ -379,9 +330,16 @@ famosWithCaloTowers = cms.Sequence(
     caloTowersRec
 )
 
+famosEcalDrivenElectronSequence = cms.Sequence(
+    famosGsfTrackSequence+
+    egammaEcalDrivenReco
+)
+
 famosElectronSequence = cms.Sequence(
     famosGsfTrackSequence+
+    famosEcalDrivenElectronSequence+
     famosWithParticleFlow+
+    egammaHighLevelRecoPostPF+
     gsfElectronSequence+
     eIdSequence
 )
@@ -428,17 +386,17 @@ famosWithCaloTowersAndParticleFlow = cms.Sequence(
     caloTowersRec
 )
 
-famosWithMuons = cms.Sequence(
-    famosWithTracks+
-    paramMuons
-)
-
-famosWithMuonsAndIsolation = cms.Sequence(
-    famosWithTracksAndCaloTowers+
-    paramMuons+
-    ak5CaloJets+
-    muIsolation_ParamGlobalMuons
-)
+#famosWithMuons = cms.Sequence(
+#    famosWithTracks+
+#    paramMuons
+#)
+#
+#famosWithMuonsAndIsolation = cms.Sequence(
+#    famosWithTracksAndCaloTowers+
+#    paramMuons+
+#    ak5CaloJets+
+#    muIsolation_ParamGlobalMuons
+#)
 
 famosWithElectrons = cms.Sequence(
     famosWithTracksAndEcalClusters+
@@ -522,15 +480,14 @@ reconstructionWithFamos = cms.Sequence(
     ecalClusters+
     particleFlowCluster+
     famosGsfTrackSequence+
-    famosConversionSequence+
     famosMuonSequence+
     famosMuonIdAndIsolationSequence+
-    famosParticleFlowSequence+
-    gsfElectronSequence+
-    eIdSequence+
+    famosConversionSequence+
+    particleFlowTrackWithDisplacedVertex+
+    famosEcalDrivenElectronSequence+
     famosPhotonSequence+
-    egammaIsolationSequence+
-    interestingEgammaIsoDetIds+
+    famosParticleFlowSequence+
+    egammaHighLevelRecoPostPF+
     caloJetMetGen+
     caloJetMet+
     PFJetMet+
