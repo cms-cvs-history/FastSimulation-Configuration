@@ -103,37 +103,28 @@ FastSimRecoTrackerAOD = cms.PSet(
     outputCommands = cms.untracked.vstring('keep recoTracks_iterativeGSWithMaterialTracks_*_*')
 )
 
+
 #####################################################################
-# The Muons are, for now, parameterized
+# new Particle Flow Collection with "Fake" Neutral Hadrons
 #####################################################################
 
 #Full Event content 
-FastSimParamMuonFEVT = cms.PSet(
-    outputCommands = cms.untracked.vstring('keep *_paramMuons_*_*', 
-        'keep l1extraL1MuonParticles_l1ParamMuons_*_*')
+FastSimParticleFlowFEVT = cms.PSet(
+    outputCommands = cms.untracked.vstring('keep recoPFCandidates_FSparticleFlow_*_*')
 )
 
-#MuIsoDeposits
-FastSimParamMuonFEVT.outputCommands.extend(RecoMuonIsolationParamGlobal.outputCommands)
-
-#RECO content
-FastSimParamMuonRECO = cms.PSet(
-    outputCommands = cms.untracked.vstring('keep *_paramMuons_*_*', 
-        'keep l1extraL1MuonParticles_l1ParamMuons_*_*')
+#RECO content 
+FastSimParticleFlowRECO = cms.PSet(
+    outputCommands = cms.untracked.vstring('keep recoPFCandidates_FSparticleFlow_*_*')
 )
 
-#MuIsoDeposits
-FastSimParamMuonRECO.outputCommands.extend(RecoMuonIsolationParamGlobal.outputCommands)
-
-#AOD content
-FastSimParamMuonAOD = cms.PSet(
-    outputCommands = cms.untracked.vstring('keep recoMuons_paramMuons_*_*', 
-        'keep *_muParamGlobalIsoDepositCtfTk_*_*', 
-        'keep *_muParamGlobalIsoDepositCalByAssociatorTowers_*_*', 
-        'keep *_muParamGlobalIsoDepositCalByAssociatorHits_*_*', 
-        'keep *_muParamGlobalIsoDepositJets_*_*', 
-        'keep l1extraL1MuonParticles_l1ParamMuons_*_*')
+#AOD content 
+FastSimParticleFlowAOD = cms.PSet(
+    outputCommands = cms.untracked.vstring('keep recoPFCandidates_FSparticleFlow_*_*')
 )
+
+
+
 
 # Addition to the event content
 # We don't need to remove anything, as the corresponding products are
@@ -148,8 +139,7 @@ FastSimParamMuonAOD = cms.PSet(
 AODEventContent.outputCommands.extend(FastSimRecoLocalTrackerAOD.outputCommands)
 AODEventContent.outputCommands.extend(FastSimRecoLocalCaloAOD.outputCommands)
 AODEventContent.outputCommands.extend(FastSimRecoTrackerAOD.outputCommands)
-AODEventContent.outputCommands.extend(FastSimParamMuonAOD.outputCommands)
-#AODEventContent.outputCommands.extend(FastSimCJPT.outputCommands)
+AODEventContent.outputCommands.extend(FastSimParticleFlowAOD.outputCommands)
 
 #####################################################################
 #
@@ -161,9 +151,7 @@ AODSIMEventContent.outputCommands.extend(FastSimCoreAOD.outputCommands)
 AODSIMEventContent.outputCommands.extend(FastSimRecoLocalTrackerAOD.outputCommands)
 AODSIMEventContent.outputCommands.extend(FastSimRecoLocalCaloAOD.outputCommands)
 AODSIMEventContent.outputCommands.extend(FastSimRecoTrackerAOD.outputCommands)
-AODSIMEventContent.outputCommands.extend(FastSimParamMuonAOD.outputCommands)
-#AODSIMEventContent.outputCommands.extend(FastSimCJPT.outputCommands)
-
+AODSIMEventContent.outputCommands.extend(FastSimParticleFlowAOD.outputCommands)
 
 #####################################################################
 #
@@ -174,7 +162,7 @@ AODSIMEventContent.outputCommands.extend(FastSimParamMuonAOD.outputCommands)
 RECOEventContent.outputCommands.extend(FastSimRecoLocalTrackerRECO.outputCommands)
 RECOEventContent.outputCommands.extend(FastSimRecoLocalCaloRECO.outputCommands)
 RECOEventContent.outputCommands.extend(FastSimRecoTrackerRECO.outputCommands)
-RECOEventContent.outputCommands.extend(FastSimParamMuonRECO.outputCommands)
+RECOEventContent.outputCommands.extend(FastSimParticleFlowRECO.outputCommands)
 
 #####################################################################
 #
@@ -186,7 +174,7 @@ RECOSIMEventContent.outputCommands.extend(FastSimCoreRECO.outputCommands)
 RECOSIMEventContent.outputCommands.extend(FastSimRecoLocalTrackerRECO.outputCommands)
 RECOSIMEventContent.outputCommands.extend(FastSimRecoLocalCaloRECO.outputCommands)
 RECOSIMEventContent.outputCommands.extend(FastSimRecoTrackerRECO.outputCommands)
-RECOSIMEventContent.outputCommands.extend(FastSimParamMuonRECO.outputCommands)
+RECOSIMEventContent.outputCommands.extend(FastSimParticleFlowRECO.outputCommands)
 
 #####################################################################
 #
@@ -198,7 +186,7 @@ RECODEBUGEventContent.outputCommands.extend(FastSimCoreRECO.outputCommands)
 RECODEBUGEventContent.outputCommands.extend(FastSimRecoLocalTrackerRECO.outputCommands)
 RECODEBUGEventContent.outputCommands.extend(FastSimRecoLocalCaloRECO.outputCommands)
 RECODEBUGEventContent.outputCommands.extend(FastSimRecoTrackerRECO.outputCommands)
-RECODEBUGEventContent.outputCommands.extend(FastSimParamMuonRECO.outputCommands)
+RECODEBUGEventContent.outputCommands.extend(FastSimParticleFlowRECO.outputCommands)
 
 ####################################################################
 #
@@ -209,7 +197,7 @@ RECODEBUGEventContent.outputCommands.extend(FastSimParamMuonRECO.outputCommands)
 FEVTEventContent.outputCommands.extend(FastSimRecoLocalTrackerFEVT.outputCommands)
 FEVTEventContent.outputCommands.extend(FastSimRecoLocalCaloFEVT.outputCommands)
 FEVTEventContent.outputCommands.extend(FastSimRecoTrackerFEVT.outputCommands)
-FEVTEventContent.outputCommands.extend(FastSimParamMuonFEVT.outputCommands)
+FEVTEventContent.outputCommands.extend(FastSimParticleFlowFEVT.outputCommands) 
 
 ####################################################################
 #
@@ -221,7 +209,7 @@ FEVTSIMEventContent.outputCommands.extend(FastSimCoreFEVT.outputCommands)
 FEVTSIMEventContent.outputCommands.extend(FastSimRecoLocalTrackerFEVT.outputCommands)
 FEVTSIMEventContent.outputCommands.extend(FastSimRecoLocalCaloFEVT.outputCommands)
 FEVTSIMEventContent.outputCommands.extend(FastSimRecoTrackerFEVT.outputCommands)
-FEVTSIMEventContent.outputCommands.extend(FastSimParamMuonFEVT.outputCommands)
+FEVTSIMEventContent.outputCommands.extend(FastSimParticleFlowFEVT.outputCommands) 
 
 #####################################################################
 #
@@ -233,7 +221,7 @@ FEVTDEBUGEventContent.outputCommands.extend(FastSimCoreFEVT.outputCommands)
 FEVTDEBUGEventContent.outputCommands.extend(FastSimRecoLocalTrackerFEVT.outputCommands)
 FEVTDEBUGEventContent.outputCommands.extend(FastSimRecoLocalCaloFEVT.outputCommands)
 FEVTDEBUGEventContent.outputCommands.extend(FastSimRecoTrackerFEVT.outputCommands)
-FEVTDEBUGEventContent.outputCommands.extend(FastSimParamMuonFEVT.outputCommands)
+FEVTDEBUGEventContent.outputCommands.extend(FastSimParticleFlowFEVT.outputCommands) 
 
 #####################################################################
 #
@@ -244,6 +232,4 @@ FEVTDEBUGHLTEventContent.outputCommands.extend(FastSimCoreFEVT.outputCommands)
 FEVTDEBUGHLTEventContent.outputCommands.extend(FastSimRecoLocalTrackerFEVT.outputCommands)
 FEVTDEBUGHLTEventContent.outputCommands.extend(FastSimRecoLocalCaloFEVT.outputCommands)
 FEVTDEBUGHLTEventContent.outputCommands.extend(FastSimRecoTrackerFEVT.outputCommands)
-FEVTDEBUGHLTEventContent.outputCommands.extend(FastSimParamMuonFEVT.outputCommands)
-
-
+FEVTDEBUGHLTEventContent.outputCommands.extend(FastSimParticleFlowFEVT.outputCommands) 
