@@ -158,6 +158,14 @@ famosMuonSequence = cms.Sequence(
 #Muon identification sequence
 #from FastSimulation.Configuration.muonIdentification_cff import *
 from RecoMuon.MuonIdentification.muonIdProducerSequence_cff import *
+# Use FastSim tracks and calo hits for muon id
+muons.inputCollectionLabels = cms.VInputTag(
+    'generalTracks',
+    'globalMuons',
+    cms.InputTag("standAloneMuons","UpdatedAtVtx")
+)
+# Use FastSim tracks and calo hits for calo muon id
+calomuons.inputTracks = 'generalTracks'
 
 # Muon isolation
 from RecoMuon.MuonIsolationProducers.muIsolation_cff import *
@@ -167,14 +175,6 @@ famosMuonIdAndIsolationSequence = cms.Sequence(
     muonIdProducerSequence+
     muIsolation
 )
-
-from RecoMuon.MuonIdentification.muons_cfi import *
-muons.FillSelectorMaps = False
-muons.FillCosmicsIdMap = False
-from RecoMuon.MuonIsolation.muonPFIsolation_cff import *
-
-muonshighlevelreco = cms.Sequence(muonPFIsolationSequence*muons)
-
 
 # Electron reconstruction
 from FastSimulation.Tracking.globalCombinedSeeds_cfi import *
@@ -205,10 +205,7 @@ electronGsfTracks.TrajectoryInEvent = True
 from RecoEgamma.ElectronIdentification.electronIdSequence_cff import *
 
 famosGsfTrackSequence = cms.Sequence(
-#    iterativeFirstSeeds+
-    iterativeInitialSeeds+
-    iterativeLowPtTripletSeeds+
-#    iterativePixelPairSeeds+
+    iterativeFirstSeeds+
     newCombinedSeeds+
     particleFlowCluster+ 
     ecalDrivenElectronSeeds+
@@ -261,7 +258,7 @@ famosBTaggingSequence = cms.Sequence(
 famosSimulationSequence = cms.Sequence(
     offlineBeamSpot+
     famosPileUp+
-    addPileupInfo+ ###PLACEHOLDER: to be activated after Mike's fixes to SimGeneral/PileupInformation/plugin
+    addPileupInfo+
     famosSimHits+
     MuonSimHits+
     mix
@@ -498,35 +495,6 @@ reconstructionWithFamos = cms.Sequence(
     famosPhotonSequence+
     famosParticleFlowSequence+
     egammaHighLevelRecoPostPF+
-    muonshighlevelreco+
-    particleFlowLinks+
-    caloJetMetGen+
-    caloJetMet+
-    PFJetMet+
-    ic5JetTracksAssociatorAtVertex+
-    ak5JetTracksAssociatorAtVertex+
-    famosTauTaggingSequence+
-    reducedRecHits+
-    famosBTaggingSequence+
-    famosPFTauTaggingSequence
-)
-
-reconstructionWithFamosNoTk = cms.Sequence(
-    vertexreco+
-    caloRecHits+
-    caloTowersRec+
-    ecalClusters+
-    particleFlowCluster+
-    famosGsfTrackSequence+
-    famosMuonSequence+
-    famosMuonIdAndIsolationSequence+
-    famosConversionSequence+
-    particleFlowTrackWithDisplacedVertex+
-    famosEcalDrivenElectronSequence+
-    famosPhotonSequence+
-    famosParticleFlowSequence+
-    egammaHighLevelRecoPostPF+
-    muonshighlevelreco+
     caloJetMetGen+
     caloJetMet+
     PFJetMet+
