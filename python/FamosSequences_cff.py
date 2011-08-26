@@ -205,10 +205,7 @@ electronGsfTracks.TrajectoryInEvent = True
 from RecoEgamma.ElectronIdentification.electronIdSequence_cff import *
 
 famosGsfTrackSequence = cms.Sequence(
-#    iterativeFirstSeeds+
-    iterativeInitialSeeds+
-    iterativeLowPtTripletSeeds+
-#    iterativePixelPairSeeds+
+    iterativeFirstSeeds+
     newCombinedSeeds+
     particleFlowCluster+ 
     ecalDrivenElectronSeeds+
