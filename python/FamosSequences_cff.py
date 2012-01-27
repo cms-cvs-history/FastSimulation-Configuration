@@ -206,10 +206,7 @@ from RecoEgamma.ElectronIdentification.electronIdSequence_cff import *
 
 iterativeTrackingBeginning = cms.Sequence(
     iterativeInitialSeeds+
-#    iterativeLowPtTripletSeeds
-    iterativePixelPairSeeds+
-    iterativeMixedTripletStepSeeds+
-    iterativePixelLessSeeds
+    iterativeLowPtTripletSeeds
     )
 
 famosGsfTrackSequence = cms.Sequence(
