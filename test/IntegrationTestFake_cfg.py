@@ -11,7 +11,7 @@ process.maxEvents = cms.untracked.PSet(
 process.DQMStore = cms.Service( "DQMStore")
 
 # Include the RandomNumberGeneratorService definition
-process.load("FastSimulation.Configuration.RandomServiceInitialization_cff")
+process.load("IOMC.RandomEngine.IOMC_cff")
 
 # Generate H -> ZZ -> l+l- l'+l'- (l,l'=e or mu), with mH=180GeV/c2
 process.load("Configuration.Generator.H200ZZ4L_cfi")
@@ -46,7 +46,9 @@ process.load("Configuration.StandardSequences.MagneticField_38T_cff")
 process.VolumeBasedMagneticFieldESProducer.useParametrizedTrackerField = True
 
 # If you want to turn on/off pile-up
-process.famosPileUp.PileUpSimulator.averageNumber = 5.0
+process.load('FastSimulation.PileUpProducer.PileUpSimulator_2012_Startup_inTimeOnly_cff')
+#process.load('FastSimulation.PileUpProducer.mix_2012_Startup_inTimeOnly_cff')
+#process.famosPileUp.PileUpSimulator.averageNumber = 5.0
 # You may not want to simulate everything for your study
 process.famosSimHits.SimulateCalorimetry = True
 process.famosSimHits.SimulateTracking = True

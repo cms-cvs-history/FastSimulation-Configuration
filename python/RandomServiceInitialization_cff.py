@@ -1,4 +1,6 @@
-# The following comments couldn't be translated into the new config version:
+# This FastSim-specific configuration is not needed anymore; this will be soon deprecated, please replace it with:
+# process.load("IOMC.RandomEngine.IOMC_cff")
+
 
 # Set random seeds. 
 
@@ -39,6 +41,17 @@ RandomNumberGeneratorService = cms.Service(
         initialSeed = cms.untracked.uint32(918273),
         engineName = cms.untracked.string('TRandom3')
     ),
+
+    mix = cms.PSet(
+        initialSeed = cms.untracked.uint32(918273), # intentionally the same as famosPileUp
+        engineName = cms.untracked.string('TRandom3')
+    ),
+
+    mixGenPU = cms.PSet(
+        initialSeed = cms.untracked.uint32(918273), # intentionally the same as famosPileUp
+        engineName = cms.untracked.string('TRandom3')
+    ),
+    
 
     famosSimHits = cms.PSet(
         initialSeed = cms.untracked.uint32(13579),

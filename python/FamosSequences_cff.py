@@ -5,19 +5,13 @@ from FastSimulation.Configuration.CommonInputs_cff import *
 # Conversion to GenParticleCandidates 
 from PhysicsTools.HepMCCandAlgos.genParticleCandidatesFast_cfi import *
 
-# Famos PileUp Producer
-from FastSimulation.PileUpProducer.PileUpProducer_cff import *
-
-# PileupSummaryInfo
-from SimGeneral.PileupInformation.AddPileupSummary_cfi import *
-addPileupInfo.PileupMixingLabel = 'famosPileUp'
-addPileupInfo.simHitLabel = 'famosSimHits'
+# Pile-up options: FAMOS-style or with the Mixing Module
+#the sequence is defined as a p[lace holder, to be defined separatedly
+#from FastSimulation.Configuration.MixingFamos_cff import *
+#from FastSimulation.Configuration.MixingFull_cff import *
 
 # Famos SimHits producer
 from FastSimulation.EventProducer.FamosSimHits_cff import *
-
-# Mixing module 
-from FastSimulation.Configuration.mixNoPU_cfi import *
 
 # Gaussian Smearing RecHit producer
 from FastSimulation.TrackingRecHitProducer.SiTrackerGaussianSmearingRecHitConverter_cfi import *
@@ -63,12 +57,11 @@ from RecoJets.Configuration.CaloTowersRec_cff import *
 
 # Particle Flow (all interactions with ParticleFlow are dealt with in the following configuration)
 #from FastSimulation.ParticleFlow.ParticleFlowFastSim_cff import *
-from FastSimulation.ParticleFlow.ParticleFlowFastSimNeutralHadron_cff import *
+from FastSimulation.ParticleFlow.ParticleFlowFastSimNeutralHadron_cff import * # this is the famous "PF patch", see https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideFastSimFAQ#I_observe_a_discrepancy_in_energ
 
 
 # Reco Jets and MET
 from RecoJets.Configuration.RecoJetsGlobal_cff import *
-#from RecoJets.Configuration.JetIDProducers_cff import *
 from RecoMET.Configuration.RecoMET_cff import *
 metreco.remove(BeamHaloId)
 
@@ -88,8 +81,6 @@ from RecoJets.Configuration.GenJetParticles_cff import *
 from RecoJets.Configuration.RecoGenJets_cff import *
 from RecoMET.Configuration.GenMETParticles_cff import *
 from RecoMET.Configuration.RecoGenMET_cff import *
-# No longer applicable according to Ronny
-#genCandidatesForMET.verbose = False
 caloJetMetGen = cms.Sequence(
     genParticles+
     genJetParticles+
@@ -98,8 +89,6 @@ caloJetMetGen = cms.Sequence(
     recoGenMET
 )
 
-# Muon parametrization
-#from FastSimulation.ParamL3MuonProducer.ParamL3Muon_cfi import *
 
 # Muon simHit sequence 
 from FastSimulation.MuonSimHitProducer.MuonSimHitProducer_cfi import *
@@ -155,7 +144,6 @@ famosMuonSequence = cms.Sequence(
 )
 
 #Muon identification sequence
-#from FastSimulation.Configuration.muonIdentification_cff import *
 from RecoMuon.MuonIdentification.muonIdProducerSequence_cff import *
 
 # Muon isolation
@@ -177,7 +165,6 @@ muonshighlevelreco = cms.Sequence(muonPFIsolationSequence*muons)
 
 # Electron reconstruction
 from FastSimulation.Tracking.globalCombinedSeeds_cfi import *
-#from RecoEgamma.Configuration.RecoEgamma_cff import *
 from RecoEgamma.EgammaHFProducers.hfEMClusteringSequence_cff import *
 from RecoEgamma.EgammaElectronProducers.ecalDrivenElectronSeeds_cfi import *
 from FastSimulation.EgammaElectronAlgos.electronGSGsfTrackCandidates_cff import *
@@ -205,7 +192,6 @@ from RecoEgamma.ElectronIdentification.electronIdSequence_cff import *
 
 iterativeTrackingBeginning = cms.Sequence(
     iterativeInitialSeeds+
-#    iterativeLowPtTripletSeeds
     iterativePixelPairSeeds+
     iterativeMixedTripletStepSeeds+
     iterativePixelLessSeeds
@@ -225,7 +211,6 @@ famosGsfTrackSequence = cms.Sequence(
 # Photon reconstruction
 from RecoEgamma.EgammaPhotonProducers.photonSequence_cff import *
 photons.hbheInstance = ''
-#photons.pixelSeedProducer = 'fastElectronSeeds'
 from RecoEgamma.PhotonIdentification.photonId_cff import *
 
 famosPhotonSequence = cms.Sequence(
@@ -242,7 +227,6 @@ from RecoEgamma.EgammaIsolationAlgos.interestingEleIsoDetIdModule_cff import *
 from RecoEgamma.EgammaIsolationAlgos.interestingGamIsoDetIdModule_cff import *
 
 from RecoEgamma.EgammaIsolationAlgos.interestingEgammaIsoDetIdsSequence_cff import *
-#import  RecoEgamma.EgammaIsolationAlgos.interestingEgammaIsoDetIdsSequence_cff
 
 
 
@@ -252,24 +236,21 @@ ak5JetTracksAssociatorAtVertex.tracks = 'generalTracks'
 from RecoVertex.Configuration.RecoVertex_cff import *
 from RecoVertex.BeamSpotProducer.BeamSpot_cff import *
 from RecoBTag.Configuration.RecoBTag_cff import *
-#offlinePrimaryVerticesWithBS.TrackLabel = 'generalTracks'
 
 famosBTaggingSequence = cms.Sequence(
     btagging
 )
 
-# Tau tagging
-# All tau tagging sequences defined in FastSimulation/ParticleFlow/python
+
 
 # The sole simulation sequence
 famosSimulationSequence = cms.Sequence(
     offlineBeamSpot+
-    famosPileUp+
-    addPileupInfo+ ###PLACEHOLDER: to be activated after Mike's fixes to SimGeneral/PileupInformation/plugin
+    cms.SequencePlaceholder("famosMixing")+
     famosSimHits+
     MuonSimHits+
-    mix
-)
+    cms.SequencePlaceholder("mix")
+    )
 
 # Famos pre-defined sequences (and self-explanatory names)
 famosWithTrackerHits = cms.Sequence(
@@ -400,17 +381,6 @@ famosWithCaloTowersAndParticleFlow = cms.Sequence(
     caloTowersRec
 )
 
-#famosWithMuons = cms.Sequence(
-#    famosWithTracks+
-#    paramMuons
-#)
-#
-#famosWithMuonsAndIsolation = cms.Sequence(
-#    famosWithTracksAndCaloTowers+
-#    paramMuons+
-#    ak5CaloJets+
-#    muIsolation_ParamGlobalMuons
-#)
 
 famosWithElectrons = cms.Sequence(
     famosWithTracksAndEcalClusters+

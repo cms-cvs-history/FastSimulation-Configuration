@@ -40,8 +40,8 @@ mixSimVertices = cms.PSet(
     type = cms.string('SimVertex')
 )
 mixHepMCProducts = cms.PSet(
-    input = cms.VInputTag(cms.InputTag("famosSimHits")),
     makeCrossingFrame = cms.untracked.bool(True),
+    input = cms.VInputTag(cms.InputTag("generator")),
     type = cms.string('HepMCProduct')
 )
 

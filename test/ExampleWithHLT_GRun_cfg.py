@@ -11,7 +11,7 @@ process.maxEvents = cms.untracked.PSet(
 process.DQMStore = cms.Service( "DQMStore")
 
 # Include the RandomNumberGeneratorService definition
-process.load("FastSimulation.Configuration.RandomServiceInitialization_cff")
+process.load("IOMC.RandomEngine.IOMC_cff")
 
 # Generate ttbar events
 process.load("Configuration.Generator.TTbar_cfi")
@@ -77,7 +77,9 @@ process.simulation = cms.Sequence(process.generator*process.simulationWithFamos)
 process.famosSimHits.SimulateCalorimetry = True
 process.famosSimHits.SimulateTracking = True
 # Number of pileup events per crossing
-process.famosPileUp.PileUpSimulator.averageNumber = 0.0
+process.load('FastSimulation.PileUpProducer.PileUpSimulator_2012_Startup_inTimeOnly_cff')
+#process.load('FastSimulation.PileUpProducer.mix_2012_Startup_inTimeOnly_cff')
+#process.famosPileUp.PileUpSimulator.averageNumber = 0.0
 
 # No reconstruction - only HLT
 #process.HLTEndSequence = cms.Sequence(process.dummyModule)
